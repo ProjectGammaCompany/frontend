@@ -28,6 +28,7 @@ jobs:
         with:
           node-version: 22.13
           cache: 'npm'
+          
       - name: Run dependencies loading
         run: npm ci
         
@@ -43,6 +44,13 @@ jobs:
         with:
           node-version: 22.13
           cache: 'npm'
+          
+      - name: create env file
+        run: |
+          cat <<EOF > .env.production
+          VITE_APP_BASE_URL=https://something.com
+          EOF
+          
       - name: Run dependencies loading
         run: npm ci
 
@@ -72,8 +80,16 @@ jobs:
           driver-opts: |
             image=moby/buildkit:latest
             network=host
+            
       - name: Set lowercase owner name
-        run: echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV   
+        run: echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV 
+        
+      - name: create env file
+        run: |
+          cat <<EOF > .env.production
+          VITE_APP_BASE_URL=https://something.com
+          EOF
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.18.0
         with: 
