@@ -12,6 +12,7 @@
     "coverage": "npm test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@hawk.so/javascript": "^3.2.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
