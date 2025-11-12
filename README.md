@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# Frontend-репозиторий веб-приложения EduPlay
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Навигация
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. [Архитектура](#Архитектура)
+   1.1. [Слои](#Слои)
+   1.2. [Допускаемое содержание каждого слайса](#допускаемое-содержание-каждого-слайса)
+   1.3. [Public API](#public-api)
+2. [Технологический стек](#технологический-стек)
+   2.1. [Основной](#основной)
+   2.2. [Специфичный для проекта](#специфичный-для-проекта)
+3. [Договорённости](#договорённости)
+   3.1. [Именование файлов](#именование-файлов)
+   3.2. [Стилизация компонентов](#стилизация-компонентов)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Архитектура
 
-## Expanding the ESLint configuration
+Используется Feature-sliced design (FSD) подход. Он включает:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Разделение на 7 слоёв, каждый из которых содержит перечень слайсов (кроме App и Shared слоёв);
+2. Инкапсуляцию сегментов внутри каждого слайса.
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+### Слои
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. [App](/src/app/)
+2. [Processes](/src/processes/)
+3. [Pages](/src//pages/)
+4. [Widgets](/src/widgets/)
+5. [Features](/src/features/)
+6. [Entities](/src/entities/)
+7. [Shared](/src/shared/)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Поток данных между слоями **однонаправлен**. (т.е. widgets могут использовать только нижележащие слои)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+_Подробнее о каждом слое можно ознакомиться в README соответствующей папки._
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+### Допускаемое содержание каждого слайса:
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+1. UI – компоненты
+2. Model – взаимодействие с state (селекторы, экшены)
+3. Lib – вспомогательные функции
+4. Config – конфигурация модуля (если требуются)
+5. API – запросы на сервер
+6. Consts – константы
+
+### Public API
+
+Для инкапсуляции сегментов внутри каждого слайса **используются единый источник экспорта** – index.ts внутри его директории.
+
+**Правила:**
+
+1. **Использовать index.ts** в соответствующей директории слайса для открытия доступа определённых его сегментов вышестоящим слайсам.
+2. Импорт содержимого одного слайса в другой не через его index.ts **запрещён**. (Вводится инкапсуляция для каждого слайса)
+
+---
+
+## Технологический стек
+
+### Основной
+
+1.  Основа – **React (Vite)**
+2.  Стилизация – **SCSS**
+3.  Форматирование кода – **EsLint + Prettier**
+4.  UI-библиотека – **Ant-Design**
+5.  Роутинг – **React-Router**
+6.  HTTP-клиент – **Axios**
+7.  Кэширование данных – **React Query**
+8.  Store данных – **Redux Toolkit**
+9.  Тестирование – **React Testing Library**
+
+### Специфичный для проекта
+
+1. Drag-And-Drop – hello-pangea/dnd
+
+---
+
+## Договорённости
+
+### Именование файлов
+
+Используется camelCase для файлов и директорий.
+
+### Стилизация компонентов
+
+1. Используется бэм-подход
+   Каждый класс оформляется в формате:
+   1. **блок блок\_\_модификатор\_\_значение** – компонент независим и переиспользуем.
+   2. блок\_\_элемент **блок\_\_элемент\_\_модификатор\_\_значение** – компонент зависим от своего блока.
