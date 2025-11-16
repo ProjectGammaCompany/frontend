@@ -36,7 +36,7 @@ jobs:
 
       - name: create env file
         run: |
-          cat <<EOF > .env.production
+          cat <<EOF > .env.test
           VITE_APP_BASE_URL=https://something.com
           EOF
 
