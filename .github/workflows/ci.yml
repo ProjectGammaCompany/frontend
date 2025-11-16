@@ -30,18 +30,12 @@ jobs:
         with:
             node-version: 22.13
             cache: "npm"
-            
-      - name: create env file
-        run: |
-          cat <<EOF > .env.production
-          VITE_APP_BASE_URL=https://something.com
-          EOF
 
       - name: Run dependencies loading
         run: npm ci
 
       - name: Run tests
-        run: npm run test
+        run: VITE_APP_BASE_URL=https://something.com npm run test
 
   build:
     runs-on: ubuntu-latest
