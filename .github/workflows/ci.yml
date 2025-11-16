@@ -28,8 +28,14 @@ jobs:
       - uses: actions/checkout@v5.0.0
       - uses: actions/setup-node@v6.0.0
         with:
-          node-version: 22.13
-          cache: "npm"
+            node-version: 22.13
+            cache: "npm"
+            
+      - name: create env file
+        run: |
+          cat <<EOF > .env.production
+          VITE_APP_BASE_URL=https://something.com
+          EOF
 
       - name: Run dependencies loading
         run: npm ci
