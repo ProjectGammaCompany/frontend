@@ -7,7 +7,6 @@ import { createAxiosInstance } from "./axios";
 const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";
 
-console.log(import.meta.env.VITE_APP_BASE_URL);
 const server = setupServer(
   http.post(`${import.meta.env.VITE_APP_BASE_URL as string}refresh`, () => {
     return HttpResponse.json({
