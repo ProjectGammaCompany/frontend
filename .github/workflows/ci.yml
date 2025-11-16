@@ -37,7 +37,7 @@ jobs:
       - name: create env file
         run: |
           cat <<EOF > .env.test
-          VITE_APP_BASE_URL=https://something.com
+          VITE_APP_BASE_URL=https://something.com/
           EOF
 
       - name: Run tests
@@ -56,7 +56,7 @@ jobs:
       - name: create env file
         run: |
           cat <<EOF > .env.production
-          VITE_APP_BASE_URL=https://something.com
+          VITE_APP_BASE_URL=https://something.com/
           EOF
 
       - name: Run dependencies loading
