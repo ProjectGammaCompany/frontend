@@ -1,21 +1,28 @@
 import { AuthPage } from "@/src/pages/auth";
 import { HomePage } from "@/src/pages/home";
+import { tokenStorage } from "@/src/shared/lib";
 import { createBrowserRouter, redirect } from "react-router";
-import { tokenStorage } from "../../../shared/lib/tokenStorage/tokenStorage";
+import { RootLayout } from "./NavigationRegister";
 
 const router = createBrowserRouter([
   {
-    path: "/auth",
-    middleware: [authMiddleware],
-    Component: AuthPage,
-  },
-  {
     path: "/",
-    middleware: [privateRoutesMiddleware],
+    Component: RootLayout,
     children: [
       {
-        index: true,
-        Component: HomePage,
+        path: "/auth",
+        middleware: [authMiddleware],
+        Component: AuthPage,
+      },
+      {
+        path: "/",
+        middleware: [privateRoutesMiddleware],
+        children: [
+          {
+            index: true,
+            Component: HomePage,
+          },
+        ],
       },
     ],
   },

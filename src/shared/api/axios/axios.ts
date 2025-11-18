@@ -1,6 +1,4 @@
-import { tokenStorage } from "../../lib/tokenStorage/tokenStorage";
+import { tokenStorage } from "../../lib/";
 import { createAxiosInstance } from "./createAxiosInstance";
 
-const axiosInstance = createAxiosInstance(tokenStorage);
-
-export { axiosInstance, createAxiosInstance };
+export const axiosInstance = createAxiosInstance(tokenStorage);

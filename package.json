@@ -14,11 +14,13 @@
     "coverage": "npm test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@hawk.so/javascript": "^3.2.10",
     "@reduxjs/toolkit": "^2.10.1",
     "@tanstack/react-query": "^5.90.9",
     "@tanstack/react-query-devtools": "^5.90.2",
     "@types/js-cookie": "^3.0.6",
+    "antd": "^5.29.0",
     "axios": "^1.13.2",
     "js-cookie": "^3.0.5",
     "msw": "^2.12.2",
