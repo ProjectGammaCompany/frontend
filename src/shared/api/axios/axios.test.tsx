@@ -1,8 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
-import { mockTokenStorage } from "../../lib/tokenStorage";
-import { createAxiosInstance } from "./axios";
+import { createAxiosInstance } from "..";
+import { mockTokenStorage } from "../../lib";
 
 const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";

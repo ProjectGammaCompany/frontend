@@ -45,6 +45,7 @@ export default defineConfig([
         { type: "shared", pattern: "shared/*" },
       ],
       "boundaries/include": ["src/**/*.*"],
+      "boundaries/entry": ["index.ts", "index.tsx"],
       "import/resolver": {
         typescript: {
           alwaysTryTypes: true,
@@ -52,6 +53,25 @@ export default defineConfig([
       },
     },
     rules: {
+      "boundaries/entry-point": [
+        "error",
+        {
+          default: "disallow",
+          message:
+            "Разрешён импорт только из index.ts. Глубокие импорты между слайсами запрещены.",
+          rules: [
+            {
+              target: ["app", "pages", "widgets", "features", "entities"],
+              allow: ["index.ts", "index.tsx"],
+              importKind: "value",
+            },
+            {
+              target: ["shared"],
+              allow: "*",
+            },
+          ],
+        },
+      ],
       "boundaries/element-types": [
         "error",
         {

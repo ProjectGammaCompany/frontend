@@ -1,7 +1,7 @@
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
-import type { TokenStorage } from "../../lib/tokenStorage";
-import type { TokensResponse } from "../../models/types/tokenResponse";
-import { refreshTokens } from "../userAPI";
+import { globalRouter, type TokenStorage } from "../../lib";
+import type { TokensResponse } from "../../models";
+import { refreshTokens } from "../endpoints/refreshTokens";
 
 export const createAxiosInstance = (tokenStorage: TokenStorage) => {
   const instance = axios.create({
@@ -11,11 +11,6 @@ export const createAxiosInstance = (tokenStorage: TokenStorage) => {
     },
   });
 
-  // переменная необходима для случая отправки множества запросов при рефреше
-  const refreshingRequest: Promise<
-    AxiosResponse<TokensResponse, unknown, object>
-  > | null = null;
-
   instance.interceptors.request.use((request) =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     putAccessToken(request, tokenStorage),
@@ -24,8 +19,7 @@ export const createAxiosInstance = (tokenStorage: TokenStorage) => {
   instance.interceptors.response.use(
     (response) => response,
 
-    async (error) =>
-      handleRefresh(error, instance, tokenStorage, refreshingRequest),
+    async (error) => handleRefresh(error, instance, tokenStorage),
   );
 
   return instance;
@@ -42,44 +36,52 @@ const putAccessToken = (request: any, tokenStorage: TokenStorage) => {
   return request;
 };
 
+// переменная необходима для случая отправки множества запросов при рефреше
+let refreshingRequest: Promise<
+  AxiosResponse<TokensResponse, unknown, object>
+> | null = null;
+
 const handleRefresh = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any,
   instance: AxiosInstance,
   tokenStorage: TokenStorage,
-  refreshingRequest: Promise<
-    AxiosResponse<TokensResponse, unknown, object>
-  > | null,
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const originalRequest = error.config;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  if (error.response?.status === 401 && !originalRequest._retry) {
+  if (error.response?.status === 401) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    originalRequest._retry = true;
-    try {
-      const { accessToken, refreshToken } = tokenStorage.getTokens();
-      if (refreshToken && accessToken) {
-        refreshingRequest =
-          refreshingRequest ?? refreshTokens(accessToken, refreshToken);
+    if (!originalRequest._retry) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      originalRequest._retry = true;
+      try {
+        const { accessToken, refreshToken } = tokenStorage.getTokens();
+        if (refreshToken && accessToken) {
+          refreshingRequest =
+            refreshingRequest ?? refreshTokens(accessToken, refreshToken);
 
-        const response = await refreshingRequest;
+          const response = await refreshingRequest;
 
-        refreshingRequest = null;
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-          response.data;
+          refreshingRequest = null;
+          const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+            response.data;
 
-        tokenStorage.setTokens(newAccessToken, newRefreshToken);
-
+          tokenStorage.setTokens(newAccessToken, newRefreshToken);
+        }
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return instance(originalRequest);
+      } catch (refreshError) {
+        tokenStorage.clearTokens();
+        void globalRouter.navigate?.("/auth");
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+        return Promise.reject(refreshError);
       }
-    } catch (refreshError) {
-      tokenStorage.clearTokens();
-      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-      return Promise.reject(refreshError);
     }
+
+    tokenStorage.clearTokens();
+    void globalRouter.navigate?.("/auth");
   }
   // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
   return Promise.reject(error);
