@@ -4,3 +4,5 @@ export {
   tokenStorage,
   type TokenStorage,
 } from "./tokenStorage";
+
+export { settingsStorage, type SettingsStorage } from "./settingsStorage";

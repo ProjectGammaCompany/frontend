@@ -1,17 +1,15 @@
 import "@ant-design/v5-patch-for-react-19";
-import { ConfigProvider } from "antd";
 import { RouterProvider } from "react-router";
+import AntConfigProvider from "./providers/antConfigProvider/AntConfigProvider";
 import router from "./providers/routerProvider/router";
+import { useClearTokens } from "./providers/useClearTokensOnClose";
 import "./styles/App.scss";
 function App() {
+  useClearTokens();
   return (
-    <ConfigProvider
-      theme={{
-        cssVar: true,
-      }}
-    >
+    <AntConfigProvider>
       <RouterProvider router={router} />;
-    </ConfigProvider>
+    </AntConfigProvider>
   );
 }
 
