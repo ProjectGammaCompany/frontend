@@ -1,7 +1,7 @@
 import { globalRouter } from "@/src/shared/lib";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-
+import "./RootLayout.scss";
 export const RootLayout = () => {
   const navigate = useNavigate();
 
@@ -9,5 +9,9 @@ export const RootLayout = () => {
     globalRouter.navigate = navigate;
   }, [navigate]);
 
-  return <Outlet />;
+  return (
+    <div className="root-layout">
+      <Outlet />
+    </div>
+  );
 };

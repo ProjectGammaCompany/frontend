@@ -1,0 +1,20 @@
+.home-page {
+  &__actions-btns {
+    width: 50px;
+    height: 50px;
+    bottom: 80px;
+    right: 5dvw;
+  }
+  &__my-events-btn {
+    width: 45px;
+    height: 45px;
+    bottom: calc(80px + 70px);
+    right: calc(5dvw);
+  }
+  &__create-event-btn {
+    width: 45px;
+    height: 45px;
+    bottom: calc(80px + 30px);
+    right: calc(5dvw + 60px);
+  }
+}

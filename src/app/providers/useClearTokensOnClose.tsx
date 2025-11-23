@@ -5,7 +5,6 @@ export const useClearTokens = () => {
   useEffect(() => {
     const handleBeforeUnload = () => {
       const rememberMe = settingsStorage.getRememberMe();
-
       if (rememberMe != "true") {
         tokenStorage.clearTokens();
       }

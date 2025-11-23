@@ -14,6 +14,9 @@ const AntConfigProvider = ({ children }: AntConfigProviderProps) => {
     <ConfigProvider
       theme={{
         cssVar: true,
+        components: {
+          Button: {},
+        },
       }}
       form={{
         validateMessages,

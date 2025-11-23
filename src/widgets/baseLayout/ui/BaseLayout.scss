@@ -1,0 +1,6 @@
+.base-layout {
+  &__main {
+    height: calc(100dvh - 60px - 65px - 15px);
+    overflow-y: auto;
+  }
+}

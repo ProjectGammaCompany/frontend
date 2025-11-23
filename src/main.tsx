@@ -6,12 +6,22 @@ import App from "./app/App.tsx";
 import "./index.scss";
 import { queryClient } from "./shared/api/reactQuery/queryClient.ts";
 import { store } from "./shared/models/redux/store.ts";
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </Provider>
-  </StrictMode>,
-);
+
+async function enableMocks() {
+  if (import.meta.env.DEV && import.meta.env.VITE_ENABLE_MSW === "true") {
+    const { worker } = await import("./shared/api/mocks/browser");
+    await worker.start({ onUnhandledRequest: "bypass" });
+  }
+}
+
+void enableMocks().then(() => {
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </Provider>
+    </StrictMode>,
+  );
+});

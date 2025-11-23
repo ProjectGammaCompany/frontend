@@ -1,0 +1,23 @@
+.link-event-card {
+  &__tags {
+    &-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &-item {
+      background-color: darkgray;
+      padding: 5px;
+      border-radius: 5px;
+      width: fit-content;
+    }
+  }
+
+  &__first-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

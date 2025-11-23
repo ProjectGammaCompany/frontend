@@ -22,10 +22,12 @@
     "@types/js-cookie": "^3.0.6",
     "antd": "^5.29.0",
     "axios": "^1.13.2",
+    "classnames": "^2.5.1",
     "js-cookie": "^3.0.5",
     "msw": "^2.12.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-intersection-observer": "^10.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.9.5"
   },
@@ -64,5 +66,10 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

@@ -1,0 +1,13 @@
+.toggle-favorite-event-btn {
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+
+  &_active {
+    color: rgb(241, 137, 0);
+  }
+  &__icon-wrapper {
+    height: 45px;
+    width: 45px;
+  }
+}

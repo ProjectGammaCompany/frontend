@@ -1,0 +1,17 @@
+.main-page-header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  &__search {
+    flex-grow: 1;
+  }
+
+  &__filters-btn {
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+  }
+}
