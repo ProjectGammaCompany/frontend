@@ -1,6 +1,6 @@
 import { IconButton, StarSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
-import classNames from "classNames";
+import classnames from "classnames";
 import { useState } from "react";
 import { putFavoriteState } from "../api/putFavoriteState";
 import "./ToggleFavoriteEventButton.scss";
@@ -21,7 +21,7 @@ const ToggleFavoriteEventButton = ({
     },
   });
 
-  const className = classNames("toggle-favorite-event-btn", {
+  const className = classnames("toggle-favorite-event-btn", {
     "toggle-favorite-event-btn_active": state,
   });
   return (

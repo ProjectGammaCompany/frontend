@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import classNames from "classNames";
+import classnames from "classnames";
 import type { ReactNode } from "react";
 import "./IconButton.scss";
 interface FooterButtonProps {
@@ -15,11 +15,11 @@ const IconButton = ({
   className,
   iconWrapperClassname,
 }: FooterButtonProps) => {
-  const classnames = classNames("icon-btn", className);
+  const classNames = classnames("icon-btn", className);
   return (
-    <Button onClick={onClick} className={classnames}>
+    <Button onClick={onClick} className={classNames}>
       <div
-        className={classNames("icon-btn__icon-wrapper", iconWrapperClassname)}
+        className={classnames("icon-btn__icon-wrapper", iconWrapperClassname)}
       >
         {icon}
       </div>

@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import boundaries from "eslint-plugin-boundaries";
+import importPlugin from "eslint-plugin-import";
 import reactDom from "eslint-plugin-react-dom";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -34,7 +35,7 @@ export default defineConfig([
         projectService: true,
       },
     },
-    plugins: { boundaries },
+    plugins: { boundaries, import: importPlugin },
     settings: {
       "boundaries/elements": [
         { type: "app", pattern: "src/app/*" },
@@ -53,6 +54,7 @@ export default defineConfig([
       },
     },
     rules: {
+      "import/no-unresolved": ["error", { caseSensitive: true }],
       "boundaries/entry-point": [
         "error",
         {
