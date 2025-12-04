@@ -1,36 +1,58 @@
 import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/src/shared/ui";
 import { FloatButton } from "antd";
-import type React from "react";
 import { useNavigate } from "react-router";
 import "./FloatButtonsGroup.scss";
 interface FloatButtonsGroupProps {
   open: boolean;
-  setOpen: (value: React.SetStateAction<boolean>) => void;
+  setOpen: (value: boolean) => void;
+  setCreateEventWindowOpen: () => void;
 }
 
-const FloatButtonsGroup = ({ setOpen, open }: FloatButtonsGroupProps) => {
+const FloatButtonsGroup = ({
+  open,
+  setOpen,
+  setCreateEventWindowOpen,
+}: FloatButtonsGroupProps) => {
   const navigate = useNavigate();
 
   return (
     <>
       <FloatButton
-        className="home-page__actions-btns"
+        classNames={{
+          root: "home-page__actions-btns",
+        }}
+        style={{
+          bottom: " 80px",
+          right: "5dvw",
+        }}
         onClick={() => setOpen(!open)}
         icon={<MoreSvg />}
       />
       {open && (
         <>
           <FloatButton
-            className="home-page__my-events-btn"
+            classNames={{
+              root: "home-page__my-events-btn",
+            }}
+            style={{
+              bottom: "calc(80px + 70px)",
+              right: "calc(5dvw)",
+            }}
             onClick={() => {
               void navigate("/myEvent");
             }}
             icon={<MyEventsSvg />}
           />
           <FloatButton
-            className="home-page__create-event-btn"
+            classNames={{
+              root: "home-page__create-event-btn",
+            }}
+            style={{
+              bottom: "calc(80px + 30px)",
+              right: "calc(5dvw + 60px)",
+            }}
             onClick={() => {
-              console.log("create");
+              setCreateEventWindowOpen();
             }}
             icon={<CreateEventSvg />}
           />

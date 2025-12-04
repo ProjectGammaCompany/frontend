@@ -44,4 +44,49 @@ export const handlers = [
       info: data,
     });
   }),
+  http.post("file", () => {
+    return HttpResponse.json({
+      url: "50faa6d198e1d1d15e868a7433f87346.jpg",
+    });
+  }),
+  http.get("files/:id", () => {
+    return HttpResponse.redirect(
+      "https://i.pinimg.com/736x/50/fa/a6/50faa6d198e1d1d15e868a7433f87346.jpg",
+    );
+  }),
+  http.get("tags", () => {
+    return HttpResponse.json({
+      tags: [
+        {
+          name: "Крч",
+          id: "1",
+        },
+        {
+          name: "Среднее",
+          id: "2",
+        },
+        {
+          name: "Максимально длинный тег",
+          id: "3",
+        },
+        {
+          name: "Проверка",
+          id: "4",
+        },
+        {
+          name: "Заполненность",
+          id: "5",
+        },
+        {
+          name: "Химия",
+          id: "6",
+        },
+      ],
+    });
+  }),
+  http.post("event", () => {
+    return HttpResponse.json({
+      id: "23232323",
+    });
+  }),
 ];

@@ -4,6 +4,10 @@ export { default as Logo } from "./Logo/Logo.tsx";
 
 export { default as CustomIcon } from "./CustomIcon/CustomIcon.tsx";
 
+export { default as CustomDatePicker } from "./CustomDatePicker/CustomDatePicker.tsx";
+
+export { default as CustomModalWindow } from "./CustomModalWindow/CustomModalWindow.tsx";
+
 export { CreateEventSvg } from "./svg/CreateEventSvg.tsx";
 export { FiltersSvg } from "./svg/FiltersSvg.tsx";
 export { HomeSvg } from "./svg/HomeSvg.tsx";

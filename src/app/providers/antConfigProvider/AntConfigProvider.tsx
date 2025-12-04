@@ -13,7 +13,6 @@ const AntConfigProvider = ({ children }: AntConfigProviderProps) => {
   return (
     <ConfigProvider
       theme={{
-        cssVar: true,
         components: {
           Button: {},
         },

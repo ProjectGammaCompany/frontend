@@ -2,19 +2,28 @@
   &__actions-btns {
     width: 50px;
     height: 50px;
-    bottom: 80px;
-    right: 5dvw;
+
+    & > span {
+      width: 30px;
+      height: 30px;
+    }
   }
   &__my-events-btn {
+    color: black;
     width: 45px;
     height: 45px;
-    bottom: calc(80px + 70px);
-    right: calc(5dvw);
+    & > span {
+      width: 30px;
+      height: 30px;
+    }
   }
   &__create-event-btn {
     width: 45px;
     height: 45px;
-    bottom: calc(80px + 30px);
-    right: calc(5dvw + 60px);
+    padding: 5px;
+    & > span {
+      width: 30px;
+      height: 30px;
+    }
   }
 }

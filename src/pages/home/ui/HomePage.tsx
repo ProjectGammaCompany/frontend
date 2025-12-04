@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { logout } from "../api/logout";
 import { getParams } from "../lib/paramsLib/getParams";
+import CreateEventWindow from "./CreateEventWindow/CreateEventWindow";
 import EventsList from "./EventsList/EventsList";
 import FloatButtonsGroup from "./FloatButtonsGroup/FloatButtonsGroup";
 import "./HomePage.scss";
@@ -10,6 +11,9 @@ import "./HomePage.scss";
 export const HomePage = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
+
+  const [createEventWindowOpen, setIsCreateEventWindoWOpen] =
+    useState<boolean>(false);
 
   const [isButtonsGroupOpened, SetButtonsGroupOpened] = useState(false);
 
@@ -32,6 +36,11 @@ export const HomePage = () => {
       <FloatButtonsGroup
         setOpen={SetButtonsGroupOpened}
         open={isButtonsGroupOpened}
+        setCreateEventWindowOpen={() => setIsCreateEventWindoWOpen(true)}
+      />
+      <CreateEventWindow
+        open={createEventWindowOpen}
+        setIsOpen={setIsCreateEventWindoWOpen}
       />
     </div>
   );
