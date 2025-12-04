@@ -6,3 +6,5 @@ export {
 } from "./tokenStorage";
 
 export { settingsStorage, type SettingsStorage } from "./settingsStorage";
+
+export { getFullFileUrl } from "./workWithFiles";

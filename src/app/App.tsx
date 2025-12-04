@@ -6,9 +6,10 @@ import { useClearTokens } from "./providers/useClearTokensOnClose";
 import "./styles/App.scss";
 function App() {
   useClearTokens();
+
   return (
     <AntConfigProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AntConfigProvider>
   );
 }

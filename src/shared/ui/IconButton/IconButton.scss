@@ -1,0 +1,11 @@
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

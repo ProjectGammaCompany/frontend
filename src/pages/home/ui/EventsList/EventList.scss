@@ -1,0 +1,19 @@
+.home-page {
+  &__events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-wrapper {
+      padding-bottom: 80px;
+    }
+  }
+
+  &__spin-wrapper {
+    display: flex;
+    padding-block: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,38 @@
+.event-form {
+  &__main-data-wrapper {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+  }
+
+  &__cover-upload {
+    padding-top: 10px;
+    &-btn {
+      width: 80px;
+      background-color: transparent;
+      white-space: normal;
+    }
+  }
+
+  &__label {
+    padding-bottom: 0px;
+  }
+
+  &__private-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__remove-tag-btn {
+    font-size: 20px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+
+    & > svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
