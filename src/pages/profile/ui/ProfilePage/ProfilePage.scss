@@ -1,0 +1,9 @@
+.profile-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  &__main-info-block {
+    width: 100%;
+  }
+}
