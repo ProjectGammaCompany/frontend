@@ -1,5 +1,6 @@
 import { AuthPage } from "@/src/pages/auth";
 import { HomePage } from "@/src/pages/home";
+import { NotificationPage } from "@/src/pages/notifications";
 import { ProfilePage } from "@/src/pages/profile";
 import { tokenStorage } from "@/src/shared/lib";
 import { BaseLayout } from "@/src/widgets";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
               {
                 path: "profile",
                 Component: ProfilePage,
+              },
+              {
+                path: "notifications",
+                Component: NotificationPage,
               },
             ],
           },
