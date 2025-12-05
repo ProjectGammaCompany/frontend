@@ -1,7 +1,5 @@
-import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
-import { logout } from "../api/logout";
+import { useSearchParams } from "react-router";
 import { getParams } from "../lib/paramsLib/getParams";
 import CreateEventWindow from "./CreateEventWindow/CreateEventWindow";
 import EventsList from "./EventsList/EventsList";
@@ -10,7 +8,6 @@ import "./HomePage.scss";
 
 export const HomePage = () => {
   const [params] = useSearchParams();
-  const navigate = useNavigate();
 
   const [createEventWindowOpen, setIsCreateEventWindoWOpen] =
     useState<boolean>(false);
@@ -20,18 +17,6 @@ export const HomePage = () => {
   const preparedParams = getParams(params);
   return (
     <div>
-      <button
-        onClick={() => {
-          //TODO переместить logout в страницу профиля. Просто тестовый, если CI/CD настроится раньше выкатки профиля
-          void logout().then(() => {
-            tokenStorage.clearTokens();
-            settingsStorage.clearRememberMe();
-            void navigate("/auth");
-          });
-        }}
-      >
-        Выйти
-      </button>
       <EventsList filters={preparedParams} />
       <FloatButtonsGroup
         setOpen={SetButtonsGroupOpened}

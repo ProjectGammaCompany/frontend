@@ -1,5 +1,6 @@
 import { AuthPage } from "@/src/pages/auth";
 import { HomePage } from "@/src/pages/home";
+import { ProfilePage } from "@/src/pages/profile";
 import { tokenStorage } from "@/src/shared/lib";
 import { BaseLayout } from "@/src/widgets";
 import { createBrowserRouter, redirect } from "react-router";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
               {
                 index: true,
                 Component: HomePage,
+              },
+              {
+                path: "profile",
+                Component: ProfilePage,
               },
             ],
           },

@@ -6,12 +6,14 @@ import { getRouteKey, type HeaderRoute } from "../const/getRouteKey";
 import "./BaseLayout.scss";
 import Footer from "./Footer/Footer";
 import MainPageHeaderContent from "./MainPageHeaderContent/MainPageHeader";
+import ProfilePageHeaderContent from "./ProfilePageHeaderContent/ProfilePageHeaderContent";
 
 const BaseLayout = () => {
   const { pathname } = useLocation();
 
   const headerContent: Record<HeaderRoute, ReactNode> = {
     home: <MainPageHeaderContent />,
+    profile: <ProfilePageHeaderContent />,
   };
 
   const key = getRouteKey(pathname);

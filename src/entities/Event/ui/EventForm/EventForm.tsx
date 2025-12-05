@@ -1,7 +1,5 @@
 import { getTags } from "@/src/entities";
-import type { UploadFileResponse } from "@/src/shared/api";
-import { uploadFile } from "@/src/shared/api";
-import { getFullFileUrl } from "@/src/shared/lib";
+import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
 import { CustomDatePicker } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -15,7 +13,6 @@ import {
   Upload,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
-import type { AxiosResponse } from "axios";
 import { Dayjs } from "dayjs";
 import { type ReactNode } from "react";
 import "./EventForm.scss";
@@ -69,21 +66,15 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
-  const coverMutation = useMutation<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    AxiosResponse<UploadFileResponse, any, object>,
-    Error,
-    File
-  >({
-    mutationFn: uploadFile,
-    onSuccess: (response) => {
+  const coverUploadMutation = useFileUpload({
+    onSuccess: (data) => {
       //@ts-expect-error форма недостаточно умная у antd
-      form.setFieldValue("cover", response.data.url);
+      form.setFieldValue("cover", data.data.url);
     },
   });
 
   const handleCoverUpload = (cover: File) => {
-    coverMutation.mutate(cover);
+    coverUploadMutation.mutate(cover);
     return false;
   };
 
@@ -153,8 +144,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
                   ) : (
                     <Button
                       className="event-form__cover-upload-btn"
-                      loading={coverMutation.isPending}
-                      onClick={() => coverMutation.mutate}
+                      loading={coverUploadMutation.isPending}
+                      onClick={() => coverUploadMutation.mutate}
                     >
                       Загрузите обложку
                     </Button>

@@ -7,4 +7,4 @@ export {
 
 export { settingsStorage, type SettingsStorage } from "./settingsStorage";
 
-export { getFullFileUrl } from "./workWithFiles";
+export { getFullFileUrl, useFileUpload } from "./workWithFiles";

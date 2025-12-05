@@ -89,4 +89,15 @@ export const handlers = [
       id: "23232323",
     });
   }),
+  http.get("profile", () => {
+    return HttpResponse.json({
+      avatar: "fdjvnjvdjdv.pnh",
+      username: "СамыйСексуальныйМужчина",
+    });
+  }),
+  http.put("profile/avatar", () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
 ];
