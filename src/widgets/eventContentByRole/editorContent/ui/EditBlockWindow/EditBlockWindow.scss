@@ -1,0 +1,16 @@
+.edit-block-window {
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+  }
+
+  &__order {
+    font-weight: 600;
+    position: absolute;
+    top: -15px;
+    left: -10px;
+  }
+}

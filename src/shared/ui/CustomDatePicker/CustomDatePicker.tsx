@@ -4,7 +4,9 @@ import React from "react";
 
 interface CustomDatePickerProps {
   value?: Dayjs | null;
-  onChange?: ((date: Dayjs, dateString: string | string[]) => void) | undefined;
+  onChange?:
+    | ((date: Dayjs | null, dateString: string | null) => void)
+    | undefined;
   showTime?: boolean;
 }
 

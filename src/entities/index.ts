@@ -16,4 +16,34 @@ export {
   type createEventResponse,
 } from "./Event/api/createEvent.ts";
 
-export { getTags, type Tag } from "./Tag/api/getTags.ts";
+export { getTags, type Tag } from "./Tag";
+
+//TODO: добавить index.ts для каждой сущности
+
+export {
+  eventNameReducer,
+  getEditingEventData,
+  getEditingEventSettings,
+  selectEventName,
+  setName,
+  type BlockItemData,
+  type getEditingEventDataResponse,
+} from "./Event";
+
+export {
+  BlockCard,
+  getEditingBlockData,
+  getTasks,
+  type GetTasksResponse,
+  type TaskItemData,
+} from "./Block";
+
+export {
+  createTask,
+  getEditorTaskData,
+  TaskForm,
+  type ClientOption,
+  type CreateTaskResponse,
+  type ServerOption,
+  type TaskFormData,
+} from "./Task";

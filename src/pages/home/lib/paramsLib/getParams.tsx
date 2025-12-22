@@ -1,11 +1,5 @@
 import type { Filters } from "../../ui/EventsList/EventsList";
-
-export const PARAMS_KEYS = [
-  "decliningRating",
-  "territorialized",
-  "active",
-  "tags",
-] as const;
+import { PARAMS_KEYS } from "./const";
 
 export const getParams = (params: URLSearchParams) => {
   const parsedParams: Filters = {

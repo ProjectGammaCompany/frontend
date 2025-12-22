@@ -1,0 +1,28 @@
+.event-page-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__icons-wrapper {
+    display: flex;
+  }
+
+  &__settings-btn {
+    background-color: transparent;
+    border: 0px;
+    height: 32px;
+    width: 32px;
+    color: black;
+  }
+
+  &__settings-icon {
+    height: 30px;
+    width: 32px;
+  }
+
+  &__back-icon {
+    height: 30px;
+    width: 32px;
+    color: black;
+  }
+}

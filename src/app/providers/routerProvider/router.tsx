@@ -1,4 +1,5 @@
 import { AuthPage } from "@/src/pages/auth";
+import { EventPage } from "@/src/pages/event";
 import { HomePage } from "@/src/pages/home";
 import { NotificationPage } from "@/src/pages/notifications";
 import { ProfilePage } from "@/src/pages/profile";
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         path: "/auth",
         middleware: [authMiddleware],
         Component: AuthPage,
+      },
+      {
+        path: "event/:eventId",
+        Component: EventPage,
       },
       {
         path: "/",

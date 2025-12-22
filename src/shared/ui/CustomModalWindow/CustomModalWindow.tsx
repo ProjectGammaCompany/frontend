@@ -29,8 +29,10 @@ const CustomModalWindow = ({
       onCancel={() => setIsOpen(false)}
       centered
       maskClosable={false}
+      destroyOnHidden
       classNames={{
         container: "custom-modal-window__container",
+        body: "custom-modal-window__body",
       }}
     >
       {children}

@@ -1,0 +1,22 @@
+.add-block-menu {
+  position: absolute;
+  bottom: -120px;
+  width: 100%;
+  z-index: 4;
+
+  transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  &__blocks-list {
+    display: flex;
+    flex-direction: row;
+    background-color: darkgray;
+    padding: 15px 30px;
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    justify-content: space-between;
+    transition: all 1s ease-in-out;
+  }
+
+  &_open {
+    bottom: 0;
+  }
+}

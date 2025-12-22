@@ -66,11 +66,10 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
-  const coverUploadMutation = useFileUpload({
-    onSuccess: (data) => {
-      //@ts-expect-error форма недостаточно умная у antd
-      form.setFieldValue("cover", data.data.url);
-    },
+  //TODO fix upload, using TaskForm
+  const coverUploadMutation = useFileUpload((data) => {
+    //@ts-expect-error форма недостаточно умная у antd
+    form.setFieldValue("cover", data.data.url);
   });
 
   const handleCoverUpload = (cover: File) => {

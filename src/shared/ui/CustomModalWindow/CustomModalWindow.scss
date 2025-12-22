@@ -1,6 +1,11 @@
 .custom-modal-window {
   &__container {
+    position: relative;
     overflow-y: auto;
     max-height: 90dvh;
+  }
+
+  &__body {
+    position: relative;
   }
 }
