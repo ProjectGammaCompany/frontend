@@ -23,7 +23,7 @@ interface TaskFormProps<TResponse> {
   name: string;
   submitBtnText: string;
   mutationFn: (data: FullTaskData) => Promise<TResponse>;
-  onSuccessFn?: (data: TResponse, variables: FullTaskData) => void;
+  onSuccessFn?: (response: TResponse, variables: FullTaskData) => void;
   order: number;
 }
 

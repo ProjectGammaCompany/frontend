@@ -230,4 +230,76 @@ export const handlers = [
       id: "2121212",
     });
   }),
+  http.get("/event/:eventId/blocks/:blockId/conditions", () => {
+    return HttpResponse.json({
+      conditions: [
+        {
+          id: "1",
+          min: -1, // -1
+          max: -1, // -1
+          blockId: "", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 0,
+        },
+        {
+          id: "2",
+          min: 1, // -1
+          max: -1, // -1
+          blockId: "2", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 1,
+        },
+        {
+          id: "3",
+          min: -1, // -1
+          max: 1, // -1
+          blockId: "", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 0,
+        },
+        {
+          id: "4",
+          min: -1, // -1
+          max: -1, // -1
+          blockId: "", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 0,
+        },
+        {
+          id: "5",
+          min: -1, // -1
+          max: -1, // -1
+          blockId: "", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 0,
+        },
+        {
+          id: "6",
+          min: -1, // -1
+          max: -1, // -1
+          blockId: "", // 0, если ни к чему не привязан, иначе 1
+          blockOrder: 0,
+        },
+      ],
+    });
+  }),
+  http.post("/event/:eventId/blocks/:blockId/conditions", () => {
+    return HttpResponse.json({
+      id: "32232233232",
+      blockOrder: 5,
+    });
+  }),
+  http.get("/event/:eventId/blocks", () => {
+    return HttpResponse.json({
+      blocks: [
+        {
+          id: "1",
+          name: "блок 1",
+        },
+        {
+          id: "2",
+          name: "блок 2",
+        },
+        {
+          id: "3",
+          name: "блок 3",
+        },
+      ],
+    });
+  }),
 ];

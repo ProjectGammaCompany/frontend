@@ -12,6 +12,7 @@ interface EditBlockWindowProps {
   blockId: string;
   eventId: string;
   setTaskWindowOpen: (value: boolean) => void;
+  setConditionWindowOpen: (value: boolean) => void;
 }
 
 const EditBlockWindow = ({
@@ -20,6 +21,7 @@ const EditBlockWindow = ({
   blockId,
   eventId,
   setTaskWindowOpen,
+  setConditionWindowOpen,
 }: EditBlockWindowProps) => {
   const [windowState, setWindowState] = useState<"tasks" | "conditions">(
     "tasks",
@@ -64,7 +66,11 @@ const EditBlockWindow = ({
           setTaskWindowOpen={setTaskWindowOpen}
         />
       ) : (
-        <ConditionsList eventId={eventId} blockId={blockId} />
+        <ConditionsList
+          eventId={eventId}
+          blockId={blockId}
+          setConditionWindowOpen={setConditionWindowOpen}
+        />
       )}
     </CustomModalWindow>
   );

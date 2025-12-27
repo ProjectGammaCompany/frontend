@@ -7,6 +7,7 @@ import { Typography } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BlockList from "../BlockList/BlockList";
+import ConditionWindow from "../ConditionWindow/ConditionWindow";
 import EditBlockWindow from "../EditBlockWindow/EditBlockWindow";
 import TaskWindow from "../TaskWindow/TaskWindow";
 import "./EditorContent.scss";
@@ -39,6 +40,8 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   const [editBlockWindowOpen, setEditBlockWindowOpen] = useState(false);
 
   const [taskWindowOpen, setTaskWindowOpen] = useState(false);
+
+  const [conditionWindowOpen, setConditionWindowOpen] = useState(false);
 
   const [blockId, setBlockId] = useState<string | null>(null);
 
@@ -93,6 +96,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
           <EditBlockWindow
             setTaskWindowOpen={setTaskWindowOpen}
             eventId={eventId}
+            setConditionWindowOpen={setConditionWindowOpen}
             open={editBlockWindowOpen}
             setIsOpen={setEditBlockWindowOpen}
             blockId={blockId}
@@ -100,6 +104,12 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
           <TaskWindow
             open={taskWindowOpen}
             setIsOpen={setTaskWindowOpen}
+            eventId={eventId}
+            blockId={blockId}
+          />
+          <ConditionWindow
+            open={conditionWindowOpen}
+            setIsOpen={setConditionWindowOpen}
             eventId={eventId}
             blockId={blockId}
           />

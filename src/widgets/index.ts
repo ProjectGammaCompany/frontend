@@ -4,6 +4,7 @@ export { EventHeader } from "./eventHeader";
 export { default as LinkEventCard } from "./linkEventCard/ui/LinkEventCard.tsx";
 
 export {
+  conditionDataReducer,
   EditorContent,
   taskDataReducer,
 } from "./eventContentByRole/editorContent";
