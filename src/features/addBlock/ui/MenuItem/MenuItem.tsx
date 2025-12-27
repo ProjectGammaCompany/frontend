@@ -9,7 +9,7 @@ interface MenuItemProps {
 const MenuItem = ({ type, index }: MenuItemProps) => {
   return (
     <BlockCard draggableId={type} index={index}>
-      {!type ? (
+      {type === "consistent" ? (
         <Typography>Послед</Typography>
       ) : (
         <Typography>Паралл</Typography>
