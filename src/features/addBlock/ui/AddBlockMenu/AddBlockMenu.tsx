@@ -59,7 +59,6 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
           };
         },
       );
-      console.log("запуск onAdd");
       onAdd?.(data.data.id);
     },
   });

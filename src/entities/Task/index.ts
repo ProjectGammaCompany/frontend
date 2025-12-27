@@ -11,3 +11,5 @@ export {
 } from "./api/getEditorTaskData.ts";
 
 export { createTask, type CreateTaskResponse } from "./api/createTask.ts";
+
+export { deleteTask } from "./api/deleteTask.ts";

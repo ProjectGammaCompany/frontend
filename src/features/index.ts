@@ -2,3 +2,7 @@ export { default as ToggleFavoriteEventButton } from "./toggleFavoriteEvent/ui/T
 
 export { AddBlockMenu } from "./addBlock";
 export { EditEventSettingsWindow } from "./editEventSettings";
+
+export { DeleteBlockButton } from "./deleteBlock";
+export { DeleteConditionButton } from "./deleteCondition";
+export { DeleteTaskButton } from "./deleteTask";

@@ -32,6 +32,7 @@ export {
 
 export {
   BlockCard,
+  deleteBlock,
   getConditions,
   getEditingBlockData,
   getTasks,
@@ -43,6 +44,7 @@ export {
 
 export {
   createTask,
+  deleteTask,
   getEditorTaskData,
   TaskForm,
   type ClientOption,

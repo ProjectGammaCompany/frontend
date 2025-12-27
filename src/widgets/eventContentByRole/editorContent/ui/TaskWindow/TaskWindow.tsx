@@ -7,10 +7,11 @@ import {
   type GetTasksResponse,
   type ServerOption,
 } from "@/src/entities";
+import { DeleteTaskButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -49,6 +50,33 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
 
   const [name, setName] = useState(data?.name ?? "");
 
+  const handleSuccessDelete = () => {
+    queryClient.setQueryData(
+      [eventId, blockId, "tasksList"],
+      (oldData: AxiosResponse<GetTasksResponse>) => {
+        if (oldData) {
+          const newData: AxiosResponse<GetTasksResponse> = {
+            ...oldData,
+            data: {
+              ...oldData.data,
+              tasks: oldData.data.tasks
+                .filter((elem) => elem.id != taskId)
+                .map((elem, index) => {
+                  return {
+                    ...elem,
+                    order: index + 1,
+                  };
+                }),
+            },
+          };
+          return newData;
+        }
+        return oldData;
+      },
+    );
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     if (data) {
       setName(data?.name);
@@ -64,7 +92,14 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
       <div className="task-window__header">
-        {taskId && <Button>Уд</Button>}
+        {taskId && (
+          <DeleteTaskButton
+            eventId={eventId}
+            blockId={blockId}
+            taskId={taskId}
+            onSuccess={handleSuccessDelete}
+          />
+        )}
         <Input
           placeholder="Введите название"
           value={name}

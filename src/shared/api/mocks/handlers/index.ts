@@ -152,9 +152,9 @@ export const handlers = [
       name: "Блок 1",
       isParallel: false,
       order: 1,
-      points: false,
+      points: true,
       rightAnswer: false,
-      partialPoints: false,
+      partialPoints: true,
     });
   }),
   http.get("/event/:eventId/blocks/:blockId/tasks", () => {
@@ -300,6 +300,26 @@ export const handlers = [
           name: "блок 3",
         },
       ],
+    });
+  }),
+  http.delete("/event/:eventId/blocks/:blockId", () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+  http.delete("/event/:eventId/blocks/:blockId/tasks/:taskId", () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+  http.delete("/event/:eventId/blocks/:blockId/conditions/:conditionId", () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+  http.delete("/event/:eventId", () => {
+    return new HttpResponse(null, {
+      status: 200,
     });
   }),
 ];

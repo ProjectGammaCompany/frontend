@@ -5,7 +5,7 @@ interface GetEditingBlockDataResponse {
   isParallel: boolean;
   order: number;
   points: boolean;
-  rightAnswer: boolean;
+  rightAnswers: boolean;
   partialPoints: boolean;
 }
 export const getEditingBlockData = (eventId: string, blockId: string) => {

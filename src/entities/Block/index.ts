@@ -12,3 +12,5 @@ export {
   type Condition,
   type GetConditionsResponse,
 } from "./api/getConditions.ts";
+
+export { deleteBlock } from "./api/deleteBlock.ts";

@@ -12,7 +12,6 @@ interface AvatarBlockProps {
 }
 
 const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
-  console.log(avatar);
   const setAvatarMutation = useMutation({
     mutationKey: ["avatar"],
     mutationFn: setAvatar,

@@ -1,8 +1,15 @@
-import { getEditingBlockData } from "@/src/entities";
+import {
+  getEditingBlockData,
+  type getEditingEventDataResponse,
+} from "@/src/entities";
+import { DeleteBlockButton } from "@/src/features";
+import { queryClient } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Switch, Typography } from "antd";
+import type { AxiosResponse } from "axios";
 import { useState } from "react";
+import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
 import TaskList from "../TaskList/TaskList";
 import "./EditBlockWindow.scss";
@@ -27,11 +34,40 @@ const EditBlockWindow = ({
     "tasks",
   );
 
+  const [openSettings, setOpenSettings] = useState(false);
+
   const { data, isPending, isError } = useQuery({
     queryKey: [eventId, blockId, "blockInfo"],
     queryFn: () => getEditingBlockData(eventId, blockId),
     select: (data) => data.data,
   });
+
+  const handleSuccessBlockDeleting = () => {
+    queryClient.setQueryData(
+      [eventId, "data"],
+      (oldData: AxiosResponse<getEditingEventDataResponse>) => {
+        if (oldData) {
+          const newData: AxiosResponse<getEditingEventDataResponse> = {
+            ...oldData,
+            data: {
+              ...oldData.data,
+              blocks: oldData.data.blocks
+                .filter((block) => block.id != blockId)
+                .map((block, index) => {
+                  return {
+                    ...block,
+                    order: index + 1,
+                  };
+                }),
+            },
+          };
+          return newData;
+        }
+        return oldData;
+      },
+    );
+    setIsOpen(false);
+  };
 
   if (isPending) {
     return <div>Загрузка...</div>;
@@ -42,24 +78,51 @@ const EditBlockWindow = ({
   }
 
   return (
-    <CustomModalWindow open={open} setIsOpen={setIsOpen}>
+    <CustomModalWindow
+      open={open}
+      setIsOpen={setIsOpen}
+      afterClose={() => {
+        setOpenSettings(false);
+        setWindowState("tasks");
+      }}
+    >
       <Typography.Text className="edit-block-window__order">
         {data.order}
       </Typography.Text>
       <div className="edit-block-window__header">
-        <Switch
-          value={windowState === "conditions"}
-          onChange={() => {
-            setWindowState(
-              //TODO сделать лучше
-              windowState === "conditions" ? "tasks" : "conditions",
-            );
-          }}
-        />
+        {openSettings ? (
+          <DeleteBlockButton
+            eventId={eventId}
+            blockId={blockId}
+            onSuccess={handleSuccessBlockDeleting}
+          />
+        ) : (
+          <Switch
+            value={windowState === "conditions"}
+            onChange={() => {
+              setWindowState(
+                //TODO сделать лучше
+                windowState === "conditions" ? "tasks" : "conditions",
+              );
+            }}
+          />
+        )}
         <Typography.Title level={2}>{data.name}</Typography.Title>
-        <Button>Наст</Button>
+        <Button
+          onClick={() => {
+            setOpenSettings((prev) => !prev);
+          }}
+        >
+          Наст
+        </Button>
       </div>
-      {windowState === "tasks" ? (
+      {openSettings ? (
+        <BlockSettingsForm
+          eventId={eventId}
+          blockId={blockId}
+          initialData={data}
+        />
+      ) : windowState === "tasks" ? (
         <TaskList
           eventId={eventId}
           blockId={blockId}

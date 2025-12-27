@@ -4,9 +4,10 @@ import {
   type CreateConditionResponse,
   type GetConditionsResponse,
 } from "@/src/entities";
+import { DeleteConditionButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useSelector } from "react-redux";
 import { selectCondition } from "../../model/conditionSlice";
@@ -26,10 +27,39 @@ const ConditionWindow = ({
 }: ConditionWindowProps) => {
   const condition = useSelector(selectCondition);
 
+  const handleSuccessDelete = () => {
+    queryClient.setQueryData(
+      [eventId, blockId, "conditionsList"],
+      (oldData: AxiosResponse<GetConditionsResponse>) => {
+        if (oldData) {
+          const newData: AxiosResponse<GetConditionsResponse> = {
+            ...oldData,
+            data: {
+              ...oldData,
+              conditions: oldData.data.conditions.filter(
+                (el) => el.id != condition?.id,
+              ),
+            },
+          };
+          return newData;
+        }
+        return oldData;
+      },
+    );
+    setIsOpen(false);
+  };
+
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
       <div>
-        {condition && <Button>У</Button>}
+        {condition && (
+          <DeleteConditionButton
+            eventId={eventId}
+            blockId={blockId}
+            conditionId={condition.id}
+            onSuccess={handleSuccessDelete}
+          />
+        )}
         <Typography.Title level={3}>Условие</Typography.Title>
       </div>
       {condition ? (

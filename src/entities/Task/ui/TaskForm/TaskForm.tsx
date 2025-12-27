@@ -108,7 +108,6 @@ const TaskForm = <TResponse,>({
     }));
 
   const handleChange: UploadProps["onChange"] = ({ fileList }) => {
-    console.log(fileList);
     const normalized = fileList.map((file) => {
       if (file.response) {
         file.url = (file.response as UploadFileResponse).url;

@@ -57,7 +57,6 @@ const ConditionForm = <TResponse,>({
       return;
     }
     if (initialData && blockOptions) {
-      console.log(blockOptions);
       form.setFieldsValue(initialData);
     }
   }, [blockOptions, form, initialData]);
