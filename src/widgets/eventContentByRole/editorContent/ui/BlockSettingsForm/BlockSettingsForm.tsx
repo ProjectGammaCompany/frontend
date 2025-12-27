@@ -28,11 +28,7 @@ const formInputs: ChangeTypeOfKeys<
   partialPoints: "Выдача частичных баллов в множественном выборе",
 };
 
-const BlockSettingsForm = ({
-  eventId,
-  blockId,
-  initialData,
-}: BlockSettingsFormProps) => {
+const BlockSettingsForm = ({ initialData }: BlockSettingsFormProps) => {
   const [form] = useForm();
 
   useEffect(() => {

@@ -1,13 +1,9 @@
-import {
-  getEditingBlockData,
-  type getEditingEventDataResponse,
-} from "@/src/entities";
+import { getEditingBlockData } from "@/src/entities";
 import { DeleteBlockButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Switch, Typography } from "antd";
-import type { AxiosResponse } from "axios";
 import { useState } from "react";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
@@ -42,30 +38,10 @@ const EditBlockWindow = ({
     select: (data) => data.data,
   });
 
-  const handleSuccessBlockDeleting = () => {
-    queryClient.setQueryData(
-      [eventId, "data"],
-      (oldData: AxiosResponse<getEditingEventDataResponse>) => {
-        if (oldData) {
-          const newData: AxiosResponse<getEditingEventDataResponse> = {
-            ...oldData,
-            data: {
-              ...oldData.data,
-              blocks: oldData.data.blocks
-                .filter((block) => block.id != blockId)
-                .map((block, index) => {
-                  return {
-                    ...block,
-                    order: index + 1,
-                  };
-                }),
-            },
-          };
-          return newData;
-        }
-        return oldData;
-      },
-    );
+  const handleSuccessBlockDeleting = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: [eventId, "data"],
+    });
     setIsOpen(false);
   };
 

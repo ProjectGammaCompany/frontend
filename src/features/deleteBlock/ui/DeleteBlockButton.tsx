@@ -5,7 +5,7 @@ import { Button } from "antd";
 interface DeleteBlockButtonProps {
   eventId: string;
   blockId: string;
-  onSuccess?: () => void;
+  onSuccess?: () => void | Promise<void>;
 }
 
 const DeleteBlockButton = ({
