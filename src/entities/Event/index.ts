@@ -1,5 +1,3 @@
-export { getEditingEventSettings } from "./api/getEditingEventSettings.ts";
-
 export {
   getEditingEventData,
   type BlockItemData,
@@ -11,3 +9,11 @@ export {
   selectEventName,
   setName,
 } from "./model/eventNameSlice.tsx";
+
+export {
+  getEditingEventSettings,
+  type EditingEventSettings,
+  type Group,
+} from "./api/getEditingEventSettings.ts";
+
+export { editEventSettings } from "./api/editEventSettings.ts";

@@ -51,7 +51,7 @@ export const handlers = [
   }),
   http.get("/files/:id", () => {
     return HttpResponse.redirect(
-      "https://i.pinimg.com/736x/50/fa/a6/50faa6d198e1d1d15e868a7433f87346.jpg",
+      "https://i.pinimg.com/736x/af/fb/a9/affba91c05f0b42dc3f36f0b341e0e9e.jpg",
     );
   }),
   http.get("/tags", () => {
@@ -92,7 +92,7 @@ export const handlers = [
   http.get("/profile", () => {
     return HttpResponse.json({
       avatar: "fdjvnjvdjdv.pnh",
-      username: "СамыйСексуальныйМужчина",
+      username: "User 1",
     });
   }),
   http.put("/profile/avatar", () => {
@@ -318,6 +318,24 @@ export const handlers = [
     });
   }),
   http.delete("/event/:eventId", () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+  http.get("/event/:eventId/settings", () => {
+    return HttpResponse.json({
+      description: "Вот описание",
+      tags: ["4", "1", "2"],
+      startDate: "12.08.2004 23:20",
+      private: true,
+      password: "string",
+      groups: [],
+      rating: false,
+      cover: "32232723723",
+      collaborators: [],
+    });
+  }),
+  http.put("/event/:eventId/settings", () => {
     return new HttpResponse(null, {
       status: 200,
     });

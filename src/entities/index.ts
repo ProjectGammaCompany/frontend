@@ -21,13 +21,16 @@ export { getTags, type Tag } from "./Tag";
 //TODO: добавить index.ts для каждой сущности
 
 export {
+  editEventSettings,
   eventNameReducer,
   getEditingEventData,
   getEditingEventSettings,
   selectEventName,
   setName,
   type BlockItemData,
+  type EditingEventSettings,
   type getEditingEventDataResponse,
+  type Group,
 } from "./Event";
 
 export {
