@@ -1,7 +1,7 @@
 import { DatePicker } from "antd";
 import { Dayjs } from "dayjs";
 import React from "react";
-
+import "./CustomDatePicker.scss";
 interface CustomDatePickerProps {
   value?: Dayjs | null;
   onChange?:
@@ -29,6 +29,12 @@ const CustomDatePicker = ({
       onChange={onChange}
       showTime={showTime}
       format={showTime ? DATE_TIME_FORMAT : DATE_FORMAT}
+      classNames={{
+        popup: {
+          root: "custom-date-picker__popup-root",
+          container: "custom-date-picker__container",
+        },
+      }}
       {...rest}
     />
   );
