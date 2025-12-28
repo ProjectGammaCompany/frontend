@@ -1,5 +1,6 @@
 import { Modal } from "antd";
 import type { ReactNode } from "react";
+import { CrossSvg } from "../svg/CrossSvg";
 import "./CustomModalWindow.scss";
 interface CustomModalWindowProps {
   open: boolean;
@@ -28,6 +29,11 @@ const CustomModalWindow = ({
       zIndex={zIndex}
       onCancel={() => setIsOpen(false)}
       centered
+      closeIcon={
+        <div className="custom-modal-window__close-btn">
+          <CrossSvg />
+        </div>
+      }
       maskClosable={false}
       destroyOnHidden
       classNames={{

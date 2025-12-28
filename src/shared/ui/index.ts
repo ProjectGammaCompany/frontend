@@ -10,6 +10,7 @@ export { default as CustomModalWindow } from "./CustomModalWindow/CustomModalWin
 
 export { BackSvg } from "./svg/BackSvg.tsx";
 export { CreateEventSvg } from "./svg/CreateEventSvg.tsx";
+export { CrossSvg } from "./svg/CrossSvg.tsx";
 export { FiltersSvg } from "./svg/FiltersSvg.tsx";
 export { HomeSvg } from "./svg/HomeSvg.tsx";
 export { MoreSvg } from "./svg/MoreSvg.tsx";
