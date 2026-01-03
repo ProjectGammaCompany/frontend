@@ -11,7 +11,7 @@ export const createTask = (
   data: FullTaskData,
 ) => {
   return axiosInstance.post<CreateTaskResponse>(
-    `event/${eventId}/blocks/${blockId}/tasks`,
+    `event/${eventId}/blocks/${blockId}/task`,
     data,
   );
 };
