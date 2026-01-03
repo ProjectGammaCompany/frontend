@@ -1,6 +1,6 @@
 .custom-modal-window {
   &__container {
-    position: static;
+    position: static !important;
     overflow-y: auto;
     max-height: 90dvh;
     padding-top: 30px !important;
