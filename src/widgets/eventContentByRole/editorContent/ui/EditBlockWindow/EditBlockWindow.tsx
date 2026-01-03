@@ -3,8 +3,8 @@ import { DeleteBlockButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Switch, Typography } from "antd";
-import { useState } from "react";
+import { Button, Input, Switch, Typography } from "antd";
+import { useEffect, useState } from "react";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
 import TaskList from "../TaskList/TaskList";
@@ -45,6 +45,14 @@ const EditBlockWindow = ({
     setIsOpen(false);
   };
 
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+    }
+  }, [data]);
+
   if (isPending) {
     return <div>Загрузка...</div>;
   }
@@ -83,7 +91,17 @@ const EditBlockWindow = ({
             }}
           />
         )}
-        <Typography.Title level={2}>{data.name}</Typography.Title>
+        <Input
+          value={name}
+          onChange={(e) => {
+            setName(e.currentTarget.value);
+          }}
+          // onBlur={}
+          variant="borderless"
+          classNames={{
+            input: "edit-block-window__name-input",
+          }}
+        />
         <Button
           onClick={() => {
             setOpenSettings((prev) => !prev);
