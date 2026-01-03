@@ -1,5 +1,9 @@
 import { getTags } from "@/src/entities";
-import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
+import {
+  getFullFileUrl,
+  useFileUpload,
+  type ChangeTypeOfKeys,
+} from "@/src/shared/lib";
 import { CustomDatePicker } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -12,7 +16,7 @@ import {
   Typography,
   Upload,
 } from "antd";
-import { useForm } from "antd/es/form/Form";
+import { useForm, useWatch } from "antd/es/form/Form";
 import { Dayjs } from "dayjs";
 import { type ReactNode } from "react";
 import "./EventForm.scss";
@@ -30,12 +34,17 @@ export interface BaseEventFormData {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type EventFormData<T extends object = {}> = BaseEventFormData & T;
 
-interface EventFormProps<TData, TResponse> {
+interface EventFormProps<TData extends EventFormData, TResponse> {
   defaultData?: TData;
   submitBtnText: string;
-  mutationFn: (data: TData) => Promise<TResponse>;
-  children: ReactNode;
-  onSuccessFn: (data: TResponse) => void;
+  mutationFn: (
+    data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
+  ) => Promise<TResponse>;
+  children?: ReactNode;
+  onSuccessFn?: (
+    data: TResponse,
+    variables: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
+  ) => void;
 }
 
 export const EventForm = <TData extends EventFormData, TResponse>({
@@ -45,7 +54,11 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   submitBtnText,
   children,
 }: EventFormProps<TData, TResponse>) => {
-  const formMutation = useMutation<TResponse, Error, TData>({
+  const formMutation = useMutation<
+    TResponse,
+    Error,
+    ChangeTypeOfKeys<TData, "startDate" | "endDate", string>
+  >({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
   });
@@ -66,11 +79,10 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
-  const coverUploadMutation = useFileUpload({
-    onSuccess: (data) => {
-      //@ts-expect-error форма недостаточно умная у antd
-      form.setFieldValue("cover", data.data.url);
-    },
+  //TODO fix upload, using TaskForm
+  const coverUploadMutation = useFileUpload((data) => {
+    //@ts-expect-error форма недостаточно умная у antd
+    form.setFieldValue("cover", data.data.url);
   });
 
   const handleCoverUpload = (cover: File) => {
@@ -81,15 +93,13 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   const onFinish = (values: TData) => {
     const preparedValues = {
       ...values,
-      startDate: values.startDate
-        ? values.startDate.format("DD.MM.YYYY HH:mm")
-        : undefined,
-      endDate: values.endDate
-        ? values.endDate.format("DD.MM.YYYY HH:mm")
-        : undefined,
-    };
+      startDate: values.startDate?.format("DD.MM.YYYY HH:mm") ?? "",
+      endDate: values.endDate?.format("DD.MM.YYYY HH:mm") ?? "",
+    } as ChangeTypeOfKeys<TData, "startDate" | "endDate", string>;
     formMutation.mutate(preparedValues);
   };
+
+  const cover = useWatch("cover", form);
 
   return (
     <ConfigProvider
@@ -132,25 +142,22 @@ export const EventForm = <TData extends EventFormData, TResponse>({
                 onPreview={() => null}
                 className="event-form__cover-upload"
               >
-                {
-                  //@ts-expect-error форма недостаточно умная у antd
-                  form.getFieldValue("cover") ? (
-                    <img
-                      src={getFullFileUrl(
-                        //@ts-expect-error форма недостаточно умная у antd
-                        form.getFieldValue("cover") as string,
-                      )}
-                    />
-                  ) : (
-                    <Button
-                      className="event-form__cover-upload-btn"
-                      loading={coverUploadMutation.isPending}
-                      onClick={() => coverUploadMutation.mutate}
-                    >
-                      Загрузите обложку
-                    </Button>
-                  )
-                }
+                {cover ? (
+                  <img
+                    src={getFullFileUrl(
+                      //@ts-expect-error форма недостаточно умная у antd
+                      form.getFieldValue("cover") as string,
+                    )}
+                  />
+                ) : (
+                  <Button
+                    className="event-form__cover-upload-btn"
+                    loading={coverUploadMutation.isPending}
+                    onClick={() => coverUploadMutation.mutate}
+                  >
+                    Загрузите обложку
+                  </Button>
+                )}
               </Upload>
             </Form.Item>
           </ConfigProvider>

@@ -1,0 +1,12 @@
+.task-item {
+  position: relative;
+  background-color: darkgray;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+
+  &__order-text {
+    text-align: center;
+  }
+}

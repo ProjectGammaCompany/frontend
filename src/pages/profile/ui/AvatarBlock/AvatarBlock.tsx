@@ -12,7 +12,6 @@ interface AvatarBlockProps {
 }
 
 const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
-  console.log(avatar);
   const setAvatarMutation = useMutation({
     mutationKey: ["avatar"],
     mutationFn: setAvatar,
@@ -35,10 +34,8 @@ const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
     },
   });
 
-  const uploadAvatarMutation = useFileUpload({
-    onSuccess: (data) => {
-      setAvatarMutation.mutate(data.data.url);
-    },
+  const uploadAvatarMutation = useFileUpload((data) => {
+    setAvatarMutation.mutate(data.data.url);
   });
 
   const handleAvatarUpload = (avatar: File) => {
