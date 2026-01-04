@@ -25,6 +25,7 @@ export {
   eventNameReducer,
   getEditingEventData,
   getEditingEventSettings,
+  getPlayerInfo,
   selectEventName,
   setName,
   type BlockItemData,

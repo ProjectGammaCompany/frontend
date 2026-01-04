@@ -142,6 +142,11 @@ export const handlers = [
       ],
     });
   }),
+  http.get("/event/:eventId/role", () => {
+    return HttpResponse.json({
+      role: 0,
+    });
+  }),
   http.post("/event/:eventid/block", () => {
     return HttpResponse.json({
       id: "232323",
@@ -338,6 +343,19 @@ export const handlers = [
   http.put("/event/:eventId/settings", () => {
     return new HttpResponse(null, {
       status: 200,
+    });
+  }),
+  http.get("/event/:eventId/playerInfo", () => {
+    return HttpResponse.json({
+      title: "string",
+      description: "string",
+      rate: 4.2,
+      favorite: false,
+      tags: ["Химия", "Биология"],
+      startDate: "04.01.2026 13:40",
+      endDate: "04.01.2026 13:55",
+      cover: "string",
+      status: "started",
     });
   }),
 ];

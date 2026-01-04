@@ -16,6 +16,7 @@ interface CreateEventWindowProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RequestResponse = AxiosResponse<createEventResponse, any, object>;
 
+//todo fix path
 const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
   const navigate = useNavigate();
   return (

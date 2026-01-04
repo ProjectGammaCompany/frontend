@@ -25,26 +25,26 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
   return (
     <>
       <Header>
-        {role === 0 ? (
-          <div>пользователь</div>
-        ) : (
-          <div className="event-page-header">
-            <div
-              className="event-page-header__icons-wrapper"
-              onClick={() => void navigate(-1)}
-            >
-              <BackSvg classname="event-page-header__back-icon" />
-              <Logo />
-            </div>
-            <Typography.Title level={3}>Редактор</Typography.Title>
+        <div className="event-page-header">
+          <div
+            className="event-page-header__icons-wrapper"
+            onClick={() => void navigate(-1)}
+          >
+            <BackSvg classname="event-page-header__back-icon" />
+            <Logo />
+          </div>
+          <Typography.Title level={1} className="event-page-header__title">
+            {role === 0 ? "Страница события" : "Редактор"}
+          </Typography.Title>
+          {role === 1 && (
             <IconButton
               icon={<SettingsSvg />}
               onClick={() => setIsOpen(true)}
               className="event-page-header__settings-btn"
               iconWrapperClassname="event-page-header__settings-icon"
             />
-          </div>
-        )}
+          )}
+        </div>
       </Header>
       <EditEventSettingsWindow
         eventId={eventId}
