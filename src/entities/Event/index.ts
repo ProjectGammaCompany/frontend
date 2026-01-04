@@ -17,3 +17,5 @@ export {
 } from "./api/getEditingEventSettings.ts";
 
 export { editEventSettings } from "./api/editEventSettings.ts";
+
+export { getPlayerInfo } from "./api/getPlayerInfo.ts";

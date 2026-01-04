@@ -7,6 +7,10 @@
     display: flex;
   }
 
+  &__title {
+    font-size: 22px !important;
+  }
+
   &__settings-btn {
     background-color: transparent;
     border: 0px;
