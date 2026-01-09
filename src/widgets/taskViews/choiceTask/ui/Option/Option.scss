@@ -1,0 +1,14 @@
+.option {
+  &__wrapper {
+    display: flex;
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 5px;
+    align-items: center;
+    gap: 10px;
+  }
+  &__icon {
+    height: 45px;
+    width: 45px;
+  }
+}

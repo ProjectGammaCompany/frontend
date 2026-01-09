@@ -51,6 +51,7 @@ export {
   deleteTask,
   getEditorTaskData,
   TaskForm,
+  TaskView,
   type ClientOption,
   type CreateTaskResponse,
   type ServerOption,

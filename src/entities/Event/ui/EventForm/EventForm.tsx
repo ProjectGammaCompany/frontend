@@ -183,8 +183,6 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             mode="multiple"
             options={tags}
             classNames={{
-              //@ts-expect-error почему-то нет такого класса
-              //TODO: поправить
               itemRemove: "event-form__remove-tag-btn",
             }}
           />

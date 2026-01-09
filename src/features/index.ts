@@ -6,3 +6,5 @@ export { EditEventSettingsWindow } from "./editEventSettings";
 export { DeleteBlockButton } from "./deleteBlock";
 export { DeleteConditionButton } from "./deleteCondition";
 export { DeleteTaskButton } from "./deleteTask";
+
+export { SendAnswerButton } from "./sendTaskAnswer";

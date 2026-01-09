@@ -1,5 +1,6 @@
 import { AuthPage } from "@/src/pages/auth";
 import { EventPage } from "@/src/pages/event";
+import { GamePage } from "@/src/pages/game";
 import { HomePage } from "@/src/pages/home";
 import { NotificationPage } from "@/src/pages/notifications";
 import { ProfilePage } from "@/src/pages/profile";
@@ -18,9 +19,19 @@ const router = createBrowserRouter([
         middleware: [authMiddleware],
         Component: AuthPage,
       },
+
       {
         path: "event/:eventId",
-        Component: EventPage,
+        children: [
+          {
+            path: "game",
+            Component: GamePage,
+          },
+          {
+            index: true,
+            Component: EventPage,
+          },
+        ],
       },
       {
         path: "/",

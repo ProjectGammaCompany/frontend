@@ -13,3 +13,5 @@ export {
 export { createTask, type CreateTaskResponse } from "./api/createTask.ts";
 
 export { deleteTask } from "./api/deleteTask.ts";
+
+export { default as TaskView } from "./ui/TaskView/TaskView.tsx";

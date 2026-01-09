@@ -1,0 +1,14 @@
+.file-item {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 80px;
+  align-items: center;
+
+  &__icon {
+    width: 45px;
+    height: 45px;
+    background-color: darkgray;
+    border-radius: 5px;
+  }
+}
