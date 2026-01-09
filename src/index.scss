@@ -10,17 +10,15 @@
   border: none;
 }
 
-html {
-  overflow: hidden;
-  scroll-behavior: smooth;
-  height: 100%;
-}
-
+html,
 body {
   height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
   overflow: auto;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 a,

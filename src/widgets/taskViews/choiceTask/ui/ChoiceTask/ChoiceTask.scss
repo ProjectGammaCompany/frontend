@@ -1,0 +1,16 @@
+.choice-task {
+  &__option {
+    &_incorrect {
+      border: 1px solid red;
+    }
+
+    &_correct {
+      border: 1px solid green;
+    }
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

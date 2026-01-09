@@ -8,4 +8,8 @@ export {
   EditorContent,
   taskDataReducer,
 } from "./eventContentByRole/editorContent";
-export { ParticipantContent } from "./eventContentByRole/participantContent/index.ts";
+export { ParticipantContent } from "./eventContentByRole/participantContent";
+
+export { ChoiceTask } from "./taskViews/choiceTask";
+export { InfoBlock } from "./taskViews/infoBlock";
+export { TextEntryTask } from "./taskViews/textEntryTask";

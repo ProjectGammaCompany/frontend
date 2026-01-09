@@ -10,6 +10,8 @@ interface ParticipantContentProps {
   eventId: string;
 }
 
+//todo: переименовать в playerContent
+
 const ParticipantContent = ({ eventId }: ParticipantContentProps) => {
   console.log(eventId);
 
