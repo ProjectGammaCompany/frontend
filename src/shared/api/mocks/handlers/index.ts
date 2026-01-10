@@ -360,28 +360,28 @@ export const handlers = [
   }),
   http.get("/event/:eventId/nextStage", () => {
     return HttpResponse.json({
-      type: "task",
-      task: {
-        id: String(Math.floor(1 + Math.random() * 5)),
-        blockId: "232232323",
-        name: "Тестовое задание",
-        description: "Проверка описания",
-        type: 2,
-        options: [
-          {
-            id: "1",
-            value: "Ответ1",
-          },
-          {
-            id: "2",
-            value:
-              "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
-          },
-        ],
-        files: ["Длинное название файла вот.png", "fjfjfj.docx"],
-        // time: 15,
-        // timeStamp?: string,
-      },
+      type: "end",
+      // task: {
+      //   id: String(Math.floor(1 + Math.random() * 5)),
+      //   blockId: "232232323",
+      //   name: "Тестовое задание",
+      //   description: "Проверка описания",
+      //   type: 2,
+      //   options: [
+      //     {
+      //       id: "1",
+      //       value: "Ответ1",
+      //     },
+      //     {
+      //       id: "2",
+      //       value:
+      //         "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
+      //     },
+      //   ],
+      //   files: ["Длинное название файла вот.png", "fjfjfj.docx"],
+      //   // time: 15,
+      //   // timeStamp?: string,
+      // },
     });
   }),
   http.post(`/event/:eventId/block/:blockId/task/:taskId/answer`, () => {

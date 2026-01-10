@@ -1,0 +1,11 @@
+.end-game-content {
+  margin-top: 25dvh;
+  height: calc(100dvh - 15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__text {
+    text-align: center;
+  }
+}
