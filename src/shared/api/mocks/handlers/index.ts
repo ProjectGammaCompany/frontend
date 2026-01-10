@@ -395,4 +395,9 @@ export const handlers = [
       status: 200,
     });
   }),
+  http.get("/event/:eventId/playerStats", () => {
+    return HttpResponse.json({
+      points: 250,
+    });
+  }),
 ];
