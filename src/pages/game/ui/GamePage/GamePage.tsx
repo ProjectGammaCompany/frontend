@@ -4,7 +4,7 @@ import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import { getNextStage } from "../../api";
 import BlockStageContent from "../BlockStageContent/BlockStageContent";
-import EndGameStage from "../EndGameContent/EndGameContent";
+import EndGameContent from "../EndGameContent/EndGameContent";
 import TaskStageContent from "../TaskStageContent/TaskStageContent";
 import "./GamePage.scss";
 const GamePage = () => {
@@ -32,7 +32,7 @@ const GamePage = () => {
   }
 
   if (data.type === "end") {
-    return <EndGameStage />;
+    return <EndGameContent eventId={eventId!} />;
   }
 
   return (
