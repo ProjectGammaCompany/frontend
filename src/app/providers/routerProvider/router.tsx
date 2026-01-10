@@ -4,6 +4,7 @@ import { GamePage } from "@/src/pages/game";
 import { HomePage } from "@/src/pages/home";
 import { NotificationPage } from "@/src/pages/notifications";
 import { ProfilePage } from "@/src/pages/profile";
+import { StatsPage } from "@/src/pages/stats";
 import { tokenStorage } from "@/src/shared/lib";
 import { BaseLayout } from "@/src/widgets";
 import { createBrowserRouter, redirect } from "react-router";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
           {
             path: "game",
             Component: GamePage,
+          },
+          {
+            path: "stats",
+            Component: StatsPage,
           },
           {
             index: true,
