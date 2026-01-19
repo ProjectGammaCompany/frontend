@@ -118,6 +118,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         classNames={{
           label: "event-form__label",
         }}
+        className="event-form"
         initialValues={defaultData}
         requiredMark={false}
         scrollToFirstError={{ behavior: "instant", block: "end", focus: true }}
@@ -148,6 +149,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
                       //@ts-expect-error форма недостаточно умная у antd
                       form.getFieldValue("cover") as string,
                     )}
+                    className="event-form__cover-img"
                   />
                 ) : (
                   <Button
@@ -178,16 +180,29 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         <Form.Item<EventFormData> name="endDate" label="Время завершения">
           <CustomDatePicker showTime />
         </Form.Item>
-        <Form.Item<EventFormData> name="tags" label="Теги">
+        <Form.Item<EventFormData>
+          name="tags"
+          label="Теги"
+          className="event-form__select-tag-wrapper"
+        >
           <Select
             mode="multiple"
             options={tags}
+            optionRender={(option) => (
+              <Typography.Paragraph className="event-form__tag-list-option">
+                {option.data.label}
+              </Typography.Paragraph>
+            )}
+            className="event-form__select-tag"
             classNames={{
               itemRemove: "event-form__remove-tag-btn",
+              popup: {
+                listItem: "event-form__tag-list-item",
+              },
             }}
           />
         </Form.Item>
-        <Form.Item<EventFormData>>
+        <Form.Item<EventFormData> className="event-form__private-form-item">
           <div className="event-form__private-wrapper">
             <Form.Item name="private" valuePropName="checked" noStyle>
               <Switch />

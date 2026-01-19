@@ -1,5 +1,6 @@
+import { CustomSwitch } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button, Form, InputNumber, Select, Switch, Typography } from "antd";
+import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { useEffect } from "react";
@@ -69,6 +70,7 @@ const ConditionForm = <TResponse,>({
 
   const selectTypeErrorMessage = "Выберите хотя бы одно из правил для условия";
 
+  //todo: пофиксить вывод input. На < почему-то не отображается
   return (
     <Form
       initialValues={initialData}
@@ -77,8 +79,9 @@ const ConditionForm = <TResponse,>({
       labelWrap
       layout="vertical"
       requiredMark={false}
+      className="condition-form"
     >
-      <FormItem<ConditionFormData>>
+      <FormItem<ConditionFormData> className="condition-form__item">
         <FormItem<ConditionFormData>
           name="max"
           noStyle
@@ -93,16 +96,14 @@ const ConditionForm = <TResponse,>({
             },
           ]}
         >
-          <Switch
-            checked={max != -1}
+          <CustomSwitch
+            value={max != -1}
             onChange={(checked) => {
               form.setFieldValue("max", checked ? 0 : -1);
             }}
+            title="Набрано менее заданного количества баллов (&lt;)"
           />
         </FormItem>
-        <Typography.Text>
-          Набрано менее заданного количества баллов (&lt;)
-        </Typography.Text>
       </FormItem>
       <Form.Item
         noStyle
@@ -113,7 +114,11 @@ const ConditionForm = <TResponse,>({
       >
         {({ getFieldValue }) =>
           getFieldValue("max") !== -1 ? (
-            <Form.Item name="max" label="Введите число">
+            <Form.Item
+              name="max"
+              label="Введите число"
+              className="condition-form__item"
+            >
               <InputNumber min={0} />
             </Form.Item>
           ) : null
@@ -134,16 +139,14 @@ const ConditionForm = <TResponse,>({
             },
           ]}
         >
-          <Switch
-            checked={min != -1}
+          <CustomSwitch
+            value={min != -1}
             onChange={(checked) => {
               form.setFieldValue("min", checked ? 0 : -1);
             }}
+            title="Набрано не менее заданного количества баллов (&gt; или =)"
           />
         </Form.Item>
-        <Typography.Text>
-          Набрано не менее заданного количества баллов (&gt; или =)
-        </Typography.Text>
       </FormItem>
       <Form.Item
         noStyle
@@ -154,7 +157,11 @@ const ConditionForm = <TResponse,>({
       >
         {({ getFieldValue }) =>
           getFieldValue("min") !== -1 ? (
-            <Form.Item name="min" label="Введите число">
+            <Form.Item
+              name="min"
+              label="Введите число"
+              className="condition-form__item"
+            >
               <InputNumber min={0} />
             </Form.Item>
           ) : null

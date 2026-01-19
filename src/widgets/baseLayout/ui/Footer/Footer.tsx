@@ -12,21 +12,23 @@ const Footer = ({ pathname }: FooterProps) => {
   const navigate = useNavigate();
   return (
     <footer className="footer">
-      {FOOTER_BUTTONS_INFO.map((buttonInfo) => (
-        <IconButton
-          className={classnames("footer__icon-btn", {
-            "footer__icon-btn_active": pathname === buttonInfo.pathname,
-          })}
-          key={buttonInfo.pathname}
-          icon={buttonInfo.icon}
-          iconWrapperClassname="footer__icon-wrapper"
-          onClick={() => {
-            if (buttonInfo.pathname != pathname) {
-              void navigate(buttonInfo.pathname);
-            }
-          }}
-        />
-      ))}
+      <div className="footer__content">
+        {FOOTER_BUTTONS_INFO.map((buttonInfo) => (
+          <IconButton
+            className={classnames("footer__icon-btn", {
+              "footer__icon-btn_active": pathname === buttonInfo.pathname,
+            })}
+            key={buttonInfo.pathname}
+            icon={buttonInfo.icon}
+            iconWrapperClassname="footer__icon-wrapper"
+            onClick={() => {
+              if (buttonInfo.pathname != pathname) {
+                void navigate(buttonInfo.pathname);
+              }
+            }}
+          />
+        ))}
+      </div>
     </footer>
   );
 };

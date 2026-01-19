@@ -2,9 +2,14 @@
   height: 45px;
   width: 45px;
   padding: 5px;
+  color: gray;
 
   &_active {
-    color: rgb(241, 137, 0);
+    color: var(--favorite-color);
+
+    &:hover {
+      color: var(--favorite-color) !important;
+    }
   }
   &__icon-wrapper {
     height: 45px;

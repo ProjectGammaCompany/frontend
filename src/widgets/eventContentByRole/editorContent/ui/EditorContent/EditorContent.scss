@@ -1,7 +1,21 @@
-.event-page {
+.editor-content {
+  display: flex;
+  height: calc(100dvh - 32px);
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
   &__name {
-    width: 100%;
+    background-color: var(--light-color);
+    padding: 10px;
+    border-radius: 10px;
     text-align: center;
     align-items: center;
+    z-index: 2;
+    position: relative;
+
+    &-text {
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
 }

@@ -2,25 +2,18 @@
   &__actions-btns {
     width: 50px;
     height: 50px;
+    color: var(--primary-color);
 
     & > span {
       width: 30px;
       height: 30px;
     }
   }
-  &__my-events-btn {
-    color: black;
-    width: 45px;
-    height: 45px;
-    & > span {
-      width: 30px;
-      height: 30px;
-    }
-  }
+  &__my-events-btn,
   &__create-event-btn {
-    width: 45px;
-    height: 45px;
-    padding: 5px;
+    color: var(--primary-color);
+    width: 60px;
+    height: 60px;
     & > span {
       width: 30px;
       height: 30px;

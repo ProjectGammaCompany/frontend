@@ -11,7 +11,7 @@ import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useSelector } from "react-redux";
 import { selectCondition } from "../../model/conditionSlice";
-
+import "./ConditionWindow.scss";
 interface ConditionWindowProps {
   open: boolean;
   setIsOpen: (value: boolean) => void;
@@ -51,7 +51,7 @@ const ConditionWindow = ({
 
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
-      <div>
+      <div className="condition-window__header">
         {condition && (
           <DeleteConditionButton
             eventId={eventId}
@@ -60,47 +60,51 @@ const ConditionWindow = ({
             onSuccess={handleSuccessDelete}
           />
         )}
-        <Typography.Title level={3}>Условие</Typography.Title>
+        <Typography.Title level={3} className="condition-window__header-title">
+          Условие
+        </Typography.Title>
       </div>
-      {condition ? (
-        <ConditionForm
-          eventId={eventId}
-          mutationFn={() => Promise.resolve()}
-          submitBtnText="Сохранить"
-          initialData={condition}
-        />
-      ) : (
-        <ConditionForm<AxiosResponse<CreateConditionResponse>>
-          eventId={eventId}
-          mutationFn={(data) => createCondition(eventId, blockId, data)}
-          submitBtnText="Создать"
-          onSuccessFn={(response, variables) => {
-            queryClient.setQueryData(
-              [eventId, blockId, "conditionsList"],
-              (oldData: AxiosResponse<GetConditionsResponse>) => {
-                if (oldData) {
-                  const newData: AxiosResponse<GetConditionsResponse> = {
-                    ...oldData,
-                    data: {
-                      conditions: [
-                        ...oldData.data.conditions,
-                        {
-                          ...variables,
-                          id: response.data.id,
-                          blockOrder: response.data.blockOrder,
-                        },
-                      ],
-                    },
-                  };
-                  return newData;
-                }
-                return oldData;
-              },
-            );
-            setIsOpen(false);
-          }}
-        />
-      )}
+      <div className="condition-window__body">
+        {condition ? (
+          <ConditionForm
+            eventId={eventId}
+            mutationFn={() => Promise.resolve()}
+            submitBtnText="Сохранить"
+            initialData={condition}
+          />
+        ) : (
+          <ConditionForm<AxiosResponse<CreateConditionResponse>>
+            eventId={eventId}
+            mutationFn={(data) => createCondition(eventId, blockId, data)}
+            submitBtnText="Создать"
+            onSuccessFn={(response, variables) => {
+              queryClient.setQueryData(
+                [eventId, blockId, "conditionsList"],
+                (oldData: AxiosResponse<GetConditionsResponse>) => {
+                  if (oldData) {
+                    const newData: AxiosResponse<GetConditionsResponse> = {
+                      ...oldData,
+                      data: {
+                        conditions: [
+                          ...oldData.data.conditions,
+                          {
+                            ...variables,
+                            id: response.data.id,
+                            blockOrder: response.data.blockOrder,
+                          },
+                        ],
+                      },
+                    };
+                    return newData;
+                  }
+                  return oldData;
+                },
+              );
+              setIsOpen(false);
+            }}
+          />
+        )}
+      </div>
     </CustomModalWindow>
   );
 };

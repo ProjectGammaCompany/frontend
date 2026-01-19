@@ -20,7 +20,7 @@ const AddBlockArea = ({ showArea }: AddBlockAreaProps) => {
               style={{
                 backgroundColor: snapshot.isDraggingOver
                   ? "white"
-                  : "lightblue",
+                  : "var(--light-color)",
               }}
             >
               <Typography.Title className="add-block-area__text">

@@ -1,7 +1,8 @@
 import { deleteBlock } from "@/src/entities";
+import { TrashSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
-
+import "./DeleteBlockButton.scss";
 interface DeleteBlockButtonProps {
   eventId: string;
   blockId: string;
@@ -21,8 +22,9 @@ const DeleteBlockButton = ({
     <Button
       onClick={() => deleteMutation.mutate()}
       loading={deleteMutation.isPending}
+      className="delete-block-btn"
     >
-      У
+      <TrashSvg />
     </Button>
   );
 };

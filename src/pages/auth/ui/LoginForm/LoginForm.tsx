@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { login, type loginProps } from "../../api/login";
 import { EMAIL_RULES, PASSWORD_RULES } from "../../const/rules";
 import AuthForm from "../AuthForm/AuthForm";
-
+import "./LoginForm.scss";
 const LoginForm = () => {
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState<boolean>(true);
@@ -42,16 +42,18 @@ const LoginForm = () => {
       ]}
       onFinish={(values) => mutation.mutate(values)}
       extra={
-        <div>
-          <div>
-            <Typography>Запомнить меня</Typography>
+        <div className="login-form__extra">
+          <div className="login-form__remember-me-wrapper">
             <Switch
               value={rememberMe}
               onChange={() => setRememberMe((prevState) => !prevState)}
               disabled={mutation.isPending}
             />
+            <Typography>Запомнить меня</Typography>
           </div>
-          <Typography>Забыли пароль?</Typography>
+          <Typography className="login-form__forgot-password-text">
+            Забыли пароль?
+          </Typography>
         </div>
       }
       submitButtonText="Войти"

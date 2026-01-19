@@ -70,9 +70,11 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   }
 
   return (
-    <>
-      <div className="event-page__name">
-        <Typography.Text>{name}</Typography.Text>
+    <div className="editor-content">
+      <div className="editor-content__name">
+        <Typography.Text className="editor-content__name-text">
+          {name}
+        </Typography.Text>
       </div>
       <DragDropContext
         onBeforeCapture={onBeforeCapture}
@@ -115,7 +117,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

@@ -23,8 +23,8 @@ const ProfilePage = () => {
   return (
     <div className="profile-page">
       <div className="profile-page__main-info-block">
-        <Typography.Title>{data.username}</Typography.Title>
         <AvatarBlock avatar={data.avatar} />
+        <Typography.Title level={2}>{data.username}</Typography.Title>
       </div>
       <LogoutBtn />
     </div>

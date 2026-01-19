@@ -10,7 +10,7 @@ const ConditionItem = ({ condition, onClick }: ConditionItemProps) => {
   const getText = (condition: Condition) => {
     const subconditions = [];
     if (condition.min != -1) {
-      subconditions.push(`=> ${condition.min}`);
+      subconditions.push(`> ${condition.min} или = ${condition.min}`);
     }
     if (condition.max != -1) {
       subconditions.push(`< ${condition.max}`);

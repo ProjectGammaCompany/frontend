@@ -3,7 +3,7 @@ import { Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { useEffect } from "react";
-
+import "./BlockSettingsForm.scss";
 interface BlockSettingsFormProps {
   eventId: string;
   blockId: string;
@@ -28,6 +28,7 @@ const formInputs: ChangeTypeOfKeys<
   partialPoints: "Выдача частичных баллов в множественном выборе",
 };
 
+//todo: добавить отправку запроса при дестрое на изменения
 const BlockSettingsForm = ({ initialData }: BlockSettingsFormProps) => {
   const [form] = useForm();
 
@@ -40,7 +41,7 @@ const BlockSettingsForm = ({ initialData }: BlockSettingsFormProps) => {
     <Form form={form} requiredMark={false} initialValues={initialData}>
       {Object.entries(formInputs).map(([key, label]) => {
         return (
-          <Form.Item key={key}>
+          <Form.Item key={key} className="block-settings-form__switch-wrapper">
             <FormItem<BlockSettingsFormData>
               noStyle
               name={key as keyof BlockSettingsFormData}

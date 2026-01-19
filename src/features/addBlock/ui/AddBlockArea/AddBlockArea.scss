@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  background-color: var(--primary-color);
   height: 250px;
   width: 90%;
   border-radius: 10px;
@@ -17,14 +17,13 @@
     height: calc(100% - 100px);
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 0, 0, 0.215);
+    background-color: #5d30ff63;
   }
 
   &__content {
     position: relative;
     height: 100%;
     width: 100%;
-    border: 1px solid black;
     border-radius: 10px;
     display: flex;
     justify-content: center;

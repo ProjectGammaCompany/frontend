@@ -4,17 +4,13 @@ import { getFullFileUrl } from "@/src/shared/lib";
 import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
 import InteractButton from "../InteractButton/InteractButton";
-import "./ParticipantContent.scss";
+import "./PlayerContent.scss";
 
 interface ParticipantContentProps {
   eventId: string;
 }
 
-//todo: переименовать в playerContent
-
-const ParticipantContent = ({ eventId }: ParticipantContentProps) => {
-  console.log(eventId);
-
+const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   const { data, isPending, isError } = useQuery({
     queryKey: [eventId, "playerInfo"],
     queryFn: () => getPlayerInfo(eventId),
@@ -32,17 +28,17 @@ const ParticipantContent = ({ eventId }: ParticipantContentProps) => {
   }
 
   return (
-    <div className="participant-content">
-      <Typography.Title level={1} className="participant-content__title">
+    <div className="player-content">
+      <Typography.Title level={1} className="player-content__title">
         {data.title}
       </Typography.Title>
-      <div className="participant-content__specific-data">
+      <div className="player-content__specific-data">
         <img
           src={getFullFileUrl(data.cover ?? "")}
           alt="Обложка события"
-          className="participant-content__cover"
+          className="player-content__cover"
         />
-        <div className="participant-content__col">
+        <div className="player-content__col">
           <ToggleFavoriteEventButton
             defaultState={data.favorite}
             id={eventId}
@@ -53,29 +49,31 @@ const ParticipantContent = ({ eventId }: ParticipantContentProps) => {
         </div>
       </div>
       {data.tags.length > 0 && (
-        <div className="participant-content__tags-wrapper">
+        <div className="player-content__tags-wrapper">
           <Typography.Title level={2}>Теги</Typography.Title>
-          <ul className="participant-content__tags">
+          <ul className="player-content__tags">
             {data.tags.map((tag) => (
-              <li key={tag}>
-                <Typography.Text>{tag}</Typography.Text>
+              <li key={tag} className="player-content__tags-item">
+                <Typography.Text className="player-content__tags-item-text">
+                  {tag}
+                </Typography.Text>
               </li>
             ))}
           </ul>
         </div>
       )}
       {data.startDate && (
-        <Typography.Paragraph className="participant-content__date-text">
+        <Typography.Paragraph className="player-content__date-text">
           <b>Открывается:</b> {data.startDate}
         </Typography.Paragraph>
       )}
       {data.endDate && (
-        <Typography.Paragraph className="participant-content__date-text">
+        <Typography.Paragraph className="player-content__date-text">
           <b>Закрывается:</b> {data.endDate}
         </Typography.Paragraph>
       )}
       {data.description && (
-        <div className="participant-content__description-wrapper">
+        <div className="player-content__description-wrapper">
           <Typography.Title level={2}>Описание события</Typography.Title>
           <Typography.Paragraph>{data.description}</Typography.Paragraph>
         </div>
@@ -90,4 +88,4 @@ const ParticipantContent = ({ eventId }: ParticipantContentProps) => {
   );
 };
 
-export default ParticipantContent;
+export default PlayerContent;

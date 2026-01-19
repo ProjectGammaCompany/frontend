@@ -25,6 +25,10 @@ const TaskView = ({
 }: TaskViewProps) => {
   const { title, defaultTime, description, files, timestamp } = taskData;
 
+  const extensions = {
+    pic: ["svg", "jpg", "jpeg", "png", "webp"],
+  };
+
   const hasTriggeredRef = useRef(false);
 
   const [time, setTime] = useState(defaultTime ?? 0);
@@ -33,6 +37,17 @@ const TaskView = ({
     const minutes = String(Math.floor(time / 60)).padStart(2, "0");
     const seconds = String(time - Math.floor(time / 60) * 60).padStart(2, "0");
     return `${minutes}:${seconds}`;
+  };
+
+  const getFileType = (
+    extension: string,
+  ): "default" | keyof typeof extensions => {
+    for (const [key, value] of Object.entries(extensions)) {
+      if (value.includes(extension)) {
+        return key as keyof typeof extensions;
+      }
+    }
+    return "default";
   };
 
   useEffect(() => {
@@ -81,7 +96,7 @@ const TaskView = ({
     <div className="task-view">
       <Typography.Title level={1}>{title}</Typography.Title>
       {defaultTime && (
-        <Typography.Paragraph>
+        <Typography.Paragraph className="task-view__timer-text">
           <b>Время:</b> {getCounterString(time)}
         </Typography.Paragraph>
       )}
@@ -95,9 +110,11 @@ const TaskView = ({
         <div>
           <Typography.Title level={2}>Файлы</Typography.Title>
           <ul className="task-view__file-list">
-            {files.map((file) => (
-              <FileItem key={file} path={file} />
-            ))}
+            {files.map((file) => {
+              const fileExst = file.split(".").at(-1) ?? "";
+              const iconType = getFileType(fileExst);
+              return <FileItem key={file} path={file} iconType={iconType} />;
+            })}
           </ul>
         </div>
       )}

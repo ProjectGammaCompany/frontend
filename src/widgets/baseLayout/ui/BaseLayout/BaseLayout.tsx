@@ -1,13 +1,13 @@
 import { Header } from "@/src/shared/ui";
 import type { ReactNode } from "react";
 import { Outlet, useLocation } from "react-router";
-import { getRouteKey, type HeaderRoute } from "../const/getRouteKey";
 
+import { getRouteKey, type HeaderRoute } from "../../const/getRouteKey";
+import Footer from "../Footer/Footer";
+import MainPageHeaderContent from "../MainPageHeaderContent/MainPageHeader";
+import NotificationPageHeaderContent from "../NotificationPageHeaderContent/NotificationPageHeaderContent";
+import ProfilePageHeaderContent from "../ProfilePageHeaderContent/ProfilePageHeaderContent";
 import "./BaseLayout.scss";
-import Footer from "./Footer/Footer";
-import MainPageHeaderContent from "./MainPageHeaderContent/MainPageHeader";
-import NotificationPageHeaderContent from "./NotificationPageHeaderContent/NotificationPageHeaderContent";
-import ProfilePageHeaderContent from "./ProfilePageHeaderContent/ProfilePageHeaderContent";
 
 const BaseLayout = () => {
   const { pathname } = useLocation();

@@ -10,7 +10,7 @@ export const RootLayout = () => {
   }, [navigate]);
 
   return (
-    <div className="root-layout">
+    <div className="root-layout" id="root-layout">
       <Outlet />
     </div>
   );

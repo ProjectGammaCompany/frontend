@@ -1,0 +1,15 @@
+.condition-window {
+  &__header {
+    display: flex;
+    align-items: center;
+
+    &-title {
+      width: calc(100% - 90px);
+      text-align: center;
+    }
+  }
+
+  &__body {
+    padding-top: 20px;
+  }
+}
