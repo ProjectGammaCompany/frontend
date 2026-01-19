@@ -17,8 +17,6 @@ interface EventHeaderProps {
 }
 
 const EventHeader = ({ role, eventId }: EventHeaderProps) => {
-  //TODO: добавить сюда окно настроек
-
   const navigate = useNavigate();
 
   const [open, setIsOpen] = useState<boolean>(false);

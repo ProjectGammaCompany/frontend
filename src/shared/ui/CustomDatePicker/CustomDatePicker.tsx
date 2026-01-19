@@ -13,7 +13,6 @@ interface CustomDatePickerProps {
 const DATE_FORMAT = "DD.MM.YYYY";
 const DATE_TIME_FORMAT = "DD.MM.YYYY HH:mm";
 
-//TODO: сделать кастомный выбор дат (использовать customWindow)
 const CustomDatePicker = ({
   ref,
   value,
