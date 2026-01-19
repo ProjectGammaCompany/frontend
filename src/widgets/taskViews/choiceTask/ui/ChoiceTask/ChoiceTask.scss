@@ -10,7 +10,16 @@
     &-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      margin-top: 10px;
+      gap: 15px;
     }
+  }
+
+  &__btn-wrapper {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: grid;
+    place-items: center;
   }
 }

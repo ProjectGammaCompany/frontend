@@ -5,7 +5,12 @@ const NotificationPageHeaderContent = () => {
   return (
     <div className="notifications-page-header-content">
       <Logo />
-      <Typography.Title level={2}>Уведомления</Typography.Title>
+      <Typography.Title
+        level={1}
+        className="notifications-page-header-content__text"
+      >
+        Уведомления
+      </Typography.Title>
     </div>
   );
 };

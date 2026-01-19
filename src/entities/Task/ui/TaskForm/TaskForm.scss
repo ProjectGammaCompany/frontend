@@ -1,4 +1,7 @@
 .task-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   &__options-list {
     display: flex;
     flex-direction: column;
@@ -6,5 +9,37 @@
   }
   &__option-item {
     display: flex;
+  }
+
+  &__right-answer-toggle {
+    width: 45px;
+    height: 45px;
+  }
+
+  &__delete-btn {
+    height: 45px;
+    width: 45px;
+    background-color: var(--red-color);
+    color: white;
+    padding: 5px;
+    flex-shrink: 0;
+  }
+
+  &__number-input {
+    width: 100px;
+    flex-shrink: 0;
+    &-wrapper {
+      & .ant-form-item-control-input-content {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+    }
+  }
+
+  &__submit-btn-wrapper {
+    display: grid;
+    place-items: center;
   }
 }

@@ -16,7 +16,7 @@ import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectTaskId, selectTaskOrder } from "../../model/taskDataSlice";
-
+import "./TaskWindow.scss";
 interface TaskWindowProps {
   eventId: string;
   blockId: string;
@@ -91,21 +91,22 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
 
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
+      {taskId && (
+        <DeleteTaskButton
+          eventId={eventId}
+          blockId={blockId}
+          taskId={taskId}
+          onSuccess={handleSuccessDelete}
+        />
+      )}
       <div className="task-window__header">
-        {taskId && (
-          <DeleteTaskButton
-            eventId={eventId}
-            blockId={blockId}
-            taskId={taskId}
-            onSuccess={handleSuccessDelete}
-          />
-        )}
         <Input
           placeholder="Введите название"
           value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
+          className="task-window__title-input"
         />
       </div>
       {taskId && data ? (

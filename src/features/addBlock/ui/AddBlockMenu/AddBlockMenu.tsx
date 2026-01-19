@@ -3,6 +3,7 @@ import type {
   getEditingEventDataResponse,
 } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
+import { BackSvg } from "@/src/shared/ui";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
@@ -99,6 +100,10 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
     [blocks.length, eventId, mutation],
   );
 
+  const iconClassNames = classnames("add-block-menu__icon", {
+    "add-block-menu__icon_opened": openMenu,
+  });
+
   return (
     <DragDropContext
       onDragStart={onDragStart}
@@ -111,8 +116,9 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
           onClick={() => {
             setMenuIsOpen((prev) => !prev);
           }}
+          className="add-block-menu__open-btn"
         >
-          Клик
+          <BackSvg classname={iconClassNames} />
         </button>
         <Droppable droppableId="blockMenu" direction="horizontal">
           {(provided) => (

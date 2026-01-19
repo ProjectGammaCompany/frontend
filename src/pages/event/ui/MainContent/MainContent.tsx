@@ -1,4 +1,4 @@
-import { EditorContent, ParticipantContent } from "@/src/widgets";
+import { EditorContent, PlayerContent } from "@/src/widgets";
 import "./MainContent.scss";
 interface MainContentProps {
   eventId: string;
@@ -11,7 +11,7 @@ const MainContent = ({ eventId, role }: MainContentProps) => {
   return (
     <main className="event-page__main-content">
       {role === 0 ? (
-        <ParticipantContent eventId={eventId} />
+        <PlayerContent eventId={eventId} />
       ) : (
         <EditorContent eventId={eventId} />
       )}

@@ -38,7 +38,9 @@ const LinkEventCard = ({
               <ul className="link-event-card__tags-list">
                 {tags.map((tag) => (
                   <li className="link-event-card__tags-item" key={tag}>
-                    {tag}
+                    <Typography.Text className="link-event-card__tags-text">
+                      {tag}
+                    </Typography.Text>
                   </li>
                 ))}
               </ul>

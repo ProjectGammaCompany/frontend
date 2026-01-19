@@ -8,9 +8,10 @@
   &__text-wrapper {
     display: flex;
     align-items: center;
-    background-color: darkgray;
+    background-color: var(--light-color);
     padding-block: 20px;
     padding-inline: 15px;
+    border-radius: 10px;
     width: 100%;
   }
 
@@ -18,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: darkgray;
+    background-color: var(--primary-color);
     border-radius: 50%;
     width: 40%;
     height: 40%;

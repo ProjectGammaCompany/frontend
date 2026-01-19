@@ -131,13 +131,15 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
           />
         ))}
       </ul>
-      <SendAnswerButton
-        eventId={eventId}
-        blockId={blockId}
-        taskId={id}
-        answer={answer}
-        successFn={handleSuccessAnswerSending}
-      />
+      <div className="choice-task__btn-wrapper">
+        <SendAnswerButton
+          eventId={eventId}
+          blockId={blockId}
+          taskId={id}
+          answer={answer}
+          successFn={handleSuccessAnswerSending}
+        />
+      </div>
     </TaskView>
   );
 };

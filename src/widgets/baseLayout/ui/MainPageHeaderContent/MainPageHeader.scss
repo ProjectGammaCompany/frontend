@@ -6,9 +6,15 @@
 
   &__search {
     flex-grow: 1;
+    height: 45px;
+
+    & .ant-input-search-btn {
+      height: 45px;
+    }
   }
 
   &__filters-btn {
+    color: var(--primary-color);
     flex-shrink: 0;
     width: 45px;
     height: 45px;

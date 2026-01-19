@@ -14,7 +14,9 @@ const BlockItem = ({ data, index, onClick }: BlockItemProps) => {
         <Typography.Text className="block-item__order-text">
           {data.order}
         </Typography.Text>
-        {data.connectedBlocks && <div className="block-item__connection" />}
+        {data.conditionsWithoutBlocks && (
+          <div className="block-item__connection" />
+        )}
       </BlockCard>
     </li>
   );

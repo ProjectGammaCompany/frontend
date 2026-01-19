@@ -1,9 +1,9 @@
 import { getEditingBlockData } from "@/src/entities";
 import { DeleteBlockButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
-import { CustomModalWindow } from "@/src/shared/ui";
+import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Input, Switch, Typography } from "antd";
+import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
@@ -81,7 +81,7 @@ const EditBlockWindow = ({
             onSuccess={handleSuccessBlockDeleting}
           />
         ) : (
-          <Switch
+          <CustomSwitch
             value={windowState === "conditions"}
             onChange={() => {
               setWindowState(
@@ -96,6 +96,7 @@ const EditBlockWindow = ({
           onChange={(e) => {
             setName(e.currentTarget.value);
           }}
+          //todo: добавить отправку запроса на изменение названия
           // onBlur={}
           variant="borderless"
           classNames={{
@@ -106,29 +107,36 @@ const EditBlockWindow = ({
           onClick={() => {
             setOpenSettings((prev) => !prev);
           }}
+          className="edit-block-window__settings-btn"
+          style={{
+            backgroundColor: openSettings ? "var(--primary-color)" : "inherit",
+            color: openSettings ? "white" : "var(--primary-color)",
+          }}
         >
-          Наст
+          <SettingsSvg />
         </Button>
       </div>
-      {openSettings ? (
-        <BlockSettingsForm
-          eventId={eventId}
-          blockId={blockId}
-          initialData={data}
-        />
-      ) : windowState === "tasks" ? (
-        <TaskList
-          eventId={eventId}
-          blockId={blockId}
-          setTaskWindowOpen={setTaskWindowOpen}
-        />
-      ) : (
-        <ConditionsList
-          eventId={eventId}
-          blockId={blockId}
-          setConditionWindowOpen={setConditionWindowOpen}
-        />
-      )}
+      <div className="edit-block-window__body">
+        {openSettings ? (
+          <BlockSettingsForm
+            eventId={eventId}
+            blockId={blockId}
+            initialData={data}
+          />
+        ) : windowState === "tasks" ? (
+          <TaskList
+            eventId={eventId}
+            blockId={blockId}
+            setTaskWindowOpen={setTaskWindowOpen}
+          />
+        ) : (
+          <ConditionsList
+            eventId={eventId}
+            blockId={blockId}
+            setConditionWindowOpen={setConditionWindowOpen}
+          />
+        )}
+      </div>
     </CustomModalWindow>
   );
 };

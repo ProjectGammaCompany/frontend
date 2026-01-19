@@ -17,13 +17,31 @@ const EndGameContent = ({ eventId }: EndGameContentProps) => {
     return () => {
       clearTimeout(timeout);
     };
+  }, [eventId, navigate]);
+
+  useEffect(() => {
+    const el = document.getElementById("root-layout");
+
+    if (el) {
+      el.classList.toggle("root-layout_on-end-game-stage");
+    }
+
+    return () => {
+      if (el) {
+        el.classList.toggle("root-layout_on-end-game-stage");
+      }
+    };
   }, []);
+
   return (
     <div className="end-game-content">
       <Typography.Title level={1} className="end-game-content__text">
         Событие пройдено!
       </Typography.Title>
-      <Typography.Title level={2} className="end-game-content__text">
+      <Typography.Title
+        level={2}
+        className="end-game-content__text end-game-content__text-congrats"
+      >
         Поздравляем!
       </Typography.Title>
     </div>

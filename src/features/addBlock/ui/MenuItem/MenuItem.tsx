@@ -6,13 +6,26 @@ interface MenuItemProps {
   index: number;
 }
 
+//todo: поменять подписи на svg картинки
 const MenuItem = ({ type, index }: MenuItemProps) => {
   return (
     <BlockCard draggableId={type} index={index}>
       {type === "consistent" ? (
-        <Typography>Послед</Typography>
+        <Typography
+          style={{
+            color: "white",
+          }}
+        >
+          Послед
+        </Typography>
       ) : (
-        <Typography>Паралл</Typography>
+        <Typography
+          style={{
+            color: "white",
+          }}
+        >
+          Паралл
+        </Typography>
       )}
     </BlockCard>
   );

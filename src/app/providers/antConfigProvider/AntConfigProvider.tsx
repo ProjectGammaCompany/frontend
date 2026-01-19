@@ -31,8 +31,27 @@ const AntConfigProvider = ({ children }: AntConfigProviderProps) => {
   return (
     <ConfigProvider
       theme={{
+        cssVar: {
+          key: "app",
+        },
         components: {
-          Button: {},
+          Typography: {
+            titleMarginBottom: 0,
+            titleMarginTop: 0,
+          },
+        },
+        token: {
+          colorPrimary: "#5c30ff",
+          colorInfo: "#5c30ff",
+          colorSuccess: "#b8ce52",
+          colorError: "#e63c25",
+          colorLink: "#2f54eb",
+          colorWarning: "#f6bc3f",
+          fontSizeHeading1: 20,
+          fontSizeHeading2: 17,
+          fontFamily: "Inter, system-ui, sans-serif",
+          fontSize: 15,
+          borderRadius: 5,
         },
       }}
       form={{

@@ -7,8 +7,12 @@
       gap: 10px;
     }
 
+    &-text {
+      color: white;
+    }
+
     &-item {
-      background-color: darkgray;
+      background-color: var(--primary-color);
       padding: 5px;
       border-radius: 5px;
       width: fit-content;

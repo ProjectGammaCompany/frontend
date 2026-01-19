@@ -15,6 +15,7 @@ const FloatButtonsGroup = ({
 }: FloatButtonsGroupProps) => {
   const navigate = useNavigate();
 
+  //todo: добавить страницу myEvents
   return (
     <>
       <FloatButton
@@ -22,7 +23,7 @@ const FloatButtonsGroup = ({
           root: "home-page__actions-btns",
         }}
         style={{
-          bottom: " 80px",
+          bottom: "80px",
           right: "5dvw",
         }}
         onClick={() => setOpen(!open)}
@@ -48,8 +49,8 @@ const FloatButtonsGroup = ({
               root: "home-page__create-event-btn",
             }}
             style={{
-              bottom: "calc(80px + 30px)",
-              right: "calc(5dvw + 60px)",
+              bottom: "calc(80px + 10px)",
+              right: "calc(5dvw + 70px)",
             }}
             onClick={() => {
               setCreateEventWindowOpen();

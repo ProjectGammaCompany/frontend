@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, ConfigProvider } from "antd";
 import classnames from "classnames";
 import type { ReactNode } from "react";
 import "./IconButton.scss";
@@ -17,13 +17,23 @@ const IconButton = ({
 }: FooterButtonProps) => {
   const classNames = classnames("icon-btn", className);
   return (
-    <Button onClick={onClick} className={classNames}>
-      <div
-        className={classnames("icon-btn__icon-wrapper", iconWrapperClassname)}
-      >
-        {icon}
-      </div>
-    </Button>
+    <ConfigProvider
+      theme={{
+        components: {
+          Button: {
+            borderRadius: 10,
+          },
+        },
+      }}
+    >
+      <Button onClick={onClick} className={classNames}>
+        <div
+          className={classnames("icon-btn__icon-wrapper", iconWrapperClassname)}
+        >
+          {icon}
+        </div>
+      </Button>
+    </ConfigProvider>
   );
 };
 

@@ -1,0 +1,18 @@
+.login-form {
+  &__extra {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  &__forgot-password-text {
+    text-align: end;
+  }
+  &__remember-me-wrapper {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+  }
+}

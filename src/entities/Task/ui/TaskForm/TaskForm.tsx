@@ -1,5 +1,6 @@
 import type { UploadFileResponse } from "@/src/shared/api";
 import { getRandomString, useFileUpload } from "@/src/shared/lib";
+import { CustomSwitch, TrashSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import {
   Button,
@@ -7,7 +8,6 @@ import {
   Input,
   InputNumber,
   Select,
-  Switch,
   Typography,
   Upload,
   type UploadFile,
@@ -156,6 +156,7 @@ const TaskForm = <TResponse,>({
       requiredMark={false}
       scrollToFirstError={{ behavior: "instant", block: "end", focus: true }}
       onFinish={onFinish}
+      className="task-form"
     >
       <Form.Item<TaskFormData>
         name="description"
@@ -220,6 +221,7 @@ const TaskForm = <TResponse,>({
               return (
                 <li key={option.clientId} className="task-form__option-item">
                   <Button
+                    className="task-form__right-answer-toggle"
                     style={{
                       backgroundColor: option.isCorrect
                         ? "green"
@@ -270,8 +272,9 @@ const TaskForm = <TResponse,>({
                         options.filter((el) => el.clientId != option.clientId),
                       );
                     }}
+                    className="task-form__delete-btn"
                   >
-                    У
+                    <TrashSvg />
                   </Button>
                 </li>
               );
@@ -295,27 +298,32 @@ const TaskForm = <TResponse,>({
         </Form.Item>
       )}
       {!!taskType && taskType != 0 && (
-        <div>
-          <Form.Item<TaskFormData> noStyle>
-            <Form.Item<TaskFormData> name="time">
-              <InputNumber name="time" min={0} />
+        <>
+          <Form.Item<TaskFormData> className="task-form__number-input-wrapper">
+            <Form.Item<TaskFormData> noStyle name="time">
+              <InputNumber
+                name="time"
+                min={0}
+                className="task-form__number-input"
+              />
             </Form.Item>
             <Typography.Text>Время на выполнение (в секундах)</Typography.Text>
           </Form.Item>
-          <Form.Item<TaskFormData> noStyle>
-            <Form.Item<TaskFormData> name="points">
-              <InputNumber name="points" min={0} />
+          <Form.Item<TaskFormData> className="task-form__number-input-wrapper">
+            <Form.Item<TaskFormData> name="points" noStyle>
+              <InputNumber
+                name="points"
+                min={0}
+                className="task-form__number-input"
+              />
             </Form.Item>
             <Typography.Text>Баллы за выполнение</Typography.Text>
           </Form.Item>
-        </div>
+        </>
       )}
       {taskType === 2 && (
-        <Form.Item<TaskFormData> noStyle>
-          <Form.Item<TaskFormData> name="partialPoints" valuePropName="checked">
-            <Switch />
-          </Form.Item>
-          <Typography.Text>Выдача частичных баллов</Typography.Text>
+        <Form.Item<TaskFormData> name="partialPoints" valuePropName="checked">
+          <CustomSwitch title="Выдача частичных баллов" />
         </Form.Item>
       )}
       <Form.Item<TaskFormData> name="files">
@@ -329,7 +337,7 @@ const TaskForm = <TResponse,>({
           <Button>Добавить файлы</Button>
         </Upload>
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="task-form__submit-btn-wrapper">
         <Button type="primary" htmlType="submit">
           {submitBtnText}
         </Button>

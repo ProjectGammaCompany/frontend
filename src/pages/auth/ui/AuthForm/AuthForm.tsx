@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input, Typography } from "antd";
 import type { Rule } from "antd/es/form";
 import Password from "antd/es/input/Password";
 import type { ReactNode } from "react";
-
+import "./AuthForm.scss";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface AuthFormProps<T extends Record<string, any>> {
   name: string;
@@ -34,7 +34,12 @@ const AuthForm = <T extends Record<string, any>>({
   extra,
 }: AuthFormProps<T>) => {
   return (
-    <Form name={name} onFinish={onFinish}>
+    <Form
+      name={name}
+      onFinish={onFinish}
+      className="auth-form"
+      requiredMark={false}
+    >
       {fields.map((field) => (
         <Form.Item
           key={field.name}
@@ -55,7 +60,12 @@ const AuthForm = <T extends Record<string, any>>({
       {extra}
       {error && <Typography>{error}</Typography>}
       <Form.Item label={null}>
-        <Button loading={loading} type="primary" htmlType="submit">
+        <Button
+          loading={loading}
+          type="primary"
+          htmlType="submit"
+          className="auth-form__submit-btn"
+        >
           {submitButtonText}
         </Button>
       </Form.Item>

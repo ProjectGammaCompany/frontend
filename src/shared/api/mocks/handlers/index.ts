@@ -15,7 +15,7 @@ export const handlers = [
       refreshToken: validRefreshToken,
     });
   }),
-  http.delete("/logout", () => {
+  http.post("/logout", () => {
     return new HttpResponse(null, {
       status: 200,
     });
@@ -66,7 +66,7 @@ export const handlers = [
           id: "2",
         },
         {
-          name: "Максимально длинный тег",
+          name: "Максимально длинный тег из возможных оооооо",
           id: "3",
         },
         {
@@ -102,7 +102,7 @@ export const handlers = [
   }),
   http.get("/event/:eventid", () => {
     return HttpResponse.json({
-      name: "Квест 1",
+      name: "Квест 1 jdjdsjdsjdsj dsdsdjsdjs ksdjdsjds ksdkjsdksd",
       blocks: [
         {
           id: "1",
@@ -144,7 +144,7 @@ export const handlers = [
   }),
   http.get("/event/:eventId/role", () => {
     return HttpResponse.json({
-      role: 0,
+      role: 1,
     });
   }),
   http.post("/event/:eventid/block", () => {
@@ -361,27 +361,27 @@ export const handlers = [
   http.get("/event/:eventId/nextStage", () => {
     return HttpResponse.json({
       type: "end",
-      // task: {
-      //   id: String(Math.floor(1 + Math.random() * 5)),
-      //   blockId: "232232323",
-      //   name: "Тестовое задание",
-      //   description: "Проверка описания",
-      //   type: 2,
-      //   options: [
-      //     {
-      //       id: "1",
-      //       value: "Ответ1",
-      //     },
-      //     {
-      //       id: "2",
-      //       value:
-      //         "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
-      //     },
-      //   ],
-      //   files: ["Длинное название файла вот.png", "fjfjfj.docx"],
-      //   // time: 15,
-      //   // timeStamp?: string,
-      // },
+      task: {
+        id: String(Math.floor(1 + Math.random() * 5)),
+        blockId: "232232323",
+        name: "Тестовое задание",
+        description: "Проверка описания",
+        type: 2,
+        options: [
+          {
+            id: "1",
+            value: "Ответ1",
+          },
+          {
+            id: "2",
+            value:
+              "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
+          },
+        ],
+        files: ["Длинное название файла вот.png", "fjfjfj.docx"],
+        time: 300,
+        // timeStamp?: string,
+      },
     });
   }),
   http.post(`/event/:eventId/block/:blockId/task/:taskId/answer`, () => {

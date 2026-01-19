@@ -1,0 +1,34 @@
+.auth-page {
+  height: calc(100dvh - 15px);
+  padding-inline: 5dvw;
+  padding-top: 5dvh;
+
+  &__content-wrapper {
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  &__form-wrapper {
+    padding-inline: 15px;
+    padding-bottom: 5px;
+  }
+
+  &__segmented {
+    &-root {
+      height: 60px;
+    }
+
+    &-label {
+      display: grid;
+      height: 100%;
+      place-items: center;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+}
+
+.root-layout_on-auth-page {
+  background-color: var(--primary-color);
+}
