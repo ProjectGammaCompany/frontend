@@ -20,7 +20,7 @@ export const handlers = [
       status: 200,
     });
   }),
-  http.put("/favoriteState/:id", () => {
+  http.put("/events/personal/favorites", () => {
     return new HttpResponse(null, {
       status: 200,
     });
