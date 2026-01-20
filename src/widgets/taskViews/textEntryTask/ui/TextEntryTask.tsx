@@ -2,7 +2,7 @@ interface ChoiceTaskProps {
   data: TextEntryTaskData;
 }
 
-//todo: change
+//todo: change for final version
 interface TextEntryTaskData {
   name: string;
   description?: string;
