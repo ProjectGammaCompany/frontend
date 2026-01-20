@@ -7,8 +7,6 @@ import { useClearTokens } from "./providers/useClearTokensOnClose";
 import "./styles/App.scss";
 
 //todo: В запросах на union сделать проверки ответа от сервера в будущем
-
-//todo: поменять switch на custom switch
 function App() {
   useClearTokens();
 

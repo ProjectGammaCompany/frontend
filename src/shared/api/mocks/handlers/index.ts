@@ -230,7 +230,7 @@ export const handlers = [
       partialPoints: false,
     });
   }),
-  http.post("/event/:eventId/:blocks/:blockId/tasks", () => {
+  http.post("/event/:eventId/:blocks/:blockId/task", () => {
     return new HttpResponse({
       id: "2121212",
     });

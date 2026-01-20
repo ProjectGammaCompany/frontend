@@ -1,4 +1,3 @@
-import type { UploadFileResponse } from "@/src/shared/api";
 import { getRandomString, useFileUpload } from "@/src/shared/lib";
 import { CustomSwitch, TrashSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
@@ -77,6 +76,11 @@ const TaskForm = <TResponse,>({
 
   const uploadMutation = useFileUpload();
 
+  const uploadFile = async (file: File) => {
+    const res = await uploadMutation.mutateAsync(file);
+    return res.data;
+  };
+
   const formMutation = useMutation<TResponse, Error, FullTaskData>({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
@@ -89,14 +93,19 @@ const TaskForm = <TResponse,>({
     onSuccess,
     onError,
   }) => {
-    uploadMutation.mutate(file as File, {
-      onSuccess: (res) => {
-        onSuccess?.(res.data);
-      },
-      onError: (err) => {
-        onError?.(err);
-      },
-    });
+    void (async () => {
+      try {
+        const data = await uploadFile(file as File);
+        onSuccess?.(
+          {
+            url: data.url,
+          },
+          file,
+        );
+      } catch (e) {
+        onError?.(e as Error);
+      }
+    })();
   };
 
   const mapUrlsToFileList = (urls: string[]): UploadFile[] =>
@@ -109,12 +118,29 @@ const TaskForm = <TResponse,>({
 
   const handleChange: UploadProps["onChange"] = ({ fileList }) => {
     const normalized = fileList.map((file) => {
-      if (file.response) {
-        file.url = (file.response as UploadFileResponse).url;
+      if (
+        file.response &&
+        typeof file.response === "object" &&
+        "url" in file.response &&
+        typeof (file.response as { url: unknown }).url === "string"
+      ) {
+        return {
+          ...file,
+          url: (file.response as { url: string }).url,
+        };
       }
       return file;
     });
+
     setFileList(normalized);
+
+    const urls = normalized
+      .filter(
+        (file): file is UploadFile & { url: string } =>
+          file.status === "done" && !!file.url,
+      )
+      .map((file) => file.url);
+    form.setFieldValue("files", urls);
   };
 
   //TODO: определение типа 3 или 4 по этому в посыле формы
