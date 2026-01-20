@@ -15,6 +15,7 @@ import {
   Switch,
   Typography,
   Upload,
+  type UploadProps,
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import { Dayjs } from "dayjs";
@@ -79,15 +80,23 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
-  //TODO fix upload, using TaskForm
-  const coverUploadMutation = useFileUpload((data) => {
-    //@ts-expect-error форма недостаточно умная у antd
-    form.setFieldValue("cover", data.data.url);
-  });
+  const fileUploadMutation = useFileUpload();
 
-  const handleCoverUpload = (cover: File) => {
-    coverUploadMutation.mutate(cover);
-    return false;
+  const customRequest: UploadProps["customRequest"] = ({
+    file,
+    onSuccess,
+    onError,
+  }) => {
+    fileUploadMutation.mutate(file as File, {
+      onSuccess: (data) => {
+        onSuccess?.(data.data);
+        //@ts-expect-error форма недостаточно умная
+        form.setFieldValue("cover", data.data.url);
+      },
+      onError: (error) => {
+        onError?.(error);
+      },
+    });
   };
 
   const onFinish = (values: TData) => {
@@ -138,8 +147,9 @@ export const EventForm = <TData extends EventFormData, TResponse>({
                 showUploadList={false}
                 listType="picture-card"
                 maxCount={1}
+                disabled={fileUploadMutation.isPending}
                 accept="image/*"
-                beforeUpload={handleCoverUpload}
+                customRequest={customRequest}
                 onPreview={() => null}
                 className="event-form__cover-upload"
               >
@@ -154,8 +164,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
                 ) : (
                   <Button
                     className="event-form__cover-upload-btn"
-                    loading={coverUploadMutation.isPending}
-                    onClick={() => coverUploadMutation.mutate}
+                    loading={fileUploadMutation.isPending}
                   >
                     Загрузите обложку
                   </Button>
