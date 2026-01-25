@@ -222,8 +222,14 @@ export const handlers = [
     return HttpResponse.json({
       name: "Test Task1",
       description: "Проверка описания",
-      type: 0,
-      options: [],
+      type: 4,
+      options: [
+        {
+          id: "sdjsdjdsjds",
+          value: "JDjddjdj-cmcc",
+          isCorrect: true,
+        },
+      ],
       files: [],
       points: 0,
       time: 0,

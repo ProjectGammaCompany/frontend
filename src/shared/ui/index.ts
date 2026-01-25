@@ -20,6 +20,7 @@ export { MyEventsSvg } from "./svg/MyEventsSvg.tsx";
 export { NotificationSvg } from "./svg/NotificationSvg.tsx";
 export { PictureSvg } from "./svg/PictureSvg.tsx";
 export { ProfileSvg } from "./svg/ProfileSvg.tsx";
+export { QRCodeSvg } from "./svg/QRCodeSvg.tsx";
 export { SettingsSvg } from "./svg/SettingsSvg.tsx";
 export { StarSvg } from "./svg/StarSvg.tsx";
 export { TrashSvg } from "./svg/TrashSvg.tsx";

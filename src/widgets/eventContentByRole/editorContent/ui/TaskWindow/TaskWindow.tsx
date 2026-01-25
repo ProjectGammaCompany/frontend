@@ -81,13 +81,10 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
     if (data) {
       setName(data?.name);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (!open) {
+    return () => {
       setName("");
-    }
-  }, [open]);
+    };
+  }, [data]);
 
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
