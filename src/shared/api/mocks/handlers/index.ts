@@ -28,19 +28,19 @@ export const handlers = [
   http.get("/events", ({ request }) => {
     // await sleep(15000);
     const url = new URL(request.url);
-    const cursor = url.searchParams.get("cursor");
+    const cursor = url.searchParams.get("page");
     const limit = 10;
     const data = EVENTS.slice(
       cursor ? Number(cursor) : 0,
       cursor ? Number(cursor) + limit : limit,
     );
-    const hasNext = data.at(-1)?.id != EVENTS.at(-1)?.id;
+    // const hasNext = data.at(-1)?.id != EVENTS.at(-1)?.id;
     return HttpResponse.json({
-      next: cursor
-        ? hasNext
-          ? `${Number(cursor) + limit}`
-          : null
-        : limit.toString(),
+      // next: cursor
+      //   ? hasNext
+      //     ? `${Number(cursor) + limit}`
+      //     : null
+      //   : limit.toString(),
       info: data,
     });
   }),

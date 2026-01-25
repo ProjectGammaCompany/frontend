@@ -3,7 +3,7 @@ import { axiosInstance } from "../axios/axios";
 
 export const refreshTokens = (accessToken: string, refreshToken: string) => {
   return axiosInstance.post<TokensResponse>(
-    "refresh",
+    "auth/refresh",
     {
       refreshToken,
     },

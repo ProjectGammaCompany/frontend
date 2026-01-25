@@ -1,8 +1,8 @@
 import { axiosInstance } from "@/src/shared/api";
 
 interface getEventsProps {
-  cursor: string | null;
-  limit?: number;
+  page: number;
+  maxOnPage: number;
   tags?: string[];
   decliningRating: boolean;
   territorialized: boolean;
@@ -10,7 +10,6 @@ interface getEventsProps {
 }
 
 export interface getEventsResponse {
-  next?: string;
   info: Event[];
 }
 

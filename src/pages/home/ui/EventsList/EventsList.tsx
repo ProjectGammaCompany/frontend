@@ -22,19 +22,30 @@ const EventsList = ({ filters }: EventsListProps) => {
     useInfiniteQuery<
       EventsResponse,
       Error,
-      InfiniteData<EventsResponse, string | null>,
+      InfiniteData<EventsResponse>,
       ["allEvents"],
-      string | null
+      number
     >({
       queryKey: ["allEvents"],
       queryFn: ({ pageParam }) =>
         getEvents({
           ...filters,
-          cursor: pageParam,
-          limit: 10,
+          page: pageParam,
+          maxOnPage: 10,
         }),
-      getNextPageParam: (lastPage) => lastPage.data.next,
-      initialPageParam: null,
+      getNextPageParam: (lastPage, _, lastPageParam) => {
+        if (lastPage.data.info.length === 0) {
+          return undefined;
+        }
+        return lastPageParam + 1;
+      },
+      getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
+        if (firstPageParam <= 1) {
+          return undefined;
+        }
+        return firstPageParam - 1;
+      },
+      initialPageParam: 0,
     });
 
   const inViewRef = useOnInView((inView) => {
