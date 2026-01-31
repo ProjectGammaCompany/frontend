@@ -1,5 +1,6 @@
 import { queryClient } from "@/src/shared/api";
 import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
+import { ProfileSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import { Button, Upload } from "antd";
 import type { AxiosResponse } from "axios";
@@ -45,11 +46,17 @@ const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
 
   return (
     <div className="profile-page__avatar-block">
-      <img
-        src={getFullFileUrl(avatar)}
-        alt="avatar"
-        className="profile-page__avatar-img"
-      />
+      {avatar ? (
+        <img
+          src={getFullFileUrl(avatar)}
+          alt="avatar"
+          className="profile-page__avatar-img"
+        />
+      ) : (
+        <div className="profile-page__avatar-img">
+          <ProfileSvg />
+        </div>
+      )}
       <Upload
         showUploadList={false}
         beforeUpload={handleAvatarUpload}

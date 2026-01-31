@@ -47,6 +47,7 @@ const AuthForm = <T extends Record<string, any>>({
           name={field.name}
           rules={field.rules}
           dependencies={field.dependencies}
+          className="auth-form__form-item"
         >
           {field?.boolean ? (
             <Checkbox />

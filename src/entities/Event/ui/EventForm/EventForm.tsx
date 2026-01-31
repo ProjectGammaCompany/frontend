@@ -21,6 +21,8 @@ import { useForm, useWatch } from "antd/es/form/Form";
 import { Dayjs } from "dayjs";
 import { type ReactNode } from "react";
 import "./EventForm.scss";
+
+//todo добавит switch на показ таблицы всей
 export interface BaseEventFormData {
   title: string;
   description: string;

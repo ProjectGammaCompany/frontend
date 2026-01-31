@@ -17,6 +17,7 @@ import type { DefaultOptionType } from "antd/es/select";
 import classnames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qrcode-logo";
+import { v4 as uuidv4 } from "uuid";
 import type { ServerOption } from "../../api/getEditorTaskData";
 import "./TaskForm.scss";
 interface TaskFormProps<TResponse> {
@@ -243,7 +244,7 @@ const TaskForm = <TResponse,>({
                   value={options?.[0]?.value}
                   onChange={(e) => {
                     let newOption: ClientOption = {
-                      clientId: crypto.randomUUID(),
+                      clientId: uuidv4(),
                       isCorrect: true,
                       value: e.target.value,
                     };
@@ -278,7 +279,7 @@ const TaskForm = <TResponse,>({
                       return "text";
                     }
                     const rightAnswer: ClientOption = {
-                      clientId: crypto.randomUUID(),
+                      clientId: uuidv4(),
                       isCorrect: true,
                       value: getRandomString(20),
                     };
@@ -362,7 +363,7 @@ const TaskForm = <TResponse,>({
             <Button
               onClick={() => {
                 const newOption: ClientOption = {
-                  clientId: crypto.randomUUID(),
+                  clientId: uuidv4(),
                   value: "",
                   isCorrect: false,
                 };

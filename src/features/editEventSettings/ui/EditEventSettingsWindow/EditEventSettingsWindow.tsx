@@ -53,17 +53,14 @@ const EditEventSettingsWindow = ({
     if (!data) {
       return undefined;
     }
+
     const transformedData: FullFormData = {
       ...data,
       startDate: data.startDate
-        ? dayjs(data.startDate, {
-            format: "DD.MM.YYYY HH:mm",
-          })
+        ? dayjs(data.startDate, "DD.MM.YYYY HH:mm:ss.SSS")
         : undefined,
       endDate: data.endDate
-        ? dayjs(data.endDate, {
-            format: "DD.MM.YYYY HH:mm",
-          })
+        ? dayjs(data.endDate, "DD.MM.YYYY HH:mm:ss.SSS")
         : undefined,
     };
     return transformedData;

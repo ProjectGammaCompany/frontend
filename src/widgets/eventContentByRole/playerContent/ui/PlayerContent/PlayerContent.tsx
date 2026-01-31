@@ -1,6 +1,7 @@
 import { getPlayerInfo } from "@/src/entities";
 import { ToggleFavoriteEventButton } from "@/src/features";
 import { getFullFileUrl } from "@/src/shared/lib";
+import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
 import InteractButton from "../InteractButton/InteractButton";
@@ -33,11 +34,17 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
         {data.title}
       </Typography.Title>
       <div className="player-content__specific-data">
-        <img
-          src={getFullFileUrl(data.cover ?? "")}
-          alt="Обложка события"
-          className="player-content__cover"
-        />
+        {data.cover ? (
+          <img
+            src={getFullFileUrl(data.cover ?? "")}
+            alt="Обложка события"
+            className="player-content__cover"
+          />
+        ) : (
+          <div className="player-content__cover">
+            <DefaultEventCoverSvg />
+          </div>
+        )}
         <div className="player-content__col">
           <ToggleFavoriteEventButton
             defaultState={data.favorite}

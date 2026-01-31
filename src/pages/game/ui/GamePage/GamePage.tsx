@@ -41,7 +41,7 @@ const GamePage = () => {
         <div className="game-page-header__content">
           <div
             className="game-page-header__icons-wrapper"
-            onClick={() => void navigate(-1)}
+            onClick={() => void navigate("/")}
           >
             <BackSvg classname="game-page-header__back-icon" />
             <Logo />
