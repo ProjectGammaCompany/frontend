@@ -44,7 +44,7 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
             return oldData;
           }
           const newBlock: BlockItemData = {
-            id: data.data.id,
+            id: data.data.blockId,
             name: variables.name,
             order: variables.order,
             conditionsWithoutBlocks: false,
@@ -60,7 +60,7 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
           };
         },
       );
-      onAdd?.(data.data.id);
+      onAdd?.(data.data.blockId);
     },
   });
 
@@ -91,9 +91,9 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
       const order = blocks.length;
       mutation.mutate({
         eventId: eventId,
-        order: order,
+        order: order + 1,
         isParallel: isParallel,
-        name: "Блок " + order,
+        name: "Блок " + (order + 1),
       });
       setShowArea(false);
     },

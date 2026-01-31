@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "react-router";
 import { getRouteKey, type HeaderRoute } from "../../const/getRouteKey";
 import Footer from "../Footer/Footer";
 import MainPageHeaderContent from "../MainPageHeaderContent/MainPageHeader";
+import MyEventsPageHeaderContent from "../MyEventsPageHeaderContent/MyEventsPageHeaderContent";
 import NotificationPageHeaderContent from "../NotificationPageHeaderContent/NotificationPageHeaderContent";
 import ProfilePageHeaderContent from "../ProfilePageHeaderContent/ProfilePageHeaderContent";
 import "./BaseLayout.scss";
@@ -16,6 +17,7 @@ const BaseLayout = () => {
     home: <MainPageHeaderContent />,
     profile: <ProfilePageHeaderContent />,
     notifications: <NotificationPageHeaderContent />,
+    myEvents: <MyEventsPageHeaderContent />,
   };
 
   const key = getRouteKey(pathname);

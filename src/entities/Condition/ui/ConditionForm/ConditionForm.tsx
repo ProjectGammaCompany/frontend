@@ -70,7 +70,6 @@ const ConditionForm = <TResponse,>({
 
   const selectTypeErrorMessage = "Выберите хотя бы одно из правил для условия";
 
-  //todo: пофиксить вывод input. На < почему-то не отображается
   return (
     <Form
       initialValues={initialData}
@@ -97,7 +96,7 @@ const ConditionForm = <TResponse,>({
           ]}
         >
           <CustomSwitch
-            value={max != -1}
+            checked={max != -1}
             onChange={(checked) => {
               form.setFieldValue("max", checked ? 0 : -1);
             }}
@@ -140,7 +139,7 @@ const ConditionForm = <TResponse,>({
           ]}
         >
           <CustomSwitch
-            value={min != -1}
+            checked={min != -1}
             onChange={(checked) => {
               form.setFieldValue("min", checked ? 0 : -1);
             }}

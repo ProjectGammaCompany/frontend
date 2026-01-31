@@ -1,1 +1,4 @@
-export const TYPES_ARRAY = ["consistent", "parallel"] as const;
+export const TYPES_ARRAY = [
+  "consistent",
+  //  "parallel"
+] as const;

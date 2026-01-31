@@ -15,6 +15,7 @@ import { Input } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { selectTaskId, selectTaskOrder } from "../../model/taskDataSlice";
 import "./TaskWindow.scss";
 interface TaskWindowProps {
@@ -43,7 +44,7 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
     return options.map((option) => {
       return {
         ...option,
-        clientId: crypto.randomUUID(),
+        clientId: uuidv4(),
       };
     });
   };
@@ -81,13 +82,10 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
     if (data) {
       setName(data?.name);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (!open) {
+    return () => {
       setName("");
-    }
-  }, [open]);
+    };
+  }, [data]);
 
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
@@ -137,7 +135,7 @@ const TaskWindow = ({ eventId, blockId, open, setIsOpen }: TaskWindowProps) => {
                       tasks: [
                         ...oldData.data.tasks,
                         {
-                          id: data.data.id,
+                          id: data.data.taskId,
                           name: variables.name,
                           order: taskOrder,
                         },

@@ -1,6 +1,7 @@
 .game-page-header {
   &__icons-wrapper {
     display: flex;
+    align-items: center;
   }
 
   &__title {
@@ -10,7 +11,7 @@
   &__back-icon {
     height: 30px;
     width: 32px;
-    color: black;
+    color: white;
   }
 
   &__content {

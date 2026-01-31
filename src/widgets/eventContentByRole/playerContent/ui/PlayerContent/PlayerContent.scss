@@ -38,6 +38,9 @@
     border-radius: 10px;
     width: 40%;
     aspect-ratio: 1/1;
+    & svg {
+      border-radius: 10px;
+    }
   }
 
   &__tags {

@@ -11,17 +11,17 @@ interface TaskViewProps {
     files: string[];
     timestamp?: string;
   };
-  isExpirationFnCanceled: boolean;
+  isExpirationFnCanceled?: boolean;
   //todo узнать, какой лучше тип использовать
-  onExpirationTimeFn: () => void;
-  children: ReactNode;
+  onExpirationTimeFn?: () => void;
+  children?: ReactNode;
 }
 
 const TaskView = ({
   taskData,
   children,
   onExpirationTimeFn,
-  isExpirationFnCanceled,
+  isExpirationFnCanceled = false,
 }: TaskViewProps) => {
   const { title, defaultTime, description, files, timestamp } = taskData;
 
@@ -89,7 +89,7 @@ const TaskView = ({
     ) {
       console.log(isExpirationFnCanceled);
       console.log("запуск функции");
-      onExpirationTimeFn();
+      onExpirationTimeFn?.();
     }
   }, [time, isExpirationFnCanceled]);
   return (

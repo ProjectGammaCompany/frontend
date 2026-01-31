@@ -17,8 +17,6 @@ interface EventHeaderProps {
 }
 
 const EventHeader = ({ role, eventId }: EventHeaderProps) => {
-  //TODO: добавить сюда окно настроек
-
   const navigate = useNavigate();
 
   const [open, setIsOpen] = useState<boolean>(false);
@@ -28,7 +26,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
         <div className="event-page-header">
           <div
             className="event-page-header__icons-wrapper"
-            onClick={() => void navigate(-1)}
+            onClick={() => void navigate("/")}
           >
             <BackSvg classname="event-page-header__back-icon" />
             <Logo />

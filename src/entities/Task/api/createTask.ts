@@ -2,7 +2,7 @@ import { axiosInstance } from "@/src/shared/api";
 import { type FullTaskData } from "../ui/TaskForm/TaskForm";
 
 export interface CreateTaskResponse {
-  id: string;
+  taskId: string;
 }
 
 export const createTask = (

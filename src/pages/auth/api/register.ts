@@ -7,5 +7,5 @@ export interface registerProps {
   repeatPassword: string;
 }
 export const register = (values: registerProps) => {
-  return axiosInstance.post<TokensResponse>("register", values);
+  return axiosInstance.post<TokensResponse>("auth/register", values);
 };

@@ -5,8 +5,6 @@ interface MainContentProps {
   role: number;
 }
 
-//todo: Перенести main content в ui страницы, а participantContent и editorContent в формате отдельных виджетов
-
 const MainContent = ({ eventId, role }: MainContentProps) => {
   return (
     <main className="event-page__main-content">

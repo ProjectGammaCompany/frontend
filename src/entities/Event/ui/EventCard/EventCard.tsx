@@ -1,3 +1,4 @@
+import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { Typography } from "antd";
 import type { ReactNode } from "react";
 import "./EventCard.scss";
@@ -16,12 +17,16 @@ const EventCard = ({ title, description, cover, extra }: EventCardProps) => {
         {title}
       </Title>
       <div className="event-card__info">
-        {cover && (
+        {cover ? (
           <img
             className="event-card__image"
             src={cover}
             alt="обложка события"
           />
+        ) : (
+          <div className="event-card__image">
+            <DefaultEventCoverSvg />
+          </div>
         )}
         {description && (
           <Typography className="event-card__description">

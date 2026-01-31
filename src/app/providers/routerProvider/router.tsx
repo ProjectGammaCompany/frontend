@@ -2,6 +2,7 @@ import { AuthPage } from "@/src/pages/auth";
 import { EventPage } from "@/src/pages/event";
 import { GamePage } from "@/src/pages/game";
 import { HomePage } from "@/src/pages/home";
+import { MyEventsPage } from "@/src/pages/myEvents";
 import { NotificationPage } from "@/src/pages/notifications";
 import { ProfilePage } from "@/src/pages/profile";
 import { StatsPage } from "@/src/pages/stats";
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
               {
                 path: "notifications",
                 Component: NotificationPage,
+              },
+              {
+                path: "myEvents",
+                Component: MyEventsPage,
               },
             ],
           },

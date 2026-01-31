@@ -14,8 +14,6 @@ const FloatButtonsGroup = ({
   setCreateEventWindowOpen,
 }: FloatButtonsGroupProps) => {
   const navigate = useNavigate();
-
-  //todo: добавить страницу myEvents
   return (
     <>
       <FloatButton
@@ -40,7 +38,7 @@ const FloatButtonsGroup = ({
               right: "calc(5dvw)",
             }}
             onClick={() => {
-              void navigate("/myEvent");
+              void navigate("/myEvents");
             }}
             icon={<MyEventsSvg />}
           />

@@ -1,6 +1,5 @@
-import type { UploadFileResponse } from "@/src/shared/api";
 import { getRandomString, useFileUpload } from "@/src/shared/lib";
-import { CustomSwitch, TrashSvg } from "@/src/shared/ui";
+import { CustomSwitch, QRCodeSvg, TrashSvg } from "@/src/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import {
   Button,
@@ -15,7 +14,10 @@ import {
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import type { DefaultOptionType } from "antd/es/select";
-import { useEffect, useState } from "react";
+import classnames from "classnames";
+import { useEffect, useRef, useState } from "react";
+import QRCode from "react-qrcode-logo";
+import { v4 as uuidv4 } from "uuid";
 import type { ServerOption } from "../../api/getEditorTaskData";
 import "./TaskForm.scss";
 interface TaskFormProps<TResponse> {
@@ -77,6 +79,11 @@ const TaskForm = <TResponse,>({
 
   const uploadMutation = useFileUpload();
 
+  const uploadFile = async (file: File) => {
+    const res = await uploadMutation.mutateAsync(file);
+    return res.data;
+  };
+
   const formMutation = useMutation<TResponse, Error, FullTaskData>({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
@@ -89,14 +96,19 @@ const TaskForm = <TResponse,>({
     onSuccess,
     onError,
   }) => {
-    uploadMutation.mutate(file as File, {
-      onSuccess: (res) => {
-        onSuccess?.(res.data);
-      },
-      onError: (err) => {
-        onError?.(err);
-      },
-    });
+    void (async () => {
+      try {
+        const data = await uploadFile(file as File);
+        onSuccess?.(
+          {
+            url: data.url,
+          },
+          file,
+        );
+      } catch (e) {
+        onError?.(e as Error);
+      }
+    })();
   };
 
   const mapUrlsToFileList = (urls: string[]): UploadFile[] =>
@@ -109,16 +121,37 @@ const TaskForm = <TResponse,>({
 
   const handleChange: UploadProps["onChange"] = ({ fileList }) => {
     const normalized = fileList.map((file) => {
-      if (file.response) {
-        file.url = (file.response as UploadFileResponse).url;
+      if (
+        file.response &&
+        typeof file.response === "object" &&
+        "url" in file.response &&
+        typeof (file.response as { url: unknown }).url === "string"
+      ) {
+        return {
+          ...file,
+          url: (file.response as { url: string }).url,
+        };
       }
       return file;
     });
+
     setFileList(normalized);
+
+    const urls = normalized
+      .filter(
+        (file): file is UploadFile & { url: string } =>
+          file.status === "done" && !!file.url,
+      )
+      .map((file) => file.url);
+    form.setFieldValue("files", urls);
   };
 
   //TODO: определение типа 3 или 4 по этому в посыле формы
   const [rightAnswerType, setRightAnswerType] = useState<"qr" | "text">("text");
+
+  const switchQRModeBtnClassName = classnames("task-form__switch-qr-mode-btn", {
+    "task-form__switch-qr-mode-btn_active": rightAnswerType === "qr",
+  });
 
   const onFinish = (values: TaskFormData) => {
     const taskName = name ?? `Задание ${order}`;
@@ -127,6 +160,13 @@ const TaskForm = <TResponse,>({
       type = 4;
     }
     formMutation.mutate({ ...values, name: taskName, type });
+  };
+
+  const QRCodeRef = useRef<QRCode | null>(null);
+
+  const handleQRCodeDownloading = () => {
+    console.log(options);
+    QRCodeRef.current?.download("png", name);
   };
 
   useEffect(() => {
@@ -144,8 +184,13 @@ const TaskForm = <TResponse,>({
   }, [fileList, form]);
 
   useEffect(() => {
+    let type = initialData?.type;
     if (initialData) {
-      form.setFieldsValue(initialData);
+      if (initialData.type === 4) {
+        type = 3;
+        setRightAnswerType("qr");
+      }
+      form.setFieldsValue({ ...initialData, type });
     }
   }, [form, initialData]);
 
@@ -165,6 +210,9 @@ const TaskForm = <TResponse,>({
       >
         <Input.TextArea />
       </Form.Item>
+      <Form.Item name="options" noStyle>
+        <div />
+      </Form.Item>
       <Form.Item<TaskFormData>
         name="type"
         label="Тип"
@@ -176,36 +224,72 @@ const TaskForm = <TResponse,>({
             if (
               ![1, 2].includes(val) ||
               ![1, 2].includes(form.getFieldValue("type") as number)
-            )
+            ) {
+              if (rightAnswerType === "qr") {
+                setRightAnswerType("text");
+              }
               form.setFieldValue("options", []);
+            }
           }}
         />
       </Form.Item>
       {taskType === 3 && (
         <>
-          <Form.Item<TaskFormData> name="options" label="Правильный ответ">
-            {
-              //Todo: доделать позднее
-            }
-            <div>
+          <Form.Item<TaskFormData>
+            label={rightAnswerType === "text" ? "Правильный ответ" : undefined}
+          >
+            <div className="task-form__qr-task-body">
               {rightAnswerType === "text" ? (
-                <Input value={options?.[0]?.value} />
+                <Input
+                  value={options?.[0]?.value}
+                  onChange={(e) => {
+                    let newOption: ClientOption = {
+                      clientId: uuidv4(),
+                      isCorrect: true,
+                      value: e.target.value,
+                    };
+                    if (options?.[0]) {
+                      newOption = {
+                        ...options[0],
+                        value: e.target.value,
+                      };
+                    }
+                    const array = [newOption];
+                    form.setFieldValue("options", array);
+                  }}
+                />
               ) : (
-                <div>{options?.[0]?.value}</div>
+                <>
+                  <div className="task-form__qr-code-wrapper">
+                    <QRCode
+                      ref={QRCodeRef}
+                      value={options ? options[0]?.value : ""}
+                    />
+                  </div>
+                  <Button onClick={handleQRCodeDownloading}>
+                    Скачать QR-код
+                  </Button>
+                </>
               )}
               <Button
                 onClick={() => {
                   setRightAnswerType((prev) => {
                     if (prev === "qr") {
-                      form.setFieldValue("options", [""]);
+                      form.setFieldValue("options", []);
                       return "text";
                     }
-                    form.setFieldValue("options", [getRandomString(20)]);
+                    const rightAnswer: ClientOption = {
+                      clientId: uuidv4(),
+                      isCorrect: true,
+                      value: getRandomString(20),
+                    };
+                    form.setFieldValue("options", [rightAnswer]);
                     return "qr";
                   });
                 }}
+                className={switchQRModeBtnClassName}
               >
-                Н
+                <QRCodeSvg />
               </Button>
             </div>
           </Form.Item>
@@ -213,9 +297,6 @@ const TaskForm = <TResponse,>({
       )}
       {(taskType === 1 || taskType === 2) && (
         <Form.Item<TaskFormData> label="Опции">
-          <Form.Item name="options" noStyle>
-            <div />
-          </Form.Item>
           <ul className="task-form__options-list">
             {options?.map((option, index) => {
               return (
@@ -282,7 +363,7 @@ const TaskForm = <TResponse,>({
             <Button
               onClick={() => {
                 const newOption: ClientOption = {
-                  clientId: crypto.randomUUID(),
+                  clientId: uuidv4(),
                   value: "",
                   isCorrect: false,
                 };

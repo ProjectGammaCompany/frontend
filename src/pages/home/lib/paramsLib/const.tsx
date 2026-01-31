@@ -1,6 +1,1 @@
-export const PARAMS_KEYS = [
-  "decliningRating",
-  "territorialized",
-  "active",
-  "tags",
-] as const;
+export const PARAMS_KEYS = ["decliningRating", "active", "tags"] as const;

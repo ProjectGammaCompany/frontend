@@ -4,6 +4,8 @@ export {
   type getEditingEventDataResponse,
 } from "./api/getEditingEventData.ts";
 
+export { deleteEvent } from "./api/deleteEvent.ts";
+
 export {
   default as eventNameReducer,
   selectEventName,

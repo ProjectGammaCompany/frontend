@@ -12,6 +12,7 @@ export { default as CustomModalWindow } from "./CustomModalWindow/CustomModalWin
 export { BackSvg } from "./svg/BackSvg.tsx";
 export { CreateEventSvg } from "./svg/CreateEventSvg.tsx";
 export { CrossSvg } from "./svg/CrossSvg.tsx";
+export { DefaultEventCoverSvg } from "./svg/DefaultEventCoverSvg.tsx";
 export { FileSvg } from "./svg/FileSvg.tsx";
 export { FiltersSvg } from "./svg/FiltersSvg.tsx";
 export { HomeSvg } from "./svg/HomeSvg.tsx";
@@ -20,6 +21,7 @@ export { MyEventsSvg } from "./svg/MyEventsSvg.tsx";
 export { NotificationSvg } from "./svg/NotificationSvg.tsx";
 export { PictureSvg } from "./svg/PictureSvg.tsx";
 export { ProfileSvg } from "./svg/ProfileSvg.tsx";
+export { QRCodeSvg } from "./svg/QRCodeSvg.tsx";
 export { SettingsSvg } from "./svg/SettingsSvg.tsx";
 export { StarSvg } from "./svg/StarSvg.tsx";
 export { TrashSvg } from "./svg/TrashSvg.tsx";

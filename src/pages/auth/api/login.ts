@@ -6,5 +6,5 @@ export interface loginProps {
   password: string;
 }
 export const login = (values: loginProps) => {
-  return axiosInstance.post<TokensResponse>("login", values);
+  return axiosInstance.post<TokensResponse>("auth/login", values);
 };

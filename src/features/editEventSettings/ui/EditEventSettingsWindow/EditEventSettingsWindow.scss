@@ -1,0 +1,16 @@
+.edit-event-settings-window {
+  &__delete-btn {
+    position: absolute;
+    left: -20px;
+    top: -25px;
+    height: 45px;
+    width: 45px;
+    padding: 5px;
+    background-color: var(--red-color);
+    color: white;
+  }
+
+  &__form-wrapper {
+    padding-top: 30px;
+  }
+}

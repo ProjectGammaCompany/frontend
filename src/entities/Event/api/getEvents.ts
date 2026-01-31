@@ -1,17 +1,20 @@
 import { axiosInstance } from "@/src/shared/api";
 
 interface getEventsProps {
-  cursor: string | null;
-  limit?: number;
+  page: number;
+  maxOnPage: number;
   tags?: string[];
   decliningRating: boolean;
-  territorialized: boolean;
   active: boolean;
 }
 
+interface Tag {
+  id: string;
+  name: string;
+}
+
 export interface getEventsResponse {
-  next?: string;
-  info: Event[];
+  events: Event[];
 }
 
 export interface Event {
@@ -21,7 +24,7 @@ export interface Event {
   rating: number;
   favorite: boolean;
   lastEditionDate: string;
-  tags: string[];
+  tags: Tag[];
   cover: string;
 }
 export const getEvents = (props: getEventsProps) => {

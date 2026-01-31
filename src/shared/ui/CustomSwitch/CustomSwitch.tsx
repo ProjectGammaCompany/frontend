@@ -6,6 +6,7 @@ interface CustomSwitchProps {
   value?: boolean;
   title?: string;
   onChange?: SwitchChangeEventHandler | undefined;
+  checked?: boolean;
 }
 
 const CustomSwitch = ({
@@ -13,6 +14,7 @@ const CustomSwitch = ({
   onChange,
   ref,
   title,
+  checked,
   ...rest
 }: CustomSwitchProps & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-redundant-type-constituents
@@ -21,6 +23,7 @@ const CustomSwitch = ({
   return (
     <label className="switch__wrapper">
       <Switch
+        checked={checked}
         value={value}
         ref={ref}
         onChange={onChange}

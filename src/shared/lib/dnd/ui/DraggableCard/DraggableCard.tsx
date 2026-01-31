@@ -7,6 +7,7 @@ interface DraggableCardProps {
   index: number;
   draggableId: string;
   className?: string;
+  isDragDisabled?: boolean;
 }
 
 const DraggableCard = ({
@@ -14,9 +15,14 @@ const DraggableCard = ({
   index,
   draggableId,
   className,
+  isDragDisabled,
 }: DraggableCardProps) => {
   return (
-    <Draggable draggableId={draggableId} index={index}>
+    <Draggable
+      draggableId={draggableId}
+      index={index}
+      isDragDisabled={isDragDisabled}
+    >
       {(provided) => (
         <CustomCard
           dragHandleProps={provided.dragHandleProps}

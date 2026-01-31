@@ -1,0 +1,10 @@
+.my-events-page-header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text {
+    color: white !important;
+  }
+}

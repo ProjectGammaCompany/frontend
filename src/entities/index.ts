@@ -21,6 +21,7 @@ export { getTags, type Tag } from "./Tag";
 //TODO: добавить index.ts для каждой сущности
 
 export {
+  deleteEvent,
   editEventSettings,
   eventNameReducer,
   getEditingEventData,

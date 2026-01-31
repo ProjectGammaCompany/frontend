@@ -5,10 +5,11 @@ import { Spin, Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useOnInView } from "react-intersection-observer";
 import "./EventList.scss";
+
+//todo: добавить favorites
 export interface Filters {
   tags?: string[];
   decliningRating: boolean;
-  territorialized: boolean;
   active: boolean;
 }
 export interface EventsListProps {
@@ -22,19 +23,30 @@ const EventsList = ({ filters }: EventsListProps) => {
     useInfiniteQuery<
       EventsResponse,
       Error,
-      InfiniteData<EventsResponse, string | null>,
+      InfiniteData<EventsResponse>,
       ["allEvents"],
-      string | null
+      number
     >({
       queryKey: ["allEvents"],
       queryFn: ({ pageParam }) =>
         getEvents({
           ...filters,
-          cursor: pageParam,
-          limit: 10,
+          page: pageParam,
+          maxOnPage: 10,
         }),
-      getNextPageParam: (lastPage) => lastPage.data.next,
-      initialPageParam: null,
+      getNextPageParam: (lastPage, _, lastPageParam) => {
+        if (lastPage.data.events.length === 0) {
+          return undefined;
+        }
+        return lastPageParam + 1;
+      },
+      getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
+        if (firstPageParam <= 1) {
+          return undefined;
+        }
+        return firstPageParam - 1;
+      },
+      initialPageParam: 1,
     });
 
   const inViewRef = useOnInView((inView) => {
@@ -47,7 +59,7 @@ const EventsList = ({ filters }: EventsListProps) => {
     <div className="home-page__events-list-wrapper">
       <div className="home-page__events-list">
         {data?.pages.map((page) => {
-          return page.data.info.map((card) => (
+          return page.data.events.map((card) => (
             <LinkEventCard
               key={card.id}
               title={card.title}
@@ -56,7 +68,7 @@ const EventsList = ({ filters }: EventsListProps) => {
               cover={card.cover}
               rating={card.rating}
               favorite={card.favorite}
-              tags={card.tags}
+              tags={card.tags.map((t) => t.name)}
             />
           ));
         })}

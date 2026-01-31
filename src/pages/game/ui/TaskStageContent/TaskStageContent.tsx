@@ -34,7 +34,14 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     0 | 1 | 2 | 3 | 4,
     React.ComponentType<{ data: TaskStageData }>
   > = {
-    0: InfoBlock,
+    0: ({ data }) => (
+      <InfoBlock
+        data={{
+          ...data,
+          eventId: eventId,
+        }}
+      />
+    ),
     1: ({ data }) => (
       <ChoiceTask data={{ ...data, type: 1, eventId: eventId }} />
     ),
