@@ -1,49 +1,56 @@
 import { http, HttpResponse } from "msw";
-import { EVENTS } from "../const/events";
 
-const validAccessToken = "testAccess";
-const validRefreshToken = "testRefresh";
+// const validAccessToken = "testAccess";
+// const validRefreshToken = "testRefresh";
+
+// const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
 
 // function sleep(ms: number) {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
 // }
 
 export const handlers = [
-  http.post(`/login`, () => {
-    return HttpResponse.json({
-      accessToken: validAccessToken,
-      refreshToken: validRefreshToken,
-    });
-  }),
-  http.post("/logout", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
+  // http.post(`/auth/login`, () => {
+  //   return HttpResponse.json({
+  //     accessToken: validAccessToken,
+  //     refreshToken: validRefreshToken,
+  //   });
+  // }),
+  // http.post(`/auth/register`, () => {
+  //   return HttpResponse.json({
+  //     accessToken: validAccessToken,
+  //     refreshToken: validRefreshToken,
+  //   });
+  // }),
+  // http.put("/auth/logout", () => {
+  //   return new HttpResponse(null, {
+  //     status: 200,
+  //   });
+  // }),
   http.put("/events/personal/favorites", () => {
     return new HttpResponse(null, {
       status: 200,
     });
   }),
-  http.get("/events", ({ request }) => {
-    // await sleep(15000);
-    const url = new URL(request.url);
-    const cursor = url.searchParams.get("page");
-    const limit = 10;
-    const data = EVENTS.slice(
-      cursor ? Number(cursor) : 0,
-      cursor ? Number(cursor) + limit : limit,
-    );
-    // const hasNext = data.at(-1)?.id != EVENTS.at(-1)?.id;
-    return HttpResponse.json({
-      // next: cursor
-      //   ? hasNext
-      //     ? `${Number(cursor) + limit}`
-      //     : null
-      //   : limit.toString(),
-      info: data,
-    });
-  }),
+  // http.get(`http://api.hse-eduplay.ru/events`, ({ request }) => {
+  //   // await sleep(15000);
+  //   const url = new URL(request.url);
+  //   const cursor = url.searchParams.get("page");
+  //   const limit = 10;
+  //   const data = EVENTS.slice(
+  //     cursor ? Number(cursor) - 1 : 0,
+  //     cursor ? Number(cursor) - 1 + limit : limit,
+  //   );
+  //   // const hasNext = data.at(-1)?.id != EVENTS.at(-1)?.id;
+  //   return HttpResponse.json({
+  //     // next: cursor
+  //     //   ? hasNext
+  //     //     ? `${Number(cursor) + limit}`
+  //     //     : null
+  //     //   : limit.toString(),
+  //     events: data,
+  //   });
+  // }),
   http.post("/file", () => {
     return HttpResponse.json({
       url: "50faa6d198e1d1d15e868a7433f87346.jpg",
@@ -54,104 +61,100 @@ export const handlers = [
       "https://i.pinimg.com/736x/af/fb/a9/affba91c05f0b42dc3f36f0b341e0e9e.jpg",
     );
   }),
-  http.get("/tags", () => {
-    return HttpResponse.json({
-      tags: [
-        {
-          name: "Крч",
-          id: "1",
-        },
-        {
-          name: "Среднее",
-          id: "2",
-        },
-        {
-          name: "Максимально длинный тег из возможных оооооо",
-          id: "3",
-        },
-        {
-          name: "Проверка",
-          id: "4",
-        },
-        {
-          name: "Заполненность",
-          id: "5",
-        },
-        {
-          name: "Химия",
-          id: "6",
-        },
-      ],
-    });
-  }),
-  http.post("/event", () => {
-    return HttpResponse.json({
-      id: "23232323",
-    });
-  }),
-  http.get("/profile", () => {
-    return HttpResponse.json({
-      avatar: "fdjvnjvdjdv.pnh",
-      username: "User 1",
-    });
-  }),
+  // http.get("/tags", () => {
+  //   return HttpResponse.json({
+  //     tags: [
+  //       {
+  //         name: "tech",
+  //         id: "1",
+  //       },
+  //       {
+  //         name: "Среднее",
+  //         id: "2",
+  //       },
+  //       {
+  //         name: "meetup",
+  //         id: "3",
+  //       },
+  //       {
+  //         name: "web",
+  //         id: "4",
+  //       },
+  //       {
+  //         name: "Химия",
+  //         id: "5",
+  //       },
+  //     ],
+  //   });
+  // }),
+  // http.post("/event", () => {
+  //   return HttpResponse.json({
+  //     id: "23232323",
+  //   });
+  // }),
+  // http.get("/profile", () => {
+  //   return HttpResponse.json({
+  //     avatar: "",
+  //     username: "khavronich12",
+  //   });
+  // }),
   http.put("/profile/avatar", () => {
     return new HttpResponse(null, {
       status: 200,
     });
   }),
-  http.get("/event/:eventid", () => {
-    return HttpResponse.json({
-      name: "Квест 1 jdjdsjdsjdsj dsdsdjsdjs ksdjdsjds ksdkjsdksd",
-      blocks: [
-        {
-          id: "1",
-          name: "блок 1",
-          order: 0,
-          connectedBlocks: false,
-          conditionsWithoutBlocks: false,
-        },
-        {
-          id: "2",
-          name: "блок 2",
-          order: 1,
-          connectedBlocks: true,
-          conditionsWithoutBlocks: false,
-        },
-        {
-          id: "3",
-          name: "блок 3",
-          order: 2,
-          connectedBlocks: true,
-          conditionsWithoutBlocks: true,
-        },
-        {
-          id: "4",
-          name: "блок 4",
-          order: 3,
-          connectedBlocks: false,
-          conditionsWithoutBlocks: false,
-        },
-        {
-          id: "5",
-          name: "блок 5",
-          order: 4,
-          connectedBlocks: false,
-          conditionsWithoutBlocks: false,
-        },
-      ],
-    });
-  }),
-  http.get("/event/:eventId/role", () => {
-    return HttpResponse.json({
-      role: 1,
-    });
-  }),
-  http.post("/event/:eventid/block", () => {
-    return HttpResponse.json({
-      id: "232323",
-    });
-  }),
+  // http.get("/event/:eventid", () => {
+  //   return HttpResponse.json({
+  //     name: "Квест 1",
+  //     blocks: [
+  //       {
+  //         id: "1",
+  //         name: "блок 1",
+  //         order: 0,
+  //         connectedBlocks: false,
+  //         conditionsWithoutBlocks: false,
+  //       },
+  //       {
+  //         id: "2",
+  //         name: "блок 2",
+  //         order: 1,
+  //         connectedBlocks: true,
+  //         conditionsWithoutBlocks: false,
+  //       },
+  //       {
+  //         id: "3",
+  //         name: "блок 3",
+  //         order: 2,
+  //         connectedBlocks: true,
+  //         conditionsWithoutBlocks: true,
+  //       },
+  //       {
+  //         id: "4",
+  //         name: "блок 4",
+  //         order: 3,
+  //         connectedBlocks: false,
+  //         conditionsWithoutBlocks: false,
+  //       },
+  //       {
+  //         id: "5",
+  //         name: "блок 5",
+  //         order: 4,
+  //         connectedBlocks: false,
+  //         conditionsWithoutBlocks: false,
+  //       },
+  //     ],
+  //   });
+  // }),
+  // http.get("/event/:eventId/role", () => {
+  //   return HttpResponse.json({
+  //     role: 1,
+  //   });
+  // }),
+  // http.post("/event/:eventid/block", () => {
+  //   return HttpResponse.json({
+  //     id: "232323",
+  //   });
+  // }),
   http.get("/event/:eventId/blocks/:blockId", () => {
     return HttpResponse.json({
       name: "Блок 1",
@@ -244,13 +247,13 @@ export const handlers = [
   http.get("/event/:eventId/blocks/:blockId/conditions", () => {
     return HttpResponse.json({
       conditions: [
-        {
-          id: "1",
-          min: -1, // -1
-          max: -1, // -1
-          blockId: "", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 0,
-        },
+        // {
+        //   id: "1",
+        //   min: -1, // -1
+        //   max: -1, // -1
+        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
+        //   blockOrder: 0,
+        // },
         {
           id: "2",
           min: 1, // -1
@@ -258,34 +261,34 @@ export const handlers = [
           blockId: "2", // 0, если ни к чему не привязан, иначе 1
           blockOrder: 1,
         },
-        {
-          id: "3",
-          min: -1, // -1
-          max: 1, // -1
-          blockId: "", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 0,
-        },
-        {
-          id: "4",
-          min: -1, // -1
-          max: -1, // -1
-          blockId: "", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 0,
-        },
-        {
-          id: "5",
-          min: -1, // -1
-          max: -1, // -1
-          blockId: "", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 0,
-        },
-        {
-          id: "6",
-          min: -1, // -1
-          max: -1, // -1
-          blockId: "", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 0,
-        },
+        // {
+        //   id: "3",
+        //   min: -1, // -1
+        //   max: 1, // -1
+        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
+        //   blockOrder: 0,
+        // },
+        // {
+        //   id: "4",
+        //   min: -1, // -1
+        //   max: -1, // -1
+        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
+        //   blockOrder: 0,
+        // },
+        // {
+        //   id: "5",
+        //   min: -1, // -1
+        //   max: -1, // -1
+        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
+        //   blockOrder: 0,
+        // },
+        // {
+        //   id: "6",
+        //   min: -1, // -1
+        //   max: -1, // -1
+        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
+        //   blockOrder: 0,
+        // },
       ],
     });
   }),
@@ -342,7 +345,7 @@ export const handlers = [
       password: "string",
       groups: [],
       rating: false,
-      cover: "32232723723",
+      cover: "",
       collaborators: [],
     });
   }),
@@ -358,32 +361,32 @@ export const handlers = [
       rate: 4.2,
       favorite: false,
       tags: ["Химия", "Биология"],
-      startDate: "04.01.2026 13:40",
-      endDate: "04.01.2026 13:55",
-      cover: "string",
-      status: "started",
+      startDate: "25.01.2026 13:40",
+      endDate: "26.01.2026 13:55",
+      cover: "",
+      status: "notStarted",
     });
   }),
   http.get("/event/:eventId/nextStage", () => {
     return HttpResponse.json({
-      type: "task",
+      type: "end",
       task: {
         id: String(Math.floor(1 + Math.random() * 5)),
         blockId: "232232323",
         name: "Тестовое задание",
         description: "Проверка описания",
-        type: 0,
-        // options: [
-        //   {
-        //     id: "1",
-        //     value: "Ответ1",
-        //   },
-        //   {
-        //     id: "2",
-        //     value:
-        //       "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
-        //   },
-        // ],
+        type: 2,
+        options: [
+          {
+            id: "1",
+            value: "Ответ1",
+          },
+          {
+            id: "2",
+            value:
+              "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
+          },
+        ],
         files: ["Длинное название файла вот.png", "fjfjfj.docx"],
         // time: 300,
         // timeStamp?: string,

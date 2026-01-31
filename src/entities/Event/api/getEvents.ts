@@ -5,12 +5,16 @@ interface getEventsProps {
   maxOnPage: number;
   tags?: string[];
   decliningRating: boolean;
-  territorialized: boolean;
   active: boolean;
 }
 
+interface Tag {
+  id: string;
+  name: string;
+}
+
 export interface getEventsResponse {
-  info: Event[];
+  events: Event[];
 }
 
 export interface Event {
@@ -20,7 +24,7 @@ export interface Event {
   rating: number;
   favorite: boolean;
   lastEditionDate: string;
-  tags: string[];
+  tags: Tag[];
   cover: string;
 }
 export const getEvents = (props: getEventsProps) => {

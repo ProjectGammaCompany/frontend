@@ -4,7 +4,6 @@ import { PARAMS_KEYS } from "./const";
 export const getParams = (params: URLSearchParams) => {
   const parsedParams: Filters = {
     decliningRating: false,
-    territorialized: false,
     active: false,
   };
   for (const key of PARAMS_KEYS) {

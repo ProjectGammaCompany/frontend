@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/src/shared/api";
 
 export interface AddBlockResponse {
-  id: string;
+  blockId: string;
 }
 
 export interface AddBlockProps {

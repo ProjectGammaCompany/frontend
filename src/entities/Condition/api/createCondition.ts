@@ -8,7 +8,7 @@ export interface ConditionData {
 }
 
 export interface CreateConditionResponse {
-  id: string;
+  conditionId: string;
   blockOrder: number;
 }
 export const createCondition = (

@@ -89,7 +89,7 @@ const ConditionWindow = ({
                           ...oldData.data.conditions,
                           {
                             ...variables,
-                            id: response.data.id,
+                            id: response.data.conditionId,
                             blockOrder: response.data.blockOrder,
                           },
                         ],

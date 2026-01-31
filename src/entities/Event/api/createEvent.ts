@@ -14,7 +14,5 @@ interface CreateEventData {
   password?: string;
 }
 export const createEvent = (data: CreateEventData) => {
-  return axiosInstance.post<createEventResponse>("event", {
-    data,
-  });
+  return axiosInstance.post<createEventResponse>("event", data);
 };

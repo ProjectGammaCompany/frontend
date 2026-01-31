@@ -8,13 +8,16 @@ const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";
 
 const server = setupServer(
-  http.post(`${import.meta.env.VITE_APP_BASE_URL as string}refresh`, () => {
-    return HttpResponse.json({
-      accessToken: validAccessToken,
-      refreshToken: validRefreshToken,
-    });
-  }),
-  http.get(`${import.meta.env.VITE_APP_BASE_URL as string}login`, () => {
+  http.post(
+    `${import.meta.env.VITE_APP_BASE_URL as string}auth/refresh`,
+    () => {
+      return HttpResponse.json({
+        accessToken: validAccessToken,
+        refreshToken: validRefreshToken,
+      });
+    },
+  ),
+  http.get(`${import.meta.env.VITE_APP_BASE_URL as string}auth/login`, () => {
     return HttpResponse.json({
       accessToken: validAccessToken,
       refreshToken: validRefreshToken,
@@ -34,6 +37,7 @@ describe("Проверка настройки axios-instance", () => {
     server.use(
       http.get(`${import.meta.env.VITE_APP_BASE_URL as string}someURL`, () => {
         if (!isUsedAlready) {
+          console.log("тут попадаю");
           isUsedAlready = true;
           return new HttpResponse(null, { status: 401 });
         }
