@@ -1,8 +1,7 @@
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
-import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
-import { getNextStage } from "../../api";
+import { useGameData } from "../../model/useGameData";
 import BlockStageContent from "../BlockStageContent/BlockStageContent";
 import EndGameContent from "../EndGameContent/EndGameContent";
 import TaskStageContent from "../TaskStageContent/TaskStageContent";
@@ -12,16 +11,7 @@ const GamePage = () => {
 
   const navigate = useNavigate();
 
-  const { data, isPending, isError } = useQuery({
-    queryKey: [eventId, "game"],
-    queryFn: () => {
-      if (eventId) {
-        return getNextStage(eventId);
-      }
-      return Promise.reject(Error("Некорректный id"));
-    },
-    select: (data) => data.data,
-  });
+  const { data, isPending, isError } = useGameData(eventId);
 
   if (isPending) {
     return <div>Загрузка...</div>;
@@ -36,7 +26,7 @@ const GamePage = () => {
   }
 
   return (
-    <div>
+    <>
       <Header>
         <div className="game-page-header__content">
           <div
@@ -51,16 +41,18 @@ const GamePage = () => {
           </Typography.Title>
         </div>
       </Header>
-      {data.type === "block" ? (
-        <BlockStageContent key={data.block.id} block={data} />
-      ) : (
-        <TaskStageContent
-          key={data.task.id}
-          defaultTask={data.task}
-          eventId={eventId!}
-        />
-      )}
-    </div>
+      <main>
+        {data.type === "block" ? (
+          <BlockStageContent key={data.block.id} block={data} />
+        ) : (
+          <TaskStageContent
+            key={data.task.id}
+            defaultTask={data.task}
+            eventId={eventId!}
+          />
+        )}
+      </main>
+    </>
   );
 };
 

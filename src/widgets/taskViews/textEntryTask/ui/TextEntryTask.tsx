@@ -3,6 +3,7 @@ interface ChoiceTaskProps {
 }
 
 //todo: change for final version
+//todo: не забыть приведение в lowercase перед отправкой ответа
 interface TextEntryTaskData {
   name: string;
   description?: string;

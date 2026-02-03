@@ -7,4 +7,8 @@ export { DeleteBlockButton } from "./deleteBlock";
 export { DeleteConditionButton } from "./deleteCondition";
 export { DeleteTaskButton } from "./deleteTask";
 
-export { SendAnswerButton } from "./sendTaskAnswer";
+export {
+  SendAnswerButton,
+  useSendAnswer,
+  type SendAnswerResponse,
+} from "./sendTaskAnswer";

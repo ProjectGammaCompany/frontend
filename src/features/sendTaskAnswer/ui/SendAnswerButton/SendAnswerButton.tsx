@@ -1,13 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
-import { sendAnswer } from "../../api/sendAnswer";
+import type { AxiosResponse } from "axios";
+import { sendAnswer, type SendAnswerResponse } from "../../api/sendAnswer";
 
 interface SendAnswerButtonProps {
   eventId: string;
   blockId: string;
   taskId: string;
   answer: string[];
-  successFn: (rightAnswer?: string[], points?: number) => void;
+  onSuccess: (data: AxiosResponse<SendAnswerResponse>) => void;
 }
 
 const SendAnswerButton = ({
@@ -15,11 +16,11 @@ const SendAnswerButton = ({
   blockId,
   taskId,
   answer,
-  successFn,
+  onSuccess,
 }: SendAnswerButtonProps) => {
   const sendAnswerMutation = useMutation({
     mutationFn: () => sendAnswer(eventId, blockId, taskId, answer),
-    onSuccess: (data) => successFn(data.data.rightAnswer, data.data.points),
+    onSuccess: onSuccess,
   });
   return (
     <Button

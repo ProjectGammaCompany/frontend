@@ -56,11 +56,11 @@ export {
   type ClientOption,
   type CreateTaskResponse,
   type ServerOption,
-  type TaskFormData,
 } from "./Task";
 
 export {
   ConditionForm,
   createCondition,
+  type ConditionData,
   type CreateConditionResponse,
 } from "./Condition";

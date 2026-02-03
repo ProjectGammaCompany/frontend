@@ -16,6 +16,7 @@ interface EventHeaderProps {
   eventId: string;
 }
 
+//todo: подумать, нужен ли перенос окна в mainContent
 const EventHeader = ({ role, eventId }: EventHeaderProps) => {
   const navigate = useNavigate();
 
@@ -44,11 +45,13 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
           )}
         </div>
       </Header>
-      <EditEventSettingsWindow
-        eventId={eventId}
-        open={open}
-        setIsOpen={setIsOpen}
-      />
+      {role === 1 && (
+        <EditEventSettingsWindow
+          eventId={eventId}
+          open={open}
+          setIsOpen={setIsOpen}
+        />
+      )}
     </>
   );
 };

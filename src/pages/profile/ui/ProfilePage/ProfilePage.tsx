@@ -1,16 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
-import { getProfile } from "../../api/getProfile";
+import { useProfileData } from "../../model/useProfileData";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
 import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";
 
 const ProfilePage = () => {
-  const { data, isError, isPending } = useQuery({
-    queryKey: ["profile"],
-    queryFn: getProfile,
-    select: (data) => data.data,
-  });
+  const { data, isError, isPending } = useProfileData();
 
   if (isPending) {
     return <div>Загрузка</div>;

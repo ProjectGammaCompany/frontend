@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/src/shared/api";
-import { type FullTaskData } from "../ui/TaskForm/TaskForm";
+import type { FullTaskData } from "../model/useFormSubmit";
 
 export interface CreateTaskResponse {
   taskId: string;

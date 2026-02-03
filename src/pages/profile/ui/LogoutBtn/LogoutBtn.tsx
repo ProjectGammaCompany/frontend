@@ -1,17 +1,21 @@
 import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { Button } from "antd";
 import { useNavigate } from "react-router";
-import { logout } from "../../api/logout";
+import { useLogout } from "../../model/useLogout";
 import "./LogoutBtn.scss";
 const LogoutBtn = () => {
   const navigate = useNavigate();
 
+  const handleSuccessLogout = () => {
+    tokenStorage.clearTokens();
+    settingsStorage.clearRememberMe();
+    void navigate("/auth");
+  };
+
+  const logoutMutation = useLogout(handleSuccessLogout);
+
   const handleClick = () => {
-    void logout().then(() => {
-      tokenStorage.clearTokens();
-      settingsStorage.clearRememberMe();
-      void navigate("/auth");
-    });
+    logoutMutation.mutate();
   };
 
   return (

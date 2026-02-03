@@ -1,8 +1,10 @@
+import { useSendAnswer } from "@/src/features";
+import { queryClient } from "@/src/shared/api";
 import { ChoiceTask, InfoBlock, TextEntryTask } from "@/src/widgets";
-import { useMutation } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
-import { commitTimestamp, type TaskStageData } from "../../api";
+import { type TaskStageData } from "../../api";
+import { useTimestampMutation } from "../../model/useTimeStampFix";
 
 interface TaskStageProps {
   defaultTask: TaskStageData;
@@ -17,18 +19,37 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   const [isOverdueTask, setIsOverdueTask] = useState(false);
 
-  const timeStampFixingMutation = useMutation<unknown, Error, string>({
-    mutationFn: (timestamp) =>
-      commitTimestamp(eventId, task.blockId, task.id, timestamp),
-    onSuccess: (_, timestamp) => {
-      setTask((prev) => {
-        return { ...prev, timestamp: timestamp };
-      });
-    },
-    onError: () => {
-      setTimeStampError(true);
-    },
-  });
+  const handleSuccessSendingAnswer = () => {
+    void queryClient.invalidateQueries({
+      queryKey: [eventId, "game"],
+    });
+  };
+
+  const sendAnswerMutation = useSendAnswer(
+    eventId,
+    defaultTask.blockId,
+    defaultTask.id,
+    [],
+    handleSuccessSendingAnswer,
+  );
+
+  const handleSuccessTimestampFixing = (timestamp: string) => {
+    setTask((prev) => {
+      return { ...prev, timestamp: timestamp };
+    });
+  };
+
+  const handleErrorTimestampFixing = () => {
+    setTimeStampError(true);
+  };
+
+  const timestampFixingMutation = useTimestampMutation(
+    eventId,
+    task.id,
+    task.blockId,
+    handleSuccessTimestampFixing,
+    handleErrorTimestampFixing,
+  );
 
   const taskMap: Record<
     0 | 1 | 2 | 3 | 4,
@@ -55,8 +76,12 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   //todo: проверить зависимости
   useEffect(() => {
     if (task.time) {
-      if (!task.timestamp && !timestampError) {
-        timeStampFixingMutation.mutate(
+      if (
+        !task.timestamp &&
+        !timestampError &&
+        !timestampFixingMutation.isPending
+      ) {
+        timestampFixingMutation.mutate(
           dayjs(Date.now()).format("DD.MM.YYYY HH:mm:ss:SSS"),
         );
       } else if (
@@ -68,16 +93,33 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
         setIsOverdueTask(true);
       }
     }
-  }, []);
+  }, [
+    isOverdueTask,
+    task.time,
+    task.timestamp,
+    timestampError,
+    timestampFixingMutation,
+  ]);
+
+  useEffect(() => {
+    if (isOverdueTask) {
+      sendAnswerMutation.mutate();
+    }
+  }, [isOverdueTask, sendAnswerMutation]);
 
   if (timestampError) {
     return <div>Произошла ошибка. Перезагрузите страницу.</div>;
+  }
+
+  if (isOverdueTask) {
+    return <div>Просрочка... Отправка пустого ответа...</div>;
   }
 
   if ([0, 1, 2, 3, 4].includes(task.type)) {
     const Component = taskMap[task.type as 0 | 1 | 2 | 3 | 4];
     return <Component data={task} />;
   }
+
   return <div>Ошибка, неизвестный тип задачи!</div>;
 };
 

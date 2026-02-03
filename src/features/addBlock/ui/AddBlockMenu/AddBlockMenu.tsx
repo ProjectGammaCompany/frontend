@@ -1,16 +1,10 @@
-import type {
-  BlockItemData,
-  getEditingEventDataResponse,
-} from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+import type { BlockItemData } from "@/src/entities";
 import { BackSvg } from "@/src/shared/ui";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
-import { useMutation } from "@tanstack/react-query";
-import type { AxiosResponse } from "axios";
 import classnames from "classnames";
 import { useCallback, useState } from "react";
-import { addBlock, type AddBlockResponse } from "../../api/addBlock";
 import { TYPES_ARRAY } from "../../const/typesArray";
+import { useAddBlockMutation } from "../../model/useAddBlockMutation";
 import AddBlockArea from "../AddBlockArea/AddBlockArea";
 import MenuItem from "../MenuItem/MenuItem";
 import "./AddBlockMenu.scss";
@@ -18,9 +12,13 @@ import "./AddBlockMenu.scss";
 interface AddBlockMenuProps {
   eventId: string;
   blocks: BlockItemData[];
-  onAdd?: (blockId: string) => void;
+  onBlockCreate?: (blockId: string) => void;
 }
-const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
+const AddBlockMenu = ({
+  eventId,
+  blocks,
+  onBlockCreate,
+}: AddBlockMenuProps) => {
   const [openMenu, setMenuIsOpen] = useState(false);
 
   const [showArea, setShowArea] = useState(false);
@@ -29,40 +27,7 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
     "add-block-menu_open": openMenu,
   });
 
-  const mutation = useMutation<
-    AxiosResponse<AddBlockResponse>,
-    Error,
-    { eventId: string; isParallel: boolean; name: string; order: number }
-  >({
-    mutationKey: ["addBlock", eventId],
-    mutationFn: addBlock,
-    onSuccess: (data, variables) => {
-      queryClient.setQueryData(
-        [eventId, "data"],
-        (oldData: AxiosResponse<getEditingEventDataResponse>) => {
-          if (!oldData) {
-            return oldData;
-          }
-          const newBlock: BlockItemData = {
-            id: data.data.blockId,
-            name: variables.name,
-            order: variables.order,
-            conditionsWithoutBlocks: false,
-            connectedBlocks: false,
-            isParallel: variables.isParallel,
-          };
-          return {
-            ...oldData,
-            data: {
-              ...oldData.data,
-              blocks: [...blocks, newBlock],
-            },
-          };
-        },
-      );
-      onAdd?.(data.data.blockId);
-    },
-  });
+  const addBlockMutation = useAddBlockMutation(eventId, blocks, onBlockCreate);
 
   const onBeforeCapture = useCallback(() => {
     setShowArea(true);
@@ -89,7 +54,7 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
       }
       const isParallel = draggableId === "parallel";
       const order = blocks.length;
-      mutation.mutate({
+      addBlockMutation.mutate({
         eventId: eventId,
         order: order + 1,
         isParallel: isParallel,
@@ -97,7 +62,7 @@ const AddBlockMenu = ({ eventId, blocks, onAdd }: AddBlockMenuProps) => {
       });
       setShowArea(false);
     },
-    [blocks.length, eventId, mutation],
+    [blocks.length, eventId, addBlockMutation],
   );
 
   const iconClassNames = classnames("add-block-menu__icon", {

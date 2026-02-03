@@ -1,5 +1,6 @@
 export {
   createCondition,
+  type ConditionData,
   type CreateConditionResponse,
 } from "./api/createCondition.ts";
 

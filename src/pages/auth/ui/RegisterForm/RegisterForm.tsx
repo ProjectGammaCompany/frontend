@@ -1,21 +1,17 @@
-import { settingsStorage, tokenStorage } from "@/src/shared/lib";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
-import { register, type registerProps } from "../../api/register";
+import { type registerProps } from "../../api/register";
 import { EMAIL_RULES, PASSWORD_RULES } from "../../const/rules";
+import { useRegister } from "../../model/useRegister";
 import AuthForm from "../AuthForm/AuthForm";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
 
-  const mutation = useMutation({
-    mutationFn: register,
-    onSuccess: (data) => {
-      tokenStorage.setTokens(data.data.accessToken, data.data.refreshToken);
-      settingsStorage.setRememberMe();
-      void navigate("/");
-    },
-  });
+  const handleSuccessRegister = () => {
+    void navigate("/");
+  };
+
+  const registerMutation = useRegister(handleSuccessRegister);
   return (
     <AuthForm<registerProps>
       name="register"
@@ -52,9 +48,9 @@ const RegisterForm = () => {
         },
       ]}
       submitButtonText="Зарегистрироваться"
-      onFinish={(values) => mutation.mutate(values)}
-      loading={mutation.isPending}
-      error={mutation.error ? "Произошла ошибка" : undefined}
+      onFinish={(values) => registerMutation.mutate(values)}
+      loading={registerMutation.isPending}
+      error={registerMutation.error ? "Произошла ошибка" : undefined}
     />
   );
 };

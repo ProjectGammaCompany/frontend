@@ -26,7 +26,9 @@ const StatsPage = () => {
           </Typography.Title>
         </div>
       </Header>
-      <StatsPageContent eventId={eventId} />
+      <main>
+        <StatsPageContent eventId={eventId} />
+      </main>
     </div>
   );
 };

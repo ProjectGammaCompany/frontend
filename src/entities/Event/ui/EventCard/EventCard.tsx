@@ -10,12 +10,11 @@ interface EventCardProps {
 }
 
 const EventCard = ({ title, description, cover, extra }: EventCardProps) => {
-  const { Title } = Typography;
   return (
     <div className="event-card">
-      <Title level={2} className="event-card__title">
+      <Typography.Title level={2} className="event-card__title">
         {title}
-      </Title>
+      </Typography.Title>
       <div className="event-card__info">
         {cover ? (
           <img

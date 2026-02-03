@@ -1,4 +1,5 @@
-import { EditorContent, PlayerContent } from "@/src/widgets";
+import { PlayerContent } from "@/src/widgets";
+import EditorContent from "../EditorContent/EditorContent";
 import "./MainContent.scss";
 interface MainContentProps {
   eventId: string;
