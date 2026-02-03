@@ -12,7 +12,6 @@ interface OptionProps {
 const Option = ({ id, value, clickFn, selected, className }: OptionProps) => {
   const classNames = classnames("option__wrapper", className);
 
-  console.log(classNames);
   return (
     <li className={classNames}>
       <ConfigProvider

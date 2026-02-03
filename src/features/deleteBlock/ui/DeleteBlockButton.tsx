@@ -1,7 +1,6 @@
-import { deleteBlock } from "@/src/entities";
 import { TrashSvg } from "@/src/shared/ui";
-import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
+import { useDeleteBlock } from "../model/useDeleteBlock";
 import "./DeleteBlockButton.scss";
 interface DeleteBlockButtonProps {
   eventId: string;
@@ -14,10 +13,7 @@ const DeleteBlockButton = ({
   blockId,
   onSuccess,
 }: DeleteBlockButtonProps) => {
-  const deleteMutation = useMutation({
-    mutationFn: () => deleteBlock(eventId, blockId),
-    onSuccess: onSuccess,
-  });
+  const deleteMutation = useDeleteBlock(eventId, blockId, onSuccess);
   return (
     <Button
       onClick={() => deleteMutation.mutate()}

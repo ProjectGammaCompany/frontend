@@ -1,8 +1,7 @@
 import { IconButton, StarSvg } from "@/src/shared/ui";
-import { useMutation } from "@tanstack/react-query";
 import classnames from "classnames";
 import { useState } from "react";
-import { putFavoriteState } from "../api/putFavoriteState";
+import { usePutFavoriteState } from "../model/usePutFavoriteState";
 import "./ToggleFavoriteEventButton.scss";
 interface toggleEventButtonProps {
   defaultState: boolean;
@@ -14,12 +13,11 @@ const ToggleFavoriteEventButton = ({
   defaultState,
 }: toggleEventButtonProps) => {
   const [state, setState] = useState<boolean>(defaultState);
-  const mutation = useMutation({
-    mutationFn: () => putFavoriteState(id, !state),
-    onSuccess: () => {
-      setState(!state);
-    },
-  });
+
+  const handleSuccessToggle = () => {
+    setState((prev) => !prev);
+  };
+  const toggleMutation = usePutFavoriteState(id, !state, handleSuccessToggle);
 
   const className = classnames("toggle-favorite-event-btn", {
     "toggle-favorite-event-btn_active": state,
@@ -32,7 +30,7 @@ const ToggleFavoriteEventButton = ({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        mutation.mutate();
+        toggleMutation.mutate();
       }}
     ></IconButton>
   );

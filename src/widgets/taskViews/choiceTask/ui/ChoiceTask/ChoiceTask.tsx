@@ -1,10 +1,11 @@
 import { TaskView } from "@/src/entities";
+import type { SendAnswerResponse } from "@/src/features";
 import { SendAnswerButton } from "@/src/features";
-import { sendAnswer } from "@/src/features/sendTaskAnswer";
+import { useSendAnswer } from "@/src/features/sendTaskAnswer";
 import { queryClient } from "@/src/shared/api";
 import { useNotify } from "@/src/shared/lib";
-import { useMutation } from "@tanstack/react-query";
 import { Typography } from "antd";
+import type { AxiosResponse } from "axios";
 import { useState } from "react";
 import Option from "../Option/Option";
 import "./ChoiceTask.scss";
@@ -34,7 +35,9 @@ interface TaskOption {
 //todo: Просмотреть ещё раз логику реагирования на истечение времени, рефакторинг переменных, проверка useEffect
 const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const notify = useNotify();
+
   const { options, eventId, blockId, id, type } = data;
+
   const taskData = {
     title: data.name,
     defaultTime: data.time,
@@ -69,9 +72,9 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   };
 
   const handleSuccessAnswerSending = (
-    rightAnswer?: string[],
-    points?: number,
+    data: AxiosResponse<SendAnswerResponse>,
   ) => {
+    const { points, rightAnswer } = data.data;
     SetIsExpirationFnCanceled(true);
     setRightAnswer(rightAnswer);
     if (points) {
@@ -89,12 +92,13 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     }, 5000);
   };
 
-  const sendAnswerMutation = useMutation({
-    mutationFn: () => sendAnswer(eventId, blockId, id, answer),
-    onSuccess: (data) => {
-      handleSuccessAnswerSending(data.data.rightAnswer, data.data.points);
-    },
-  });
+  const sendAnswerMutation = useSendAnswer(
+    eventId,
+    blockId,
+    id,
+    answer,
+    handleSuccessAnswerSending,
+  );
 
   const getOptionClassName = (
     id: string,
@@ -137,7 +141,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
           blockId={blockId}
           taskId={id}
           answer={answer}
-          successFn={handleSuccessAnswerSending}
+          onSuccess={handleSuccessAnswerSending}
         />
       </div>
     </TaskView>

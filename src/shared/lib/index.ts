@@ -24,3 +24,5 @@ export { getRandomString } from "./workWithStrokes";
 export { type ChangeTypeOfKeys } from "./tsTypes";
 
 export { NotificationContext, useNotify } from "./notifications";
+
+export { useDebounce } from "./customHooks";

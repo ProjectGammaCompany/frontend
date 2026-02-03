@@ -1,11 +1,7 @@
-import { queryClient } from "@/src/shared/api";
 import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
 import { ProfileSvg } from "@/src/shared/ui";
-import { useMutation } from "@tanstack/react-query";
 import { Button, Upload } from "antd";
-import type { AxiosResponse } from "axios";
-import type { GetProfileResponse } from "../../api/getProfile";
-import { setAvatar } from "../../api/setAvatar";
+import { useSetAvatar } from "../../model/useSetAvatar";
 import "./AvatarBlock.scss";
 
 interface AvatarBlockProps {
@@ -13,27 +9,7 @@ interface AvatarBlockProps {
 }
 
 const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
-  const setAvatarMutation = useMutation({
-    mutationKey: ["avatar"],
-    mutationFn: setAvatar,
-    onSuccess: (_, variables) => {
-      queryClient.setQueryData(
-        ["profile"],
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (oldData: AxiosResponse<GetProfileResponse, any, object>) => {
-          return oldData
-            ? {
-                ...oldData,
-                data: {
-                  ...oldData.data,
-                  avatar: variables,
-                },
-              }
-            : oldData;
-        },
-      );
-    },
-  });
+  const setAvatarMutation = useSetAvatar();
 
   const uploadAvatarMutation = useFileUpload((data) => {
     setAvatarMutation.mutate(data.data.url);

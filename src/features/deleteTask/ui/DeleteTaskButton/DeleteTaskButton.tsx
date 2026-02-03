@@ -1,7 +1,6 @@
-import { deleteTask } from "@/src/entities";
 import { TrashSvg } from "@/src/shared/ui";
-import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
+import { useDeleteTask } from "../../model/useDeleteTask";
 import "./DeleteTaskButton.scss";
 interface DeleteTaskButtonProps {
   eventId: string;
@@ -16,10 +15,7 @@ const DeleteTaskButton = ({
   taskId,
   onSuccess,
 }: DeleteTaskButtonProps) => {
-  const deleteMutation = useMutation({
-    mutationFn: () => deleteTask(eventId, blockId, taskId),
-    onSuccess: onSuccess,
-  });
+  const deleteMutation = useDeleteTask(eventId, blockId, taskId, onSuccess);
   return (
     <Button
       loading={deleteMutation.isPending}

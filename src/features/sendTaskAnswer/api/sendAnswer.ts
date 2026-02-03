@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/src/shared/api";
 
-interface SendAnswerResponse {
+export interface SendAnswerResponse {
   rightAnswer?: string[];
   points?: number;
 }

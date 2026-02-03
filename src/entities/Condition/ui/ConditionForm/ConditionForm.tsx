@@ -1,24 +1,21 @@
 import { CustomSwitch } from "@/src/shared/ui";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { useEffect } from "react";
-import { getBlocksOptions, type BlockOption } from "../../api/getBlocksOptions";
+import type { ConditionData } from "../../api/createCondition";
+import { getBlocksOptions } from "../../api/getBlocksOptions";
+import { mapBlockOptionsToSelectOption } from "../../model/mapBlockOptionsToSelectOption";
+import { useFormSubmit } from "../../model/useFormSubmit";
 import "./ConditionForm.scss";
 
 interface ConditionFormProps<TResponse> {
   eventId: string;
-  initialData?: ConditionFormData;
-  onSuccessFn?: (response: TResponse, variables: ConditionFormData) => void;
-  mutationFn: (values: ConditionFormData) => Promise<TResponse>;
+  initialData?: ConditionData;
+  onSuccessFn?: (response: TResponse, variables: ConditionData) => void;
+  mutationFn: (values: ConditionData) => Promise<TResponse>;
   submitBtnText: string;
-}
-interface ConditionFormData {
-  min: number;
-  max: number;
-  group?: string[];
-  blockId: string;
 }
 
 const ConditionForm = <TResponse,>({
@@ -28,7 +25,13 @@ const ConditionForm = <TResponse,>({
   mutationFn,
   submitBtnText,
 }: ConditionFormProps<TResponse>) => {
-  const [form] = useForm<ConditionFormData>();
+  const SELECT_TYPE_ERROR_MESSAGE =
+    "Выберите хотя бы одно из правил для условия";
+
+  const [form] = useForm<ConditionData>();
+
+  const max = useWatch("max", form);
+  const min = useWatch("min", form);
 
   const {
     data: blockOptions,
@@ -40,17 +43,11 @@ const ConditionForm = <TResponse,>({
     select: (data) => data.data.blocks,
   });
 
-  const formMutation = useMutation({
-    mutationFn: mutationFn,
-    onSuccess: onSuccessFn,
-  });
+  const submitMutation = useFormSubmit(mutationFn, onSuccessFn);
 
-  const handleFinish = (values: ConditionFormData) => {
-    formMutation.mutate(values);
+  const handleFinish = (values: ConditionData) => {
+    submitMutation.mutate(values);
   };
-
-  const max = useWatch("max", form);
-  const min = useWatch("min", form);
 
   useEffect(() => {
     if (!initialData) {
@@ -62,14 +59,6 @@ const ConditionForm = <TResponse,>({
     }
   }, [blockOptions, form, initialData]);
 
-  const mapBlockOptionsToSelectOption = (blocks: BlockOption[]) => {
-    return blocks.map((block) => {
-      return { value: block.id, label: block.name };
-    });
-  };
-
-  const selectTypeErrorMessage = "Выберите хотя бы одно из правил для условия";
-
   return (
     <Form
       initialValues={initialData}
@@ -80,15 +69,58 @@ const ConditionForm = <TResponse,>({
       requiredMark={false}
       className="condition-form"
     >
-      <FormItem<ConditionFormData> className="condition-form__item">
-        <FormItem<ConditionFormData>
+      <FormItem<ConditionData> className="condition-form__item">
+        <FormItem<ConditionData>>
+          <Form.Item
+            name="min"
+            noStyle
+            rules={[
+              {
+                validator(_, value) {
+                  if (value === -1 && form.getFieldValue("max") === -1) {
+                    return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
+            <CustomSwitch
+              checked={min != -1}
+              onChange={(checked) => {
+                form.setFieldValue("min", checked ? 0 : -1);
+              }}
+              title="Набрано не менее заданного количества баллов (&gt; или =)"
+            />
+          </Form.Item>
+        </FormItem>
+        <Form.Item
+          noStyle
+          shouldUpdate={
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            (prev, cur) => prev.min !== cur.min
+          }
+        >
+          {({ getFieldValue }) =>
+            getFieldValue("min") !== -1 ? (
+              <Form.Item
+                name="min"
+                label="Введите число"
+                className="condition-form__item"
+              >
+                <InputNumber min={0} />
+              </Form.Item>
+            ) : null
+          }
+        </Form.Item>
+        <FormItem<ConditionData>
           name="max"
           noStyle
           rules={[
             {
               validator(_, value) {
                 if (value === -1 && form.getFieldValue("min") === -1) {
-                  return Promise.reject(new Error(selectTypeErrorMessage));
+                  return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
                 }
                 return Promise.resolve();
               },
@@ -123,50 +155,8 @@ const ConditionForm = <TResponse,>({
           ) : null
         }
       </Form.Item>
-      <FormItem<ConditionFormData>>
-        <Form.Item
-          name="min"
-          noStyle
-          rules={[
-            {
-              validator(_, value) {
-                if (value === -1 && form.getFieldValue("max") === -1) {
-                  return Promise.reject(new Error(selectTypeErrorMessage));
-                }
-                return Promise.resolve();
-              },
-            },
-          ]}
-        >
-          <CustomSwitch
-            checked={min != -1}
-            onChange={(checked) => {
-              form.setFieldValue("min", checked ? 0 : -1);
-            }}
-            title="Набрано не менее заданного количества баллов (&gt; или =)"
-          />
-        </Form.Item>
-      </FormItem>
-      <Form.Item
-        noStyle
-        shouldUpdate={
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          (prev, cur) => prev.min !== cur.min
-        }
-      >
-        {({ getFieldValue }) =>
-          getFieldValue("min") !== -1 ? (
-            <Form.Item
-              name="min"
-              label="Введите число"
-              className="condition-form__item"
-            >
-              <InputNumber min={0} />
-            </Form.Item>
-          ) : null
-        }
-      </Form.Item>
-      <FormItem<ConditionFormData>
+
+      <FormItem<ConditionData>
         name="blockId"
         label="Выберите блок, куда направится участник события при выполнении условия"
         className="condition-form__block-select-wrapper"

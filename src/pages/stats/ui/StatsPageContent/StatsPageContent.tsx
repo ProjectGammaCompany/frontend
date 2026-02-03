@@ -1,17 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
-import { getPlayerStats } from "../../api/getPlayerStats";
+import { useStats } from "../../model/useStats";
 import "./StatsPageContent.scss";
 interface StatsPageContentProps {
   eventId: string;
 }
 
 const StatsPageContent = ({ eventId }: StatsPageContentProps) => {
-  const { data, isPending, isError } = useQuery({
-    queryKey: [eventId, "stats"],
-    queryFn: () => getPlayerStats(eventId),
-    select: (data) => data.data,
-  });
+  const { data, isPending, isError } = useStats(eventId);
 
   if (isPending) {
     return <div>Загрузка...</div>;

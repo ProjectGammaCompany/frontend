@@ -1,7 +1,6 @@
 import { TaskView } from "@/src/entities";
-import { sendAnswer } from "@/src/features/sendTaskAnswer";
+import { useSendAnswer } from "@/src/features/sendTaskAnswer";
 import { queryClient } from "@/src/shared/api";
-import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
 import "./InfoBlock.scss";
 interface InfoBlockProps {
@@ -20,16 +19,20 @@ interface InfoBlockData {
 const InfoBlock = ({ data }: InfoBlockProps) => {
   const { eventId, blockId, id, name: title } = data;
 
-  const sendAnswerMutation = useMutation({
-    mutationFn: () => sendAnswer(eventId, blockId, id, [""]),
-    onSuccess: () => {
-      const el = document.getElementById("root");
-      el?.scrollTo({ top: 0, behavior: "smooth" });
-      void queryClient.invalidateQueries({
-        queryKey: [eventId, "game"],
-      });
-    },
-  });
+  const handleSuccessSendingAnswer = () => {
+    const el = document.getElementById("root");
+    el?.scrollTo({ top: 0, behavior: "smooth" });
+    void queryClient.invalidateQueries({
+      queryKey: [eventId, "game"],
+    });
+  };
+  const sendAnswerMutation = useSendAnswer(
+    eventId,
+    blockId,
+    id,
+    [""],
+    handleSuccessSendingAnswer,
+  );
   return (
     <TaskView taskData={{ ...data, title }}>
       <div className="info-block__next-btn-wrapper">

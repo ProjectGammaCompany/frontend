@@ -1,12 +1,12 @@
-import type { Filters } from "../../ui/EventsList/EventsList";
-import { PARAMS_KEYS } from "./const";
+import type { Filters } from "../../model/useAllEvents";
 
 export const getParams = (params: URLSearchParams) => {
   const parsedParams: Filters = {
     decliningRating: false,
     active: false,
+    favorites: false,
   };
-  for (const key of PARAMS_KEYS) {
+  for (const key of Object.keys(parsedParams)) {
     if (params.has(key)) {
       if (key === "tags") {
         const tags = params.getAll(key);
@@ -15,7 +15,9 @@ export const getParams = (params: URLSearchParams) => {
         }
         continue;
       }
-      parsedParams[key] = Boolean(params.get(key));
+      parsedParams[key as Exclude<keyof typeof parsedParams, "tags">] = Boolean(
+        params.get(key),
+      );
     }
   }
   return parsedParams;
