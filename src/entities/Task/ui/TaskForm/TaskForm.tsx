@@ -34,6 +34,7 @@ interface TaskFormProps<TResponse> {
   submitBtnText: string;
   mutationFn: (data: FullTaskData) => Promise<TResponse>;
   onSuccessFn?: (response: TResponse, variables: FullTaskData) => void;
+  onSuccessText?: string;
   order: number;
 }
 
@@ -43,6 +44,7 @@ const TaskForm = <TResponse,>({
   order,
   onSuccessFn,
   submitBtnText,
+  onSuccessText,
   mutationFn,
 }: TaskFormProps<TResponse>) => {
   const [form] = useForm<TaskFormData>();
@@ -55,11 +57,24 @@ const TaskForm = <TResponse,>({
 
   const uploadMutation = useFileUpload();
 
-  const submitMutation = useFormSubmit<TResponse>(mutationFn, onSuccessFn);
+  const handleSuccessSubmit = (
+    response: TResponse,
+    variables: FullTaskData,
+  ) => {
+    setShowSuccessText(true);
+    onSuccessFn?.(response, variables);
+  };
+
+  const submitMutation = useFormSubmit<TResponse>(
+    mutationFn,
+    handleSuccessSubmit,
+  );
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const [textInputType, setTextInputType] = useState<"qr" | "text">("text");
+
+  const [showSuccessText, setShowSuccessText] = useState(false);
 
   const switchQRModeBtnClassName = classnames("task-form__switch-qr-mode-btn", {
     "task-form__switch-qr-mode-btn_active": textInputType === "qr",
@@ -244,6 +259,7 @@ const TaskForm = <TResponse,>({
     }
   }, [form, initialData]);
 
+  //todo: check block error
   return (
     <Form
       initialValues={initialData}
@@ -350,6 +366,11 @@ const TaskForm = <TResponse,>({
       {taskType === 2 && (
         <Form.Item<TaskFormData> name="partialPoints" valuePropName="checked">
           <CustomSwitch title="Выдача частичных баллов" />
+        </Form.Item>
+      )}
+      {showSuccessText && onSuccessText && (
+        <Form.Item<TaskFormData> noStyle>
+          <Typography.Text>{onSuccessText}</Typography.Text>
         </Form.Item>
       )}
       <Form.Item<TaskFormData> name="files">

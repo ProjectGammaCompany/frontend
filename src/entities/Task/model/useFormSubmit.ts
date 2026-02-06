@@ -1,7 +1,10 @@
+import type { PickPartial } from "@/src/shared/lib";
 import { useMutation } from "@tanstack/react-query";
 import type { ServerOption } from "../api/getEditorTaskData";
 
-export type ClientOption = ServerOption & { clientId: string };
+export type ClientOption = PickPartial<ServerOption, "id"> & {
+  clientId: string;
+};
 
 export interface TaskFormData {
   description?: string;

@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 // const validAccessToken = "testAccess";
 // const validRefreshToken = "testRefresh";
 
-// const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
+const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
 
 // function sleep(ms: number) {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -27,11 +27,11 @@ export const handlers = [
   //     status: 200,
   //   });
   // }),
-  http.put("/events/personal/favorites", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
+  // http.put(`${baseUrl}/events/personal/favorites`, () => {
+  //   return new HttpResponse(null, {
+  //     status: 200,
+  //   });
+  // }),
   // http.get(`http://api.hse-eduplay.ru/events`, ({ request }) => {
   //   // await sleep(15000);
   //   const url = new URL(request.url);
@@ -60,6 +60,16 @@ export const handlers = [
     return HttpResponse.redirect(
       "https://i.pinimg.com/736x/af/fb/a9/affba91c05f0b42dc3f36f0b341e0e9e.jpg",
     );
+  }),
+  http.put(`${baseUrl}event/:eventId/:blocks/:blockId/tasks/:taskId`, () => {
+    return HttpResponse.json({
+      order: 2,
+      options: [
+        { id: "12", value: "Ответ 1", isCorrect: true },
+        { id: "13", value: "Ответ 2", isCorrect: false },
+        { id: "14", value: "Ответ 3", isCorrect: false },
+      ],
+    });
   }),
   // http.get("/tags", () => {
   //   return HttpResponse.json({

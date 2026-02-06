@@ -14,3 +14,7 @@ export {
 } from "./api/getConditions.ts";
 
 export { deleteBlock } from "./api/deleteBlock.ts";
+
+export { useTasks } from "./model/useTasks.ts";
+
+export { blockQueries } from "./api/queries.ts";

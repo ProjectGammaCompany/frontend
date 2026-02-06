@@ -21,7 +21,7 @@ export { DraggableCard } from "./dnd";
 
 export { getRandomString } from "./workWithStrokes";
 
-export { type ChangeTypeOfKeys } from "./tsTypes";
+export { type ChangeTypeOfKeys, type PickPartial } from "./tsTypes";
 
 export { NotificationContext, useNotify } from "./notifications";
 

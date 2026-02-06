@@ -37,10 +37,12 @@ export {
 
 export {
   BlockCard,
+  blockQueries,
   deleteBlock,
   getConditions,
   getEditingBlockData,
   getTasks,
+  useTasks,
   type Condition,
   type GetConditionsResponse,
   type GetTasksResponse,
@@ -52,10 +54,15 @@ export {
   deleteTask,
   getEditorTaskData,
   TaskForm,
+  taskQueries,
   TaskView,
+  updateTask,
+  useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
+  type getEditorTaskDataResponse,
   type ServerOption,
+  type UpdateTaskResponse,
 } from "./Task";
 
 export {

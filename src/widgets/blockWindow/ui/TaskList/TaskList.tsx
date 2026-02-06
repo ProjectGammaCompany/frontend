@@ -1,7 +1,7 @@
+import { useTasks } from "@/src/entities";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { Button } from "antd";
 import { useCallback } from "react";
-import { useTasks } from "../../model/useTasks";
 import TaskItem from "../TaskItem/TaskItem";
 import "./TaskList.scss";
 interface TasksListProps {

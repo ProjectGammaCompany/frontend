@@ -1,9 +1,12 @@
 import {
   createTask,
   TaskForm,
+  updateTask,
+  useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
   type ServerOption,
+  type UpdateTaskResponse,
 } from "@/src/entities";
 import { DeleteTaskButton } from "@/src/features";
 import { CustomModalWindow } from "@/src/shared/ui";
@@ -11,9 +14,10 @@ import { Input } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { addTaskToList } from "../../model/addTaskToList";
 import { removeTaskFromList } from "../../model/removeTaskFromList";
-import { addTaskToList } from "../../model/updateTasksQuery";
-import { useTaskData } from "../../model/useTaskData";
+import { updateTaskInList } from "../../model/updateTaskInQuery";
+import { updateTaskOptions as updateTaskData } from "../../model/updateTaskOptions";
 import "./TaskWindow.scss";
 
 export type TaskWindowMode = "create" | "edit";
@@ -42,7 +46,7 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
 
   const id = mode === "edit" ? props.editData.id : undefined;
 
-  const { data } = useTaskData(mode, eventId, blockId, id);
+  const { data } = useEditorTaskData(mode, eventId, blockId, id);
 
   const mapServerOptionsToClientOptions = (
     options: ServerOption[],
@@ -64,15 +68,15 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      setName(data?.name);
-    }
-  }, [data]);
-
   const handleAfterClose = () => {
     setName("");
   };
+
+  useEffect(() => {
+    if (data && open) {
+      setName(data?.name);
+    }
+  }, [data, open]);
 
   return (
     <CustomModalWindow
@@ -98,16 +102,33 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
           className="task-window__title-input"
         />
       </div>
-      {props.mode === "edit" && data ? (
-        <TaskForm
+      {props.mode === "edit" && id && data ? (
+        <TaskForm<AxiosResponse<UpdateTaskResponse>>
           submitBtnText="Сохранить"
           order={order}
           name={name}
-          mutationFn={() => Promise.resolve()}
+          mutationFn={(data) => updateTask(eventId, blockId, id, data)}
           initialData={{
             ...data,
             options: mapServerOptionsToClientOptions(data.options),
           }}
+          onSuccessFn={(data, variables) => {
+            updateTaskInList(
+              eventId,
+              blockId,
+              id,
+              variables.name,
+              data.data.order - 1,
+            );
+            updateTaskData(
+              eventId,
+              blockId,
+              id,
+              variables.name,
+              data.data.options,
+            );
+          }}
+          onSuccessText="Данные успешно обновлены"
         />
       ) : (
         <TaskForm<AxiosResponse<CreateTaskResponse>>
