@@ -10,47 +10,6 @@ const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
 // }
 
 export const handlers = [
-  // http.post(`/auth/login`, () => {
-  //   return HttpResponse.json({
-  //     accessToken: validAccessToken,
-  //     refreshToken: validRefreshToken,
-  //   });
-  // }),
-  // http.post(`/auth/register`, () => {
-  //   return HttpResponse.json({
-  //     accessToken: validAccessToken,
-  //     refreshToken: validRefreshToken,
-  //   });
-  // }),
-  // http.put("/auth/logout", () => {
-  //   return new HttpResponse(null, {
-  //     status: 200,
-  //   });
-  // }),
-  // http.put(`${baseUrl}/events/personal/favorites`, () => {
-  //   return new HttpResponse(null, {
-  //     status: 200,
-  //   });
-  // }),
-  // http.get(`http://api.hse-eduplay.ru/events`, ({ request }) => {
-  //   // await sleep(15000);
-  //   const url = new URL(request.url);
-  //   const cursor = url.searchParams.get("page");
-  //   const limit = 10;
-  //   const data = EVENTS.slice(
-  //     cursor ? Number(cursor) - 1 : 0,
-  //     cursor ? Number(cursor) - 1 + limit : limit,
-  //   );
-  //   // const hasNext = data.at(-1)?.id != EVENTS.at(-1)?.id;
-  //   return HttpResponse.json({
-  //     // next: cursor
-  //     //   ? hasNext
-  //     //     ? `${Number(cursor) + limit}`
-  //     //     : null
-  //     //   : limit.toString(),
-  //     events: data,
-  //   });
-  // }),
   http.post("/file", () => {
     return HttpResponse.json({
       url: "50faa6d198e1d1d15e868a7433f87346.jpg",
@@ -71,292 +30,36 @@ export const handlers = [
       ],
     });
   }),
-  // http.get("/tags", () => {
-  //   return HttpResponse.json({
-  //     tags: [
-  //       {
-  //         name: "tech",
-  //         id: "1",
-  //       },
-  //       {
-  //         name: "Среднее",
-  //         id: "2",
-  //       },
-  //       {
-  //         name: "meetup",
-  //         id: "3",
-  //       },
-  //       {
-  //         name: "web",
-  //         id: "4",
-  //       },
-  //       {
-  //         name: "Химия",
-  //         id: "5",
-  //       },
-  //     ],
-  //   });
-  // }),
-  // http.post("/event", () => {
-  //   return HttpResponse.json({
-  //     id: "23232323",
-  //   });
-  // }),
-  // http.get("/profile", () => {
-  //   return HttpResponse.json({
-  //     avatar: "",
-  //     username: "khavronich12",
-  //   });
-  // }),
+  http.get(`${baseUrl}event/:eventId/:blocks/:blockId/conditions`, () => {
+    return HttpResponse.json({
+      conditions: [
+        {
+          id: "123",
+          blockId: "1b57f871-80a5-40b1-8198-c8a0f5cd41aa",
+          blockOrder: 1,
+          group: null,
+          min: 23,
+          max: 25,
+        },
+      ],
+    });
+  }),
+  http.put(
+    `${baseUrl}event/:eventId/:blocks/:blockId/conditions/:conditionId`,
+    () => {
+      return HttpResponse.json({
+        id: "123",
+        blockId: "1b57f871-80a5-40b1-8198-c8a0f5cd41aa",
+        blockOrder: 1,
+        group: null,
+        min: 20,
+        max: 50,
+      });
+    },
+  ),
   http.put("/profile/avatar", () => {
     return new HttpResponse(null, {
       status: 200,
-    });
-  }),
-  // http.get("/event/:eventid", () => {
-  //   return HttpResponse.json({
-  //     name: "Квест 1",
-  //     blocks: [
-  //       {
-  //         id: "1",
-  //         name: "блок 1",
-  //         order: 0,
-  //         connectedBlocks: false,
-  //         conditionsWithoutBlocks: false,
-  //       },
-  //       {
-  //         id: "2",
-  //         name: "блок 2",
-  //         order: 1,
-  //         connectedBlocks: true,
-  //         conditionsWithoutBlocks: false,
-  //       },
-  //       {
-  //         id: "3",
-  //         name: "блок 3",
-  //         order: 2,
-  //         connectedBlocks: true,
-  //         conditionsWithoutBlocks: true,
-  //       },
-  //       {
-  //         id: "4",
-  //         name: "блок 4",
-  //         order: 3,
-  //         connectedBlocks: false,
-  //         conditionsWithoutBlocks: false,
-  //       },
-  //       {
-  //         id: "5",
-  //         name: "блок 5",
-  //         order: 4,
-  //         connectedBlocks: false,
-  //         conditionsWithoutBlocks: false,
-  //       },
-  //     ],
-  //   });
-  // }),
-  // http.get("/event/:eventId/role", () => {
-  //   return HttpResponse.json({
-  //     role: 1,
-  //   });
-  // }),
-  // http.post("/event/:eventid/block", () => {
-  //   return HttpResponse.json({
-  //     id: "232323",
-  //   });
-  // }),
-  http.get("/event/:eventId/blocks/:blockId", () => {
-    return HttpResponse.json({
-      name: "Блок 1",
-      isParallel: false,
-      order: 1,
-      points: true,
-      rightAnswer: false,
-      partialPoints: true,
-    });
-  }),
-  http.get("/event/:eventId/blocks/:blockId/tasks", () => {
-    return HttpResponse.json({
-      tasks: [
-        {
-          id: "1",
-          name: "Короткая",
-          order: 1,
-        },
-        {
-          id: "2",
-          name: "Достаточно длинное название",
-          order: 2,
-        },
-        {
-          id: "3",
-          name: "Суууууупер длинное название для удачной вставки",
-          order: 3,
-        },
-        {
-          id: "5",
-          name: "Ещё одна таска",
-          order: 5,
-        },
-        {
-          id: "6",
-          name: "Суууууупер длинное название для удачной вставки",
-          order: 6,
-        },
-        {
-          id: "7",
-          name: "Ещё одна таска",
-          order: 7,
-        },
-        {
-          id: "8",
-          name: "Ещё одна таска",
-          order: 8,
-        },
-        {
-          id: "9",
-          name: "Ещё одна таска",
-          order: 9,
-        },
-        {
-          id: "10",
-          name: "Ещё одна таска",
-          order: 10,
-        },
-        {
-          id: "11",
-          name: "Ещё одна таска",
-          order: 11,
-        },
-      ],
-    });
-  }),
-  http.get("/event/:eventId/:blocks/:blockId/tasks/:taskId", () => {
-    return HttpResponse.json({
-      name: "Test Task1",
-      description: "Проверка описания",
-      type: 4,
-      options: [
-        {
-          id: "sdjsdjdsjds",
-          value: "JDjddjdj-cmcc",
-          isCorrect: true,
-        },
-      ],
-      files: [],
-      points: 0,
-      time: 0,
-      partialPoints: false,
-    });
-  }),
-  http.post("/event/:eventId/:blocks/:blockId/task", () => {
-    return new HttpResponse({
-      id: "2121212",
-    });
-  }),
-  http.get("/event/:eventId/blocks/:blockId/conditions", () => {
-    return HttpResponse.json({
-      conditions: [
-        // {
-        //   id: "1",
-        //   min: -1, // -1
-        //   max: -1, // -1
-        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
-        //   blockOrder: 0,
-        // },
-        {
-          id: "2",
-          min: 1, // -1
-          max: -1, // -1
-          blockId: "2", // 0, если ни к чему не привязан, иначе 1
-          blockOrder: 1,
-        },
-        // {
-        //   id: "3",
-        //   min: -1, // -1
-        //   max: 1, // -1
-        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
-        //   blockOrder: 0,
-        // },
-        // {
-        //   id: "4",
-        //   min: -1, // -1
-        //   max: -1, // -1
-        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
-        //   blockOrder: 0,
-        // },
-        // {
-        //   id: "5",
-        //   min: -1, // -1
-        //   max: -1, // -1
-        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
-        //   blockOrder: 0,
-        // },
-        // {
-        //   id: "6",
-        //   min: -1, // -1
-        //   max: -1, // -1
-        //   blockId: "", // 0, если ни к чему не привязан, иначе 1
-        //   blockOrder: 0,
-        // },
-      ],
-    });
-  }),
-  http.post("/event/:eventId/blocks/:blockId/conditions", () => {
-    return HttpResponse.json({
-      id: "32232233232",
-      blockOrder: 5,
-    });
-  }),
-  http.get("/event/:eventId/blocks", () => {
-    return HttpResponse.json({
-      blocks: [
-        {
-          id: "1",
-          name: "блок 1",
-        },
-        {
-          id: "2",
-          name: "блок 2",
-        },
-        {
-          id: "3",
-          name: "блок 3",
-        },
-      ],
-    });
-  }),
-  http.delete("/event/:eventId/blocks/:blockId", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
-  http.delete("/event/:eventId/blocks/:blockId/tasks/:taskId", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
-  http.delete("/event/:eventId/blocks/:blockId/conditions/:conditionId", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
-  http.delete("/event/:eventId", () => {
-    return new HttpResponse(null, {
-      status: 200,
-    });
-  }),
-  http.get("/event/:eventId/settings", () => {
-    return HttpResponse.json({
-      description: "Вот описание",
-      tags: ["4", "1", "2"],
-      startDate: "12.08.2004 23:20",
-      private: true,
-      password: "string",
-      groups: [],
-      rating: false,
-      cover: "",
-      collaborators: [],
     });
   }),
   http.put("/event/:eventId/settings", () => {

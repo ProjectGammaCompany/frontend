@@ -42,6 +42,7 @@ export {
   getConditions,
   getEditingBlockData,
   getTasks,
+  useConditions,
   useTasks,
   type Condition,
   type GetConditionsResponse,
@@ -68,6 +69,8 @@ export {
 export {
   ConditionForm,
   createCondition,
+  updateCondition,
   type ConditionData,
   type CreateConditionResponse,
+  type UpdateConditionResponse,
 } from "./Condition";

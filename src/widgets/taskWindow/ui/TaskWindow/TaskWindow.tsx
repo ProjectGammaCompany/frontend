@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { addTaskToList } from "../../model/addTaskToList";
 import { removeTaskFromList } from "../../model/removeTaskFromList";
-import { updateTaskInList } from "../../model/updateTaskInQuery";
+import { updateTaskInQuery } from "../../model/updateTaskInQuery";
 import { updateTaskOptions as updateTaskData } from "../../model/updateTaskOptions";
 import "./TaskWindow.scss";
 
@@ -113,7 +113,7 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
             options: mapServerOptionsToClientOptions(data.options),
           }}
           onSuccessFn={(data, variables) => {
-            updateTaskInList(
+            updateTaskInQuery(
               eventId,
               blockId,
               id,

@@ -2,7 +2,7 @@ import { blockQueries, type GetTasksResponse } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
 
-export const updateTaskInList = (
+export const updateTaskInQuery = (
   eventId: string,
   blockId: string,
   id: string,
@@ -28,7 +28,6 @@ export const updateTaskInList = (
             ],
           },
         };
-        console.log(newData);
         return newData;
       }
       return oldData;

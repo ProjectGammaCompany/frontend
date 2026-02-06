@@ -1,6 +1,5 @@
-import { type Condition } from "@/src/entities";
+import { useConditions, type Condition } from "@/src/entities";
 import { Button } from "antd";
-import { useConditions } from "../../model/useConditions";
 import ConditionItem from "../ConditionItem/ConditionItem";
 import "./ConditionsList.scss";
 interface ConditionsListProps {

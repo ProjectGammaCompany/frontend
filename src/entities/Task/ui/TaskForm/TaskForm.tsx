@@ -368,11 +368,6 @@ const TaskForm = <TResponse,>({
           <CustomSwitch title="Выдача частичных баллов" />
         </Form.Item>
       )}
-      {showSuccessText && onSuccessText && (
-        <Form.Item<TaskFormData> noStyle>
-          <Typography.Text>{onSuccessText}</Typography.Text>
-        </Form.Item>
-      )}
       <Form.Item<TaskFormData> name="files">
         <Upload
           listType="picture"
@@ -384,6 +379,11 @@ const TaskForm = <TResponse,>({
           <Button>Добавить файлы</Button>
         </Upload>
       </Form.Item>
+      {showSuccessText && onSuccessText && (
+        <Form.Item<TaskFormData> noStyle>
+          <Typography.Text>{onSuccessText}</Typography.Text>
+        </Form.Item>
+      )}
       <Form.Item className="task-form__submit-btn-wrapper">
         <Button type="primary" htmlType="submit">
           {submitBtnText}

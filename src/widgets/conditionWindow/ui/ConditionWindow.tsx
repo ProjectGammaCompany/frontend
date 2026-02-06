@@ -1,8 +1,10 @@
 import {
   ConditionForm,
   createCondition,
+  updateCondition,
   type Condition,
   type CreateConditionResponse,
+  type UpdateConditionResponse,
 } from "@/src/entities";
 import { DeleteConditionButton } from "@/src/features";
 import { CustomModalWindow } from "@/src/shared/ui";
@@ -10,6 +12,7 @@ import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { addConditionToList } from "../model/addConditionToList";
 import { removeConditionFromList } from "../model/removeConditionFromList";
+import { updateConditionInQuery } from "../model/updateConditionInQuery";
 import "./ConditionWindow.scss";
 
 export type ConditionWindowMode = "create" | "edit";
@@ -63,9 +66,18 @@ const ConditionWindow = (
       </div>
       <div className="condition-window__body">
         {condition ? (
-          <ConditionForm
+          <ConditionForm<AxiosResponse<UpdateConditionResponse>>
             eventId={eventId}
-            mutationFn={() => Promise.resolve()}
+            mutationFn={(data) =>
+              updateCondition(eventId, blockId, condition.id, data)
+            }
+            onSuccessFn={(response, variables) => {
+              updateConditionInQuery(eventId, blockId, {
+                ...variables,
+                id: condition.id,
+                blockOrder: response.data.blockOrder,
+              });
+            }}
             submitBtnText="Сохранить"
             initialData={condition}
           />
