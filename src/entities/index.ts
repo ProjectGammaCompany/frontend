@@ -39,15 +39,21 @@ export {
   BlockCard,
   blockQueries,
   deleteBlock,
+  getBlockSettings,
   getConditions,
-  getEditingBlockData,
   getTasks,
+  updateBlockSettings,
+  useBlockSettings,
   useConditions,
   useTasks,
+  useUpdateBlockName,
+  useUpdateBlockSettings,
+  type BlockSettings,
   type Condition,
   type GetConditionsResponse,
   type GetTasksResponse,
   type TaskItemData,
+  type UpdateBlockData,
 } from "./Block";
 
 export {

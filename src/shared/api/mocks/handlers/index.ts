@@ -57,6 +57,11 @@ export const handlers = [
       });
     },
   ),
+  http.put(`${baseUrl}event/:eventId/blocks/:blockId`, () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
   http.put("/profile/avatar", () => {
     return new HttpResponse(null, {
       status: 200,
