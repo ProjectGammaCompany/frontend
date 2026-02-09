@@ -67,9 +67,15 @@ export const handlers = [
       status: 200,
     });
   }),
-  http.put("/event/:eventId/settings", () => {
-    return new HttpResponse(null, {
-      status: 200,
+  http.put(`${baseUrl}event/:eventId/settings`, () => {
+    return HttpResponse.json({
+      groups: [
+        {
+          id: "1",
+          login: "Группа 123",
+          password: "1234",
+        },
+      ],
     });
   }),
   http.get("/event/:eventId/playerInfo", () => {

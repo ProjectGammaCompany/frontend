@@ -24,15 +24,18 @@ export {
   deleteEvent,
   editEventSettings,
   eventNameReducer,
+  eventQueries,
   getEditingEventData,
   getEditingEventSettings,
   getPlayerInfo,
   selectEventName,
   setName,
   type BlockItemData,
+  type ClientGroup,
+  type EditEventSettingsResponse,
   type EditingEventSettings,
   type getEditingEventDataResponse,
-  type Group,
+  type ServerGroup,
 } from "./Event";
 
 export {

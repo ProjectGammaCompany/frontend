@@ -9,12 +9,14 @@ export interface EditingEventSettings {
   private: boolean;
   password?: string;
   lastEditionDate: string;
-  groups: Group[];
+  groups: ServerGroup[];
   rating: boolean;
   collaborators: string[];
+  allowDownloading: boolean;
 }
 
-export interface Group {
+export interface ServerGroup {
+  id: string;
   login: string;
   password: string;
 }
