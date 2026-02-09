@@ -39,6 +39,12 @@ export const GroupsSettings = () => {
     };
     form.setFieldValue("groups", [...groups, newGroup]);
   };
+  const handleGroupDelete = (id: string) => {
+    form.setFieldValue(
+      "groups",
+      groups.filter((el) => el.clientId != id),
+    );
+  };
 
   useEffect(() => {
     console.log(groups);
@@ -54,6 +60,7 @@ export const GroupsSettings = () => {
               onChange={(login, password) =>
                 handleGroupItemChange(index, login, password)
               }
+              onDelete={() => handleGroupDelete(group.clientId)}
             />
           ))}
         </ul>
