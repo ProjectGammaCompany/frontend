@@ -29,7 +29,6 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     eventId,
     defaultTask.blockId,
     defaultTask.id,
-    [],
     handleSuccessSendingAnswer,
   );
 
@@ -69,8 +68,12 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     2: ({ data }) => (
       <ChoiceTask data={{ ...data, type: 2, eventId: eventId }} />
     ),
-    3: TextEntryTask,
-    4: TextEntryTask,
+    3: ({ data }) => (
+      <TextEntryTask data={{ ...data, type: "text", eventId: eventId }} />
+    ),
+    4: ({ data }) => (
+      <TextEntryTask data={{ ...data, type: "qr", eventId: eventId }} />
+    ),
   };
 
   //todo: проверить зависимости
@@ -103,7 +106,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   useEffect(() => {
     if (isOverdueTask) {
-      sendAnswerMutation.mutate();
+      sendAnswerMutation.mutate([]);
     }
   }, [isOverdueTask, sendAnswerMutation]);
 

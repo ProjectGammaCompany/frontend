@@ -1,0 +1,28 @@
+.qr-code-scanner {
+  &_open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--primary-backdrop-color);
+  }
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &__close-btn {
+    width: 45px !important;
+    height: 45px;
+    z-index: 10;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}

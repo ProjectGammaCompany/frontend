@@ -30,14 +30,13 @@ const InfoBlock = ({ data }: InfoBlockProps) => {
     eventId,
     blockId,
     id,
-    [""],
     handleSuccessSendingAnswer,
   );
   return (
     <TaskView taskData={{ ...data, title }}>
       <div className="info-block__next-btn-wrapper">
         <Button
-          onClick={() => sendAnswerMutation.mutate()}
+          onClick={() => sendAnswerMutation.mutate([""])}
           loading={sendAnswerMutation.isPending}
         >
           Далее

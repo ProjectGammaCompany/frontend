@@ -96,7 +96,6 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     eventId,
     blockId,
     id,
-    answer,
     handleSuccessAnswerSending,
   );
 
@@ -118,7 +117,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     <TaskView
       taskData={taskData}
       onExpirationTimeFn={() => {
-        sendAnswerMutation.mutate();
+        sendAnswerMutation.mutate(answer);
       }}
       isExpirationFnCanceled={isExpirationFnCanceled}
     >
