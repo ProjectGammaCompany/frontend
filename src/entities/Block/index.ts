@@ -1,6 +1,9 @@
 export { default as BlockCard } from "./ui/BlockCard/BlockCard.tsx";
 
-export { getEditingBlockData } from "./api/getEditingBlockData.ts";
+export {
+  getBlockSettings,
+  type BlockSettings,
+} from "./api/getBlockSettings.ts";
 export {
   getTasks,
   type GetTasksResponse,
@@ -14,3 +17,20 @@ export {
 } from "./api/getConditions.ts";
 
 export { deleteBlock } from "./api/deleteBlock.ts";
+
+export { useTasks } from "./model/useTasks.ts";
+
+export { useConditions } from "./model/useConditions.ts";
+
+export { blockQueries } from "./api/queries.ts";
+
+export { useBlockSettings } from "./model/useBlockSettings.ts";
+
+export {
+  updateBlockSettings,
+  type UpdateBlockData,
+} from "./api/updateBlockSettings.ts";
+
+export { useUpdateBlockSettings } from "./model/useUpdateBlockSettings.ts";
+
+export { useUpdateBlockName } from "./model/useUpdateBlockName.ts";

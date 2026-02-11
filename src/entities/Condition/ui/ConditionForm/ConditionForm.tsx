@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { ConditionData } from "../../api/createCondition";
 import { getBlocksOptions } from "../../api/getBlocksOptions";
 import { mapBlockOptionsToSelectOption } from "../../model/mapBlockOptionsToSelectOption";
@@ -16,6 +16,7 @@ interface ConditionFormProps<TResponse> {
   onSuccessFn?: (response: TResponse, variables: ConditionData) => void;
   mutationFn: (values: ConditionData) => Promise<TResponse>;
   submitBtnText: string;
+  onSuccessText?: string;
 }
 
 const ConditionForm = <TResponse,>({
@@ -24,6 +25,7 @@ const ConditionForm = <TResponse,>({
   onSuccessFn,
   mutationFn,
   submitBtnText,
+  onSuccessText,
 }: ConditionFormProps<TResponse>) => {
   const SELECT_TYPE_ERROR_MESSAGE =
     "Выберите хотя бы одно из правил для условия";
@@ -32,6 +34,8 @@ const ConditionForm = <TResponse,>({
 
   const max = useWatch("max", form);
   const min = useWatch("min", form);
+
+  const [showSuccessText, setShowSuccessText] = useState(false);
 
   const {
     data: blockOptions,
@@ -43,7 +47,15 @@ const ConditionForm = <TResponse,>({
     select: (data) => data.data.blocks,
   });
 
-  const submitMutation = useFormSubmit(mutationFn, onSuccessFn);
+  const handleSuccessSubmit = (
+    response: TResponse,
+    variables: ConditionData,
+  ) => {
+    setShowSuccessText(true);
+    onSuccessFn?.(response, variables);
+  };
+
+  const submitMutation = useFormSubmit(mutationFn, handleSuccessSubmit);
 
   const handleFinish = (values: ConditionData) => {
     submitMutation.mutate(values);
@@ -176,6 +188,11 @@ const ConditionForm = <TResponse,>({
         )}
       </FormItem>
 
+      {showSuccessText && onSuccessText && (
+        <FormItem noStyle>
+          <Typography.Text>{onSuccessText}</Typography.Text>
+        </FormItem>
+      )}
       <FormItem noStyle>
         <Button htmlType="submit">{submitBtnText}</Button>
       </FormItem>

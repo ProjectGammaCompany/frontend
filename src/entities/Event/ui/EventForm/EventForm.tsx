@@ -4,7 +4,7 @@ import {
   useFileUpload,
   type ChangeTypeOfKeys,
 } from "@/src/shared/lib";
-import { CustomDatePicker } from "@/src/shared/ui";
+import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Button,
@@ -13,13 +13,14 @@ import {
   Input,
   Select,
   Switch,
+  Tooltip,
   Typography,
   Upload,
   type UploadProps,
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import { Dayjs } from "dayjs";
-import { type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import "./EventForm.scss";
 
 //todo добавит switch на показ таблицы всей
@@ -32,6 +33,7 @@ export interface BaseEventFormData {
   endDate?: Dayjs;
   private: boolean;
   password?: string;
+  allowDownloading: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -44,6 +46,8 @@ interface EventFormProps<TData extends EventFormData, TResponse> {
     data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
   ) => Promise<TResponse>;
   children?: ReactNode;
+  onSuccessText?: string;
+  showSuccessText?: boolean;
   onSuccessFn?: (
     data: TResponse,
     variables: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
@@ -53,6 +57,8 @@ interface EventFormProps<TData extends EventFormData, TResponse> {
 export const EventForm = <TData extends EventFormData, TResponse>({
   mutationFn,
   onSuccessFn,
+  onSuccessText,
+  showSuccessText,
   defaultData,
   submitBtnText,
   children,
@@ -79,6 +85,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   });
 
   const [form] = useForm<TData>();
+
+  const [toolTipOpen, setToolTipOpen] = useState(false);
 
   const privateValue = Form.useWatch("private", form);
 
@@ -111,6 +119,13 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   };
 
   const cover = useWatch("cover", form);
+
+  useEffect(() => {
+    if (defaultData) {
+      // @ts-expect-error проблема с типизацией данных
+      form.setFieldsValue(defaultData);
+    }
+  }, [defaultData, form]);
 
   return (
     <ConfigProvider
@@ -231,6 +246,28 @@ export const EventForm = <TData extends EventFormData, TResponse>({
           </Form.Item>
         )}
         {children}
+        <Form.Item<EventFormData> noStyle>
+          <div className="event-form__allow-downloading-form-item">
+            <CustomSwitch title="Разрешить скачивание" />
+            <Tooltip
+              title="Вместе с заданиями пользователю будут загружены и ответы на них."
+              open={toolTipOpen}
+            >
+              <Button
+                icon={<QuestionSvg />}
+                onClick={() => setToolTipOpen((prev) => !prev)}
+                classNames={{
+                  root: "event-form__allow-downloading-tooltip-btn",
+                }}
+              />
+            </Tooltip>
+          </div>
+        </Form.Item>
+        {showSuccessText && onSuccessText && (
+          <Form.Item>
+            <Typography>{onSuccessText}</Typography>
+          </Form.Item>
+        )}
         <Form.Item>
           <Button type="primary" htmlType="submit">
             {submitBtnText}

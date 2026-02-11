@@ -1,6 +1,6 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/src/shared/api"
 
-interface getEditorTaskDataResponse {
+export interface getEditorTaskDataResponse {
   name: string;
   description: string;
   type: number; // начинаем с 1
@@ -12,7 +12,7 @@ interface getEditorTaskDataResponse {
 }
 
 export interface ServerOption {
-  id?: string;
+  id: string;
   value: string;
   isCorrect: boolean;
 }

@@ -11,6 +11,8 @@ import "./styles/App.scss";
 
 //todo: В запросах на union сделать проверки ответа от сервера в будущем
 //todo: добавить отправку lastEditionDate в каждый put/post/delete запрос в editor'е
+//todo: перенести useQuery и useMutation в model по соседству с используемым api
+//todo: поправить index.ts в entities (у event)
 function App() {
   useClearTokens();
 

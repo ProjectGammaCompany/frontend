@@ -15,9 +15,15 @@ export {
 export {
   getEditingEventSettings,
   type EditingEventSettings,
-  type Group,
+  type ServerGroup,
 } from "./api/getEditingEventSettings.ts";
 
-export { editEventSettings } from "./api/editEventSettings.ts";
+export {
+  editEventSettings,
+  type ClientGroup,
+  type EditEventSettingsResponse,
+} from "./api/editEventSettings.ts";
 
 export { getPlayerInfo } from "./api/getPlayerInfo.ts";
+
+export { eventQueries } from "./api/queries.ts";

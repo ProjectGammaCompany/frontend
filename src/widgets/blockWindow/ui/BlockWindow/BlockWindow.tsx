@@ -1,10 +1,15 @@
-import { type Condition } from "@/src/entities";
+import {
+  useBlockSettings,
+  useUpdateBlockName,
+  type Condition,
+  type UpdateBlockData,
+} from "@/src/entities";
 import { DeleteBlockButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
+import { useDebounce } from "@/src/shared/lib";
 import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { useBlockInfo } from "../../model/useBlockInfo";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
 import TaskList from "../TaskList/TaskList";
@@ -34,7 +39,7 @@ const BlockWindow = ({
     "tasks" | "conditions" | "settings"
   >("tasks");
 
-  const { data, isPending, isError } = useBlockInfo(eventId, blockId);
+  const { data, isPending, isError } = useBlockSettings(eventId, blockId);
 
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
@@ -45,11 +50,22 @@ const BlockWindow = ({
 
   const [name, setName] = useState("");
 
+  const updateBlockNameMutation = useUpdateBlockName(eventId, blockId);
+
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const debounceName = useDebounce(name, 1500);
+
   useEffect(() => {
     if (data) {
       setName(data.name);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (!isInitialized) return;
+    updateBlockNameMutation.mutate(debounceName);
+  }, [debounceName]);
 
   const handleSettingsBtnClick = () => {
     setWindowState((prev) => {
@@ -67,6 +83,12 @@ const BlockWindow = ({
   if (isError) {
     return <div>Ошибка!</div>;
   }
+
+  const settingFormData: UpdateBlockData = {
+    isParallel: data.isParallel,
+    points: data.points,
+    rightAnswers: data.rightAnswers,
+  };
 
   return (
     <CustomModalWindow
@@ -100,9 +122,8 @@ const BlockWindow = ({
           value={name}
           onChange={(e) => {
             setName(e.currentTarget.value);
+            setIsInitialized(true);
           }}
-          //todo: добавить отправку запроса на изменение названия
-          // onBlur={}
           variant="borderless"
           classNames={{
             input: "block-window__name-input",
@@ -140,7 +161,7 @@ const BlockWindow = ({
           <BlockSettingsForm
             eventId={eventId}
             blockId={blockId}
-            initialData={data}
+            initialData={settingFormData}
           />
         )}
       </div>

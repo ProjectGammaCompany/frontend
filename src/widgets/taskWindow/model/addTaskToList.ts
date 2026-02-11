@@ -1,4 +1,4 @@
-import type { GetTasksResponse } from "@/src/entities";
+import { blockQueries, type GetTasksResponse } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
 
@@ -10,7 +10,7 @@ export const addTaskToList = (
   order: number,
 ) => {
   queryClient.setQueryData(
-    [eventId, blockId, "tasksList"],
+    blockQueries.getTasks(eventId, blockId),
     (oldData: AxiosResponse<GetTasksResponse>) => {
       if (oldData) {
         const newData: AxiosResponse<GetTasksResponse> = {

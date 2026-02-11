@@ -6,16 +6,21 @@ import {
   selectEventName,
   setName,
   type BaseEventFormData,
+  type ClientGroup,
+  type EditEventSettingsResponse,
   type EditingEventSettings,
-  type Group,
 } from "@/src/entities";
 import { CustomModalWindow, TrashSvg } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button } from "antd";
+import { Button, Form } from "antd";
 import type { AxiosResponse } from "axios";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { mapServerGroupToClientGroup } from "../../model/mapServerGroupToClientGroup";
+import { updateGroupsInQuery } from "../../model/updateGroupsInQuery";
+import { GroupsSettings } from "../GroupsSettings/GroupsSettings";
 import "./EditEventSettingsWindow.scss";
 interface EditEventWindowProps {
   eventId: string;
@@ -23,8 +28,8 @@ interface EditEventWindowProps {
   setIsOpen: (value: boolean) => void;
 }
 
-type FullFormData = BaseEventFormData & {
-  groups: Group[];
+export type FullFormData = BaseEventFormData & {
+  groups: ClientGroup[];
   collaborators: string[];
 };
 
@@ -47,6 +52,8 @@ const EditEventSettingsWindow = ({
     },
   });
 
+  const [showSuccessText, setShowSuccessText] = useState(false);
+
   const dispatch = useDispatch();
 
   const mapServerDataToFormData = (data?: FullSettingsData) => {
@@ -62,6 +69,7 @@ const EditEventSettingsWindow = ({
       endDate: data.endDate
         ? dayjs(data.endDate, "DD.MM.YYYY HH:mm:ss.SSS")
         : undefined,
+      groups: mapServerGroupToClientGroup(data.groups),
     };
     return transformedData;
   };
@@ -72,33 +80,40 @@ const EditEventSettingsWindow = ({
       void navigate("/");
     },
   });
+
   return (
-    <CustomModalWindow open={open} setIsOpen={setIsOpen}>
-      <Button
-        className="edit-event-settings-window__delete-btn"
-        onClick={() => deleteEventMutation.mutate()}
-      >
-        <TrashSvg />
-      </Button>
-      <div className="edit-event-settings-window__form-wrapper">
-        <EventForm<FullFormData, AxiosResponse<unknown>>
-          submitBtnText="Применить"
-          mutationFn={(data) => editEventSettings(eventId, data)}
-          onSuccessFn={(_, variables) => {
-            dispatch(setName(variables.title));
-            setIsOpen(false);
-          }}
-          defaultData={mapServerDataToFormData(data)}
+    <>
+      <CustomModalWindow open={open} setIsOpen={setIsOpen}>
+        <Button
+          className="edit-event-settings-window__delete-btn"
+          onClick={() => deleteEventMutation.mutate()}
         >
-          {/* <Form.Item>
-          <Form.Item<EditingEventSettings> noStyle name="collaborators">
-          <div />
-          </Form.Item>
-          <div>{}</div>
-          </Form.Item> */}
-        </EventForm>
-      </div>
-    </CustomModalWindow>
+          <TrashSvg />
+        </Button>
+        <div className="edit-event-settings-window__form-wrapper">
+          <EventForm<FullFormData, AxiosResponse<EditEventSettingsResponse>>
+            submitBtnText="Применить"
+            onSuccessText="Настройки обновлены"
+            showSuccessText={showSuccessText}
+            mutationFn={(data) => editEventSettings(eventId, data)}
+            onSuccessFn={(response, variables) => {
+              dispatch(setName(variables.title));
+              updateGroupsInQuery(eventId, response.data.groups);
+              setShowSuccessText(true);
+              setTimeout(() => {
+                setShowSuccessText(false);
+              }, 3000);
+            }}
+            defaultData={mapServerDataToFormData(data)}
+          >
+            <Form.Item>
+              <Form.Item<EditingEventSettings> noStyle name="groups" />
+              <GroupsSettings />
+            </Form.Item>
+          </EventForm>
+        </div>
+      </CustomModalWindow>
+    </>
   );
 };
 
