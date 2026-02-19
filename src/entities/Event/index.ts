@@ -27,3 +27,14 @@ export {
 export { getPlayerInfo } from "./api/getPlayerInfo.ts";
 
 export { eventQueries } from "./api/queries.ts";
+
+export {
+  getNextStage,
+  type BlockStage,
+  type EndStage,
+  type GetNextStageResponse,
+  type TaskItem,
+  type TaskOption,
+  type TaskStage,
+  type TaskStageData,
+} from "./api/getNextStage.ts";

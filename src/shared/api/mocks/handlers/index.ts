@@ -93,27 +93,49 @@ export const handlers = [
   }),
   http.get(`${baseUrl}event/:eventId/nextStage`, () => {
     return HttpResponse.json({
-      type: "task",
-      task: {
-        id: String(Math.floor(1 + Math.random() * 5)),
-        blockId: "232232323",
-        name: "Тестовое задание",
-        description: "Проверка описания",
-        type: 3,
-        // options: [
-        //   {
-        //     id: "1",
-        //     value: "Ответ1",
-        //   },
-        //   {
-        //     id: "2",
-        //     value:
-        //       "Проверка достаточно длинного ответа, чтобы было, что проверить несколько раз",
-        //   },
-        // ],
-        files: ["Длинное название файла вот.png", "fjfjfj.docx"],
-        // time: 300,
-        // timeStamp?: string,
+      type: "block",
+      block: {
+        id: "id1",
+        name: "Блок 1",
+        tasks: [
+          {
+            id: "1",
+            name: "Информационный блок",
+            type: 0,
+            isCompleted: false,
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a dictum ex. Mauris molestie elit sit amet nulla lacinia, in euismod tellus auctor. Quisque semper lorem non dolor facilisis aliquam. Mauris dapibus, felis at tempus aliquam, libero nibh ultrices risus, non tincidunt felis metus sed urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer ornare viverra felis, quis ultrices sem elementum vel. Phasellus hendrerit volutpat tellus, sit amet semper magna ultrices ut. Aliquam accumsan tincidunt sagittis. Quisque maximus tortor fringilla est euismod, vel euismod leo semper. Nunc malesuada odio eu nulla malesuada, id iaculis velit malesuada. Mauris fermentum diam nec justo sodales, sed pretium quam porta. Vivamus hendrerit eros a felis ornare, et ultrices turpis iaculis.",
+          },
+          {
+            id: "2",
+            name: "Единичный выбор",
+            type: 1,
+            time: 62,
+            isCompleted: false,
+            description: "Описание",
+          },
+          {
+            id: "3",
+            name: "Множественный выбор",
+            type: 2,
+            isCompleted: false,
+            description: "description",
+          },
+          {
+            id: "4",
+            name: "Текстовый ввод",
+            type: 3,
+            isCompleted: false,
+            description: "description",
+          },
+          {
+            id: "5",
+            name: "QR-сканирование",
+            type: 4,
+            isCompleted: false,
+            description: "description",
+          },
+        ],
       },
     });
   }),
@@ -127,6 +149,11 @@ export const handlers = [
     },
   ),
   http.put(`/event/:eventId/blocks/:blockId/task/:taskId/timestamp`, () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+  http.put(`${baseUrl}event/:eventId/nextStage`, () => {
     return new HttpResponse(null, {
       status: 200,
     });

@@ -27,15 +27,23 @@ export {
   eventQueries,
   getEditingEventData,
   getEditingEventSettings,
+  getNextStage,
   getPlayerInfo,
   selectEventName,
   setName,
   type BlockItemData,
+  type BlockStage,
   type ClientGroup,
   type EditEventSettingsResponse,
   type EditingEventSettings,
+  type EndStage,
   type getEditingEventDataResponse,
+  type GetNextStageResponse,
   type ServerGroup,
+  type TaskItem,
+  type TaskOption,
+  type TaskStage,
+  type TaskStageData,
 } from "./Event";
 
 export {

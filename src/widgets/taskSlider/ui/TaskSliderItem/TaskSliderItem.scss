@@ -1,0 +1,43 @@
+.task-slider-item {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  margin-inline: 50px;
+  padding: 15px;
+  height: 70dvh;
+
+  &__header,
+  &__description {
+    color: white !important;
+  }
+
+  &__title {
+    color: white;
+    width: 100%;
+    text-align: left;
+  }
+
+  &__description {
+    max-height: 100%;
+    text-align: justify;
+    padding-right: 15px;
+    overflow-y: auto;
+    padding-bottom: 10px;
+
+    &-wrapper {
+      position: relative;
+      max-height: 50%;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    right: 7px;
+    top: 5px;
+  }
+}
