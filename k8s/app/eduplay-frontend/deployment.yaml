@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eduplay-frontend
+  namespace: eduplay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eduplay-frontend
+  template:
+    metadata:
+      labels:
+        app: eduplay-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: evgenbolat/eduplay-frontend
+          ports:
+            - containerPort: 80
