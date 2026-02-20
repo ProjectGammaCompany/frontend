@@ -1,0 +1,30 @@
+.custom-date-picker {
+  &__popup-root {
+    background-color: rgba(0, 0, 0, 0.238);
+    width: 100dvw;
+    height: 100dvh;
+    inset: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & .ant-picker-datetime-panel {
+      flex-direction: column;
+    }
+
+    & .ant-picker-time-panel-cell {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .ant-picker-time-panel-column::after {
+      display: none !important;
+    }
+  }
+  &__container {
+    max-height: 80dvh;
+    padding-inline: 10px;
+    overflow-y: auto !important;
+    margin: 0px !important;
+  }
+}

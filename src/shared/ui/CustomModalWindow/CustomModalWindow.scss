@@ -1,0 +1,33 @@
+.custom-modal-window {
+  &__container {
+    position: static !important;
+    overflow-y: auto;
+    max-height: 90dvh;
+    padding-top: 30px !important;
+
+    & .ant-modal-close {
+      position: absolute !important;
+      margin-top: -25px;
+      margin-right: -18px;
+      height: 45px;
+      width: 45px;
+      padding: 5px;
+      border-radius: 10px;
+      background-color: var(--error-color);
+
+      &:hover {
+        background-color: var(--red-color);
+      }
+    }
+  }
+
+  &__body {
+    position: relative;
+  }
+
+  &__close-btn {
+    width: 100%;
+    height: 100%;
+    color: white;
+  }
+}

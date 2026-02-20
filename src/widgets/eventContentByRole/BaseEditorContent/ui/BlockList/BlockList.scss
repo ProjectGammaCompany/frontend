@@ -1,0 +1,12 @@
+.block-list {
+  display: flex;
+  margin-top: -25px;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding-top: 40px;
+  padding-bottom: 70dvh;
+}

@@ -1,0 +1,45 @@
+.add-block-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 250px;
+  width: 90%;
+  border-radius: 10px;
+  padding: 10px;
+  &__wrapper {
+    top: 0;
+    left: 0;
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 100px);
+    justify-content: center;
+    align-items: center;
+    background-color: #5d30ff63;
+  }
+
+  &__content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__text {
+    position: absolute;
+    text-align: center;
+  }
+
+  &__placeholder {
+    height: 200px;
+    width: 200px;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

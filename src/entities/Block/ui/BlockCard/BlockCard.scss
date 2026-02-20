@@ -1,0 +1,9 @@
+.block-card {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  padding: 5px;
+  flex-shrink: 0;
+}

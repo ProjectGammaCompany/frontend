@@ -1,0 +1,40 @@
+.footer {
+  height: 65px;
+  width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 5px;
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
+  }
+
+  &__icon-btn {
+    width: 25%;
+    background-color: var(--link-color);
+    color: var(--light-color);
+    height: 50px;
+    padding: 2px;
+    &_active {
+      color: white;
+    }
+
+    &:hover {
+      color: white !important;
+    }
+  }
+  &__icon-wrapper {
+    height: 100%;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 5px;
+    border-radius: 5px;
+  }
+}

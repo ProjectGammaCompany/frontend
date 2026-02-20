@@ -1,0 +1,34 @@
+import { axiosInstance } from "@/src/shared/api";
+
+interface getEventsProps {
+  page: number;
+  maxOnPage: number;
+  tags?: string[];
+  decliningRating: boolean;
+  active: boolean;
+}
+
+interface Tag {
+  id: string;
+  name: string;
+}
+
+export interface getEventsResponse {
+  events: Event[];
+}
+
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+  rating: number;
+  favorite: boolean;
+  lastEditionDate: string;
+  tags: Tag[];
+  cover: string;
+}
+export const getEvents = (props: getEventsProps) => {
+  return axiosInstance.get<getEventsResponse>("events", {
+    params: props,
+  });
+};

@@ -1,0 +1,34 @@
+.event-page-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__icons-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: white !important;
+    font-size: 22px !important;
+  }
+
+  &__settings-btn {
+    background-color: transparent;
+    border: 0px;
+    height: 45px;
+    width: 45px;
+    color: white;
+  }
+
+  &__settings-icon {
+    height: 30px;
+    width: 32px;
+  }
+
+  &__back-icon {
+    height: 30px;
+    width: 32px;
+    color: white;
+  }
+}

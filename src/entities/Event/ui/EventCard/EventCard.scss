@@ -1,0 +1,24 @@
+.event-card {
+  background-color: var(--light-color);
+  border-radius: 5px;
+  padding-inline: 10px;
+  padding-block: 5px;
+  // &__title {
+  // }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  &__image {
+    object-fit: cover;
+    height: 100px;
+    aspect-ratio: 1 / 1;
+    border-radius: 5px;
+    & svg {
+      border-radius: 5px;
+    }
+  }
+}

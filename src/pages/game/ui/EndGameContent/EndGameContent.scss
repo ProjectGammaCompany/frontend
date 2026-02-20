@@ -1,0 +1,21 @@
+.end-game-content {
+  margin-top: 25dvh;
+  height: calc(100dvh - 15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__text {
+    font-weight: 900;
+    text-align: center;
+    color: white !important;
+
+    &-congrats {
+      margin-top: 20px !important;
+    }
+  }
+}
+
+.root-layout_on-end-game-stage {
+  background-color: var(--primary-color);
+}

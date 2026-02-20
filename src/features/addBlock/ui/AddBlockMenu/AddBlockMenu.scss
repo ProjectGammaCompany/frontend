@@ -1,0 +1,43 @@
+.add-block-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: -120px;
+  width: 100%;
+  z-index: 4;
+  transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+  &__icon {
+    color: var(--primary-color);
+    rotate: 90deg;
+    height: 100%;
+    width: 100%;
+
+    &_opened {
+      rotate: -90deg;
+    }
+  }
+
+  &__open-btn {
+    height: 35px;
+    width: 70px;
+    background-color: var(--light-color);
+    padding: 5px;
+    border-radius: 5px 5px 0 0;
+  }
+  &__blocks-list {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--light-color);
+    padding: 15px 30px;
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    justify-content: center;
+    transition: all 1s ease-in-out;
+  }
+
+  &_open {
+    bottom: 0;
+  }
+}

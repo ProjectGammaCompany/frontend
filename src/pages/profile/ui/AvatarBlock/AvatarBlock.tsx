@@ -1,0 +1,49 @@
+import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
+import { ProfileSvg } from "@/src/shared/ui";
+import { Button, Upload } from "antd";
+import { useSetAvatar } from "../../model/useSetAvatar";
+import "./AvatarBlock.scss";
+
+interface AvatarBlockProps {
+  avatar: string;
+}
+
+const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
+  const setAvatarMutation = useSetAvatar();
+
+  const uploadAvatarMutation = useFileUpload((data) => {
+    setAvatarMutation.mutate(data.data.url);
+  });
+
+  const handleAvatarUpload = (avatar: File) => {
+    uploadAvatarMutation.mutate(avatar);
+    return false;
+  };
+
+  return (
+    <div className="profile-page__avatar-block">
+      {avatar ? (
+        <img
+          src={getFullFileUrl(avatar)}
+          alt="avatar"
+          className="profile-page__avatar-img"
+        />
+      ) : (
+        <div className="profile-page__avatar-img">
+          <ProfileSvg />
+        </div>
+      )}
+      <Upload
+        showUploadList={false}
+        beforeUpload={handleAvatarUpload}
+        maxCount={1}
+        onPreview={() => null}
+        accept="image/*"
+      >
+        <Button>Обновить</Button>
+      </Upload>
+    </div>
+  );
+};
+
+export default AvatarBlock;

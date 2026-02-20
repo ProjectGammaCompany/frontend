@@ -1,0 +1,15 @@
+.task-view {
+  margin-top: 10px;
+  &__file-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__timer-text {
+    margin-top: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+}

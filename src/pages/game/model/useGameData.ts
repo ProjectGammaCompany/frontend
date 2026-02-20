@@ -1,0 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import { getNextStage } from "../api";
+
+export const useGameData = (eventId?: string) => {
+  return useQuery({
+    queryKey: [eventId, "game"],
+    queryFn: () => {
+      if (eventId) {
+        return getNextStage(eventId);
+      }
+      return Promise.reject(Error("Некорректный id"));
+    },
+    select: (data) => data.data,
+  });
+};

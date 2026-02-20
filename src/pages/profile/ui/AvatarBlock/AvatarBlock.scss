@@ -1,0 +1,13 @@
+.profile-page {
+  &__avatar-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__avatar-img {
+    aspect-ratio: 1/1;
+    width: 30dvw;
+    border-radius: 50%;
+  }
+}

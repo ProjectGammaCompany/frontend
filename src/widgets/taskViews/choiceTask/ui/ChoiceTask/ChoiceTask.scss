@@ -1,0 +1,25 @@
+.choice-task {
+  &__option {
+    &_incorrect {
+      border: 1px solid red;
+    }
+
+    &_correct {
+      border: 1px solid green;
+    }
+    &-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      gap: 15px;
+    }
+  }
+
+  &__btn-wrapper {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+}

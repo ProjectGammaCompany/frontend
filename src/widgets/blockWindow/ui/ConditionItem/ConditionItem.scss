@@ -1,0 +1,28 @@
+.condition-item {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: stretch;
+  width: 100%;
+  &__text-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--light-color);
+    padding-block: 20px;
+    padding-inline: 15px;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  &__connected-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    width: 40%;
+    height: 40%;
+    aspect-ratio: 1/1;
+  }
+}

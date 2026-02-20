@@ -1,0 +1,23 @@
+.game-page-header {
+  &__icons-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: white !important;
+  }
+
+  &__back-icon {
+    height: 30px;
+    width: 32px;
+    color: white;
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

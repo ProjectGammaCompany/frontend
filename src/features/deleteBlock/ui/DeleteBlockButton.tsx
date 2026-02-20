@@ -1,0 +1,28 @@
+import { TrashSvg } from "@/src/shared/ui";
+import { Button } from "antd";
+import { useDeleteBlock } from "../model/useDeleteBlock";
+import "./DeleteBlockButton.scss";
+interface DeleteBlockButtonProps {
+  eventId: string;
+  blockId: string;
+  onSuccess?: () => void | Promise<void>;
+}
+
+const DeleteBlockButton = ({
+  eventId,
+  blockId,
+  onSuccess,
+}: DeleteBlockButtonProps) => {
+  const deleteMutation = useDeleteBlock(eventId, blockId, onSuccess);
+  return (
+    <Button
+      onClick={() => deleteMutation.mutate()}
+      loading={deleteMutation.isPending}
+      className="delete-block-btn"
+    >
+      <TrashSvg />
+    </Button>
+  );
+};
+
+export default DeleteBlockButton;

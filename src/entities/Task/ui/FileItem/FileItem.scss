@@ -1,0 +1,36 @@
+.file-item {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 80px;
+  align-items: center;
+
+  &__icon {
+    width: 45px;
+    height: 45px;
+    color: white;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  &__wrapper {
+    width: 80px;
+  }
+
+  &__text {
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 5px;
+    text-align: center;
+  }
+}
+
+@media (hover: hover) {
+  .file-item:hover {
+    .file-item__icon {
+      color: var(--primary-color);
+      background-color: var(--light-color);
+    }
+  }
+}

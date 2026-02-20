@@ -1,0 +1,24 @@
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    & .anticon {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      & svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

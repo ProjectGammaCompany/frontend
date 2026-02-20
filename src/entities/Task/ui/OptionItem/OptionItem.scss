@@ -1,0 +1,17 @@
+.option-item {
+  display: flex;
+
+  &__right-answer-toggle {
+    width: 45px;
+    height: 45px;
+  }
+
+  &__delete-btn {
+    height: 45px;
+    width: 45px;
+    background-color: var(--red-color);
+    color: white;
+    padding: 5px;
+    flex-shrink: 0;
+  }
+}
