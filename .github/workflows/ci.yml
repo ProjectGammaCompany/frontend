@@ -37,7 +37,8 @@ jobs:
       - name: create env file
         run: |
           cat <<EOF > .env.test
-          VITE_APP_BASE_URL=https://something.com/
+          VITE_APP_BASE_URL=http://api.hse-eduplay.ru/
+          VITE_FILE_BASE_URL=http://api.hse-eduplay.ru/files/
           EOF
 
       - name: Run tests
