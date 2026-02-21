@@ -43,7 +43,11 @@ const GamePage = () => {
       </Header>
       <main>
         {data.type === "block" ? (
-          <BlockStageContent key={data.block.id} block={data} />
+          <BlockStageContent
+            key={data.block.id}
+            blockStageData={data}
+            eventId={eventId!}
+          />
         ) : (
           <TaskStageContent
             key={data.task.id}

@@ -1,11 +1,18 @@
-import { selectEventName, setName } from "@/src/entities";
+import {
+  selectBlockReorderingState,
+  selectEventName,
+  setBlockReorderingState,
+  setName,
+  useEditingEventData,
+  useUpdateBlocksOrder,
+} from "@/src/entities";
 import { AddBlockMenu } from "@/src/features";
 import BlockItem from "@/src/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
-import { DragDropContext } from "@hello-pangea/dnd";
-import { Typography } from "antd";
+import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
+import { Button, Typography } from "antd";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEditingEventData } from "../../model/useEditingEventData";
+import { updateBlocksOrderInQuery } from "../../model/updateBlocksOrderInQuery";
 import BlockList from "../BlockList/BlockList";
 import "./BaseEditorContent.scss";
 
@@ -22,6 +29,23 @@ const BaseEditorContent = ({
   onBlockCreate,
   onBlockClick,
 }: EditorContentProps) => {
+  const name = useSelector(selectEventName);
+
+  const blockReorderingState = useSelector(selectBlockReorderingState);
+
+  const dispatch = useDispatch();
+
+  const { data, isPending, isError } = useEditingEventData(eventId);
+
+  const handleSuccessBlocksOrderUpdating = () => {
+    dispatch(setBlockReorderingState(false));
+  };
+
+  const updateBlocksOrderMutation = useUpdateBlocksOrder(
+    eventId,
+    handleSuccessBlocksOrderUpdating,
+  );
+
   const onBeforeCapture = useCallback(() => {
     /*...*/
   }, []);
@@ -34,20 +58,64 @@ const BaseEditorContent = ({
   const onDragUpdate = useCallback(() => {
     /*...*/
   }, []);
-  const onDragEnd = useCallback(() => {
-    // the only one that is required
-  }, []);
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      const { destination, source, draggableId } = result;
 
-  const name = useSelector(selectEventName);
-  const dispatch = useDispatch();
+      if (!destination) {
+        return;
+      }
 
-  const { data, isPending, isError } = useEditingEventData(eventId);
+      if (
+        destination.droppableId === draggableId &&
+        destination.index === source.index
+      ) {
+        return;
+      }
+
+      if (!data) {
+        return;
+      }
+      dispatch(setBlockReorderingState(true));
+
+      const newBlocks = Array.from(data.blocks);
+      const movedBlock = data.blocks.find((block) => block.id === draggableId);
+      if (!movedBlock) {
+        return;
+      }
+      newBlocks.splice(source.index, 1);
+      newBlocks.splice(destination.index, 0, movedBlock);
+      newBlocks.forEach((block, index) => {
+        newBlocks[index] = { ...block, order: index + 1 };
+      });
+      updateBlocksOrderInQuery(eventId, newBlocks);
+    },
+    [data, dispatch, eventId],
+  );
+
+  const handleBlockElementClick = (blockId: string) => {
+    if (!blockReorderingState) {
+      onBlockClick(blockId);
+    }
+  };
+
+  const handleSaveBlockReordering = () => {
+    if (data) {
+      updateBlocksOrderMutation.mutate(data?.blocks.map((block) => block.id));
+    }
+  };
 
   useEffect(() => {
     if (data) {
       dispatch(setName(data.name));
     }
   }, [data, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setBlockReorderingState(false));
+    };
+  }, [dispatch]);
 
   if (isPending) {
     return <div>Загрузка...</div>;
@@ -56,6 +124,7 @@ const BaseEditorContent = ({
     return <div>Ошибка!</div>;
   }
 
+  //todo: Проверить, блочит ли loading кликание на кнопку
   return (
     <div className="base-editor-content">
       <div className="base-editor-content__name">
@@ -73,14 +142,24 @@ const BaseEditorContent = ({
         <BlockList
           blocks={data.blocks}
           BlockComponent={BlockItem}
-          onElementClick={(blockId: string) => onBlockClick(blockId)}
+          onElementClick={handleBlockElementClick}
         />
         <AddBlockMenu
+          isHidden={blockReorderingState}
           eventId={eventId}
           blocks={data.blocks}
           onBlockCreate={(id) => onBlockCreate(id)}
         />
       </DragDropContext>
+      {blockReorderingState && (
+        <Button
+          className="base-editor-content__save-block-reordering-btn"
+          onClick={handleSaveBlockReordering}
+          loading={updateBlocksOrderMutation.isPending}
+        >
+          Сохранить порядок
+        </Button>
+      )}
     </div>
   );
 };

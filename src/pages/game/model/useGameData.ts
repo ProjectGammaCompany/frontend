@@ -1,5 +1,5 @@
+import { getNextStage } from "@/src/entities";
 import { useQuery } from "@tanstack/react-query";
-import { getNextStage } from "../api";
 
 export const useGameData = (eventId?: string) => {
   return useQuery({
