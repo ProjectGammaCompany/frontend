@@ -1,0 +1,8 @@
+resources:
+  - namespace.yaml
+  - eduplay-frontend/deployment.yaml
+  - eduplay-frontend/service.yaml
+
+images:
+  - name: evgenbolat/eduplay-frontend
+    newTag: sha-c5ec188
