@@ -163,4 +163,9 @@ export const handlers = [
       points: 250,
     });
   }),
+  http.put(`${baseUrl}event/:eventId/blocksOrder`, () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
 ];

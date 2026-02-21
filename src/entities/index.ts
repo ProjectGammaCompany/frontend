@@ -21,6 +21,7 @@ export { getTags, type Tag } from "./Tag";
 //TODO: добавить index.ts для каждой сущности
 
 export {
+  blockReorderingReducer,
   deleteEvent,
   editEventSettings,
   eventNameReducer,
@@ -29,8 +30,12 @@ export {
   getEditingEventSettings,
   getNextStage,
   getPlayerInfo,
+  selectBlockReorderingState,
   selectEventName,
+  setBlockReorderingState,
   setName,
+  useEditingEventData,
+  useUpdateBlocksOrder,
   type BlockItemData,
   type BlockStage,
   type ClientGroup,
