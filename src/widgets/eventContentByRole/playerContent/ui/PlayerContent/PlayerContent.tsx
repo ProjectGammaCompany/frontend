@@ -60,9 +60,9 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
           <Typography.Title level={2}>Теги</Typography.Title>
           <ul className="player-content__tags">
             {data.tags.map((tag) => (
-              <li key={tag} className="player-content__tags-item">
+              <li key={tag.id} className="player-content__tags-item">
                 <Typography.Text className="player-content__tags-item-text">
-                  {tag}
+                  {tag.name}
                 </Typography.Text>
               </li>
             ))}

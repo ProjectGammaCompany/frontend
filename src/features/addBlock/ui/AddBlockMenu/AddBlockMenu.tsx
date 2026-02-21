@@ -2,7 +2,7 @@ import type { BlockItemData } from "@/src/entities";
 import { BackSvg } from "@/src/shared/ui";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import classnames from "classnames";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TYPES_ARRAY } from "../../const/typesArray";
 import { useAddBlockMutation } from "../../model/useAddBlockMutation";
 import AddBlockArea from "../AddBlockArea/AddBlockArea";
@@ -13,11 +13,13 @@ interface AddBlockMenuProps {
   eventId: string;
   blocks: BlockItemData[];
   onBlockCreate?: (blockId: string) => void;
+  isHidden?: boolean;
 }
 const AddBlockMenu = ({
   eventId,
   blocks,
   onBlockCreate,
+  isHidden,
 }: AddBlockMenuProps) => {
   const [openMenu, setMenuIsOpen] = useState(false);
 
@@ -25,6 +27,7 @@ const AddBlockMenu = ({
 
   const className = classnames("add-block-menu", {
     "add-block-menu_open": openMenu,
+    "add-block-menu_hidden": isHidden,
   });
 
   const addBlockMutation = useAddBlockMutation(eventId, blocks, onBlockCreate);
@@ -69,6 +72,12 @@ const AddBlockMenu = ({
     "add-block-menu__icon_opened": openMenu,
   });
 
+  useEffect(() => {
+    if (isHidden) {
+      setMenuIsOpen(false);
+    }
+  }, [isHidden]);
+
   return (
     <DragDropContext
       onDragStart={onDragStart}
@@ -79,7 +88,9 @@ const AddBlockMenu = ({
       <div className={className}>
         <button
           onClick={() => {
-            setMenuIsOpen((prev) => !prev);
+            if (!isHidden) {
+              setMenuIsOpen((prev) => !prev);
+            }
           }}
           className="add-block-menu__open-btn"
         >

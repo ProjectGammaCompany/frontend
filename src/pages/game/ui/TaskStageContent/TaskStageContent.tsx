@@ -1,9 +1,9 @@
+import type { TaskStageData } from "@/src/entities";
 import { useSendAnswer } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
 import { ChoiceTask, InfoBlock, TextEntryTask } from "@/src/widgets";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
-import { type TaskStageData } from "../../api";
+import { invalidateGameData } from "../../model/invalidateGameData";
 import { useTimestampMutation } from "../../model/useTimeStampFix";
 
 interface TaskStageProps {
@@ -20,16 +20,13 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   const [isOverdueTask, setIsOverdueTask] = useState(false);
 
   const handleSuccessSendingAnswer = () => {
-    void queryClient.invalidateQueries({
-      queryKey: [eventId, "game"],
-    });
+    invalidateGameData(eventId);
   };
 
   const sendAnswerMutation = useSendAnswer(
     eventId,
     defaultTask.blockId,
     defaultTask.id,
-    [],
     handleSuccessSendingAnswer,
   );
 
@@ -69,8 +66,12 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     2: ({ data }) => (
       <ChoiceTask data={{ ...data, type: 2, eventId: eventId }} />
     ),
-    3: TextEntryTask,
-    4: TextEntryTask,
+    3: ({ data }) => (
+      <TextEntryTask data={{ ...data, type: "text", eventId: eventId }} />
+    ),
+    4: ({ data }) => (
+      <TextEntryTask data={{ ...data, type: "qr", eventId: eventId }} />
+    ),
   };
 
   //todo: проверить зависимости
@@ -103,7 +104,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   useEffect(() => {
     if (isOverdueTask) {
-      sendAnswerMutation.mutate();
+      sendAnswerMutation.mutate([]);
     }
   }, [isOverdueTask, sendAnswerMutation]);
 

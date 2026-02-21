@@ -1,0 +1,21 @@
+.ant-carousel .slick-arrow,
+.ant-carousel .slick-disabled {
+  width: 35px;
+  height: 35px;
+  color: var(--primary-color) !important;
+}
+
+.ant-carousel .slick-prev::after,
+.ant-carousel .slick-next::after {
+  display: none !important;
+}
+
+.task-slider {
+  &__arrow {
+    height: 30px;
+    width: 30px;
+    &_next {
+      rotate: -180deg;
+    }
+  }
+}

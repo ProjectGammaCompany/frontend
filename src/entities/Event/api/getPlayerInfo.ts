@@ -5,11 +5,16 @@ export interface GetPlayerInfoResponse {
   description: string;
   rate: number;
   favorite: boolean;
-  tags: string[];
+  tags: Tag[];
   startDate?: string;
   endDate?: string;
   cover?: string;
   status: "notStarted" | "started" | "ended";
+}
+
+interface Tag {
+  id: string;
+  name: string;
 }
 export const getPlayerInfo = (eventId: string) => {
   return axiosInstance.get<GetPlayerInfoResponse>(
