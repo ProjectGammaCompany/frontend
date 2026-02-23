@@ -34,3 +34,11 @@ export {
 export { useUpdateBlockSettings } from "./model/useUpdateBlockSettings.ts";
 
 export { useUpdateBlockName } from "./model/useUpdateBlockName.ts";
+
+export { useUpdateTasksOrder } from "./model/useUpdateTasksOrder.ts";
+
+export {
+  selectTasksReorderingState,
+  setTasksReorderingState,
+  default as tasksReorderingReducer,
+} from "./model/taskReorderingState.tsx";

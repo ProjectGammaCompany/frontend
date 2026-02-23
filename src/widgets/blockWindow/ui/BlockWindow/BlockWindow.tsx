@@ -1,4 +1,5 @@
 import {
+  selectTasksReorderingState,
   useBlockSettings,
   useUpdateBlockName,
   type Condition,
@@ -10,6 +11,7 @@ import { useDebounce } from "@/src/shared/lib";
 import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
 import TaskList from "../TaskList/TaskList";
@@ -40,6 +42,8 @@ const BlockWindow = ({
   >("tasks");
 
   const { data, isPending, isError } = useBlockSettings(eventId, blockId);
+
+  const tasksReorderingState = useSelector(selectTasksReorderingState);
 
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
@@ -111,6 +115,7 @@ const BlockWindow = ({
         ) : (
           <CustomSwitch
             value={windowState === "conditions"}
+            disabled={tasksReorderingState}
             onChange={() => {
               setWindowState((prev) => {
                 return prev === "conditions" ? "tasks" : "conditions";
@@ -131,6 +136,7 @@ const BlockWindow = ({
         />
         <Button
           onClick={handleSettingsBtnClick}
+          disabled={tasksReorderingState}
           className="block-window__settings-btn"
           style={{
             backgroundColor:
