@@ -15,6 +15,7 @@ const CustomSwitch = ({
   onChange,
   ref,
   title,
+  disabled,
   checked,
   ...rest
 }: CustomSwitchProps & {
