@@ -61,9 +61,7 @@ const handleRefresh = async (
         if (refreshToken && accessToken) {
           refreshingRequest =
             refreshingRequest ?? refreshTokens(accessToken, refreshToken);
-
           const response = await refreshingRequest;
-
           refreshingRequest = null;
           const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
             response.data;
@@ -73,13 +71,13 @@ const handleRefresh = async (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return instance(originalRequest);
       } catch (refreshError) {
+        console.log("иду сюда");
         tokenStorage.clearTokens();
         void globalRouter.navigate?.("/auth");
         // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
         return Promise.reject(refreshError);
       }
     }
-
     tokenStorage.clearTokens();
     void globalRouter.navigate?.("/auth");
   }

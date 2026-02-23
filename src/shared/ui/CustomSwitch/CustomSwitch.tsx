@@ -7,6 +7,7 @@ interface CustomSwitchProps {
   title?: string;
   onChange?: SwitchChangeEventHandler | undefined;
   checked?: boolean;
+  disabled?: boolean;
 }
 
 const CustomSwitch = ({
@@ -25,6 +26,7 @@ const CustomSwitch = ({
       <Switch
         checked={checked}
         value={value}
+        disabled={disabled}
         ref={ref}
         onChange={onChange}
         {...rest}
