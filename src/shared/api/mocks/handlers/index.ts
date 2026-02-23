@@ -168,4 +168,9 @@ export const handlers = [
       status: 200,
     });
   }),
+  http.put(`${baseUrl}event/:eventId/blocks/:blockId/tasksOrder`, () => {
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
 ];

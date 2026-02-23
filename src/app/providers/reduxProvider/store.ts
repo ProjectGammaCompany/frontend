@@ -1,4 +1,8 @@
-import { blockReorderingReducer, eventNameReducer } from "@/src/entities";
+import {
+  blockReorderingReducer,
+  eventNameReducer,
+  tasksReorderingReducer,
+} from "@/src/entities";
 import { conditionDataReducer, taskDataReducer } from "@/src/pages/event";
 import { configureStore } from "@reduxjs/toolkit";
 export const store = configureStore({
@@ -7,5 +11,6 @@ export const store = configureStore({
     taskData: taskDataReducer,
     conditionData: conditionDataReducer,
     blockReorderingState: blockReorderingReducer,
+    tasksReorderingState: tasksReorderingReducer,
   },
 });
