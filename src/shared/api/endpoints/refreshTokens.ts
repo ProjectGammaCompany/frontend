@@ -1,8 +1,12 @@
+import axios from "axios";
 import type { TokensResponse } from "../../models";
-import { axiosInstance } from "../axios/axios";
+
+const refreshClient = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_URL as string,
+});
 
 export const refreshTokens = (accessToken: string, refreshToken: string) => {
-  return axiosInstance.post<TokensResponse>(
+  return refreshClient.post<TokensResponse>(
     "auth/refresh",
     {
       refreshToken,

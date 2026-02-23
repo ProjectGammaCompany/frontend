@@ -50,6 +50,12 @@ const handleRefresh = async (
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const originalRequest = error.config;
 
+  if (error.config.url?.includes("/auth/refresh")) {
+    tokenStorage.clearTokens();
+    void globalRouter.navigate?.("/auth");
+    return Promise.reject(error);
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (error.response?.status === 401) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -71,7 +77,6 @@ const handleRefresh = async (
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return instance(originalRequest);
       } catch (refreshError) {
-        console.log("иду сюда");
         tokenStorage.clearTokens();
         void globalRouter.navigate?.("/auth");
         // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
