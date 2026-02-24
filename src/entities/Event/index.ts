@@ -30,6 +30,8 @@ export {
   type EditEventSettingsResponse,
 } from "./api/editEventSettings.ts";
 
+export { useJoinRequiredFields } from "./model/useJoinRequiredFields.ts";
+
 export { getPlayerInfo } from "./api/getPlayerInfo.ts";
 
 export { eventQueries } from "./api/queries.ts";

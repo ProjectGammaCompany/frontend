@@ -1,2 +1,17 @@
 .home-page {
+  position: relative;
+
+  &__participate-btn {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    height: 45px;
+    padding: 10px;
+    width: 100%;
+    &-wrapper {
+      margin-left: auto;
+      width: 200px;
+      margin-bottom: 10px;
+    }
+  }
 }

@@ -35,6 +35,7 @@ export {
   setBlockReorderingState,
   setName,
   useEditingEventData,
+  useJoinRequiredFields,
   useUpdateBlocksOrder,
   type BlockItemData,
   type BlockStage,
@@ -100,3 +101,10 @@ export {
   type CreateConditionResponse,
   type UpdateConditionResponse,
 } from "./Condition";
+
+export {
+  joinEvent,
+  useJoinEvent,
+  type JoinDetails,
+  type UseJoinEventResponse,
+} from "./User";

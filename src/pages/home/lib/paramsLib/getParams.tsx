@@ -5,6 +5,8 @@ export const getParams = (params: URLSearchParams) => {
     decliningRating: false,
     active: false,
     favorites: false,
+    tags: [],
+    title: "",
   };
   for (const key of Object.keys(parsedParams)) {
     if (params.has(key)) {
@@ -15,9 +17,16 @@ export const getParams = (params: URLSearchParams) => {
         }
         continue;
       }
-      parsedParams[key as Exclude<keyof typeof parsedParams, "tags">] = Boolean(
-        params.get(key),
-      );
+      if (key === "title") {
+        const title = params.get(key);
+        if (title) {
+          parsedParams.title = title;
+        }
+        continue;
+      }
+      parsedParams[
+        key as Exclude<keyof typeof parsedParams, "tags" | "title">
+      ] = Boolean(params.get(key));
     }
   }
   return parsedParams;

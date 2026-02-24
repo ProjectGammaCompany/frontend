@@ -29,11 +29,13 @@ export const GroupItem = ({ group, onChange, onDelete }: GroupItemProps) => {
         <Input
           placeholder="Введите название группы"
           value={login}
+          required
           onChange={(e) => setLogin(e.currentTarget.value)}
         />
         <Password
           value={password}
           placeholder="Введите пароль для группы"
+          required
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
       </div>
