@@ -40,6 +40,14 @@ export { useEditingEventData } from "./model/useEditingEventData.ts";
 
 export { useUpdateBlocksOrder } from "./model/useUpdateBlocksOrder.tsx";
 
+export { usePersonalEvents, type QueryFnType } from "./model/useUserEvents.ts";
+
+export { getFavoritesEvents } from "./api/getFavoritesEvents.ts";
+
+export { getUserEvents } from "./api/getUserEvents.ts";
+
+export { getEventsHistory } from "./api/getEventsHistory.ts";
+
 export {
   getNextStage,
   type BlockStage,
