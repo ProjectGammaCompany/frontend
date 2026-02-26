@@ -1,5 +1,8 @@
-import { useDeleteNotification, useNotifications } from "@/src/entities";
-import NotificationCard from "@/src/entities/Notification/ui/NotificationCard/NotificationCard";
+import {
+  NotificationCard,
+  useDeleteNotification,
+  useNotifications,
+} from "@/src/entities";
 import { Spin, Typography } from "antd";
 import { useState } from "react";
 import { useOnInView } from "react-intersection-observer";
@@ -13,7 +16,7 @@ const NotificationsList = () => {
 
   const inViewRef = useOnInView((inView) => {
     if (inView && !isFetching && hasNextPage) {
-      fetchNextPage();
+      void fetchNextPage();
     }
   });
 
@@ -36,6 +39,7 @@ const NotificationsList = () => {
         {data?.pages.map((page, index) =>
           page.data.notifications.map((notification) => (
             <NotificationCard
+              key={notification.id}
               notification={notification}
               onDelete={(id) => {
                 handleDeleteNotifications(id, index);

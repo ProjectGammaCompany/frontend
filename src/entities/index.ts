@@ -110,6 +110,7 @@ export {
 export {
   getNotifications,
   NotificationCard,
+  notificationQueries,
   useDeleteNotification,
   useNotifications,
   type CustomNotification,

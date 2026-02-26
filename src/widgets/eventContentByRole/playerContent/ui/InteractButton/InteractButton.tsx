@@ -5,7 +5,7 @@ import { useInteractButtonFunctioning } from "../../model/useInteractButtonFunct
 interface InteractButtonProps {
   startDate?: string;
   endDate?: string;
-  status: "notStarted" | "started" | "ended";
+  status: "not started" | "in progress" | "finished";
   eventId: string;
 }
 
@@ -24,7 +24,7 @@ const InteractButton = ({
   );
 
   const handleClick = () => {
-    if (status === "ended") {
+    if (status === "finished") {
       void navigate(`/event/${eventId}/results`);
       return;
     }
@@ -33,10 +33,10 @@ const InteractButton = ({
 
   return (
     !hidden && (
-      <Button disabled={disabled && status != "ended"} onClick={handleClick}>
-        {status === "notStarted"
+      <Button disabled={disabled && status != "finished"} onClick={handleClick}>
+        {status === "not started"
           ? "Начать"
-          : status === "started"
+          : status === "in progress"
             ? "Продолжить"
             : "Перейти к результатам"}
       </Button>
