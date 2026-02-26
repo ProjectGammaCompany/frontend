@@ -1,5 +1,7 @@
+import { queryClient } from "@/src/shared/api";
 import { LinkEventCard } from "@/src/widgets";
 import { Spin, Typography } from "antd";
+import { useEffect } from "react";
 import { useOnInView } from "react-intersection-observer";
 import { useAllEvents, type Filters } from "../../model/useAllEvents";
 import "./EventList.scss";
@@ -18,6 +20,12 @@ const EventsList = ({ filters }: EventsListProps) => {
       void fetchNextPage();
     }
   });
+
+  useEffect(() => {
+    void queryClient.invalidateQueries({
+      queryKey: ["allEvents"],
+    });
+  }, [filters]);
 
   return (
     <div className="home-page__events-list-wrapper">

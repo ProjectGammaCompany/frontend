@@ -28,13 +28,18 @@ export {
   eventQueries,
   getEditingEventData,
   getEditingEventSettings,
+  getEventsHistory,
+  getFavoritesEvents,
   getNextStage,
   getPlayerInfo,
+  getUserEvents,
   selectBlockReorderingState,
   selectEventName,
   setBlockReorderingState,
   setName,
   useEditingEventData,
+  useJoinRequiredFields,
+  usePersonalEvents,
   useUpdateBlocksOrder,
   type BlockItemData,
   type BlockStage,
@@ -44,6 +49,7 @@ export {
   type EndStage,
   type getEditingEventDataResponse,
   type GetNextStageResponse,
+  type QueryFnType,
   type ServerGroup,
   type TaskItem,
   type TaskOption,
@@ -100,3 +106,23 @@ export {
   type CreateConditionResponse,
   type UpdateConditionResponse,
 } from "./Condition";
+
+export {
+  getNotifications,
+  NotificationCard,
+  notificationQueries,
+  useDeleteNotification,
+  useNotifications,
+  type CustomNotification,
+  type EventEndExtra,
+  type EventStartExtra,
+  type GetNotificationsQueryData,
+  type NotificationType,
+} from "./Notification";
+
+export {
+  joinEvent,
+  useJoinEvent,
+  type JoinDetails,
+  type UseJoinEventResponse,
+} from "./User";

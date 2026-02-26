@@ -10,12 +10,12 @@ import {
   type EditEventSettingsResponse,
   type EditingEventSettings,
 } from "@/src/entities";
-import { CustomModalWindow, TrashSvg } from "@/src/shared/ui";
+import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Form } from "antd";
 import type { AxiosResponse } from "axios";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { mapServerGroupToClientGroup } from "../../model/mapServerGroupToClientGroup";
@@ -29,6 +29,7 @@ interface EditEventWindowProps {
 }
 
 export type FullFormData = BaseEventFormData & {
+  groupEvent: boolean;
   groups: ClientGroup[];
   collaborators: string[];
 };
@@ -53,6 +54,8 @@ const EditEventSettingsWindow = ({
   });
 
   const [showSuccessText, setShowSuccessText] = useState(false);
+
+  const [groupEvent, setGroupEvent] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -81,6 +84,12 @@ const EditEventSettingsWindow = ({
     },
   });
 
+  useEffect(() => {
+    if (data?.groupEvent) {
+      setGroupEvent(data.groupEvent);
+    }
+  }, [data]);
+
   return (
     <>
       <CustomModalWindow open={open} setIsOpen={setIsOpen}>
@@ -106,9 +115,19 @@ const EditEventSettingsWindow = ({
             }}
             defaultData={mapServerDataToFormData(data)}
           >
-            <Form.Item>
+            <Form.Item<EditingEventSettings>
+              name="groupEvent"
+              className="edit-event-settings-window__form-item"
+            >
+              <CustomSwitch
+                title="Групповое событие"
+                value={groupEvent}
+                onChange={(checked) => setGroupEvent(checked)}
+              />
+            </Form.Item>
+            <Form.Item noStyle={!groupEvent}>
               <Form.Item<EditingEventSettings> noStyle name="groups" />
-              <GroupsSettings />
+              {groupEvent && <GroupsSettings />}
             </Form.Item>
           </EventForm>
         </div>

@@ -1,12 +1,10 @@
-import { Typography } from "antd";
+import NotificationsList from "../NotificationsList/NotificationsList";
 import "./NotificationsPage.scss";
 
 const NotificationsPage = () => {
   return (
     <div className="notifications-page">
-      <Typography.Title level={3}>
-        Здесь будут отображаться ваши уведомления
-      </Typography.Title>
+      <NotificationsList />
     </div>
   );
 };

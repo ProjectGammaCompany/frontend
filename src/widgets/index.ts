@@ -1,5 +1,11 @@
 export { default as BaseLayout } from "./baseLayout/ui/BaseLayout/BaseLayout.tsx";
 
+export {
+  filtersWindowStateReducer,
+  selectFiltersWindowState,
+  setIsFiltersWindowOpen,
+} from "./baseLayout";
+
 export { EventHeader } from "./eventHeader";
 export { default as LinkEventCard } from "./linkEventCard/ui/LinkEventCard.tsx";
 

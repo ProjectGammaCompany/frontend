@@ -30,6 +30,8 @@ export {
   type EditEventSettingsResponse,
 } from "./api/editEventSettings.ts";
 
+export { useJoinRequiredFields } from "./model/useJoinRequiredFields.ts";
+
 export { getPlayerInfo } from "./api/getPlayerInfo.ts";
 
 export { eventQueries } from "./api/queries.ts";
@@ -37,6 +39,14 @@ export { eventQueries } from "./api/queries.ts";
 export { useEditingEventData } from "./model/useEditingEventData.ts";
 
 export { useUpdateBlocksOrder } from "./model/useUpdateBlocksOrder.tsx";
+
+export { usePersonalEvents, type QueryFnType } from "./model/useUserEvents.ts";
+
+export { getFavoritesEvents } from "./api/getFavoritesEvents.ts";
+
+export { getUserEvents } from "./api/getUserEvents.ts";
+
+export { getEventsHistory } from "./api/getEventsHistory.ts";
 
 export {
   getNextStage,

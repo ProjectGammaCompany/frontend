@@ -25,7 +25,7 @@ export const editEventSettings = (
   settings: EditingEventSettings,
 ) => {
   return axiosInstance.put<EditEventSettingsResponse>(
-    `event/${eventId}/settings`,
+    `event/${eventId}`,
     settings,
   );
 };

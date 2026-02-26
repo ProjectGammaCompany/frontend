@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 export const useInteractButtonFunctioning = (
-  status: "notStarted" | "started" | "ended",
+  status: "not started" | "in progress" | "finished",
   startDate?: string,
   endDate?: string,
 ) => {
@@ -14,7 +14,7 @@ export const useInteractButtonFunctioning = (
     let startInterval = 0;
     let endInterval = 0;
 
-    if (status != "ended") {
+    if (status != "finished") {
       if (!startDate && !endDate) {
         setDisabled(false);
         return;
@@ -49,14 +49,14 @@ export const useInteractButtonFunctioning = (
             const date = dayjs(Date.now());
             if (date >= parsedEndDate) {
               setDisabled(true);
-              if (status === "notStarted") {
+              if (status === "not started") {
                 setIsHidden(true);
               }
               clearInterval(endInterval);
             }
           }, 1000);
         } else {
-          if (status === "notStarted") {
+          if (status === "not started") {
             setIsHidden(true);
           }
           setDisabled(true);
