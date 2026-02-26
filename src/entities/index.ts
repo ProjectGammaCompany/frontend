@@ -108,6 +108,18 @@ export {
 } from "./Condition";
 
 export {
+  getNotifications,
+  NotificationCard,
+  useDeleteNotification,
+  useNotifications,
+  type CustomNotification,
+  type EventEndExtra,
+  type EventStartExtra,
+  type GetNotificationsQueryData,
+  type NotificationType,
+} from "./Notification";
+
+export {
   joinEvent,
   useJoinEvent,
   type JoinDetails,
