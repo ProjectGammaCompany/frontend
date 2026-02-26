@@ -1,7 +1,6 @@
 import type { ClientGroup } from "@/src/entities";
 import { Button, Form } from "antd";
 import { useWatch } from "antd/es/form/Form";
-import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import type { FullFormData } from "../EditEventSettingsWindow/EditEventSettingsWindow";
 import { GroupItem } from "../GroupItem/GroupItem";
@@ -46,9 +45,6 @@ export const GroupsSettings = () => {
     );
   };
 
-  useEffect(() => {
-    console.log(groups);
-  }, [groups]);
   return (
     <Form.Item>
       <div className="group-settings">

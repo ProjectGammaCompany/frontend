@@ -9,6 +9,7 @@ export interface EditingEventSettings {
   private: boolean;
   password?: string;
   lastEditionDate: string;
+  groupEvent: boolean;
   groups: ServerGroup[];
   rating: boolean;
   collaborators: string[];

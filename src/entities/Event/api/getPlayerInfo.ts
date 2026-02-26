@@ -9,7 +9,7 @@ export interface GetPlayerInfoResponse {
   startDate?: string;
   endDate?: string;
   cover?: string;
-  status: "notStarted" | "started" | "ended";
+  status: "not started" | "in progress" | "finished";
 }
 
 interface Tag {

@@ -7,6 +7,7 @@ export interface Filters {
   decliningRating: boolean;
   active: boolean;
   favorites: boolean;
+  title: string;
 }
 
 export const useAllEvents = (filters: Filters) => {
