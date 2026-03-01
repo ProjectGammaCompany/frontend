@@ -20,7 +20,10 @@ export { deleteBlock } from "./api/deleteBlock.ts";
 
 export { useTasks } from "./model/useTasks.ts";
 
-export { useConditions } from "./model/useConditions.ts";
+export {
+  useConditions,
+  type UseConditionsData,
+} from "./model/useConditions.ts";
 
 export { blockQueries } from "./api/queries.ts";
 

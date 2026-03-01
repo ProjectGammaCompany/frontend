@@ -7,4 +7,36 @@
   &__item {
     width: 100%;
   }
+
+  &__remove-group-btn {
+    font-size: 20px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+
+    & > svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  &__group-list {
+    &-option {
+      text-wrap: wrap;
+    }
+  }
+
+  &__select-group {
+    & .ant-select-selection-item-content {
+      display: flex;
+      align-items: center;
+      text-overflow: unset !important;
+      white-space: wrap !important;
+    }
+
+    &-wrapper {
+      width: 100%;
+    }
+  }
 }

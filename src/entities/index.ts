@@ -38,6 +38,7 @@ export {
   setBlockReorderingState,
   setName,
   useEditingEventData,
+  useGroups,
   useJoinRequiredFields,
   usePersonalEvents,
   useUpdateBlocksOrder,
@@ -49,12 +50,14 @@ export {
   type EndStage,
   type getEditingEventDataResponse,
   type GetNextStageResponse,
+  type Group,
   type QueryFnType,
   type ServerGroup,
   type TaskItem,
   type TaskOption,
   type TaskStage,
   type TaskStageData,
+  type UseGroupsQueryData,
 } from "./Event";
 
 export {
@@ -80,6 +83,7 @@ export {
   type GetTasksResponse,
   type TaskItemData,
   type UpdateBlockData,
+  type UseConditionsData,
 } from "./Block";
 
 export {
@@ -102,6 +106,7 @@ export {
   ConditionForm,
   createCondition,
   updateCondition,
+  useUpdateGroups,
   type ConditionData,
   type CreateConditionResponse,
   type UpdateConditionResponse,

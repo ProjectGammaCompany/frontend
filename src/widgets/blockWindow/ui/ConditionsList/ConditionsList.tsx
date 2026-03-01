@@ -1,4 +1,9 @@
-import { useConditions, type Condition } from "@/src/entities";
+import {
+  useConditions,
+  useGroups,
+  type Condition,
+  type Group,
+} from "@/src/entities";
 import { Button } from "antd";
 import ConditionItem from "../ConditionItem/ConditionItem";
 import "./ConditionsList.scss";
@@ -21,20 +26,46 @@ const ConditionsList = ({
     isError,
   } = useConditions(eventId, blockId);
 
-  if (isPending) {
+  const { data: eventGroups, isPending: isGroupsPending } = useGroups<Group[]>(
+    eventId,
+    (data) => data.data.groups.map((group) => group),
+  );
+
+  if (isPending || isGroupsPending) {
     return <div>Загрузка...</div>;
   }
   if (isError) {
     return <div>Ошибка!</div>;
   }
+
+  const getClearGroups = (conditionGroups: string[], eventGroups: Group[]) => {
+    const newGroups: string[] = [];
+    const eventGroupsId: string[] = eventGroups.map(
+      (eventGroup) => eventGroup.id,
+    );
+    conditionGroups.forEach((conditionGroup) => {
+      if (eventGroupsId.includes(conditionGroup)) {
+        newGroups.push(
+          eventGroups.find((eventGroup) => eventGroup.id === conditionGroup)!
+            .name,
+        );
+      }
+    });
+    return newGroups;
+  };
+
   return (
     <div className="conditions-list__wrapper">
       <div className="conditions-list">
         {conditions.map((condition) => {
+          let groups = condition.group;
+          if (groups && eventGroups) {
+            groups = getClearGroups(groups, eventGroups);
+          }
           return (
             <ConditionItem
               key={condition.id}
-              condition={condition}
+              condition={{ ...condition, group: groups }}
               onClick={() => onConditionClick(condition)}
             />
           );

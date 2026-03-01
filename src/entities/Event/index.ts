@@ -42,6 +42,10 @@ export { useUpdateBlocksOrder } from "./model/useUpdateBlocksOrder.tsx";
 
 export { usePersonalEvents, type QueryFnType } from "./model/useUserEvents.ts";
 
+export { useGroups, type UseGroupsQueryData } from "./model/useGroups.ts";
+
+export { type Group } from "./api/getGroups.ts";
+
 export { getFavoritesEvents } from "./api/getFavoritesEvents.ts";
 
 export { getUserEvents } from "./api/getUserEvents.ts";
