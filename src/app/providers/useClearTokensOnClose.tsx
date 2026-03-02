@@ -1,6 +1,7 @@
 import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { useEffect } from "react";
 
+//todo: переместить в отдельную директорию
 export const useClearTokens = () => {
   useEffect(() => {
     const handleBeforeUnload = () => {

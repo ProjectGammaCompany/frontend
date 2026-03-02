@@ -2,6 +2,7 @@ import {
   ConditionForm,
   createCondition,
   updateCondition,
+  useUpdateGroups,
   type Condition,
   type CreateConditionResponse,
   type UpdateConditionResponse,
@@ -10,9 +11,11 @@ import { DeleteConditionButton } from "@/src/features";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
+import { useState } from "react";
 import { addConditionToList } from "../model/addConditionToList";
 import { removeConditionFromList } from "../model/removeConditionFromList";
 import { updateConditionInQuery } from "../model/updateConditionInQuery";
+import { updateGroupsInConditionsQuery } from "../model/updateGroupsInConditionsQuery";
 import "./ConditionWindow.scss";
 
 export type ConditionWindowMode = "create" | "edit";
@@ -31,6 +34,7 @@ type EditConditionWindow = ConditionWindowProps & {
   mode: Extract<ConditionWindowMode, "edit">;
   editData: {
     condition: Condition;
+    updateConditionGroups: (groups: string[]) => void;
   };
 };
 
@@ -39,7 +43,14 @@ const ConditionWindow = (
 ) => {
   const { mode, open, setIsOpen, eventId, blockId } = props;
 
+  const [groupsSelectLoading, setGroupsSelectLoading] = useState(false);
+
+  const [groupsSelectingError, setGroupsSelectingError] = useState(false);
+
   const condition = mode === "edit" ? props.editData.condition : undefined;
+
+  const updateConditionGroups =
+    mode === "edit" ? props.editData.updateConditionGroups : undefined;
 
   const handleSuccessDelete = () => {
     if (condition) {
@@ -48,9 +59,43 @@ const ConditionWindow = (
     }
   };
 
-  //todo: добавить put
+  const handleSuccessUpdate = (id: string, groups: string[]) => {
+    if (mode === "edit") {
+      updateConditionGroups?.(groups);
+      updateGroupsInConditionsQuery(eventId, blockId, id, groups);
+      setGroupsSelectLoading(false);
+    }
+  };
+
+  const handleErrorUpdate = () => {
+    setGroupsSelectingError(true);
+    setGroupsSelectLoading(false);
+  };
+
+  const updateGroupsMutation = useUpdateGroups(
+    eventId,
+    blockId,
+    condition ? condition.id : "",
+    handleSuccessUpdate,
+    handleErrorUpdate,
+  );
+
+  const handleHangingGroups = (fixedGroups: string[]) => {
+    setGroupsSelectLoading(true);
+    updateGroupsMutation.mutate(fixedGroups);
+  };
+
+  const handleClose = () => {
+    setGroupsSelectLoading(false);
+    setGroupsSelectingError(false);
+  };
+
   return (
-    <CustomModalWindow open={open} setIsOpen={setIsOpen}>
+    <CustomModalWindow
+      open={open}
+      setIsOpen={setIsOpen}
+      afterClose={handleClose}
+    >
       <div className="condition-window__header">
         {condition && (
           <DeleteConditionButton
@@ -78,8 +123,11 @@ const ConditionWindow = (
                 blockOrder: response.data.blockOrder,
               });
             }}
+            onHangingGroups={handleHangingGroups}
             submitBtnText="Сохранить"
             initialData={condition}
+            groupsLoaded={groupsSelectLoading}
+            groupsError={groupsSelectingError}
           />
         ) : (
           <ConditionForm<AxiosResponse<CreateConditionResponse>>

@@ -12,3 +12,5 @@ export {
   updateCondition,
   type UpdateConditionResponse,
 } from "./api/updateCondition.ts";
+
+export { useUpdateGroups } from "./model/useUpdateGroups.ts";

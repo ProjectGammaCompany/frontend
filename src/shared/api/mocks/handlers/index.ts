@@ -30,20 +30,6 @@ export const handlers = [
       ],
     });
   }),
-  http.get(`${baseUrl}event/:eventId/:blocks/:blockId/conditions`, () => {
-    return HttpResponse.json({
-      conditions: [
-        {
-          id: "123",
-          blockId: "1b57f871-80a5-40b1-8198-c8a0f5cd41aa",
-          blockOrder: 1,
-          group: null,
-          min: 23,
-          max: 25,
-        },
-      ],
-    });
-  }),
   http.put(
     `${baseUrl}event/:eventId/:blocks/:blockId/conditions/:conditionId`,
     () => {
@@ -265,6 +251,32 @@ export const handlers = [
   http.delete(`${baseUrl}notifications/:id`, () => {
     return new HttpResponse(null, {
       status: 200,
+    });
+  }),
+  http.put(
+    `${baseUrl}event/:eventId/blocks/:blockId/conditions/:conditionId/groups`,
+    () => {
+      return new HttpResponse(null, {
+        status: 500,
+      });
+    },
+  ),
+  http.get(`${baseUrl}event/:eventId/groups`, () => {
+    return HttpResponse.json({
+      groups: [
+        {
+          id: "1",
+          name: "Группа 1",
+        },
+        {
+          id: "2",
+          name: "Группа 2",
+        },
+        {
+          id: "3",
+          name: "Группа 3",
+        },
+      ],
     });
   }),
 ];

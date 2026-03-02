@@ -1,3 +1,5 @@
+import type { UseGroupsQueryData } from "@/src/entities";
+import { useGroups } from "@/src/entities";
 import { CustomSwitch } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
@@ -17,6 +19,9 @@ interface ConditionFormProps<TResponse> {
   mutationFn: (values: ConditionData) => Promise<TResponse>;
   submitBtnText: string;
   onSuccessText?: string;
+  groupsLoaded?: boolean;
+  groupsError?: boolean;
+  onHangingGroups?: (fixedGroups: string[]) => void;
 }
 
 const ConditionForm = <TResponse,>({
@@ -26,6 +31,9 @@ const ConditionForm = <TResponse,>({
   mutationFn,
   submitBtnText,
   onSuccessText,
+  onHangingGroups,
+  groupsError,
+  groupsLoaded,
 }: ConditionFormProps<TResponse>) => {
   const SELECT_TYPE_ERROR_MESSAGE =
     "Выберите хотя бы одно из правил для условия";
@@ -36,6 +44,22 @@ const ConditionForm = <TResponse,>({
   const min = useWatch("min", form);
 
   const [showSuccessText, setShowSuccessText] = useState(false);
+
+  const mapGroupsToSelectOption = (data: UseGroupsQueryData) => {
+    return data.data.groups.map((group) => {
+      return {
+        label: group.name,
+        value: group.id,
+      };
+    });
+  };
+
+  const { data: eventGroups, isPending: isEventGroupsPending } = useGroups<
+    {
+      label: string;
+      value: string;
+    }[]
+  >(eventId, mapGroupsToSelectOption);
 
   const {
     data: blockOptions,
@@ -67,16 +91,44 @@ const ConditionForm = <TResponse,>({
       return;
     }
     if (initialData && blockOptions) {
-      form.setFieldsValue(initialData);
+      const preparedData = {
+        ...initialData,
+      };
+      if (initialData.group) {
+        if (eventGroups) {
+          let triggerGroupsUpdate = false;
+          const eventGroupIdArray = eventGroups.map((group) => group.value);
+          const newGroups: string[] = [];
+          initialData.group.forEach((group) => {
+            if (!eventGroupIdArray.includes(group)) {
+              triggerGroupsUpdate = true;
+            } else {
+              newGroups.push(group);
+            }
+          });
+          if (triggerGroupsUpdate && !groupsLoaded && !groupsError) {
+            onHangingGroups?.(newGroups);
+          }
+        }
+      }
+      form.setFieldsValue(preparedData);
     }
-  }, [blockOptions, form, initialData]);
+  }, [
+    blockOptions,
+    eventGroups,
+    form,
+    groupsError,
+    groupsLoaded,
+    initialData,
+    onHangingGroups,
+  ]);
 
   return (
     <Form
-      initialValues={initialData}
       form={form}
       onFinish={handleFinish}
       labelWrap
+      initialValues={initialData}
       layout="vertical"
       requiredMark={false}
       className="condition-form"
@@ -167,6 +219,31 @@ const ConditionForm = <TResponse,>({
           ) : null
         }
       </Form.Item>
+      {eventGroups && eventGroups.length > 0 && (
+        <Form.Item<ConditionData>
+          name="group"
+          label="Выберите группы, в одной из которых должен состоять участник события"
+        >
+          <Select
+            mode="multiple"
+            disabled={(groupsError ?? isEventGroupsPending) || groupsLoaded}
+            loading={isEventGroupsPending || groupsLoaded}
+            options={eventGroups}
+            optionRender={(option) => (
+              <Typography.Paragraph className="condition-form__group-list-option">
+                {option.data.label}
+              </Typography.Paragraph>
+            )}
+            className="condition-form__select-group"
+            classNames={{
+              itemRemove: "condition-form__remove-group-btn",
+              popup: {
+                listItem: "condition-form__tag-list-item",
+              },
+            }}
+          />
+        </Form.Item>
+      )}
 
       <FormItem<ConditionData>
         name="blockId"

@@ -8,14 +8,33 @@ interface ConditionItemProps {
 
 const ConditionItem = ({ condition, onClick }: ConditionItemProps) => {
   const getText = (condition: Condition) => {
-    const subconditions = [];
+    const stringParts: string[] = [];
+    if (condition.min != -1 || condition.max != -1) {
+      stringParts.push("Баллов ");
+    }
     if (condition.min != -1) {
-      subconditions.push(`> ${condition.min} или = ${condition.min}`);
+      stringParts.push(`> ${condition.min} или = ${condition.min}`);
+      if (condition.max != -1) {
+        stringParts.push(`И < ${condition.max}`);
+      }
+    } else if (condition.max != -1) {
+      stringParts.push(`< ${condition.max}`);
     }
-    if (condition.max != -1) {
-      subconditions.push(`< ${condition.max}`);
+    const pointsString = stringParts.join(" ");
+    const subConditions = [];
+    if (pointsString) {
+      subConditions.push(pointsString);
     }
-    return subconditions.join(" И ");
+    if (condition.group && condition.group.length > 0) {
+      subConditions.push(
+        `Игрок состоит в одной из команд: ${condition.group.join(", ")}`,
+      );
+      if (pointsString) {
+        subConditions[0] = `(${pointsString})`;
+        subConditions[1] = `(${subConditions[1]})`;
+      }
+    }
+    return subConditions.join(" И ");
   };
 
   return (

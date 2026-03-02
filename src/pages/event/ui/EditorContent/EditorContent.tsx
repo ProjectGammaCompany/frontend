@@ -68,6 +68,17 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     setBlockWindowOpen(true);
   };
 
+  const handleConditionGroupsUpdate = (groups: string[]) => {
+    if (currentCondition) {
+      dispatch(
+        setCondition({
+          ...currentCondition,
+          group: groups,
+        }),
+      );
+    }
+  };
+
   const handleConditionClick = (condition: Condition) => {
     dispatch(setCondition(condition));
     setConditionWindowMode("edit");
@@ -77,7 +88,6 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     dispatch(setCondition(null));
     setConditionWindowMode("create");
     setConditionWindowOpen(true);
-    console.log("создание условия ручка дёрнута");
   };
 
   useEffect(() => {
@@ -141,6 +151,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
                   mode: "edit",
                   editData: {
                     condition: currentCondition,
+                    updateConditionGroups: handleConditionGroupsUpdate,
                   },
                 }
               : {
