@@ -53,6 +53,12 @@ export { getUserEvents } from "./api/getUserEvents.ts";
 export { getEventsHistory } from "./api/getEventsHistory.ts";
 
 export {
+  createEvent,
+  type CreateEventData,
+  type CreateEventResponse,
+} from "./api/createEvent.ts";
+
+export {
   getNextStage,
   type BlockStage,
   type EndStage,

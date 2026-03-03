@@ -2,7 +2,8 @@ import {
   createEvent,
   EventForm,
   type BaseEventFormData,
-  type createEventResponse,
+  type CreateEventData,
+  type CreateEventResponse,
 } from "@/src/entities";
 import { CustomModalWindow } from "@/src/shared/ui";
 import type { AxiosResponse } from "axios";
@@ -14,7 +15,7 @@ interface CreateEventWindowProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RequestResponse = AxiosResponse<createEventResponse, any, object>;
+type RequestResponse = AxiosResponse<CreateEventResponse, any, object>;
 
 //todo fix path
 const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
@@ -22,7 +23,20 @@ const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
       <EventForm<BaseEventFormData, RequestResponse>
-        mutationFn={createEvent}
+        mutationFn={(data) => {
+          const preparedData: CreateEventData = {
+            title: data.name,
+            description: data.description,
+            cover: data.cover,
+            tags: data.tags,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            private: data.private,
+            password: data.password,
+            allowDownloading: data.allowDownloading,
+          };
+          return createEvent(preparedData);
+        }}
         children={undefined}
         submitBtnText="Создать"
         onSuccessFn={(data: RequestResponse) => {

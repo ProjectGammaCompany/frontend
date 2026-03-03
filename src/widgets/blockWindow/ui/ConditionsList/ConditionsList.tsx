@@ -65,7 +65,11 @@ const ConditionsList = ({
           return (
             <ConditionItem
               key={condition.id}
-              condition={{ ...condition, group: groups }}
+              condition={{
+                ...condition,
+                blockOrder: condition.blockOrder + 1,
+                group: groups,
+              }}
               onClick={() => onConditionClick(condition)}
             />
           );

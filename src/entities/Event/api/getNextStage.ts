@@ -12,7 +12,7 @@ export interface TaskStage {
 }
 
 export interface TaskStageData {
-  id: string;
+  taskId: string;
   blockId: string;
   name: string;
   description?: string;

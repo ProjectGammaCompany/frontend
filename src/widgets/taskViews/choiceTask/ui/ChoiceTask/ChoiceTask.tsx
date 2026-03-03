@@ -15,7 +15,7 @@ interface ChoiceTaskProps {
 
 //todo: change
 interface ChoiceTaskData {
-  id: string;
+  taskId: string;
   eventId: string;
   blockId: string;
   name: string;
@@ -36,7 +36,7 @@ interface TaskOption {
 const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const notify = useNotify();
 
-  const { options, eventId, blockId, id, type } = data;
+  const { options, eventId, blockId, taskId: id, type } = data;
 
   const taskData = {
     title: data.name,

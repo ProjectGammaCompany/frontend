@@ -26,7 +26,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   const sendAnswerMutation = useSendAnswer(
     eventId,
     defaultTask.blockId,
-    defaultTask.id,
+    defaultTask.taskId,
     handleSuccessSendingAnswer,
   );
 
@@ -42,7 +42,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   const timestampFixingMutation = useTimestampMutation(
     eventId,
-    task.id,
+    task.taskId,
     task.blockId,
     handleSuccessTimestampFixing,
     handleErrorTimestampFixing,

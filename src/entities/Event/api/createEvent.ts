@@ -1,9 +1,9 @@
 import { axiosInstance } from "@/src/shared/api";
-export interface createEventResponse {
+export interface CreateEventResponse {
   eventId: string;
 }
 
-interface CreateEventData {
+export interface CreateEventData {
   title: string;
   description: string;
   cover?: string;
@@ -12,7 +12,8 @@ interface CreateEventData {
   endDate?: string;
   private: boolean;
   password?: string;
+  allowDownloading?: boolean;
 }
 export const createEvent = (data: CreateEventData) => {
-  return axiosInstance.post<createEventResponse>("event", data);
+  return axiosInstance.post<CreateEventResponse>("event", data);
 };

@@ -1,4 +1,5 @@
 import { queryClient } from "@/src/shared/api";
+import { getFullFileUrl } from "@/src/shared/lib";
 import { LinkEventCard } from "@/src/widgets";
 import { Spin, Typography } from "antd";
 import { useEffect } from "react";
@@ -37,7 +38,7 @@ const EventsList = ({ filters }: EventsListProps) => {
               title={card.title}
               id={card.id}
               description={card.description}
-              cover={card.cover}
+              cover={getFullFileUrl(card.cover)}
               rating={card.rating}
               favorite={card.favorite}
               tags={card.tags.map((t) => t.name)}

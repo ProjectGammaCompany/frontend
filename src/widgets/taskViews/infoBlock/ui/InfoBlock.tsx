@@ -8,7 +8,7 @@ interface InfoBlockProps {
 }
 
 interface InfoBlockData {
-  id: string;
+  taskId: string;
   eventId: string;
   blockId: string;
   name: string;
@@ -17,7 +17,7 @@ interface InfoBlockData {
 }
 
 const InfoBlock = ({ data }: InfoBlockProps) => {
-  const { eventId, blockId, id, name: title } = data;
+  const { eventId, blockId, taskId: id, name: title } = data;
 
   const handleSuccessSendingAnswer = () => {
     const el = document.getElementById("root");

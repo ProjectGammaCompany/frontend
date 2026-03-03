@@ -12,7 +12,7 @@ const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
   const setAvatarMutation = useSetAvatar();
 
   const uploadAvatarMutation = useFileUpload((data) => {
-    setAvatarMutation.mutate(data.data.url);
+    setAvatarMutation.mutate(data.data);
   });
 
   const handleAvatarUpload = (avatar: File) => {

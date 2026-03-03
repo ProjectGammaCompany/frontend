@@ -18,6 +18,7 @@ export const removeConditionFromList = (
             conditions: oldData.data.conditions.filter((el) => el.id != id),
           },
         };
+        console.log(newData);
         return newData;
       }
       return oldData;

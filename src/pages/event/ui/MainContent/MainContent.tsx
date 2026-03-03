@@ -7,6 +7,7 @@ interface MainContentProps {
 }
 
 const MainContent = ({ eventId, role }: MainContentProps) => {
+  console.log(role);
   return (
     <main className="event-page__main-content">
       {role === 0 ? (

@@ -1,4 +1,6 @@
+import { eventQueries } from "@/src/entities";
 import { EditEventSettingsWindow } from "@/src/features";
+import { queryClient } from "@/src/shared/api";
 import {
   BackSvg,
   Header,
@@ -38,7 +40,15 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
           {role === 1 && (
             <IconButton
               icon={<SettingsSvg />}
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                void queryClient
+                  .invalidateQueries({
+                    queryKey: eventQueries.getSettings(eventId),
+                  })
+                  .then(() => {
+                    setIsOpen(true);
+                  });
+              }}
               className="event-page-header__settings-btn"
               iconWrapperClassname="event-page-header__settings-icon"
             />

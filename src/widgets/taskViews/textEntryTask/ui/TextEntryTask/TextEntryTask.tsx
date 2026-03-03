@@ -19,7 +19,7 @@ interface TextEntryTaskProps {
 //todo: change for final version
 //todo: не забыть приведение в lowercase перед отправкой ответа
 interface TextEntryTaskData {
-  id: string;
+  taskId: string;
   name: string;
   description?: string;
   files: string[];
@@ -31,7 +31,7 @@ interface TextEntryTaskData {
 }
 
 const TextEntryTask = ({ data }: TextEntryTaskProps) => {
-  const { eventId, blockId, id } = data;
+  const { eventId, blockId, taskId: id } = data;
 
   const [inputMode, setInputMode] = useState<"qr" | "text">(data.type);
 
