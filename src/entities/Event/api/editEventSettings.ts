@@ -3,7 +3,7 @@ import type { PickPartial } from "@/src/shared/lib";
 import type { ServerGroup } from "./getEditingEventSettings";
 
 interface EditingEventSettings {
-  title: string;
+  name: string;
   description: string;
   cover?: string;
   tags: string[];

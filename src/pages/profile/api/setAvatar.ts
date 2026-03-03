@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/src/shared/api";
 
-export const setAvatar = (url: string) => {
+export const setAvatar = (avatar: string) => {
   return axiosInstance.put("profile/avatar", {
-    url,
+    avatar,
   });
 };

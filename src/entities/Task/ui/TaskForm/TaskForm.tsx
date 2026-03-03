@@ -1,4 +1,8 @@
-import { getRandomString, useFileUpload } from "@/src/shared/lib";
+import {
+  getFullFileUrl,
+  getRandomString,
+  useFileUpload,
+} from "@/src/shared/lib";
 import { CustomSwitch, QRCodeSvg } from "@/src/shared/ui";
 import {
   Button,
@@ -95,7 +99,7 @@ const TaskForm = <TResponse,>({
         const data = await uploadFile(file as File);
         onSuccess?.(
           {
-            url: data.url,
+            url: data,
           },
           file,
         );
@@ -160,7 +164,7 @@ const TaskForm = <TResponse,>({
       const rightAnswer: ClientOption = {
         clientId: uuidv4(),
         isCorrect: true,
-        value: getRandomString(20),
+        value: getRandomString(10),
       };
       form.setFieldValue("options", [rightAnswer]);
       return "qr";
@@ -234,6 +238,18 @@ const TaskForm = <TResponse,>({
     submitMutation.mutate({ ...values, name: taskName, type });
   };
 
+  const handlePreview = (file: UploadFile<unknown>) => {
+    if (file.url) {
+      const hiddenLink = document.createElement("a");
+      hiddenLink.href = getFullFileUrl(file.url);
+      hiddenLink.target = "_blank";
+      hiddenLink.style.display = "none";
+      document.body.appendChild(hiddenLink);
+      hiddenLink.click();
+      document.removeChild(hiddenLink);
+    }
+  };
+
   useEffect(() => {
     if (initialData?.files.length) {
       setFileList(mapUrlsToFileList(initialData.files));
@@ -295,7 +311,7 @@ const TaskForm = <TResponse,>({
               {textInputType === "text" ? (
                 <Input value={options?.[0]?.value} onChange={handleTextInput} />
               ) : (
-                <>
+                <div>
                   <div className="task-form__qr-code-wrapper">
                     <QRCode
                       ref={QRCodeRef}
@@ -305,7 +321,13 @@ const TaskForm = <TResponse,>({
                   <Button onClick={handleQRCodeDownloading}>
                     Скачать QR-код
                   </Button>
-                </>
+                  <Typography.Text>
+                    Расшифрованный код:
+                    <Typography.Paragraph copyable>
+                      {options?.[0]?.value}
+                    </Typography.Paragraph>
+                  </Typography.Text>
+                </div>
               )}
               <Button
                 onClick={handleTextInputSwitch}
@@ -374,6 +396,7 @@ const TaskForm = <TResponse,>({
           customRequest={customRequest}
           onChange={handleFilesChangeChange}
           fileList={fileList}
+          onPreview={(file) => handlePreview(file)}
           multiple
         >
           <Button>Добавить файлы</Button>

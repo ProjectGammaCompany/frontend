@@ -1,12 +1,24 @@
 import {
   eventQueries,
+  type BaseEventFormData,
   type EditingEventSettings,
   type ServerGroup,
 } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
+import type { ChangeTypeOfKeys } from "@/src/shared/lib";
 import type { AxiosResponse } from "axios";
 
-export const updateGroupsInQuery = (eventId: string, groups: ServerGroup[]) => {
+type FormData = BaseEventFormData & {
+  groupEvent: boolean;
+  groups: ServerGroup[];
+  collaborators: string[];
+};
+
+type SettingsData = ChangeTypeOfKeys<FormData, "startDate" | "endDate", string>;
+export const updateSettingsInQuery = (
+  eventId: string,
+  settings: SettingsData,
+) => {
   queryClient.setQueryData(
     eventQueries.getSettings(eventId),
     (oldData: AxiosResponse<EditingEventSettings>) => {
@@ -15,7 +27,7 @@ export const updateGroupsInQuery = (eventId: string, groups: ServerGroup[]) => {
           ...oldData,
           data: {
             ...oldData.data,
-            groups,
+            ...settings,
           },
         };
         return newData;

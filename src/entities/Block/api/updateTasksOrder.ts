@@ -5,7 +5,7 @@ export const updateTasksOrder = (
   blockId: string,
   tasks: string[],
 ) => {
-  return axiosInstance.put(`event/${eventId}/blocks/${blockId}/tasksOrder`, {
+  return axiosInstance.put(`event/${eventId}/blocks/${blockId}/tasks`, {
     tasks,
   });
 };

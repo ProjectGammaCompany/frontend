@@ -12,3 +12,5 @@ export {
   useSendAnswer,
   type SendAnswerResponse,
 } from "./sendTaskAnswer";
+
+export { JoinGroupWindow } from "./joinGroup";

@@ -1,8 +1,8 @@
-import { queryClient } from "@/src/shared/api";
-import { useMutation } from "@tanstack/react-query";
-import type { AxiosResponse } from "axios";
-import type { GetProfileResponse } from "../api/getProfile";
-import { setAvatar } from "../api/setAvatar";
+import { queryClient } from "@/src/shared/api"
+import { useMutation } from "@tanstack/react-query"
+import type { AxiosResponse } from "axios"
+import type { GetProfileResponse } from "../api/getProfile"
+import { setAvatar } from "../api/setAvatar"
 
 export const useSetAvatar = () => {
   return useMutation({

@@ -1,12 +1,15 @@
+import { queryClient } from "@/src/shared/api";
 import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { useEffect } from "react";
 
+//todo: переместить в отдельную директорию
 export const useClearTokens = () => {
   useEffect(() => {
     const handleBeforeUnload = () => {
       const rememberMe = settingsStorage.getRememberMe();
       if (rememberMe != "true") {
         tokenStorage.clearTokens();
+        queryClient.clear();
       }
     };
 

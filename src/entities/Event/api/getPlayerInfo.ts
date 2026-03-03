@@ -8,6 +8,7 @@ export interface GetPlayerInfoResponse {
   tags: Tag[];
   startDate?: string;
   endDate?: string;
+  needGroup: boolean;
   cover?: string;
   status: "not started" | "in progress" | "finished";
 }

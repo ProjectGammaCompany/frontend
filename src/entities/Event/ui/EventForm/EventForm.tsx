@@ -25,7 +25,7 @@ import "./EventForm.scss";
 
 //todo добавит switch на показ таблицы всей
 export interface BaseEventFormData {
-  title: string;
+  name: string;
   description: string;
   cover?: string;
   tags: string[];
@@ -42,6 +42,7 @@ export type EventFormData<T extends object = {}> = BaseEventFormData & T;
 interface EventFormProps<TData extends EventFormData, TResponse> {
   defaultData?: TData;
   submitBtnText: string;
+  joinCode?: string;
   mutationFn: (
     data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
   ) => Promise<TResponse>;
@@ -61,6 +62,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   showSuccessText,
   defaultData,
   submitBtnText,
+  joinCode,
   children,
 }: EventFormProps<TData, TResponse>) => {
   const formMutation = useMutation<
@@ -101,7 +103,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       onSuccess: (data) => {
         onSuccess?.(data.data);
         //@ts-expect-error форма недостаточно умная
-        form.setFieldValue("cover", data.data.url);
+        form.setFieldValue("cover", data.data);
       },
       onError: (error) => {
         onError?.(error);
@@ -190,7 +192,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             </Form.Item>
           </ConfigProvider>
           <Form.Item<EventFormData>
-            name="title"
+            name="name"
             label="Название события:"
             rules={[{ required: true }]}
           >
@@ -248,7 +250,9 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         {children}
         <Form.Item<EventFormData> noStyle>
           <div className="event-form__allow-downloading-form-item">
-            <CustomSwitch title="Разрешить скачивание" />
+            <Form.Item<EventFormData> noStyle name="allowDownloading">
+              <CustomSwitch title="Разрешить скачивание" />
+            </Form.Item>
             <Tooltip
               title="Вместе с заданиями пользователю будут загружены и ответы на них."
               open={toolTipOpen}
@@ -266,6 +270,16 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         {showSuccessText && onSuccessText && (
           <Form.Item>
             <Typography>{onSuccessText}</Typography>
+          </Form.Item>
+        )}
+        {joinCode && (
+          <Form.Item
+            className="event-form__code-item"
+            label="Пригласительный код"
+          >
+            <Typography.Paragraph copyable className="event-form__code-text">
+              {joinCode}
+            </Typography.Paragraph>
           </Form.Item>
         )}
         <Form.Item>

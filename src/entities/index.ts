@@ -11,17 +11,13 @@ export {
   type getEventsResponse,
 } from "./Event/api/getEvents.ts";
 
-export {
-  createEvent,
-  type createEventResponse,
-} from "./Event/api/createEvent.ts";
-
 export { getTags, type Tag } from "./Tag";
 
 //TODO: добавить index.ts для каждой сущности
 
 export {
   blockReorderingReducer,
+  createEvent,
   deleteEvent,
   editEventSettings,
   eventNameReducer,
@@ -38,23 +34,28 @@ export {
   setBlockReorderingState,
   setName,
   useEditingEventData,
+  useGroups,
   useJoinRequiredFields,
   usePersonalEvents,
   useUpdateBlocksOrder,
   type BlockItemData,
   type BlockStage,
   type ClientGroup,
+  type CreateEventData,
+  type CreateEventResponse,
   type EditEventSettingsResponse,
   type EditingEventSettings,
   type EndStage,
   type getEditingEventDataResponse,
   type GetNextStageResponse,
+  type Group,
   type QueryFnType,
   type ServerGroup,
   type TaskItem,
   type TaskOption,
   type TaskStage,
   type TaskStageData,
+  type UseGroupsQueryData,
 } from "./Event";
 
 export {
@@ -80,6 +81,7 @@ export {
   type GetTasksResponse,
   type TaskItemData,
   type UpdateBlockData,
+  type UseConditionsData,
 } from "./Block";
 
 export {
@@ -102,6 +104,7 @@ export {
   ConditionForm,
   createCondition,
   updateCondition,
+  useUpdateGroups,
   type ConditionData,
   type CreateConditionResponse,
   type UpdateConditionResponse,

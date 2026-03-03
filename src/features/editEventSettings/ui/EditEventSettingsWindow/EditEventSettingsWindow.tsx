@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { mapServerGroupToClientGroup } from "../../model/mapServerGroupToClientGroup";
-import { updateGroupsInQuery } from "../../model/updateGroupsInQuery";
+import { updateSettingsInQuery } from "../../model/updateSettingsInQuery";
 import { GroupsSettings } from "../GroupsSettings/GroupsSettings";
 import "./EditEventSettingsWindow.scss";
 interface EditEventWindowProps {
@@ -35,7 +35,7 @@ export type FullFormData = BaseEventFormData & {
 };
 
 type FullSettingsData = EditingEventSettings & {
-  title: string;
+  name: string;
 };
 const EditEventSettingsWindow = ({
   eventId,
@@ -49,7 +49,7 @@ const EditEventSettingsWindow = ({
     queryKey: [eventId, "settings"],
     queryFn: () => getEditingEventSettings(eventId),
     select: (data) => {
-      return { ...data.data, title };
+      return mapServerDataToFormData({ ...data.data, name: title });
     },
   });
 
@@ -64,13 +64,13 @@ const EditEventSettingsWindow = ({
       return undefined;
     }
 
-    const transformedData: FullFormData = {
+    const transformedData: FullFormData & { joinCode?: string } = {
       ...data,
       startDate: data.startDate
-        ? dayjs(data.startDate, "DD.MM.YYYY HH:mm:ss.SSS")
+        ? dayjs(data.startDate, "DD.MM.YYYY HH:mm")
         : undefined,
       endDate: data.endDate
-        ? dayjs(data.endDate, "DD.MM.YYYY HH:mm:ss.SSS")
+        ? dayjs(data.endDate, "DD.MM.YYYY HH:mm")
         : undefined,
       groups: mapServerGroupToClientGroup(data.groups),
     };
@@ -104,16 +104,21 @@ const EditEventSettingsWindow = ({
             submitBtnText="Применить"
             onSuccessText="Настройки обновлены"
             showSuccessText={showSuccessText}
+            joinCode={data?.joinCode}
             mutationFn={(data) => editEventSettings(eventId, data)}
             onSuccessFn={(response, variables) => {
-              dispatch(setName(variables.title));
-              updateGroupsInQuery(eventId, response.data.groups);
+              const newData = {
+                ...variables,
+                groups: response.data.groups,
+              };
+              dispatch(setName(variables.name));
+              updateSettingsInQuery(eventId, newData);
               setShowSuccessText(true);
               setTimeout(() => {
                 setShowSuccessText(false);
               }, 3000);
             }}
-            defaultData={mapServerDataToFormData(data)}
+            defaultData={data}
           >
             <Form.Item<EditingEventSettings>
               name="groupEvent"

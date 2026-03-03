@@ -7,6 +7,8 @@ interface InteractButtonProps {
   endDate?: string;
   status: "not started" | "in progress" | "finished";
   eventId: string;
+  needGroup: boolean;
+  onNeedGroup: () => void;
 }
 
 const InteractButton = ({
@@ -14,6 +16,8 @@ const InteractButton = ({
   status,
   startDate,
   endDate,
+  needGroup,
+  onNeedGroup,
 }: InteractButtonProps) => {
   const navigate = useNavigate();
 
@@ -24,6 +28,10 @@ const InteractButton = ({
   );
 
   const handleClick = () => {
+    if (needGroup) {
+      onNeedGroup();
+      return;
+    }
     if (status === "finished") {
       void navigate(`/event/${eventId}/results`);
       return;
