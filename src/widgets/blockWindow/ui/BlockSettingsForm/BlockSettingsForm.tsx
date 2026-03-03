@@ -42,7 +42,6 @@ const BlockSettingsForm = ({
   const submitMutation = useFormSubmit(eventId, blockId, handleSuccessSubmit);
 
   const handleSubmit = (data: UpdateBlockData) => {
-    console.log(data);
     submitMutation.mutate(data);
   };
 

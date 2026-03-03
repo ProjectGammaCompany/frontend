@@ -1,8 +1,6 @@
 import { axiosInstance } from "../axios/axios";
 
-export interface UploadFileResponse {
-  url: string;
-}
+export type UploadFileResponse = string;
 export const uploadFile = (file: File) => {
   const formData = new FormData();
   formData.append("file", file);

@@ -15,6 +15,7 @@ const EventPage = () => {
       }
       return Promise.reject(Error("Некорректный id"));
     },
+    staleTime: 0,
     select: (data) => data.data.role,
   });
 
@@ -29,6 +30,7 @@ const EventPage = () => {
   if (isError) {
     return <div>Ошибка на стороне сервера</div>;
   }
+
   return (
     <>
       <EventHeader role={data} eventId={eventId} />

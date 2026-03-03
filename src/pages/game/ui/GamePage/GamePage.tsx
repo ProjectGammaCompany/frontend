@@ -50,7 +50,7 @@ const GamePage = () => {
           />
         ) : (
           <TaskStageContent
-            key={data.task.id}
+            key={data.task.taskId}
             defaultTask={data.task}
             eventId={eventId!}
           />

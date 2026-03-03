@@ -1,3 +1,4 @@
+import { queryClient } from "@/src/shared/api";
 import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { useEffect } from "react";
 
@@ -8,6 +9,7 @@ export const useClearTokens = () => {
       const rememberMe = settingsStorage.getRememberMe();
       if (rememberMe != "true") {
         tokenStorage.clearTokens();
+        queryClient.clear();
       }
     };
 

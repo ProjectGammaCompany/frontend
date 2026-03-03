@@ -40,7 +40,7 @@ jobs:
         run: |
           cat <<EOF > .env.production
           VITE_APP_BASE_URL=http://api.hse-eduplay.ru/
-          VITE_FILE_BASE_URL=http://api.hse-eduplay.ru/files/
+          VITE_FILE_BASE_URL=http://files.hse-eduplay.ru/eduplay-bucket/uploads/
           EOF
 
       - name: Build and push Docker image
