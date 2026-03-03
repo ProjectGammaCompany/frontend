@@ -42,6 +42,7 @@ export type EventFormData<T extends object = {}> = BaseEventFormData & T;
 interface EventFormProps<TData extends EventFormData, TResponse> {
   defaultData?: TData;
   submitBtnText: string;
+  joinCode?: string;
   mutationFn: (
     data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
   ) => Promise<TResponse>;
@@ -61,6 +62,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   showSuccessText,
   defaultData,
   submitBtnText,
+  joinCode,
   children,
 }: EventFormProps<TData, TResponse>) => {
   const formMutation = useMutation<
@@ -266,6 +268,16 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         {showSuccessText && onSuccessText && (
           <Form.Item>
             <Typography>{onSuccessText}</Typography>
+          </Form.Item>
+        )}
+        {joinCode && (
+          <Form.Item
+            className="event-form__code-item"
+            label="Пригласительный код"
+          >
+            <Typography.Paragraph copyable className="event-form__code-text">
+              {joinCode}
+            </Typography.Paragraph>
           </Form.Item>
         )}
         <Form.Item>

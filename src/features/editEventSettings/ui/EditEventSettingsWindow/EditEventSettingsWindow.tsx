@@ -104,6 +104,7 @@ const EditEventSettingsWindow = ({
             submitBtnText="Применить"
             onSuccessText="Настройки обновлены"
             showSuccessText={showSuccessText}
+            joinCode={data?.joinCode}
             mutationFn={(data) => editEventSettings(eventId, data)}
             onSuccessFn={(response, variables) => {
               dispatch(setName(variables.title));
