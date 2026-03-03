@@ -1,9 +1,11 @@
 import { getPlayerInfo } from "@/src/entities";
-import { ToggleFavoriteEventButton } from "@/src/features";
+import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
 import { getFullFileUrl } from "@/src/shared/lib";
 import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import InteractButton from "../InteractButton/InteractButton";
 import "./PlayerContent.scss";
 
@@ -12,6 +14,7 @@ interface ParticipantContentProps {
 }
 
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
+  const navigate = useNavigate();
   const { data, isPending, isError } = useQuery({
     queryKey: [eventId, "playerInfo"],
     queryFn: () => getPlayerInfo(eventId),
@@ -19,6 +22,8 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
       return data.data;
     },
   });
+
+  const [openLoginGroupWindow, setOpenLoginGroupWindow] = useState(false);
 
   if (isPending) {
     return <div>Загрузка...</div>;
@@ -90,6 +95,18 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
         status={data.status}
         startDate={data.startDate}
         endDate={data.endDate}
+        needGroup={data.needGroup}
+        onNeedGroup={() => {
+          setOpenLoginGroupWindow(true);
+        }}
+      />
+      <JoinGroupWindow
+        eventId={eventId}
+        open={openLoginGroupWindow}
+        setIsOpen={setOpenLoginGroupWindow}
+        onSuccess={() => {
+          void navigate(`/event/${eventId}/game`);
+        }}
       />
     </div>
   );

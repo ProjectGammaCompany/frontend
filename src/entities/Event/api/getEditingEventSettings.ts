@@ -12,6 +12,7 @@ export interface EditingEventSettings {
   groupEvent: boolean;
   groups: ServerGroup[];
   rating: boolean;
+  joinCode?: string;
   collaborators: string[];
   allowDownloading: boolean;
 }

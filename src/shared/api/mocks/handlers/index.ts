@@ -64,19 +64,6 @@ export const handlers = [
       ],
     });
   }),
-  http.get("/event/:eventId/playerInfo", () => {
-    return HttpResponse.json({
-      title: "string",
-      description: "string",
-      rate: 4.2,
-      favorite: false,
-      tags: ["Химия", "Биология"],
-      startDate: "25.01.2026 13:40",
-      endDate: "26.01.2026 13:55",
-      cover: "",
-      status: "notStarted",
-    });
-  }),
   http.get(`${baseUrl}event/:eventId/nextStage`, () => {
     return HttpResponse.json({
       type: "block",
@@ -277,6 +264,11 @@ export const handlers = [
           name: "Группа 3",
         },
       ],
+    });
+  }),
+  http.post(`${baseUrl}events/:eventId/join`, () => {
+    return new HttpResponse(null, {
+      status: 200,
     });
   }),
 ];
