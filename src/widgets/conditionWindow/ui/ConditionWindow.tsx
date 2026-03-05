@@ -54,7 +54,6 @@ const ConditionWindow = (
 
   const handleSuccessDelete = () => {
     if (condition) {
-      console.log(condition.id);
       removeConditionFromList(eventId, blockId, condition?.id);
       setIsOpen(false);
     }

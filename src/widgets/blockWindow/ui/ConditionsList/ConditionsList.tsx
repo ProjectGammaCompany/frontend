@@ -67,7 +67,6 @@ const ConditionsList = ({
               key={condition.id}
               condition={{
                 ...condition,
-                blockOrder: condition.blockOrder + 1,
                 group: groups,
               }}
               onClick={() => onConditionClick(condition)}

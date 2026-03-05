@@ -7,7 +7,7 @@ export const commitTimestamp = (
   timestamp: string,
 ) => {
   return axiosInstance.put(
-    `event/${eventId}/blocks/${blockId}/task/${taskId}/timestamp`,
+    `event/${eventId}/blocks/${blockId}/tasks/${taskId}/timestamp`,
     {
       timestamp,
     },

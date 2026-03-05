@@ -76,30 +76,30 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   //todo: проверить зависимости
   useEffect(() => {
-    if (task.time) {
-      if (
-        !task.timestamp &&
-        !timestampError &&
-        !timestampFixingMutation.isPending
-      ) {
-        timestampFixingMutation.mutate(
-          dayjs(Date.now()).format("DD.MM.YYYY HH:mm:ss:SSS"),
-        );
-      } else if (
-        task.timestamp &&
-        dayjs(Date.now()) >
-          dayjs(task.timestamp, "DD.MM.YYYY HH:mm:ss:SSS", true) &&
-        !isOverdueTask
-      ) {
-        setIsOverdueTask(true);
-      }
+    if (
+      !task.timestamp &&
+      !timestampError &&
+      !timestampFixingMutation.isPending
+    ) {
+      timestampFixingMutation.mutate(
+        dayjs(Date.now()).format("DD.MM.YYYY HH:mm:ss.SSS"),
+      );
+    } else if (
+      task.time &&
+      task.timestamp &&
+      dayjs(Date.now()) >
+        dayjs(task.timestamp, "DD.MM.YYYY HH:mm:ss.SSS", true) &&
+      !isOverdueTask
+    ) {
+      console.log("ставлю overdueTask");
+      setIsOverdueTask(true);
     }
   }, [
     isOverdueTask,
-    task.time,
     task.timestamp,
     timestampError,
     timestampFixingMutation,
+    task.time,
   ]);
 
   useEffect(() => {

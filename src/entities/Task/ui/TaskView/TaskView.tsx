@@ -87,19 +87,17 @@ const TaskView = ({
       time == 0 &&
       !hasTriggeredRef.current
     ) {
-      console.log(isExpirationFnCanceled);
-      console.log("запуск функции");
       onExpirationTimeFn?.();
     }
   }, [time, isExpirationFnCanceled]);
   return (
     <div className="task-view">
       <Typography.Title level={1}>{title}</Typography.Title>
-      {defaultTime && (
+      {defaultTime && defaultTime > 0 ? (
         <Typography.Paragraph className="task-view__timer-text">
           <b>Время:</b> {getCounterString(time)}
         </Typography.Paragraph>
-      )}
+      ) : undefined}
       {description && (
         <div>
           <Typography.Title level={2}>Описание</Typography.Title>
