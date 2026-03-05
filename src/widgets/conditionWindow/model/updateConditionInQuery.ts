@@ -29,7 +29,6 @@ export const updateConditionInQuery = (
             conditions: [...firstSlice, { ...condition }, ...secondSlice],
           },
         };
-        console.log(newData.data.conditions);
         return newData;
       }
       return oldData;

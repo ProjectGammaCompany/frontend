@@ -5,7 +5,6 @@ import {
 } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
-import { data } from "react-router";
 
 export const updateBlocksOrderInQuery = (
   eventId: string,
@@ -20,7 +19,7 @@ export const updateBlocksOrderInQuery = (
       const newData = {
         ...oldData,
         data: {
-          ...data,
+          ...oldData.data,
           blocks,
         },
       };

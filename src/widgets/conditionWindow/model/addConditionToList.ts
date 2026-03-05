@@ -1,4 +1,8 @@
-import type { ConditionData, GetConditionsResponse } from "@/src/entities";
+import {
+  blockQueries,
+  type ConditionData,
+  type GetConditionsResponse,
+} from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
 
@@ -10,7 +14,7 @@ export const addConditionToList = (
   blockOrder: number,
 ) => {
   queryClient.setQueryData(
-    [eventId, blockId, "conditionsList"],
+    blockQueries.getConditions(eventId, blockId),
     (oldData: AxiosResponse<GetConditionsResponse>) => {
       if (oldData) {
         const newData: AxiosResponse<GetConditionsResponse> = {

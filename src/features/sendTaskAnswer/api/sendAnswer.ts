@@ -11,7 +11,7 @@ export const sendAnswer = (
   answer: string[],
 ) => {
   return axiosInstance.post<SendAnswerResponse>(
-    `event/${eventId}/block/${blockId}/task/${taskId}/answer`,
+    `event/${eventId}/blocks/${blockId}/tasks/${taskId}/answer`,
     {
       answer,
     },
