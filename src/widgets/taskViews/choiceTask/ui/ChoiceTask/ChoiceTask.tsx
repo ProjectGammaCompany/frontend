@@ -74,6 +74,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const handleSuccessAnswerSending = (
     data: AxiosResponse<SendAnswerResponse>,
   ) => {
+    console.log(data.data);
     const { points, rightAnswer } = data.data;
     SetIsExpirationFnCanceled(true);
     setRightAnswer(rightAnswer);

@@ -1,4 +1,4 @@
-import type { GetConditionsResponse } from "@/src/entities";
+import { blockQueries, type GetConditionsResponse } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
 
@@ -8,7 +8,7 @@ export const removeConditionFromList = (
   id: string,
 ) => {
   queryClient.setQueryData(
-    [eventId, blockId, "conditionsList"],
+    blockQueries.getConditions(eventId, blockId),
     (oldData: AxiosResponse<GetConditionsResponse>) => {
       if (oldData) {
         const newData: AxiosResponse<GetConditionsResponse> = {
@@ -18,7 +18,6 @@ export const removeConditionFromList = (
             conditions: oldData.data.conditions.filter((el) => el.id != id),
           },
         };
-        console.log(newData);
         return newData;
       }
       return oldData;

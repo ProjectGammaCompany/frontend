@@ -37,7 +37,6 @@ describe("Проверка настройки axios-instance", () => {
     server.use(
       http.get(`${import.meta.env.VITE_APP_BASE_URL as string}someURL`, () => {
         if (!isUsedAlready) {
-          console.log("тут попадаю");
           isUsedAlready = true;
           return new HttpResponse(null, { status: 401 });
         }

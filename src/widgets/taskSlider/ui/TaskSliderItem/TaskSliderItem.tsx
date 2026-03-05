@@ -43,12 +43,12 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
         </Typography.Title>
         <Checkbox checked={isSelected} className="task-slider-item__checkbox" />
       </div>
-      {task.time && (
+      {task.time ? (
         <Typography.Paragraph className="task-slider-item__title">
           Время на выполнение: {getTimeString(task.time)}
         </Typography.Paragraph>
-      )}
-      {task.description && (
+      ) : undefined}
+      {/* {task.description && (
         <div className="task-slider-item__description-wrapper">
           <Typography.Text className="task-slider-item__title">
             Описание
@@ -57,7 +57,7 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
             {task.description}
           </Typography.Paragraph>
         </div>
-      )}
+      )} */}
       <Typography.Paragraph className="task-slider-item__title task-slider-item__type">
         Тип: {getTaskTypeString(task.type)}
       </Typography.Paragraph>
