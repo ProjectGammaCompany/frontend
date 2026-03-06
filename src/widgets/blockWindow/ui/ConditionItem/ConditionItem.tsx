@@ -44,7 +44,9 @@ const ConditionItem = ({ condition, onClick }: ConditionItemProps) => {
       </div>
       {condition.blockId && (
         <div className="condition-item__connected-block">
-          <Typography.Text>{condition.blockOrder}</Typography.Text>
+          <Typography.Text className="condition-item__connected-block-text">
+            {condition.blockOrder}
+          </Typography.Text>
         </div>
       )}
     </div>

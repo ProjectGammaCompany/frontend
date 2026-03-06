@@ -18,11 +18,7 @@ const FloatButtonsGroup = ({
     <>
       <FloatButton
         classNames={{
-          root: "home-page__actions-btns",
-        }}
-        style={{
-          bottom: "80px",
-          right: "5dvw",
+          root: "home-page__actions-btn",
         }}
         onClick={() => setOpen(!open)}
         icon={<MoreSvg />}
@@ -33,10 +29,6 @@ const FloatButtonsGroup = ({
             classNames={{
               root: "home-page__my-events-btn",
             }}
-            style={{
-              bottom: "calc(80px + 70px)",
-              right: "calc(5dvw)",
-            }}
             onClick={() => {
               void navigate("/myEvents");
             }}
@@ -45,10 +37,6 @@ const FloatButtonsGroup = ({
           <FloatButton
             classNames={{
               root: "home-page__create-event-btn",
-            }}
-            style={{
-              bottom: "calc(80px + 10px)",
-              right: "calc(5dvw + 70px)",
             }}
             onClick={() => {
               setCreateEventWindowOpen();

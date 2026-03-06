@@ -7,13 +7,13 @@ import {
 
 import type { ReactNode } from "react";
 
-export interface footerButtonsInfo {
+export interface NavigationButtonsInfo {
   pathname: "/" | "/notifications" | "/profile";
   icon: ReactNode;
   onClick?: () => void;
 }
 
-export const FOOTER_BUTTONS_INFO: footerButtonsInfo[] = [
+export const NAVIGATION_BUTTONS_INFO: NavigationButtonsInfo[] = [
   {
     pathname: "/notifications",
     icon: <CustomIcon component={NotificationSvg} />,

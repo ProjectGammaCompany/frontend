@@ -1,0 +1,8 @@
+.user-events-list {
+  &__card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: start;
+  }
+}

@@ -90,16 +90,18 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
           <Typography.Paragraph>{data.description}</Typography.Paragraph>
         </div>
       )}
-      <InteractButton
-        eventId={eventId}
-        status={data.status}
-        startDate={data.startDate}
-        endDate={data.endDate}
-        needGroup={data.needGroup}
-        onNeedGroup={() => {
-          setOpenLoginGroupWindow(true);
-        }}
-      />
+      <div className="player-content__interact-btn-wrapper">
+        <InteractButton
+          eventId={eventId}
+          status={data.status}
+          startDate={data.startDate}
+          endDate={data.endDate}
+          needGroup={data.needGroup}
+          onNeedGroup={() => {
+            setOpenLoginGroupWindow(true);
+          }}
+        />
+      </div>
       <JoinGroupWindow
         eventId={eventId}
         open={openLoginGroupWindow}

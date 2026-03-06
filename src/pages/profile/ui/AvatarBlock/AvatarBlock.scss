@@ -2,6 +2,7 @@
   &__avatar-block {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
   }
 
@@ -10,5 +11,16 @@
     object-fit: cover;
     width: 30dvw;
     border-radius: 50%;
+  }
+
+  &__upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & .ant-upload {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

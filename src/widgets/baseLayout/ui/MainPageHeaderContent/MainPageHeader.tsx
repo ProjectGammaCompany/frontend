@@ -3,8 +3,13 @@ import { Input } from "antd";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router";
 import { setIsFiltersWindowOpen } from "../../model/filtersWindowState";
+import NavigationButtons from "../NavigationButtons/NavigationButtons";
 import "./MainPageHeader.scss";
-const MainPageHeaderContent = () => {
+
+export interface MainPageHeaderContentProps {
+  pathname: string;
+}
+const MainPageHeaderContent = ({ pathname }: MainPageHeaderContentProps) => {
   const { Search } = Input;
 
   const [, setSearchParams] = useSearchParams();
@@ -24,12 +29,13 @@ const MainPageHeaderContent = () => {
         }}
       />
       <IconButton
-        className="main-page-header-content__filters-btn"
+        className="main-page-header-content__action-btn"
         icon={<FiltersSvg />}
         onClick={() => {
           dispatch(setIsFiltersWindowOpen(true));
         }}
       />
+      <NavigationButtons pathname={pathname} />
     </div>
   );
 };

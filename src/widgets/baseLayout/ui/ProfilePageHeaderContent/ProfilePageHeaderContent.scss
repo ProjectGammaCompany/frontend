@@ -7,4 +7,13 @@
   &__text {
     color: white !important;
   }
+
+  &__buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 20px;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
 }

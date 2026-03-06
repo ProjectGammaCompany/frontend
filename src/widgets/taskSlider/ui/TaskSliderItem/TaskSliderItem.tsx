@@ -1,5 +1,6 @@
 import type { TaskItem } from "@/src/entities";
-import { Checkbox, Typography } from "antd";
+import { useWindowWidth } from "@/src/shared/lib";
+import { Checkbox, ConfigProvider, Typography } from "antd";
 import "./TaskSliderItem.scss";
 interface TaskSliderItemProps {
   task: TaskItem;
@@ -8,6 +9,8 @@ interface TaskSliderItemProps {
 }
 
 const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
+  const windowWidth = useWindowWidth();
+
   const getTimeString = (time: number) => {
     const minutes = String(Math.floor(time / 60)).padStart(2, "0");
     const seconds = String(time - Math.floor(time / 60) * 60).padStart(2, "0");
@@ -41,7 +44,21 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
         <Typography.Title level={3} className="task-slider-item__header">
           {task.name}
         </Typography.Title>
-        <Checkbox checked={isSelected} className="task-slider-item__checkbox" />
+        <ConfigProvider
+          theme={{
+            token: {
+              controlInteractiveSize: windowWidth >= 700 ? 45 : 20,
+            },
+          }}
+        >
+          <Checkbox
+            checked={isSelected}
+            classNames={{
+              root: "task-slider-item__checkbox",
+              icon: "task-slider-item__checkbox-icon",
+            }}
+          />
+        </ConfigProvider>
       </div>
       {task.time ? (
         <Typography.Paragraph className="task-slider-item__title">

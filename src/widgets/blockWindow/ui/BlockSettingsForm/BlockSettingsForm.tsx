@@ -77,7 +77,7 @@ const BlockSettingsForm = ({
           <Typography.Text>Настройки сохранены</Typography.Text>
         </FormItem>
       )}
-      <FormItem>
+      <FormItem className="block-settings-form__submit-btn-wrapper">
         <Button htmlType="submit">Сохранить</Button>
       </FormItem>
     </Form>

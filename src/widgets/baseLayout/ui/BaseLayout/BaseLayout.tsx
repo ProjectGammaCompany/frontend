@@ -14,7 +14,7 @@ const BaseLayout = () => {
   const { pathname } = useLocation();
 
   const headerContent: Record<HeaderRoute, ReactNode> = {
-    home: <MainPageHeaderContent />,
+    home: <MainPageHeaderContent pathname={pathname} />,
     profile: <ProfilePageHeaderContent />,
     notifications: <NotificationPageHeaderContent />,
     myEvents: <MyEventsPageHeaderContent />,

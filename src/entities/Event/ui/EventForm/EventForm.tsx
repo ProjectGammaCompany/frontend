@@ -141,6 +141,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       }}
     >
       <Form
+        layout="vertical"
         form={form}
         onFinish={onFinish}
         classNames={{
@@ -282,8 +283,12 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             </Typography.Paragraph>
           </Form.Item>
         )}
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
+        <Form.Item className="event-form__submit-btn-wrapper">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="event-form__submit-btn"
+          >
             {submitBtnText}
           </Button>
         </Form.Item>

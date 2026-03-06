@@ -1,0 +1,19 @@
+.action-btn {
+  color: var(--primary-color);
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  display: none;
+  &_active {
+    color: white;
+    background-color: var(--hover-primary-color);
+    border: 1px solid var(--primary-color);
+  }
+}
+
+@media (min-width: 700px) {
+  .action-btn {
+    display: block;
+  }
+}

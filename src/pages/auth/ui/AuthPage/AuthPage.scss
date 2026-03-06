@@ -2,10 +2,15 @@
   height: calc(100dvh - 15px);
   padding-inline: 5dvw;
   padding-top: 5dvh;
+  display: flex;
+  justify-content: center;
 
   &__content-wrapper {
+    flex-grow: 1;
     background-color: white;
     border-radius: 10px;
+    max-width: 500px;
+    height: fit-content;
   }
 
   &__form-wrapper {
@@ -16,6 +21,7 @@
   &__segmented {
     &-root {
       height: 60px;
+      margin-bottom: 20px;
     }
 
     &-label {

@@ -24,23 +24,21 @@ export const AuthPage = () => {
   return (
     <div className="auth-page">
       <div className="auth-page__content-wrapper">
-        <div>
-          <Segmented
-            options={PAGE_STATES.map((state) => {
-              return {
-                ...state,
-                label: <Typography>{state.label}</Typography>,
-              };
-            })}
-            classNames={{
-              root: "auth-page__segmented-root",
-              label: "auth-page__segmented-label",
-            }}
-            value={pageState}
-            onChange={setPageState}
-            block
-          />
-        </div>
+        <Segmented
+          options={PAGE_STATES.map((state) => {
+            return {
+              ...state,
+              label: <Typography>{state.label}</Typography>,
+            };
+          })}
+          classNames={{
+            root: "auth-page__segmented-root",
+            label: "auth-page__segmented-label",
+          }}
+          value={pageState}
+          onChange={setPageState}
+          block
+        />
         <div className="auth-page__form-wrapper">
           {pageState === "login" ? <LoginForm /> : <RegisterForm />}
         </div>

@@ -39,6 +39,7 @@ const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
         maxCount={1}
         onPreview={() => null}
         accept="image/*"
+        className="profile-page__upload"
       >
         <Button>Обновить</Button>
       </Upload>

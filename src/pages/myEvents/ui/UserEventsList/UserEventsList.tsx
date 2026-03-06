@@ -5,9 +5,11 @@ import {
   usePersonalEvents,
   type QueryFnType,
 } from "@/src/entities";
+import { getFullFileUrl } from "@/src/shared/lib";
 import { LinkEventCard } from "@/src/widgets";
 import { Spin, Typography } from "antd";
 import { useOnInView } from "react-intersection-observer";
+import "./UserEventsList.scss";
 
 type ListType = "userEvents" | "favorites" | "eventsHistory";
 interface UserEventsListProps {
@@ -42,7 +44,7 @@ const UserEventsList = ({ triggerLoading, listType }: UserEventsListProps) => {
   });
   return (
     <div>
-      <div>
+      <div className="user-events-list__card-list">
         {data?.pages.map((page) => {
           return page.data.events.map((card) => (
             <LinkEventCard
@@ -50,7 +52,7 @@ const UserEventsList = ({ triggerLoading, listType }: UserEventsListProps) => {
               title={card.title}
               id={card.id}
               description={card.description}
-              cover={card.cover}
+              cover={card.cover ? getFullFileUrl(card.cover) : undefined}
               rating={card.rate}
               favorite={card.favorite}
               tags={card.tags.map((t) => t.name)}

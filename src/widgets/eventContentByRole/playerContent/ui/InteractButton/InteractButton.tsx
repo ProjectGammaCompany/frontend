@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router";
 import { useInteractButtonFunctioning } from "../../model/useInteractButtonFunctioning";
-
+import "./InteractButton.scss";
 interface InteractButtonProps {
   startDate?: string;
   endDate?: string;
@@ -33,7 +33,7 @@ const InteractButton = ({
       return;
     }
     if (status === "finished") {
-      void navigate(`/event/${eventId}/results`);
+      void navigate(`/event/${eventId}/stats`);
       return;
     }
     void navigate(`/event/${eventId}/game`);
@@ -41,7 +41,11 @@ const InteractButton = ({
 
   return (
     !hidden && (
-      <Button disabled={disabled && status != "finished"} onClick={handleClick}>
+      <Button
+        disabled={disabled && status != "finished"}
+        onClick={handleClick}
+        className="interact-btn"
+      >
         {status === "not started"
           ? "Начать"
           : status === "in progress"
