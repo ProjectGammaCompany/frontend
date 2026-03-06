@@ -1,7 +1,18 @@
 .base-layout {
+  display: block;
+  container-type: inline-size;
+  container-name: base-layout;
   &__main {
     height: calc(100dvh - 60px - 65px - 15px);
     overflow-y: auto;
     padding-top: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .base-layout {
+    &__main {
+      height: calc(100dvh - 60px - 15px);
+    }
   }
 }

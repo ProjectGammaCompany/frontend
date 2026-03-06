@@ -131,7 +131,7 @@ export const handlers = [
       status: 200,
     });
   }),
-  http.get("/event/:eventId/playerStats", () => {
+  http.get(`${baseUrl}event/:eventId/playerStats`, () => {
     return HttpResponse.json({
       points: 250,
     });

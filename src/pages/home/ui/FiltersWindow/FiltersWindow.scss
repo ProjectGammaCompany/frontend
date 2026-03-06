@@ -1,0 +1,13 @@
+.filters-window {
+  &__submit-btn {
+    width: 200px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    &-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

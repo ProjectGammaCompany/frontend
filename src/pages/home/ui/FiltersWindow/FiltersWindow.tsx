@@ -5,7 +5,7 @@ import { Button, Form, Select, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
 import type { Filters } from "../../model/useAllEvents";
-
+import "./FiltersWindow.scss";
 interface FiltersWindowProps {
   open: boolean;
   setIsOpen: (value: boolean) => void;
@@ -79,8 +79,10 @@ const FiltersWindow = ({
             }}
           />
         </Form.Item>
-        <Form.Item>
-          <Button htmlType="submit">Применить</Button>
+        <Form.Item className="filters-window__submit-btn-wrapper">
+          <Button htmlType="submit" className="filters-window__submit-btn">
+            Применить
+          </Button>
         </Form.Item>
       </Form>
     </CustomModalWindow>

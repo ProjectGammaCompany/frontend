@@ -38,10 +38,30 @@
 
   &__qr-task-body {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 20px;
   }
 
-  &__qr-code-wrapper {
-    display: none;
+  &__qr-code {
+    &-text {
+      text-align: center;
+      margin-bottom: 0px !important;
+    }
+    &-btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+    &-upload {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+    &-wrapper {
+      display: none;
+    }
   }
 }

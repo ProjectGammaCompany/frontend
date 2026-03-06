@@ -1,0 +1,17 @@
+.group-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &__delete-btn {
+    height: 45px;
+    width: 45px;
+    flex-shrink: 0;
+    color: white;
+    background-color: var(--red-color);
+    & svg {
+      height: 40px;
+      width: 40px;
+    }
+  }
+}

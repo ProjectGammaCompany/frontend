@@ -42,6 +42,7 @@ const AuthForm = <T extends Record<string, any>>({
     >
       {fields.map((field) => (
         <Form.Item
+          layout="vertical"
           key={field.name}
           label={field.label}
           name={field.name}

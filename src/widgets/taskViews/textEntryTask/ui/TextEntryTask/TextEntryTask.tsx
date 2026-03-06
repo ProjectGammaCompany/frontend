@@ -11,7 +11,7 @@ import type { AxiosResponse } from "axios";
 import { useState } from "react";
 import QRInputBlock from "../QRBlock/QRBlock";
 import TextInputBlock from "../TextInputBlock/TextInputBlock";
-
+import "./TextEntryTask.scss";
 interface TextEntryTaskProps {
   data: TextEntryTaskData;
 }
@@ -124,14 +124,16 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
       )}
       {((data.type === "qr" && inputMode === "text") ||
         data.type === "text") && (
-        <SendAnswerButton
-          eventId={eventId}
-          blockId={blockId}
-          taskId={id}
-          answer={answer}
-          disabled={!answer.at(0)}
-          onSuccess={handleSuccessAnswerSending}
-        />
+        <div className="text-entry-task__send-answer-btn-wrapper">
+          <SendAnswerButton
+            eventId={eventId}
+            blockId={blockId}
+            taskId={id}
+            answer={answer.length > 0 ? [answer[0].toLocaleLowerCase()] : []}
+            disabled={!answer.at(0)}
+            onSuccess={handleSuccessAnswerSending}
+          />
+        </div>
       )}
     </TaskView>
   );

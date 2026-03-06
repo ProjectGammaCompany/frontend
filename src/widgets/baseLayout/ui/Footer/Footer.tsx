@@ -1,7 +1,8 @@
 import { IconButton } from "@/src/shared/ui";
 import classnames from "classnames";
+import { useRef } from "react";
 import { useNavigate } from "react-router";
-import { FOOTER_BUTTONS_INFO } from "../../const/footerButtonsInfo";
+import { NAVIGATION_BUTTONS_INFO } from "../../const/navigationButtonsInfo";
 import "./Footer.scss";
 
 interface FooterProps {
@@ -10,10 +11,12 @@ interface FooterProps {
 
 const Footer = ({ pathname }: FooterProps) => {
   const navigate = useNavigate();
+
+  const targetRef = useRef(null);
   return (
-    <footer className="footer">
+    <footer ref={targetRef} className="footer">
       <div className="footer__content">
-        {FOOTER_BUTTONS_INFO.map((buttonInfo) => (
+        {NAVIGATION_BUTTONS_INFO.map((buttonInfo) => (
           <IconButton
             className={classnames("footer__icon-btn", {
               "footer__icon-btn_active": pathname === buttonInfo.pathname,
