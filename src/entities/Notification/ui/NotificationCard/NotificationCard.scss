@@ -1,5 +1,7 @@
 .notification-card {
   position: relative;
+  container-type: inline-size;
+  container-name: notification-card;
   color: white;
   background-color: var(--primary-color);
   border-radius: 15px;
@@ -54,5 +56,11 @@
   .notification-card:hover {
     background-color: var(--hover-primary-color);
     cursor: pointer;
+  }
+}
+
+@media (min-width: 400px) {
+  .notification-card {
+    padding: 40px 15px 15px 15px;
   }
 }

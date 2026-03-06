@@ -37,7 +37,7 @@ const EventsList = ({ filters }: EventsListProps) => {
               title={card.title}
               id={card.id}
               description={card.description}
-              cover={getFullFileUrl(card.cover)}
+              cover={card.cover ? getFullFileUrl(card.cover) : undefined}
               rating={card.rating}
               favorite={card.favorite}
               tags={card.tags.map((t) => t.name)}

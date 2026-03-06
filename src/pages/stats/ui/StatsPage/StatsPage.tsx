@@ -16,7 +16,7 @@ const StatsPage = () => {
         <div className="stats-page-header__content">
           <div
             className="stats-page-header__icons-wrapper"
-            onClick={() => void navigate(`/${eventId}`)}
+            onClick={() => void navigate(`/event/${eventId}`)}
           >
             <BackSvg classname="stats-page-header__back-icon" />
             <Logo />
