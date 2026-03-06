@@ -1,7 +1,6 @@
 .event-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   &__main-data-wrapper {
     display: flex;
     justify-content: start;
@@ -121,6 +120,16 @@
     width: 100%;
     text-align: center;
     font-weight: 600;
+  }
+
+  &__submit-btn {
+    width: 200px;
+    height: 40px;
+    &-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 

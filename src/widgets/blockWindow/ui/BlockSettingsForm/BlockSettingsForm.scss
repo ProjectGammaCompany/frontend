@@ -4,4 +4,12 @@
     align-items: center;
     gap: 5px;
   }
+
+  &__submit-btn {
+    &-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
 }

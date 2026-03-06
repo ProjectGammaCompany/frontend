@@ -3,7 +3,7 @@ import {
   getRandomString,
   useFileUpload,
 } from "@/src/shared/lib";
-import { CustomSwitch, QRCodeSvg } from "@/src/shared/ui";
+import { CustomSwitch, IconButton, QRCodeSvg } from "@/src/shared/ui";
 import {
   Button,
   Form,
@@ -280,6 +280,7 @@ const TaskForm = <TResponse,>({
     <Form
       initialValues={initialData}
       form={form}
+      layout="vertical"
       requiredMark={false}
       scrollToFirstError={{ behavior: "instant", block: "end", focus: true }}
       onFinish={onFinish}
@@ -311,30 +312,38 @@ const TaskForm = <TResponse,>({
               {textInputType === "text" ? (
                 <Input value={options?.[0]?.value} onChange={handleTextInput} />
               ) : (
-                <div>
+                <div className="task-form__qr-code-upload">
                   <div className="task-form__qr-code-wrapper">
                     <QRCode
                       ref={QRCodeRef}
                       value={options ? options[0]?.value : ""}
                     />
                   </div>
-                  <Button onClick={handleQRCodeDownloading}>
-                    Скачать QR-код
-                  </Button>
-                  <Typography.Text>
-                    Расшифрованный код:
-                    <Typography.Paragraph copyable>
-                      {options?.[0]?.value}
+                  <div className="task-form__qr-code-btn-wrapper">
+                    <Button onClick={handleQRCodeDownloading}>
+                      Скачать QR-код
+                    </Button>
+                    <Typography.Paragraph
+                      style={{
+                        marginBottom: 0,
+                      }}
+                    >
+                      Расшифрованный код:
+                      <Typography.Paragraph
+                        copyable
+                        className="task-form__qr-code-text"
+                      >
+                        {options?.[0]?.value}
+                      </Typography.Paragraph>
                     </Typography.Paragraph>
-                  </Typography.Text>
+                  </div>
                 </div>
               )}
-              <Button
+              <IconButton
+                icon={<QRCodeSvg />}
                 onClick={handleTextInputSwitch}
                 className={switchQRModeBtnClassName}
-              >
-                <QRCodeSvg />
-              </Button>
+              ></IconButton>
             </div>
           </Form.Item>
         </>

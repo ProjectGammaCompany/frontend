@@ -1,10 +1,10 @@
 import type { ClientGroup } from "@/src/entities";
 import { useDebounce } from "@/src/shared/lib";
-import { TrashSvg } from "@/src/shared/ui";
-import { Button, Input } from "antd";
+import { IconButton, TrashSvg } from "@/src/shared/ui";
+import { Input } from "antd";
 import Password from "antd/es/input/Password";
 import { useEffect, useState } from "react";
-
+import "./GroupItem.scss";
 interface GroupItemProps {
   group: ClientGroup;
   onChange?: (login: string, password: string) => void;
@@ -24,7 +24,7 @@ export const GroupItem = ({ group, onChange, onDelete }: GroupItemProps) => {
   }, [loginDebounce, onChange, passwordDebounce]);
 
   return (
-    <li>
+    <li className="group-item">
       <div>
         <Input
           placeholder="Введите название группы"
@@ -39,7 +39,11 @@ export const GroupItem = ({ group, onChange, onDelete }: GroupItemProps) => {
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
       </div>
-      <Button icon={<TrashSvg />} onClick={() => onDelete?.()} />
+      <IconButton
+        icon={<TrashSvg />}
+        onClick={() => onDelete?.()}
+        className="group-item__delete-btn"
+      />
     </li>
   );
 };

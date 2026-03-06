@@ -7,7 +7,6 @@ import { useOnInView } from "react-intersection-observer";
 import { useAllEvents, type Filters } from "../../model/useAllEvents";
 import "./EventList.scss";
 
-//todo: добавить favorites
 export interface EventsListProps {
   filters: Filters;
 }
