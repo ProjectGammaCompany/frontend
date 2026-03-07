@@ -49,11 +49,18 @@ export const HomePage = () => {
     setParams((params) => {
       for (const [key, value] of Object.entries(preparedFilters)) {
         if (Array.isArray(value)) {
+          if (value.length == 0) {
+            params.delete(key);
+          }
           for (const elem of value) {
             params.append(key, elem);
           }
         } else {
-          params.set(key, value);
+          if (value === "true") {
+            params.set(key, value);
+          } else {
+            params.delete(key);
+          }
         }
       }
       return params;

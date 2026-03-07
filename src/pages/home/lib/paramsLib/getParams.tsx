@@ -26,7 +26,7 @@ export const getParams = (params: URLSearchParams) => {
       }
       parsedParams[
         key as Exclude<keyof typeof parsedParams, "tags" | "title">
-      ] = Boolean(params.get(key));
+      ] = params.get(key) ? params.get(key)?.toLowerCase() === "true" : false;
     }
   }
   return parsedParams;
