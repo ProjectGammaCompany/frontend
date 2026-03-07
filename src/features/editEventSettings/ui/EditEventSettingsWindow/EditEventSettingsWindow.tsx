@@ -31,6 +31,7 @@ interface EditEventWindowProps {
 export type FullFormData = BaseEventFormData & {
   groupEvent: boolean;
   groups: ClientGroup[];
+  rating: boolean;
   collaborators: string[];
 };
 
@@ -120,6 +121,12 @@ const EditEventSettingsWindow = ({
             }}
             defaultData={data}
           >
+            <Form.Item<EditingEventSettings>
+              name="rating"
+              className="edit-event-settings-window__form-item"
+            >
+              <CustomSwitch title="Показывать общую таблицу" />
+            </Form.Item>
             <Form.Item<EditingEventSettings>
               name="groupEvent"
               className="edit-event-settings-window__form-item"
