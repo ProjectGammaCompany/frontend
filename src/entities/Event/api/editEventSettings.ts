@@ -8,6 +8,7 @@ interface EditingEventSettings {
   cover?: string;
   tags: string[];
   startDate?: string;
+  rating: boolean;
   endDate?: string;
   private: boolean;
   password?: string;
