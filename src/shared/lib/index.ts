@@ -25,6 +25,8 @@ export { type ChangeTypeOfKeys, type PickPartial } from "./tsTypes";
 
 export { NotificationContext, useNotify } from "./notifications";
 
-export { useDebounce, useWindowWidth } from "./customHooks";
+export { useDebounce, useTitle, useWindowWidth } from "./customHooks";
 
 export { QrCodeScanner } from "./qrCodeScanner";
+
+export { PageMeta } from "./meta";

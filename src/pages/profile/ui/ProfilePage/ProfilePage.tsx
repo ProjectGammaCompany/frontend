@@ -1,3 +1,4 @@
+import { useTitle } from "@/src/shared/lib";
 import { Typography } from "antd";
 import { useProfileData } from "../../model/useProfileData";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
@@ -5,6 +6,7 @@ import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";
 
 const ProfilePage = () => {
+  useTitle("Профиль");
   const { data, isError, isPending } = useProfileData();
 
   if (isPending) {

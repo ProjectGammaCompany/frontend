@@ -1,4 +1,4 @@
-import type { ChangeTypeOfKeys } from "@/src/shared/lib";
+import { useTitle, type ChangeTypeOfKeys } from "@/src/shared/lib";
 import {
   selectFiltersWindowState,
   setIsFiltersWindowOpen,
@@ -17,6 +17,7 @@ import "./HomePage.scss";
 import JoinWithCodeWindow from "./JoinWithCodeWindow/JoinWithCodeWindow";
 
 export const HomePage = () => {
+  useTitle("Главная");
   const [params, setParams] = useSearchParams();
 
   const [createEventWindowOpen, setIsCreateEventWindoWOpen] = useState(false);

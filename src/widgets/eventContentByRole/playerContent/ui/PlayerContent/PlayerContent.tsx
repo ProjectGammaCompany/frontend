@@ -1,6 +1,6 @@
 import { getPlayerInfo } from "@/src/entities";
 import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
-import { getFullFileUrl } from "@/src/shared/lib";
+import { getFullFileUrl, useTitle } from "@/src/shared/lib";
 import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Typography } from "antd";
@@ -14,6 +14,7 @@ interface ParticipantContentProps {
 }
 
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
+  useTitle("Событие");
   const navigate = useNavigate();
   const { data, isPending, isError } = useQuery({
     queryKey: [eventId, "playerInfo"],
