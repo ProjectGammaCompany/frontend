@@ -44,7 +44,7 @@ const GamePage = () => {
       <main>
         {data.type === "block" ? (
           <BlockStageContent
-            key={data.block.id}
+            key={data.block.blockId}
             blockStageData={data}
             eventId={eventId!}
           />

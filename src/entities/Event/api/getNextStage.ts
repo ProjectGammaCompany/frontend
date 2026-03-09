@@ -26,7 +26,7 @@ export interface TaskStageData {
 export interface BlockStage {
   type: "block";
   block: {
-    id: string;
+    blockId: string;
     name: string;
     tasks: TaskItem[];
   };
