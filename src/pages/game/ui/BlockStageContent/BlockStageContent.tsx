@@ -27,7 +27,7 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
 
   const selectTaskMutation = useSelectTask(
     eventId,
-    block.id,
+    block.blockId,
     handleSuccessSelect,
   );
 
