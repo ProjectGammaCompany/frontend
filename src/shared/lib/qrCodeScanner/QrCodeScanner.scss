@@ -1,8 +1,8 @@
 .qr-code-scanner {
   &_open {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -13,16 +13,29 @@
 
   &-wrapper {
     position: relative;
+    max-width: 700px;
+    max-height: 700px;
+
+    & > video {
+      border-radius: 20px;
+    }
   }
 
   &__close-btn {
     width: 45px !important;
     height: 45px;
     z-index: 10;
+    color: white;
+    background-color: var(--red-color);
     position: absolute;
     top: 0px;
     right: 0px;
     margin-top: 10px;
     margin-right: 10px;
+
+    & > .ant-btn-icon {
+      height: 35px;
+      width: 35px;
+    }
   }
 }

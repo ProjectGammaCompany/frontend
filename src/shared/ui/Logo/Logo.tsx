@@ -1,7 +1,11 @@
 import "./Logo.scss";
-const Logo = () => {
+
+interface LogoProps {
+  className?: string;
+}
+const Logo = ({ className }: LogoProps) => {
   return (
-    <div className="logo">
+    <div className={`logo ${className ?? ""}`}>
       <svg
         width="526"
         height="139"
