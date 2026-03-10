@@ -32,7 +32,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
             onClick={() => void navigate("/")}
           >
             <BackSvg classname="event-page-header__back-icon" />
-            <Logo />
+            <Logo className="event-page-header__logo" />
           </div>
           <Typography.Title level={1} className="event-page-header__title">
             {role === 0 ? "Страница события" : "Редактор"}

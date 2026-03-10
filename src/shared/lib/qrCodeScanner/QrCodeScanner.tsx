@@ -9,7 +9,7 @@ import {
 import type { Html5QrcodeError } from "html5-qrcode/esm/core";
 import type { Html5QrcodeScannerConfig } from "html5-qrcode/esm/html5-qrcode-scanner";
 import { useCallback, useEffect, useState } from "react";
-import { TrashSvg } from "../../ui";
+import { CrossSvg } from "../../ui";
 import "./QrCodeScanner.scss";
 interface QrCodeScannerProps {
   elementId: string;
@@ -110,7 +110,7 @@ export const QrCodeScanner = ({
             <Button
               onClick={() => setIsOpen(false)}
               className="qr-code-scanner__close-btn"
-              icon={<TrashSvg />}
+              icon={<CrossSvg />}
             />
           )}
         </div>
