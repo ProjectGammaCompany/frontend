@@ -1,8 +1,8 @@
-import { axiosInstance } from "@/src/shared/api"
+import { axiosInstance } from "@/src/shared/api";
 
-export interface getEditorTaskDataResponse {
+export interface GetEditorTaskDataResponse {
   name: string;
-  description: string;
+  description?: string;
   type: number; // начинаем с 1
   options: ServerOption[];
   files: string[];
@@ -21,7 +21,7 @@ export const getEditorTaskData = (
   blockId: string,
   taskId: string,
 ) => {
-  return axiosInstance.get<getEditorTaskDataResponse>(
+  return axiosInstance.get<GetEditorTaskDataResponse>(
     `event/${eventId}/blocks/${blockId}/tasks/${taskId}`,
   );
 };

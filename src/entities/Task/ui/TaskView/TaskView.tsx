@@ -25,6 +25,8 @@ const TaskView = ({
 }: TaskViewProps) => {
   const { title, defaultTime, description, files, timestamp } = taskData;
 
+  console.log("default time", defaultTime);
+
   const extensions = {
     pic: ["svg", "jpg", "jpeg", "png", "webp"],
   };
@@ -69,7 +71,7 @@ const TaskView = ({
   useEffect(() => {
     const currentDate = dayjs(Date.now());
     if (timestamp && defaultTime) {
-      const endTime = dayjs(timestamp, "DD.MM.YYYY HH:mm:ss:SSS", true).add(
+      const endTime = dayjs(timestamp, "DD.MM.YYYY HH:mm:ss.SSS", true).add(
         defaultTime,
         "seconds",
       );
@@ -77,6 +79,10 @@ const TaskView = ({
       setTime(endTime.diff(currentDate, "seconds"));
     }
   }, [defaultTime, timestamp]);
+
+  useEffect(() => {
+    console.log(time);
+  }, [time]);
 
   //todo: фикс зависимостей
   useEffect(() => {

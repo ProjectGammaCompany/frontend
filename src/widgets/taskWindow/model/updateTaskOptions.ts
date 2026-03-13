@@ -1,29 +1,23 @@
-import {
-  taskQueries,
-  type getEditorTaskDataResponse,
-  type ServerOption,
-} from "@/src/entities";
+import { taskQueries, type GetEditorTaskDataResponse } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import type { AxiosResponse } from "axios";
 
-export const updateTaskOptions = (
+export const updateTaskData = (
   eventId: string,
   blockId: string,
   id: string,
-  name: string,
-  options: ServerOption[],
+  updatedData: GetEditorTaskDataResponse,
 ) => {
   queryClient.setQueryData(
     taskQueries.editorTaskData(eventId, blockId, id),
-    (oldData: AxiosResponse<getEditorTaskDataResponse>) => {
+    (oldData: AxiosResponse<GetEditorTaskDataResponse>) => {
       //todo: check if splice is bad
       if (oldData) {
-        const newData: AxiosResponse<getEditorTaskDataResponse> = {
+        const newData: AxiosResponse<GetEditorTaskDataResponse> = {
           ...oldData,
           data: {
             ...oldData.data,
-            name,
-            options,
+            ...updatedData,
           },
         };
         return newData;
