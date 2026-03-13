@@ -90,6 +90,10 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     setConditionWindowOpen(true);
   };
 
+  const handleTaskWindowClose = () => {
+    dispatch(setTaskId(""));
+  };
+
   useEffect(() => {
     if (data) {
       dispatch(setName(data.name));
@@ -140,6 +144,9 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
             {...(taskWindowMode === "edit" && editTaskId
               ? { mode: "edit", editData: { id: editTaskId } }
               : { mode: "create" })}
+            onClose={
+              taskWindowMode === "edit" ? handleTaskWindowClose : undefined
+            }
           />
           <ConditionWindow
             open={conditionWindowOpen}
