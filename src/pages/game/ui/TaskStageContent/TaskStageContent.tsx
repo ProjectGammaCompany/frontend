@@ -74,7 +74,6 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     ),
   };
 
-  //todo: проверить зависимости
   useEffect(() => {
     if (
       !task.timestamp &&
@@ -88,10 +87,12 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
       task.time &&
       task.timestamp &&
       dayjs(Date.now()) >
-        dayjs(task.timestamp, "DD.MM.YYYY HH:mm:ss.SSS", true) &&
+        dayjs(task.timestamp, "DD.MM.YYYY HH:mm:ss.SSS", true).add(
+          task.time,
+          "seconds",
+        ) &&
       !isOverdueTask
     ) {
-      console.log("ставлю overdueTask");
       setIsOverdueTask(true);
     }
   }, [
@@ -103,7 +104,11 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   ]);
 
   useEffect(() => {
-    if (isOverdueTask) {
+    if (
+      isOverdueTask &&
+      !sendAnswerMutation.isPending &&
+      !sendAnswerMutation.isError
+    ) {
       sendAnswerMutation.mutate([]);
     }
   }, [isOverdueTask, sendAnswerMutation]);
