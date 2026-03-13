@@ -95,7 +95,7 @@ export {
   useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
-  type getEditorTaskDataResponse,
+  type GetEditorTaskDataResponse,
   type ServerOption,
   type UpdateTaskResponse,
 } from "./Task";

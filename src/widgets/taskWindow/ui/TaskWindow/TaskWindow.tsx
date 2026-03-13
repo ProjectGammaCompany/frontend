@@ -5,6 +5,7 @@ import {
   useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
+  type GetEditorTaskDataResponse,
   type ServerOption,
   type UpdateTaskResponse,
 } from "@/src/entities";
@@ -17,7 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addTaskToList } from "../../model/addTaskToList";
 import { removeTaskFromList } from "../../model/removeTaskFromList";
 import { updateTaskInQuery } from "../../model/updateTaskInQuery";
-import { updateTaskOptions as updateTaskData } from "../../model/updateTaskOptions";
+import { updateTaskData } from "../../model/updateTaskOptions";
 import "./TaskWindow.scss";
 
 export type TaskWindowMode = "create" | "edit";
@@ -28,6 +29,7 @@ interface TaskWindowProps {
   order: number;
   open: boolean;
   setIsOpen: (value: boolean) => void;
+  onClose?: () => void;
 }
 
 type CreateTaskProps = TaskWindowProps & {
@@ -42,7 +44,7 @@ type EditTaskProps = TaskWindowProps & {
 };
 
 const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
-  const { eventId, blockId, mode, open, setIsOpen, order } = props;
+  const { eventId, blockId, mode, open, setIsOpen, order, onClose } = props;
 
   const id = mode === "edit" ? props.editData.id : undefined;
 
@@ -70,6 +72,7 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
 
   const handleAfterClose = () => {
     setName("");
+    onClose?.();
   };
 
   useEffect(() => {
@@ -120,13 +123,15 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
               variables.name,
               data.data.order - 1,
             );
-            updateTaskData(
-              eventId,
-              blockId,
-              id,
-              variables.name,
-              data.data.options,
-            );
+            const updatedData: GetEditorTaskDataResponse = {
+              ...variables,
+              options: data.data.options,
+              partialPoints:
+                typeof variables.partialPoints === "boolean"
+                  ? variables.partialPoints
+                  : false,
+            };
+            updateTaskData(eventId, blockId, id, updatedData);
           }}
           onSuccessText="Данные успешно обновлены"
         />
