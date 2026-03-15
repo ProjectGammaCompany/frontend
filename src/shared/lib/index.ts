@@ -1,3 +1,5 @@
+import { MessageContext } from "./messages/messagesContext";
+import { useMessage } from "./messages/useMessage";
 export { globalRouter } from "./globalRouter/main";
 export {
   mockTokenStorage,
@@ -24,6 +26,8 @@ export { getRandomString } from "./workWithStrokes";
 export { type ChangeTypeOfKeys, type PickPartial } from "./tsTypes";
 
 export { NotificationContext, useNotify } from "./notifications";
+
+export { MessageContext, useMessage };
 
 export { useDebounce, useWindowWidth } from "./customHooks";
 

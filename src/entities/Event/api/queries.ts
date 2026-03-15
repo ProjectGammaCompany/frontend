@@ -4,4 +4,5 @@ export const eventQueries = {
   getGroups: (eventId: string) => [eventId, "groups"] as const,
   getJoinRequiredFields: (joinCode: string) =>
     [joinCode, "joinRequiredFields"] as const,
+  getJoinCodeData: (eventId: string) => [eventId, "joinCodeData"] as const,
 };
