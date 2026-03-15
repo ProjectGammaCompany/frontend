@@ -21,47 +21,51 @@ const router = createBrowserRouter([
         middleware: [authMiddleware],
         Component: AuthPage,
       },
-
-      {
-        path: "event/:eventId",
-        children: [
-          {
-            path: "game",
-            Component: GamePage,
-          },
-          {
-            path: "stats",
-            Component: StatsPage,
-          },
-          {
-            index: true,
-            Component: EventPage,
-          },
-        ],
-      },
       {
         path: "/",
         middleware: [privateRoutesMiddleware],
         children: [
           {
-            path: "/",
-            Component: BaseLayout,
+            path: "event/:eventId",
             children: [
               {
+                path: "game",
+                Component: GamePage,
+              },
+              {
+                path: "stats",
+                Component: StatsPage,
+              },
+              {
                 index: true,
-                Component: HomePage,
+                Component: EventPage,
               },
+            ],
+          },
+          {
+            path: "/",
+            children: [
               {
-                path: "profile",
-                Component: ProfilePage,
-              },
-              {
-                path: "notifications",
-                Component: NotificationPage,
-              },
-              {
-                path: "myEvents",
-                Component: MyEventsPage,
+                path: "/",
+                Component: BaseLayout,
+                children: [
+                  {
+                    index: true,
+                    Component: HomePage,
+                  },
+                  {
+                    path: "profile",
+                    Component: ProfilePage,
+                  },
+                  {
+                    path: "notifications",
+                    Component: NotificationPage,
+                  },
+                  {
+                    path: "myEvents",
+                    Component: MyEventsPage,
+                  },
+                ],
               },
             ],
           },
