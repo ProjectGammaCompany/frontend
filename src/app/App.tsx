@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router";
 import { queryClient } from "../shared/api";
 import AntConfigProvider from "./providers/antConfigProvider/AntConfigProvider";
+import { MessageProvider } from "./providers/messageProvider/messageProvider";
 import { NotificationProvider } from "./providers/notificationProvider/notificationProvider";
 import router from "./providers/routerProvider/router";
 import { useClearTokens } from "./providers/useClearTokensOnClose";
@@ -20,7 +21,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AntConfigProvider>
         <NotificationProvider>
-          <RouterProvider router={router} />
+          <MessageProvider>
+            <RouterProvider router={router} />
+          </MessageProvider>
         </NotificationProvider>
       </AntConfigProvider>
       <ReactQueryDevtools initialIsOpen={false} />

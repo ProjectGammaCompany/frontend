@@ -35,6 +35,7 @@ export {
   setName,
   useEditingEventData,
   useGroups,
+  useJoinCodeData,
   useJoinRequiredFields,
   usePersonalEvents,
   useUpdateBlocksOrder,
@@ -56,6 +57,7 @@ export {
   type TaskStage,
   type TaskStageData,
   type UseGroupsQueryData,
+  type UseJoinCodeDataResult,
 } from "./Event";
 
 export {

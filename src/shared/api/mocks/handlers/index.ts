@@ -15,6 +15,12 @@ export const handlers = [
       groupFields: true,
     });
   }),
+  http.get(`${baseUrl}events/:eventId/joinCode`, () => {
+    return HttpResponse.json({
+      joinCode: "3233323223",
+      expiresAt: "12.08.2004 23:59.323",
+    });
+  }),
   http.post(`${baseUrl}events/join/:joinCode`, () => {
     return HttpResponse.json({
       eventId: "33d7c987-50cd-422f-9c7e-4c824c92e218",

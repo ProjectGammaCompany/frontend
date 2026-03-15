@@ -5,6 +5,7 @@ import {
   getEditingEventSettings,
   selectEventName,
   setName,
+  useJoinCodeData,
   type BaseEventFormData,
   type ClientGroup,
   type EditEventSettingsResponse,
@@ -46,13 +47,20 @@ const EditEventSettingsWindow = ({
   const title = useSelector(selectEventName);
   const navigate = useNavigate();
 
-  const { data } = useQuery({
+  const { data: formData } = useQuery({
     queryKey: [eventId, "settings"],
     queryFn: () => getEditingEventSettings(eventId),
     select: (data) => {
       return mapServerDataToFormData({ ...data.data, name: title });
     },
   });
+
+  const {
+    data: joinCodeData,
+    isPending: isJoinCodeDataPending,
+    isError: isJoinCodeDataError,
+    refetch,
+  } = useJoinCodeData(eventId, false);
 
   const [showSuccessText, setShowSuccessText] = useState(false);
 
@@ -86,10 +94,16 @@ const EditEventSettingsWindow = ({
   });
 
   useEffect(() => {
-    if (data?.groupEvent) {
-      setGroupEvent(data.groupEvent);
+    if (formData?.groupEvent) {
+      setGroupEvent(formData.groupEvent);
     }
-  }, [data]);
+  }, [formData]);
+
+  useEffect(() => {
+    if (open && formData?.private) {
+      void refetch();
+    }
+  }, [formData?.private, open, refetch]);
 
   return (
     <>
@@ -105,7 +119,9 @@ const EditEventSettingsWindow = ({
             submitBtnText="Применить"
             onSuccessText="Настройки обновлены"
             showSuccessText={showSuccessText}
-            joinCode={data?.joinCode}
+            isJoinCodePending={isJoinCodeDataPending}
+            isJoinCodeError={isJoinCodeDataError}
+            joinCode={joinCodeData}
             mutationFn={(data) => editEventSettings(eventId, data)}
             onSuccessFn={(response, variables) => {
               const newData = {
@@ -115,11 +131,14 @@ const EditEventSettingsWindow = ({
               dispatch(setName(variables.name));
               updateSettingsInQuery(eventId, newData);
               setShowSuccessText(true);
+              if (variables.private) {
+                void refetch();
+              }
               setTimeout(() => {
                 setShowSuccessText(false);
               }, 3000);
             }}
-            defaultData={data}
+            defaultData={formData}
           >
             <Form.Item<EditingEventSettings>
               name="rating"
