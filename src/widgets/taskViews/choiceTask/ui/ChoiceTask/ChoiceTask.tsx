@@ -59,6 +59,8 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     undefined,
   );
 
+  const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
+
   const handleOptionClick = (id: string, value: boolean) => {
     if (!value) {
       setAnswer((prev) => prev.filter((el) => el != id));
@@ -74,14 +76,23 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const handleSuccessAnswerSending = (
     data: AxiosResponse<SendAnswerResponse>,
   ) => {
-    console.log(data.data);
-    const { points, rightAnswer } = data.data;
+    setSendButtonDisabled(true);
+    const { points, rightAnswerId, status } = data.data;
     SetIsExpirationFnCanceled(true);
-    setRightAnswer(rightAnswer);
-    if (points) {
+    setRightAnswer(rightAnswerId);
+    if (status === "correct") {
       notify.success({
         title: "Задача успешно пройдена!",
-        description: `Вами получено ${points}`,
+        description: points ? `Вами получено ${points}` : undefined,
+      });
+    } else if (status === "incorrect") {
+      notify.error({
+        title: "Задача пройдена неправильно!",
+      });
+    } else {
+      notify.warning({
+        title: "Задача пройдена частично правильно.",
+        description: points ? `Вами получено ${points}` : undefined,
       });
     }
     setTimeout(() => {
@@ -140,6 +151,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
           eventId={eventId}
           blockId={blockId}
           taskId={id}
+          disabled={sendButtonDisabled}
           answer={answer}
           onSuccess={handleSuccessAnswerSending}
         />

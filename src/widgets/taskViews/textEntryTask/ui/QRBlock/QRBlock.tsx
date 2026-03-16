@@ -67,7 +67,9 @@ const QRInputBlock = ({
           <Input
             disabled={disabled}
             value={answer[0]}
-            onChange={(e) => setAnswer([e.currentTarget.value])}
+            onChange={(e) =>
+              setAnswer([e.currentTarget.value.toLocaleUpperCase()])
+            }
           />
         </div>
       )}

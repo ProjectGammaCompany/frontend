@@ -21,7 +21,7 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  rating: number;
+  rate: number;
   favorite: boolean;
   lastEditionDate: string;
   tags: Tag[];

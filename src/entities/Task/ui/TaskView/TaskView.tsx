@@ -25,8 +25,6 @@ const TaskView = ({
 }: TaskViewProps) => {
   const { title, defaultTime, description, files, timestamp } = taskData;
 
-  console.log("default time", defaultTime);
-
   const extensions = {
     pic: ["svg", "jpg", "jpeg", "png", "webp"],
   };
@@ -110,7 +108,7 @@ const TaskView = ({
           <Typography.Paragraph>{description}</Typography.Paragraph>
         </div>
       )}
-      {files && (
+      {files && files.length > 0 && (
         <div>
           <Typography.Title level={2}>Файлы</Typography.Title>
           <ul className="task-view__file-list">
