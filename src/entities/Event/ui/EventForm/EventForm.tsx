@@ -218,7 +218,12 @@ export const EventForm = <TData extends EventFormData, TResponse>({
           </Form.Item>
         </div>
         <Form.Item<EventFormData> name="description" label="Описание события:">
-          <Input.TextArea placeholder="Введите текст" />
+          <Input.TextArea
+            placeholder="Введите текст"
+            autoSize={{
+              minRows: 3,
+            }}
+          />
         </Form.Item>
         <Form.Item<EventFormData> name="startDate" label="Время начала">
           <CustomDatePicker showTime />
