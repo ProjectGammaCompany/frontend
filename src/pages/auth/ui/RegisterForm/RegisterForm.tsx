@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { type registerProps } from "../../api/register";
 import { EMAIL_RULES, PASSWORD_RULES } from "../../const/rules";
@@ -7,11 +8,17 @@ import AuthForm from "../AuthForm/AuthForm";
 const RegisterForm = () => {
   const navigate = useNavigate();
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleSuccessRegister = () => {
     void navigate("/");
   };
 
-  const registerMutation = useRegister(handleSuccessRegister);
+  const registerMutation = useRegister(
+    handleSuccessRegister,
+    () => setErrorMessage("Пользователь с указанной почтой уже существует"),
+    () => setErrorMessage("Произошла ошибка. Повторите попытку позже."),
+  );
   return (
     <AuthForm<registerProps>
       name="register"
@@ -50,7 +57,7 @@ const RegisterForm = () => {
       submitButtonText="Зарегистрироваться"
       onFinish={(values) => registerMutation.mutate(values)}
       loading={registerMutation.isPending}
-      error={registerMutation.error ? "Произошла ошибка" : undefined}
+      error={registerMutation.isError ? errorMessage : undefined}
     />
   );
 };

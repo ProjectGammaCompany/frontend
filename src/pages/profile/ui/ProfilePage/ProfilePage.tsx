@@ -1,18 +1,37 @@
-import { Typography } from "antd";
+import { errorText } from "@/src/shared/api";
+import { Flex, Spin, Typography } from "antd";
 import { useProfileData } from "../../model/useProfileData";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
 import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";
 
 const ProfilePage = () => {
-  const { data, isError, isPending } = useProfileData();
+  const { data, isError, isPending, error } = useProfileData();
 
   if (isPending) {
-    return <div>Загрузка</div>;
+    return (
+      <Flex align="center" justify="center">
+        <Spin />
+      </Flex>
+    );
   }
 
   if (isError) {
-    return <div>Ошибка</div>;
+    return (
+      <Flex justify="center">
+        <Typography.Paragraph type="danger">
+          {errorText(
+            error,
+            () => undefined,
+            () => undefined,
+            undefined,
+            "Произошла ошибка. Перезагрузите страницу.",
+            "Произошла ошибка. Перезагрузите страницу.",
+            "Произошла ошибка. Перезагрузите страницу.",
+          )}
+        </Typography.Paragraph>
+      </Flex>
+    );
   }
 
   return (

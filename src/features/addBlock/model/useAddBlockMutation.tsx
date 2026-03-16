@@ -10,6 +10,7 @@ import { addBlock, type AddBlockResponse } from "../api/addBlock";
 export const useAddBlockMutation = (
   eventId: string,
   blocks: BlockItemData[],
+  onError: () => void,
   onBlockCreate?: (blockId: string) => void,
 ) => {
   return useMutation<
@@ -19,6 +20,7 @@ export const useAddBlockMutation = (
   >({
     mutationKey: ["addBlock", eventId],
     mutationFn: addBlock,
+    onError,
     onSuccess: (data, variables) => {
       queryClient.setQueryData(
         [eventId, "data"],

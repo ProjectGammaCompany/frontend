@@ -7,6 +7,7 @@ import {
   useUpdateBlocksOrder,
 } from "@/src/entities";
 import { AddBlockMenu } from "@/src/features";
+import { useNotify } from "@/src/shared/lib";
 import BlockItem from "@/src/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
 import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
 import { Button, Typography } from "antd";
@@ -30,6 +31,7 @@ const BaseEditorContent = ({
   onBlockClick,
 }: EditorContentProps) => {
   const name = useSelector(selectEventName);
+  const notify = useNotify();
 
   const blockReorderingState = useSelector(selectBlockReorderingState);
 
@@ -41,9 +43,18 @@ const BaseEditorContent = ({
     dispatch(setBlockReorderingState(false));
   };
 
+  const handleFailedBlocksOrderUpdating = () => {
+    notify.error({
+      title: "Не удалось обновить порядок",
+      description: "Произошла ошибка. Повторите попытку или попробуйте позже",
+      placement: "top",
+    });
+  };
+
   const updateBlocksOrderMutation = useUpdateBlocksOrder(
     eventId,
     handleSuccessBlocksOrderUpdating,
+    handleFailedBlocksOrderUpdating,
   );
 
   const onBeforeCapture = useCallback(() => {
@@ -124,7 +135,6 @@ const BaseEditorContent = ({
     return <div>Ошибка!</div>;
   }
 
-  //todo: Проверить, блочит ли loading кликание на кнопку
   return (
     <div className="base-editor-content">
       <div className="base-editor-content__name">

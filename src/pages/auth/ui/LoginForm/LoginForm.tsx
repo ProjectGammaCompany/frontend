@@ -13,7 +13,16 @@ const LoginForm = () => {
   const handleSuccessLogin = () => {
     void navigate("/");
   };
-  const loginMutation = useLogin(rememberMe, handleSuccessLogin);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const loginMutation = useLogin(
+    rememberMe,
+    handleSuccessLogin,
+    () => setErrorMessage("Пользователя с указанными данными не существует"),
+    () => setErrorMessage("Пользователя с указанными данными не существует"),
+    () => setErrorMessage("Произошла ошибка. Повторите попытку позже."),
+  );
 
   return (
     <AuthForm<loginProps>
@@ -51,7 +60,7 @@ const LoginForm = () => {
       }
       submitButtonText="Войти"
       loading={loginMutation.isPending}
-      error={loginMutation.error ? "Произошла ошибка" : undefined}
+      error={loginMutation.error ? errorMessage : undefined}
     />
   );
 };
