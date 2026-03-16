@@ -11,6 +11,7 @@ import {
   type EditEventSettingsResponse,
   type EditingEventSettings,
 } from "@/src/entities";
+import { useNotify } from "@/src/shared/lib";
 import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/src/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
@@ -44,6 +45,7 @@ const EditEventSettingsWindow = ({
   open,
   setIsOpen,
 }: EditEventWindowProps) => {
+  const notify = useNotify();
   const title = useSelector(selectEventName);
   const navigate = useNavigate();
 
@@ -93,6 +95,14 @@ const EditEventSettingsWindow = ({
     },
   });
 
+  const handleFailedUpdate = () => {
+    notify.error({
+      title: "Ошибка создания события",
+      description: "Не удалось создать событие. Повторите попытку",
+      placement: "top",
+    });
+  };
+
   useEffect(() => {
     if (formData?.groupEvent) {
       setGroupEvent(formData.groupEvent);
@@ -121,6 +131,7 @@ const EditEventSettingsWindow = ({
             showSuccessText={showSuccessText}
             isJoinCodePending={isJoinCodeDataPending}
             isJoinCodeError={isJoinCodeDataError}
+            onError={handleFailedUpdate}
             joinCode={joinCodeData}
             mutationFn={(data) => editEventSettings(eventId, data)}
             onSuccessFn={(response, variables) => {

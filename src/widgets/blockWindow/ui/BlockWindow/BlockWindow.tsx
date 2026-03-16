@@ -1,5 +1,6 @@
 import {
   selectTasksReorderingState,
+  setTasksReorderingState,
   useBlockSettings,
   useUpdateBlockName,
   type Condition,
@@ -7,11 +8,11 @@ import {
 } from "@/src/entities";
 import { DeleteBlockButton } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
-import { useDebounce } from "@/src/shared/lib";
+import { useDebounce, useNotify } from "@/src/shared/lib";
 import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
 import TaskList from "../TaskList/TaskList";
@@ -25,6 +26,7 @@ interface BlockWindowProps {
   onTaskClick: (id: string, order: number) => void;
   onConditionClick: (condition: Condition) => void;
   onCreateConditionBtnClick: () => void;
+  onError: () => void;
 }
 
 const BlockWindow = ({
@@ -36,7 +38,9 @@ const BlockWindow = ({
   onTaskClick,
   onConditionClick,
   onCreateConditionBtnClick,
+  onError,
 }: BlockWindowProps) => {
+  const notify = useNotify();
   const [windowState, setWindowState] = useState<
     "tasks" | "conditions" | "settings"
   >("tasks");
@@ -44,6 +48,8 @@ const BlockWindow = ({
   const { data, isPending, isError } = useBlockSettings(eventId, blockId);
 
   const tasksReorderingState = useSelector(selectTasksReorderingState);
+
+  const dispatch = useDispatch();
 
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
@@ -69,7 +75,7 @@ const BlockWindow = ({
   useEffect(() => {
     if (!isInitialized) return;
     updateBlockNameMutation.mutate(debounceName);
-  }, [debounceName]);
+  }, [debounceName, isInitialized, updateBlockNameMutation]);
 
   const handleSettingsBtnClick = () => {
     setWindowState((prev) => {
@@ -81,11 +87,16 @@ const BlockWindow = ({
   };
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return;
   }
 
   if (isError) {
-    return <div>Ошибка!</div>;
+    notify.error({
+      title: "Не удалось загрузить данные",
+      description: "Произошла ошибка. Попробуйте нажать снова",
+    });
+    onError();
+    return <></>;
   }
 
   const settingFormData: UpdateBlockData = {
@@ -100,6 +111,7 @@ const BlockWindow = ({
       setIsOpen={setIsOpen}
       afterClose={() => {
         setWindowState("tasks");
+        dispatch(setTasksReorderingState(false));
       }}
     >
       <Typography.Text className="block-window__order">

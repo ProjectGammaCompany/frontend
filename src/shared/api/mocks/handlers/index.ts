@@ -1,7 +1,7 @@
-import { http, HttpResponse } from "msw";
-
 // const validAccessToken = "testAccess";
 // const validRefreshToken = "testRefresh";
+
+import { http, HttpResponse } from "msw";
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
 
@@ -13,12 +13,6 @@ export const handlers = [
   http.get(`${baseUrl}events/joinRequiredFields/:joinCode`, () => {
     return HttpResponse.json({
       groupFields: true,
-    });
-  }),
-  http.get(`${baseUrl}events/:eventId/joinCode`, () => {
-    return HttpResponse.json({
-      joinCode: "3233323223",
-      expiresAt: "12.08.2004 23:59.323",
     });
   }),
   http.post(`${baseUrl}events/join/:joinCode`, () => {
@@ -107,12 +101,31 @@ export const handlers = [
   }),
   http.delete(`${baseUrl}notifications/:id`, () => {
     return new HttpResponse(null, {
-      status: 200,
+      status: 500,
     });
   }),
-  http.post(`${baseUrl}events/:eventId/join`, () => {
-    return new HttpResponse(null, {
-      status: 200,
+  http.get(`${baseUrl}event/:eventId/playerStats`, () => {
+    return HttpResponse.json({
+      fullStats: false,
+      users: [
+        {
+          id: "233233223",
+          username: "khavronich12",
+          avatar: "223232323",
+          points: 30,
+        },
+      ],
+    });
+  }),
+  http.get(`${baseUrl}event/:eventId/playerInfo`, () => {
+    return HttpResponse.json({
+      title: "string",
+      description: "string",
+      rate: 3, // float
+      favorite: false,
+      tags: [],
+      status: "not started",
+      needGroup: true,
     });
   }),
 ];

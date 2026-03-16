@@ -5,9 +5,10 @@ import {
   usePersonalEvents,
   type QueryFnType,
 } from "@/src/entities";
+import { errorText } from "@/src/shared/api";
 import { getFullFileUrl } from "@/src/shared/lib";
 import { LinkEventCard } from "@/src/widgets";
-import { Spin, Typography } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useOnInView } from "react-intersection-observer";
 import "./UserEventsList.scss";
 
@@ -61,10 +62,25 @@ const UserEventsList = ({ triggerLoading, listType }: UserEventsListProps) => {
         })}
       </div>
       {(isFetching || error) && (
-        <div className="home-page__spin-wrapper">
+        <Flex justify="center">
           {isFetching && !error && <Spin />}
-          {error && <Typography>Возникла ошибка</Typography>}
-        </div>
+          {error && (
+            <Flex justify="center" vertical>
+              <Typography.Paragraph type="danger">
+                {errorText(
+                  error,
+                  () => undefined,
+                  () => undefined,
+                  undefined,
+                  "Произошла ошибка",
+                  "Произошла ошибка",
+                  "Произошла ошибка",
+                )}
+              </Typography.Paragraph>
+              <Button onClick={() => void fetchNextPage()}>Обновить</Button>
+            </Flex>
+          )}
+        </Flex>
       )}
       <div ref={inViewRef} className="home-page__intersection-observer" />
     </div>

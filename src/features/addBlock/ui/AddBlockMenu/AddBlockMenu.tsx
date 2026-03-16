@@ -1,4 +1,5 @@
 import type { BlockItemData } from "@/src/entities";
+import { useNotify } from "@/src/shared/lib";
 import { BackSvg } from "@/src/shared/ui";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import classnames from "classnames";
@@ -21,6 +22,7 @@ const AddBlockMenu = ({
   onBlockCreate,
   isHidden,
 }: AddBlockMenuProps) => {
+  const notify = useNotify();
   const [openMenu, setMenuIsOpen] = useState(false);
 
   const [showArea, setShowArea] = useState(false);
@@ -30,7 +32,19 @@ const AddBlockMenu = ({
     "add-block-menu_hidden": isHidden,
   });
 
-  const addBlockMutation = useAddBlockMutation(eventId, blocks, onBlockCreate);
+  const handleFailedBlockAdding = () => {
+    notify.error({
+      title: "Не удалось добавить блок",
+      description: "Произошла ошибка. Повторите попытку.",
+    });
+  };
+
+  const addBlockMutation = useAddBlockMutation(
+    eventId,
+    blocks,
+    handleFailedBlockAdding,
+    onBlockCreate,
+  );
 
   const onBeforeCapture = useCallback(() => {
     setShowArea(true);

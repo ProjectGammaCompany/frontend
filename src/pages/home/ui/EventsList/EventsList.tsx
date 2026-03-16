@@ -1,7 +1,8 @@
+import { eventQueries } from "@/src/entities";
 import { queryClient } from "@/src/shared/api";
 import { getFullFileUrl } from "@/src/shared/lib";
 import { LinkEventCard } from "@/src/widgets";
-import { Spin, Typography } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect } from "react";
 import { useOnInView } from "react-intersection-observer";
 import { useAllEvents, type Filters } from "../../model/useAllEvents";
@@ -23,7 +24,7 @@ const EventsList = ({ filters }: EventsListProps) => {
 
   useEffect(() => {
     void queryClient.invalidateQueries({
-      queryKey: ["allEvents"],
+      queryKey: eventQueries.getEvents(),
     });
   }, [filters]);
 
@@ -48,7 +49,23 @@ const EventsList = ({ filters }: EventsListProps) => {
       {(isFetching || error) && (
         <div className="home-page__spin-wrapper">
           {isFetching && !error && <Spin />}
-          {error && <Typography>Возникла ошибка</Typography>}
+          {error && (
+            <Flex justify="center" vertical>
+              <Typography.Paragraph
+                type="danger"
+                className="events-list__error"
+              >
+                Возникла ошибка при загрузке
+              </Typography.Paragraph>
+              <Button
+                onClick={() => {
+                  void fetchNextPage();
+                }}
+              >
+                Обновить
+              </Button>
+            </Flex>
+          )}
         </div>
       )}
       <div ref={inViewRef} className="home-page__intersection-observer" />
