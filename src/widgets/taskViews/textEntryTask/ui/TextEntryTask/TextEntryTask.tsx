@@ -47,6 +47,8 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
 
   const [answer, setAnswer] = useState<string[]>([]);
 
+  const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
+
   const [rightAnswer, setRightAnswer] = useState<string[] | undefined>(
     undefined,
   );
@@ -59,17 +61,27 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     data: AxiosResponse<SendAnswerResponse>,
   ) => {
     setDisabled(true);
+    setSendButtonDisabled(true);
 
     SetIsExpirationFnCanceled(true);
 
-    const { points, rightAnswer } = data.data;
+    const { points, rightAnswer, status } = data.data;
 
     setRightAnswer(rightAnswer);
 
-    if (points) {
+    if (status === "correct") {
       notify.success({
         title: "Задача успешно пройдена!",
-        description: `Вами получено ${points}`,
+        description: points ? `Вами получено ${points}` : undefined,
+      });
+    } else if (status === "incorrect") {
+      notify.error({
+        title: "Задача пройдена неправильно!",
+      });
+    } else {
+      notify.warning({
+        title: "Задача пройдена частично правильно.",
+        description: points ? `Вами получено ${points}` : undefined,
       });
     }
     setTimeout(() => {
@@ -130,7 +142,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
             blockId={blockId}
             taskId={id}
             answer={answer.length > 0 ? [answer[0].toLocaleLowerCase()] : []}
-            disabled={!answer.at(0)}
+            disabled={!answer.at(0) || sendButtonDisabled}
             onSuccess={handleSuccessAnswerSending}
           />
         </div>

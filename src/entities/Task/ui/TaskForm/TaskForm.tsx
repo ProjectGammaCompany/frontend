@@ -291,7 +291,7 @@ const TaskForm = <TResponse,>({
         label="Описание"
         initialValue={""}
       >
-        <Input.TextArea />
+        <Input.TextArea autoSize={{ minRows: 3 }} />
       </Form.Item>
       <Form.Item name="options" noStyle>
         <div />
