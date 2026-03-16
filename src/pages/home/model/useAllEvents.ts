@@ -1,4 +1,8 @@
-import { getEvents, type getEventsResponse } from "@/src/entities";
+import {
+  eventQueries,
+  getEvents,
+  type getEventsResponse,
+} from "@/src/entities";
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 
@@ -15,10 +19,10 @@ export const useAllEvents = (filters: Filters) => {
     AxiosResponse<getEventsResponse>,
     Error,
     InfiniteData<AxiosResponse<getEventsResponse>>,
-    ["allEvents"],
+    readonly unknown[],
     number
   >({
-    queryKey: ["allEvents"],
+    queryKey: eventQueries.getEvents(),
     queryFn: ({ pageParam }) =>
       getEvents({
         ...filters,

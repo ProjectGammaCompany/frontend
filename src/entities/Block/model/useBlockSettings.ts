@@ -6,5 +6,6 @@ export const useBlockSettings = (eventId: string, blockId: string) => {
     queryKey: [eventId, blockId, "blockInfo"],
     queryFn: () => getBlockSettings(eventId, blockId),
     select: (data) => data.data,
+    retry: false,
   });
 };

@@ -4,13 +4,14 @@ import {
   type JoinDetails,
   type UseJoinEventResponse,
 } from "@/src/entities";
+import { errorText } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Button, Form, Input, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import Password from "antd/es/input/Password";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-
+import "./JoinWithCodeWindow.scss";
 interface JoinWithCodeWindowProps {
   open: boolean;
   setIsOpen: (value: boolean) => void;
@@ -23,12 +24,16 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
 
   const [joinCode, setJoinCode] = useState<string>("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [usedJoinCode, setUsedJoinCode] = useState("");
 
-  const { data: requiredFields } = useJoinRequiredFields(
-    usedJoinCode,
-    !!usedJoinCode,
-  );
+  const {
+    data: requiredFields,
+    error: requiredFieldsError,
+    isPending,
+    refetch,
+  } = useJoinRequiredFields(usedJoinCode, !!usedJoinCode);
 
   const [form] = useForm<JoinForm>();
 
@@ -36,11 +41,17 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
     void navigate(`event/${response.data.eventId}`);
   };
 
-  const joinEventMutation = useJoinEvent(usedJoinCode, handleSuccessJoin);
+  const joinEventMutation = useJoinEvent(
+    usedJoinCode,
+    handleSuccessJoin,
+    () => setErrorMessage("Введены некорректные данные"),
+    () => setErrorMessage("Произошла ошибка. Повторите попытку"),
+  );
 
   const handleAfterClose = () => {
     setJoinCode("");
     setUsedJoinCode("");
+    setErrorMessage("");
     form.resetFields();
   };
 
@@ -56,6 +67,7 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
     >
       {requiredFields ? (
         <Form
+          layout="vertical"
           form={form}
           requiredMark={false}
           scrollToFirstError={{
@@ -103,8 +115,17 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
               </Form.Item>
             </div>
           )}
-          <Form.Item>
-            <Button htmlType="submit" loading={joinEventMutation.isPending}>
+          <Form.Item className="join-with-code-window__btn-wrapper">
+            {errorMessage && (
+              <Typography.Paragraph type="danger">
+                {errorMessage}
+              </Typography.Paragraph>
+            )}
+            <Button
+              htmlType="submit"
+              loading={joinEventMutation.isPending}
+              className="join-with-code-window__submit-btn"
+            >
               Присоединиться
             </Button>
           </Form.Item>
@@ -119,12 +140,32 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
             value={joinCode}
             onChange={(e) => setJoinCode(e.currentTarget.value)}
           />
-          <Button
-            disabled={!joinCode}
-            onClick={() => setUsedJoinCode(joinCode)}
-          >
-            Присоединиться
-          </Button>
+          <div className="join-with-code-window__btn-wrapper">
+            {requiredFieldsError && (
+              <Typography.Paragraph type="danger">
+                {errorText(
+                  requiredFieldsError,
+                  () => undefined,
+                  () => undefined,
+                  undefined,
+                  "Некорректный код",
+                  undefined,
+                  "Произошла ошибка. Повторите попытку",
+                )}
+              </Typography.Paragraph>
+            )}
+            <Button
+              className="join-with-code-window__submit-btn"
+              disabled={!joinCode}
+              loading={isPending && !!usedJoinCode}
+              onClick={() => {
+                setUsedJoinCode(joinCode);
+                void refetch();
+              }}
+            >
+              Присоединиться
+            </Button>
+          </div>
         </div>
       )}
     </CustomModalWindow>

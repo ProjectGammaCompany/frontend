@@ -52,6 +52,7 @@ interface EventFormProps<TData extends EventFormData, TResponse> {
   children?: ReactNode;
   onSuccessText?: string;
   showSuccessText?: boolean;
+  onError: () => void;
   onSuccessFn?: (
     data: TResponse,
     variables: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
@@ -62,6 +63,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   mutationFn,
   onSuccessFn,
   onSuccessText,
+  onError,
   showSuccessText,
   defaultData,
   submitBtnText,
@@ -79,6 +81,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   >({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
+    onError,
   });
 
   const { data: tags } = useQuery({
@@ -114,6 +117,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       },
       onError: (error) => {
         onError?.(error);
+        //@ts-expect-error форма недостаточно умная
+        form.setFieldValue("cover", undefined);
       },
     });
   };
@@ -207,6 +212,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             name="name"
             label="Название события:"
             rules={[{ required: true }]}
+            className="event-form__name-item"
           >
             <Input />
           </Form.Item>
