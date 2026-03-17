@@ -1,9 +1,11 @@
+import { useTitle } from "@/src/shared/lib";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
 import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import StatsPageContent from "../StatsPageContent/StatsPageContent";
 import "./StatsPage.scss";
 const StatsPage = () => {
+  useTitle("Статистика");
   const navigate = useNavigate();
   const { eventId } = useParams();
 

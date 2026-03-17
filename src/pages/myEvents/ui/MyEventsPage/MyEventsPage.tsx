@@ -1,3 +1,4 @@
+import { useTitle } from "@/src/shared/lib";
 import { Collapse } from "antd";
 import { useState, type ReactNode } from "react";
 import UserEventsList from "../UserEventsList/UserEventsList";
@@ -8,6 +9,7 @@ interface ItemType {
   children: ReactNode;
 }
 const MyEvents = () => {
+  useTitle("Мои события");
   const [key, setActiveKey] = useState<undefined | string>(undefined);
 
   const items: ItemType[] = [
