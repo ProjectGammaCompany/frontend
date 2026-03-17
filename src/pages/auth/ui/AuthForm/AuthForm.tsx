@@ -60,12 +60,17 @@ const AuthForm = <T extends Record<string, any>>({
         </Form.Item>
       ))}
       {extra}
-      {error && <Typography>{error}</Typography>}
+      {error && (
+        <Typography.Paragraph type="danger">{error}</Typography.Paragraph>
+      )}
       <Form.Item label={null}>
         <Button
-          loading={loading}
+          classNames={{
+            icon: "auth-form__submit-btn-icon",
+          }}
           type="primary"
           htmlType="submit"
+          loading={loading}
           className="auth-form__submit-btn"
         >
           {submitButtonText}

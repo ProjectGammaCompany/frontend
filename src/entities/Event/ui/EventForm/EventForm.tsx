@@ -1,7 +1,8 @@
-import { getTags } from "@/src/entities";
+import { getTags, type UseJoinCodeDataResult } from "@/src/entities";
 import {
   getFullFileUrl,
   useFileUpload,
+  useMessage,
   type ChangeTypeOfKeys,
 } from "@/src/shared/lib";
 import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/src/shared/ui";
@@ -42,13 +43,16 @@ export type EventFormData<T extends object = {}> = BaseEventFormData & T;
 interface EventFormProps<TData extends EventFormData, TResponse> {
   defaultData?: TData;
   submitBtnText: string;
-  joinCode?: string;
+  joinCode?: UseJoinCodeDataResult;
+  isJoinCodePending?: boolean;
+  isJoinCodeError?: boolean;
   mutationFn: (
     data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
   ) => Promise<TResponse>;
   children?: ReactNode;
   onSuccessText?: string;
   showSuccessText?: boolean;
+  onError: () => void;
   onSuccessFn?: (
     data: TResponse,
     variables: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
@@ -59,12 +63,17 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   mutationFn,
   onSuccessFn,
   onSuccessText,
+  onError,
   showSuccessText,
   defaultData,
   submitBtnText,
   joinCode,
+  isJoinCodePending,
+  isJoinCodeError,
   children,
 }: EventFormProps<TData, TResponse>) => {
+  const message = useMessage();
+
   const formMutation = useMutation<
     TResponse,
     Error,
@@ -72,6 +81,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   >({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
+    onError,
   });
 
   const { data: tags } = useQuery({
@@ -107,6 +117,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       },
       onError: (error) => {
         onError?.(error);
+        //@ts-expect-error форма недостаточно умная
+        form.setFieldValue("cover", undefined);
       },
     });
   };
@@ -128,6 +140,10 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       form.setFieldsValue(defaultData);
     }
   }, [defaultData, form]);
+
+  useEffect(() => {
+    console.log(privateValue);
+  }, [privateValue]);
 
   return (
     <ConfigProvider
@@ -196,6 +212,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             name="name"
             label="Название события:"
             rules={[{ required: true }]}
+            className="event-form__name-item"
           >
             <Input />
           </Form.Item>
@@ -240,12 +257,68 @@ export const EventForm = <TData extends EventFormData, TResponse>({
           </div>
         </Form.Item>
         {privateValue && (
-          <Form.Item<EventFormData>
-            name="password"
-            label="Пароль"
-            rules={[{ required: privateValue }]}
+          <>
+            <Form.Item<EventFormData>
+              name="password"
+              label="Пароль"
+              rules={[{ required: privateValue }]}
+            >
+              <Input.Password />
+            </Form.Item>
+          </>
+        )}
+        {defaultData?.private && privateValue && (
+          <Form.Item
+            className="event-form__code-item"
+            label="Пригласительный код"
           >
-            <Input.Password />
+            {joinCode && (
+              <Typography.Paragraph className="event-form__code">
+                {joinCode.joinCode}
+              </Typography.Paragraph>
+            )}
+            <Button
+              loading={isJoinCodePending}
+              disabled={isJoinCodeError}
+              className="event-form__join-btn"
+              onClick={() => {
+                if (joinCode) {
+                  void navigator.clipboard
+                    .writeText(joinCode.joinCode)
+                    .then(() => {
+                      message.success({
+                        content: "Пригласительный код скопирован",
+                      });
+                    })
+                    .catch(() => {
+                      message.error({
+                        content: "Не удалось скопировать код",
+                      });
+                    });
+                }
+              }}
+            >
+              Скопировать пригласительный код
+            </Button>
+            {isJoinCodeError && (
+              <Typography.Paragraph
+                type="danger"
+                className="event-form__code-error"
+              >
+                Произошла ошибка.{<br />}Откройте окно заново.
+              </Typography.Paragraph>
+            )}
+            {joinCode && (
+              <Typography.Paragraph className="event-form__code-date">
+                Код активен до{" "}
+                <b>
+                  {joinCode.expiresAt.substring(
+                    0,
+                    joinCode.expiresAt.length - 4,
+                  )}
+                </b>
+              </Typography.Paragraph>
+            )}
           </Form.Item>
         )}
         {children}
@@ -270,16 +343,11 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         </Form.Item>
         {showSuccessText && onSuccessText && (
           <Form.Item>
-            <Typography>{onSuccessText}</Typography>
-          </Form.Item>
-        )}
-        {joinCode && (
-          <Form.Item
-            className="event-form__code-item"
-            label="Пригласительный код"
-          >
-            <Typography.Paragraph copyable className="event-form__code-text">
-              {joinCode}
+            <Typography.Paragraph
+              type="success"
+              className="event-form__submit-text"
+            >
+              {onSuccessText}
             </Typography.Paragraph>
           </Form.Item>
         )}

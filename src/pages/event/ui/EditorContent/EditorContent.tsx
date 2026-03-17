@@ -8,6 +8,7 @@ import {
   type TaskWindowMode,
 } from "@/src/widgets";
 import { useQuery } from "@tanstack/react-query";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCondition, setCondition } from "../../model/conditionSlice";
@@ -17,6 +18,7 @@ import {
   setTaskId,
   setTaskOrder,
 } from "../../model/taskDataSlice";
+import "./EditorContent.scss";
 
 interface EditorContentProps {
   eventId: string;
@@ -30,7 +32,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   const editTaskId = useSelector(selectTaskId);
   const currentCondition = useSelector(selectCondition);
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: [eventId, "data"],
     queryFn: () => getEditingEventData(eventId),
     select: (data) => data.data,
@@ -92,6 +94,14 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     setConditionWindowOpen(true);
   };
 
+  const handleTaskWindowClose = () => {
+    dispatch(setTaskId(""));
+  };
+
+  const handleBlockWindowError = () => {
+    setBlockId(null);
+  };
+
   useEffect(() => {
     if (data) {
       dispatch(setName(data.name));
@@ -108,10 +118,31 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   }, [dispatch]);
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <Flex justify="center" className="editor-content__loading-block">
+        <Spin />
+      </Flex>
+    );
   }
   if (isError) {
-    return <div>Ошибка!</div>;
+    return (
+      <Flex justify="center" align="center" vertical gap={10}>
+        <Typography.Paragraph
+          type="danger"
+          className="editor-content__error-text"
+        >
+          Произошла ошибка. Обновите страницу
+        </Typography.Paragraph>
+        <Button
+          onClick={() => {
+            void refetch();
+          }}
+          className="editor-content__refetch-btn"
+        >
+          Обновить
+        </Button>
+      </Flex>
+    );
   }
   return (
     <div>
@@ -132,6 +163,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
             onTaskClick={handleTaskClick}
             onConditionClick={handleConditionClick}
             onCreateConditionBtnClick={handleCreateConditionBtnClick}
+            onError={handleBlockWindowError}
           />
           <TaskWindow
             order={taskOrder}
@@ -142,6 +174,9 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
             {...(taskWindowMode === "edit" && editTaskId
               ? { mode: "edit", editData: { id: editTaskId } }
               : { mode: "create" })}
+            onClose={
+              taskWindowMode === "edit" ? handleTaskWindowClose : undefined
+            }
           />
           <ConditionWindow
             open={conditionWindowOpen}

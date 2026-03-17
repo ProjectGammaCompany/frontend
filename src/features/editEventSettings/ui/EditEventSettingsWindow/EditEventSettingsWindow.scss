@@ -17,4 +17,20 @@
   &__form-item {
     width: 100%;
   }
+
+  &__collaborator {
+    &-item {
+      display: flex;
+      width: 100%;
+      flex-direction: row !important;
+
+      & .ant-form-item-row {
+        width: 100%;
+      }
+      & .ant-form-item-control-input-content {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
 }

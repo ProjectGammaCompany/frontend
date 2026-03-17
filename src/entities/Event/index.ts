@@ -53,6 +53,11 @@ export { getUserEvents } from "./api/getUserEvents.ts";
 export { getEventsHistory } from "./api/getEventsHistory.ts";
 
 export {
+  useJoinCodeData,
+  type UseJoinCodeDataResult,
+} from "./model/useJoinCodeData.ts";
+
+export {
   createEvent,
   type CreateEventData,
   type CreateEventResponse,

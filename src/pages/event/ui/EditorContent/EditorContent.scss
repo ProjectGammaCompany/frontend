@@ -1,0 +1,13 @@
+.editor-content {
+  &__loading-block {
+    padding-top: 10px;
+  }
+
+  &__error-text {
+    text-align: center;
+  }
+
+  &__refetch-btn {
+    width: 200px;
+  }
+}

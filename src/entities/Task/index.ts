@@ -2,7 +2,7 @@ export { default as TaskForm } from "./ui/TaskForm/TaskForm.tsx";
 
 export {
   getEditorTaskData,
-  type getEditorTaskDataResponse,
+  type GetEditorTaskDataResponse,
   type ServerOption,
 } from "./api/getEditorTaskData.ts";
 

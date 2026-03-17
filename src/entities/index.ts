@@ -35,6 +35,7 @@ export {
   setName,
   useEditingEventData,
   useGroups,
+  useJoinCodeData,
   useJoinRequiredFields,
   usePersonalEvents,
   useUpdateBlocksOrder,
@@ -56,6 +57,7 @@ export {
   type TaskStage,
   type TaskStageData,
   type UseGroupsQueryData,
+  type UseJoinCodeDataResult,
 } from "./Event";
 
 export {
@@ -95,7 +97,7 @@ export {
   useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
-  type getEditorTaskDataResponse,
+  type GetEditorTaskDataResponse,
   type ServerOption,
   type UpdateTaskResponse,
 } from "./Task";

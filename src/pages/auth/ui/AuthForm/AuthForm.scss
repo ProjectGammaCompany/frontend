@@ -3,11 +3,16 @@
   flex-direction: column;
   align-items: center;
 
+  //ant-btn-icon ant-btn-loading-icon auth-form__submit-btn-icon
   &__submit-btn {
     border-radius: 10px;
     min-width: 150px;
     padding-block: 20px;
     padding-inline: 20px;
+
+    &-icon {
+      color: white !important;
+    }
   }
 
   &__form-item {
