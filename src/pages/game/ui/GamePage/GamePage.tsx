@@ -1,3 +1,4 @@
+import { useTitle } from "@/src/shared/lib";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
 import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
@@ -7,6 +8,7 @@ import EndGameContent from "../EndGameContent/EndGameContent";
 import TaskStageContent from "../TaskStageContent/TaskStageContent";
 import "./GamePage.scss";
 const GamePage = () => {
+  useTitle("Прохождение события");
   const { eventId } = useParams();
 
   const navigate = useNavigate();
