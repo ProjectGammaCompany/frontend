@@ -5,9 +5,11 @@ export const useUpdateTasksOrder = (
   eventId: string,
   blockId: string,
   onSuccess: () => void,
+  onError?: () => void,
 ) => {
   return useMutation<unknown, Error, string[]>({
     mutationFn: (tasks) => updateTasksOrder(eventId, blockId, tasks),
     onSuccess,
+    onError,
   });
 };

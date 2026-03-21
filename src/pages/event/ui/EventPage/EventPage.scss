@@ -1,0 +1,24 @@
+.event-page {
+  &__error-text {
+    color: white;
+  }
+
+  &__error-header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logo {
+    width: 100px;
+  }
+  &__icons-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__back-icon {
+    height: 30px;
+    width: 32px;
+    color: white;
+  }
+}

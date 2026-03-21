@@ -61,24 +61,36 @@ const TaskForm = <TResponse,>({
 
   const uploadMutation = useFileUpload();
 
+  const [showSuccessText, setShowSuccessText] = useState(false);
+  const [showErrorText, setShowErrorText] = useState(false);
+
   const handleSuccessSubmit = (
     response: TResponse,
     variables: FullTaskData,
   ) => {
     setShowSuccessText(true);
+    setTimeout(() => {
+      setShowSuccessText(false);
+    }, 5000);
     onSuccessFn?.(response, variables);
+  };
+
+  const handleErrorSubmit = () => {
+    setShowErrorText(true);
+    setTimeout(() => {
+      setShowErrorText(false);
+    }, 5000);
   };
 
   const submitMutation = useFormSubmit<TResponse>(
     mutationFn,
     handleSuccessSubmit,
+    handleErrorSubmit,
   );
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const [textInputType, setTextInputType] = useState<"qr" | "text">("text");
-
-  const [showSuccessText, setShowSuccessText] = useState(false);
 
   const switchQRModeBtnClassName = classnames("task-form__switch-qr-mode-btn", {
     "task-form__switch-qr-mode-btn_active": textInputType === "qr",
@@ -413,11 +425,28 @@ const TaskForm = <TResponse,>({
       </Form.Item>
       {showSuccessText && onSuccessText && (
         <Form.Item<TaskFormData> noStyle>
-          <Typography.Text>{onSuccessText}</Typography.Text>
+          <Typography.Paragraph
+            type="success"
+            className="task-form__success-text"
+          >
+            {onSuccessText}
+          </Typography.Paragraph>
+        </Form.Item>
+      )}
+
+      {showErrorText && (
+        <Form.Item<TaskFormData> noStyle>
+          <Typography.Paragraph type="danger" className="task-form__error-text">
+            Произошла ошибка. Повторите попытку позже
+          </Typography.Paragraph>
         </Form.Item>
       )}
       <Form.Item className="task-form__submit-btn-wrapper">
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={submitMutation.isPending}
+        >
           {submitBtnText}
         </Button>
       </Form.Item>

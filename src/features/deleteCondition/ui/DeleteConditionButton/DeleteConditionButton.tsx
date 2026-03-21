@@ -8,6 +8,7 @@ interface DeleteConditionButtonProps {
   blockId: string;
   conditionId: string;
   onSuccess?: () => void;
+  onError?: () => void;
 }
 
 //todo: перенести в ui кнопку удаления
@@ -16,10 +17,12 @@ const DeleteConditionButton = ({
   blockId,
   conditionId,
   onSuccess,
+  onError,
 }: DeleteConditionButtonProps) => {
   const deleteMutation = useMutation({
     mutationFn: () => deleteCondition(eventId, blockId, conditionId),
-    onSuccess: onSuccess,
+    onSuccess,
+    onError,
   });
   return (
     <Button

@@ -11,7 +11,7 @@ import { queryClient } from "@/src/shared/api";
 import { useDebounce, useNotify } from "@/src/shared/lib";
 import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
 import { Button, Input, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BlockSettingsForm from "../BlockSettingsForm/BlockSettingsForm";
 import ConditionsList from "../ConditionsList/ConditionsList";
@@ -45,37 +45,53 @@ const BlockWindow = ({
     "tasks" | "conditions" | "settings"
   >("tasks");
 
+  const onChangedName = useEffectEvent((name: string) => {
+    if (isInitialized && !updateBlockNameMutation.isPending) {
+      updateBlockNameMutation.mutate(name);
+    }
+  });
+
   const { data, isPending, isError } = useBlockSettings(eventId, blockId);
 
   const tasksReorderingState = useSelector(selectTasksReorderingState);
 
   const dispatch = useDispatch();
 
+  const [name, setName] = useState("");
+
+  const handleErrorBlockNameUpdate = () => {
+    notify.error({
+      title: "Не удалось обновить название блока.",
+      description: "Произошла ошибка. Измените название снова",
+    });
+  };
+
+  const updateBlockNameMutation = useUpdateBlockName(
+    eventId,
+    blockId,
+    handleErrorBlockNameUpdate,
+  );
+
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const debounceName = useDebounce(name, 1000);
+
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
       queryKey: [eventId, "data"],
     });
+    notify.success({
+      title: "Блок успешно удалён",
+    });
     setIsOpen(false);
   };
 
-  const [name, setName] = useState("");
-
-  const updateBlockNameMutation = useUpdateBlockName(eventId, blockId);
-
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  const debounceName = useDebounce(name, 1500);
-
-  useEffect(() => {
-    if (data) {
-      setName(data.name);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (!isInitialized) return;
-    updateBlockNameMutation.mutate(debounceName);
-  }, [debounceName, isInitialized, updateBlockNameMutation]);
+  const handleErrorBlockDeleting = () => {
+    notify.error({
+      title: "Не удалось удалить блок",
+      description: "Произошла ошибка. Повторите попытку позже",
+    });
+  };
 
   const handleSettingsBtnClick = () => {
     setWindowState((prev) => {
@@ -85,6 +101,18 @@ const BlockWindow = ({
       return "settings";
     });
   };
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    onChangedName(debounceName);
+    //использован useEffectEvet
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounceName]);
 
   if (isPending) {
     return;
@@ -123,6 +151,7 @@ const BlockWindow = ({
             eventId={eventId}
             blockId={blockId}
             onSuccess={handleSuccessBlockDeleting}
+            onError={handleErrorBlockDeleting}
           />
         ) : (
           <CustomSwitch

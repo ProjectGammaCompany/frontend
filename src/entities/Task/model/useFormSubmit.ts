@@ -20,10 +20,12 @@ export type FullTaskData = TaskFormData & { name: string };
 
 export const useFormSubmit = <TResponse>(
   mutationFn: (data: FullTaskData) => Promise<TResponse>,
-  onSuccessFn?: (response: TResponse, variables: FullTaskData) => void,
+  onSuccess?: (response: TResponse, variables: FullTaskData) => void,
+  onError?: () => void,
 ) => {
   return useMutation<TResponse, Error, FullTaskData>({
     mutationFn: (data) => mutationFn(data),
-    onSuccess: onSuccessFn,
+    onSuccess,
+    onError,
   });
 };

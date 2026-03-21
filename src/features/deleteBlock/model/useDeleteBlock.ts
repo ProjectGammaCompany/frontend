@@ -5,9 +5,11 @@ export const useDeleteBlock = (
   eventId: string,
   blockId: string,
   onSuccess?: () => void | Promise<void>,
+  onError?: () => void,
 ) => {
   return useMutation({
     mutationFn: () => deleteBlock(eventId, blockId),
-    onSuccess: onSuccess,
+    onSuccess,
+    onError,
   });
 };
