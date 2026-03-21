@@ -7,6 +7,7 @@ interface DeleteTaskButtonProps {
   blockId: string;
   taskId: string;
   onSuccess?: () => void;
+  onError?: () => void;
 }
 
 const DeleteTaskButton = ({
@@ -14,8 +15,15 @@ const DeleteTaskButton = ({
   blockId,
   taskId,
   onSuccess,
+  onError,
 }: DeleteTaskButtonProps) => {
-  const deleteMutation = useDeleteTask(eventId, blockId, taskId, onSuccess);
+  const deleteMutation = useDeleteTask(
+    eventId,
+    blockId,
+    taskId,
+    onSuccess,
+    onError,
+  );
   return (
     <Button
       loading={deleteMutation.isPending}

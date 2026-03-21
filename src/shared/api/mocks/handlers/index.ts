@@ -99,33 +99,19 @@ export const handlers = [
       ],
     });
   }),
-  http.delete(`${baseUrl}notifications/:id`, () => {
-    return new HttpResponse(null, {
-      status: 500,
-    });
-  }),
-  http.get(`${baseUrl}event/:eventId/playerStats`, () => {
-    return HttpResponse.json({
-      fullStats: false,
-      users: [
-        {
-          id: "233233223",
-          username: "khavronich12",
-          avatar: "223232323",
-          points: 30,
-        },
-      ],
-    });
-  }),
-  http.get(`${baseUrl}event/:eventId/playerInfo`, () => {
-    return HttpResponse.json({
-      title: "string",
-      description: "string",
-      rate: 3, // float
-      favorite: false,
-      tags: [],
-      status: "not started",
-      needGroup: true,
-    });
-  }),
+  http.delete(
+    `${baseUrl}event/:eventId/blocks/:id/conditions/:conditionId`,
+    () => {
+      // await sleep(5000);
+      return new HttpResponse(null, {
+        status: 500,
+      });
+    },
+  ),
+  // http.get(`${baseUrl}event/:eventId/rle`, async () => {
+  //   // await sleep(1000);
+  //   return new HttpResponse(null, {
+  //     status: 500,
+  //   });
+  // }),
 ];

@@ -4,8 +4,9 @@ import {
   useTasks,
   useUpdateTasksOrder,
 } from "@/src/entities";
+import { useNotify } from "@/src/shared/lib";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
-import { Button } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTasksOrderInQuery } from "../../model/updateTasksOrderInQuery";
@@ -24,9 +25,16 @@ const TaskList = ({
   onTaskClick,
   onCreateTask,
 }: TasksListProps) => {
-  const { data: tasks, isPending, isError } = useTasks(eventId, blockId);
+  const {
+    data: tasks,
+    isPending,
+    isError,
+    refetch,
+  } = useTasks(eventId, blockId);
 
   const taskReorderingState = useSelector(selectTasksReorderingState);
+
+  const notify = useNotify();
 
   const dispatch = useDispatch();
 
@@ -34,10 +42,18 @@ const TaskList = ({
     dispatch(setTasksReorderingState(false));
   };
 
+  const handleErrorTasksReordering = () => {
+    notify.error({
+      title: "Не удалось обновить порядок заданий",
+      description: "Произошла ошибка. Повторите попытку позже",
+    });
+  };
+
   const updateTasksOrderMutation = useUpdateTasksOrder(
     eventId,
     blockId,
     handleSuccessTasksReordering,
+    handleErrorTasksReordering,
   );
 
   const onDragEnd = useCallback(
@@ -85,11 +101,28 @@ const TaskList = ({
   };
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <Flex justify="center">
+        <Spin />
+      </Flex>
+    );
   }
 
   if (isError) {
-    return <div>Ошибка!</div>;
+    return (
+      <Flex justify="center" align="center" vertical>
+        <Typography.Paragraph type="danger">
+          Произошла ошибка. Повторите попытку
+        </Typography.Paragraph>
+        <Button
+          onClick={() => {
+            void refetch();
+          }}
+        >
+          Обновить
+        </Button>
+      </Flex>
+    );
   }
   return (
     <div className="task-list__wrapper">

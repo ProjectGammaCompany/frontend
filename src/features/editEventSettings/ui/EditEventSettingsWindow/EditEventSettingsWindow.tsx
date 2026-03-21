@@ -93,6 +93,12 @@ const EditEventSettingsWindow = ({
     onSuccess: () => {
       void navigate("/");
     },
+    onError: () => {
+      notify.error({
+        title: "Не удалось удалить событие",
+        description: "Произошла ошибка. Повторите позже",
+      });
+    },
   });
 
   const handleFailedUpdate = () => {
@@ -121,9 +127,9 @@ const EditEventSettingsWindow = ({
         <Button
           className="edit-event-settings-window__delete-btn"
           onClick={() => deleteEventMutation.mutate()}
-        >
-          <TrashSvg />
-        </Button>
+          loading={deleteEventMutation.isPending}
+          icon={<TrashSvg />}
+        />
         <div className="edit-event-settings-window__form-wrapper">
           <EventForm<FullFormData, AxiosResponse<EditEventSettingsResponse>>
             submitBtnText="Применить"

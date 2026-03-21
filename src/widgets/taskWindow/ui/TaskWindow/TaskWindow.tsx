@@ -10,6 +10,7 @@ import {
   type UpdateTaskResponse,
 } from "@/src/entities";
 import { DeleteTaskButton } from "@/src/features";
+import { useNotify } from "@/src/shared/lib";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Input } from "antd";
 import type { AxiosResponse } from "axios";
@@ -50,6 +51,8 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
 
   const { data } = useEditorTaskData(mode, eventId, blockId, id);
 
+  const notify = useNotify();
+
   const mapServerOptionsToClientOptions = (
     options: ServerOption[],
   ): ClientOption[] => {
@@ -70,6 +73,12 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
     }
   };
 
+  const handleErrorDelete = () => {
+    notify.error({
+      title: "Не удалось удалить задание",
+      description: "Произошла ошибка. Повторите попытку позже",
+    });
+  };
   const handleAfterClose = () => {
     setName("");
     onClose?.();
@@ -93,6 +102,7 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
           blockId={blockId}
           taskId={id}
           onSuccess={handleSuccessDelete}
+          onError={handleErrorDelete}
         />
       )}
       <div className="task-window__header">

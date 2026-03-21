@@ -8,6 +8,7 @@ import {
   type UpdateConditionResponse,
 } from "@/src/entities";
 import { DeleteConditionButton } from "@/src/features";
+import { useNotify } from "@/src/shared/lib";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
@@ -42,6 +43,8 @@ const ConditionWindow = (
   props: CreateConditionWindow | EditConditionWindow,
 ) => {
   const { mode, open, setIsOpen, eventId, blockId } = props;
+
+  const notify = useNotify();
 
   const [groupsSelectLoading, setGroupsSelectLoading] = useState(false);
 
@@ -90,6 +93,13 @@ const ConditionWindow = (
     setGroupsSelectingError(false);
   };
 
+  const handleDeleteError = () => {
+    notify.error({
+      title: "Не удалось удалить условие перехода",
+      description: "Произошла ошибка. Повторите попытку позже",
+    });
+  };
+
   return (
     <CustomModalWindow
       open={open}
@@ -103,6 +113,7 @@ const ConditionWindow = (
             blockId={blockId}
             conditionId={condition.id}
             onSuccess={handleSuccessDelete}
+            onError={handleDeleteError}
           />
         )}
         <Typography.Title level={3} className="condition-window__header-title">

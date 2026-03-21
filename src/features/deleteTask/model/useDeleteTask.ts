@@ -6,9 +6,11 @@ export const useDeleteTask = (
   blockId: string,
   taskId: string,
   onSuccess?: () => void,
+  onError?: () => void,
 ) => {
   return useMutation({
     mutationFn: () => deleteTask(eventId, blockId, taskId),
-    onSuccess: onSuccess,
+    onSuccess,
+    onError,
   });
 };

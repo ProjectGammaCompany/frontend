@@ -76,6 +76,9 @@ const ConditionForm = <TResponse,>({
     variables: ConditionData,
   ) => {
     setShowSuccessText(true);
+    setTimeout(() => {
+      setShowSuccessText(false);
+    }, 5000);
     onSuccessFn?.(response, variables);
   };
 
@@ -267,11 +270,22 @@ const ConditionForm = <TResponse,>({
 
       {showSuccessText && onSuccessText && (
         <FormItem noStyle>
-          <Typography.Text>{onSuccessText}</Typography.Text>
+          <Typography.Paragraph type="success">
+            {onSuccessText}
+          </Typography.Paragraph>
+        </FormItem>
+      )}
+      {submitMutation.isError && (
+        <FormItem noStyle>
+          <Typography.Paragraph type="danger">
+            Произошла ошибка. Повторите попытку позже.
+          </Typography.Paragraph>
         </FormItem>
       )}
       <FormItem noStyle>
-        <Button htmlType="submit">{submitBtnText}</Button>
+        <Button htmlType="submit" loading={submitMutation.isPending}>
+          {submitBtnText}
+        </Button>
       </FormItem>
     </Form>
   );
