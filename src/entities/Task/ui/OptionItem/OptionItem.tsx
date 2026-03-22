@@ -17,19 +17,10 @@ export const OptionItem = ({
   onRightAnswerToggle,
   onDelete,
 }: OptionItemProps) => {
-  const [option, setOption] = useState<ClientOption>(initialData);
-
-  const isRightAnswer = option.isCorrect;
-  const optionValue = option.value;
-
-  const useRightAnswerDebounce = useDebounce<boolean>(isRightAnswer, 2000);
+  const isRightAnswer = initialData.isCorrect;
+  const [optionValue, setOptionValue] = useState(initialData.value);
 
   const useOptionValueDebounce = useDebounce<string>(optionValue, 2000);
-
-  //todo: изучить затем, нужен ли useAfterUpdate вместо useEffect
-  useEffect(() => {
-    onRightAnswerToggle?.(useRightAnswerDebounce);
-  }, [onRightAnswerToggle, useRightAnswerDebounce]);
 
   useEffect(() => {
     onInputValueChange?.(useOptionValueDebounce);
@@ -40,33 +31,23 @@ export const OptionItem = ({
       <Button
         className="option-item__right-answer-toggle"
         style={{
-          backgroundColor: option.isCorrect ? "green" : "transparent",
+          backgroundColor: isRightAnswer ? "green" : "transparent",
         }}
         onClick={() => {
-          setOption((prev) => {
-            return {
-              ...prev,
-              isCorrect: !prev.isCorrect,
-            };
-          });
+          onRightAnswerToggle?.(!isRightAnswer);
         }}
       />
       <Input
         placeholder="Введите текст опции"
-        value={option.value}
+        value={optionValue}
         onChange={(e) => {
-          setOption((prev) => {
-            return {
-              ...prev,
-              value: e.target.value,
-            };
-          });
+          setOptionValue(e.target.value);
           onInputValueChange?.(e.target.value);
         }}
       />
       <Button
         onClick={() => {
-          onDelete(option.clientId);
+          onDelete(initialData.clientId);
         }}
         className="option-item__delete-btn"
       >
