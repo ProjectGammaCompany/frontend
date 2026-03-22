@@ -6,6 +6,8 @@ interface FooterButtonProps {
   icon: ReactNode;
   onClick?: (React.MouseEventHandler<HTMLElement> | undefined) | (() => void);
   className?: string;
+  loading?: boolean;
+  disabled?: boolean;
   iconWrapperClassname?: string;
 }
 
@@ -13,6 +15,8 @@ const IconButton = ({
   icon,
   onClick,
   className,
+  loading,
+  disabled,
   iconWrapperClassname,
 }: FooterButtonProps) => {
   const classNames = classnames("icon-btn", className);
@@ -26,12 +30,22 @@ const IconButton = ({
         },
       }}
     >
-      <Button onClick={onClick} className={classNames}>
-        <div
-          className={classnames("icon-btn__icon-wrapper", iconWrapperClassname)}
-        >
-          {icon}
-        </div>
+      <Button
+        onClick={onClick}
+        className={classNames}
+        loading={loading}
+        disabled={disabled}
+      >
+        {!loading && (
+          <div
+            className={classnames(
+              "icon-btn__icon-wrapper",
+              iconWrapperClassname,
+            )}
+          >
+            {icon}
+          </div>
+        )}
       </Button>
     </ConfigProvider>
   );

@@ -99,17 +99,8 @@ export const handlers = [
       ],
     });
   }),
-  http.delete(
-    `${baseUrl}event/:eventId/blocks/:id/conditions/:conditionId`,
-    () => {
-      // await sleep(5000);
-      return new HttpResponse(null, {
-        status: 500,
-      });
-    },
-  ),
-  // http.get(`${baseUrl}event/:eventId/rle`, async () => {
-  //   // await sleep(1000);
+  // http.put(`${baseUrl}events/personal/favorites`, async () => {
+  //   await sleep(5000);
   //   return new HttpResponse(null, {
   //     status: 500,
   //   });

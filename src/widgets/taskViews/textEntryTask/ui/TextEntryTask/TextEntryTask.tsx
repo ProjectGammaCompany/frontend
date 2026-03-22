@@ -55,11 +55,11 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
 
   const [disabled, setDisabled] = useState(false);
 
+  const [isAnswerSended, setIsAnswerSended] = useState(false);
+
   const [isExpirationFnCanceled, SetIsExpirationFnCanceled] = useState(false);
 
-  const handleSuccessAnswerSending = (
-    data: AxiosResponse<SendAnswerResponse>,
-  ) => {
+  const handleSuccessSendAnswer = (data: AxiosResponse<SendAnswerResponse>) => {
     setDisabled(true);
     setSendButtonDisabled(true);
 
@@ -93,11 +93,20 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     }, 5000);
   };
 
+  const handleErrorSendAnswer = () => {
+    setSendButtonDisabled(false);
+    notify.error({
+      title: "Не удалось сохранить ответ",
+      description: "Произошла ошибка. Повторите попытку",
+    });
+  };
+
   const sendAnswerMutation = useSendAnswer(
     eventId,
     blockId,
     id,
-    handleSuccessAnswerSending,
+    handleSuccessSendAnswer,
+    handleErrorSendAnswer,
   );
 
   const handleSuccessScanning = (decodedText: string) => {
@@ -109,6 +118,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     <TaskView
       taskData={taskData}
       onExpirationTimeFn={() => {
+        setDisabled(true);
         sendAnswerMutation.mutate([]);
       }}
       isExpirationFnCanceled={isExpirationFnCanceled}
@@ -117,7 +127,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
         <QRInputBlock
           answer={answer}
           setAnswer={setAnswer}
-          disabled={disabled}
+          disabled={disabled || isAnswerSended}
           inputMode={inputMode}
           setInputMode={setInputMode}
           onSuccessScanning={handleSuccessScanning}
@@ -126,7 +136,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
         <TextInputBlock
           answer={answer}
           setAnswer={setAnswer}
-          disabled={disabled}
+          disabled={disabled || isAnswerSended}
         />
       )}
       {rightAnswer && data.type != "qr" && (
@@ -143,7 +153,15 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
             taskId={id}
             answer={answer.length > 0 ? [answer[0].toLocaleLowerCase()] : []}
             disabled={!answer.at(0) || sendButtonDisabled}
-            onSuccess={handleSuccessAnswerSending}
+            timeIsUpError={
+              sendAnswerMutation.isError && !sendAnswerMutation.isPending
+            }
+            onSuccess={handleSuccessSendAnswer}
+            onError={handleErrorSendAnswer}
+            onMutate={() => {
+              setIsAnswerSended(true);
+              setSendButtonDisabled(true);
+            }}
           />
         </div>
       )}
