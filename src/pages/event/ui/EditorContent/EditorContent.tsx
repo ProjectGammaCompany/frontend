@@ -67,6 +67,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     setBlockId(id);
     setBlockWindowOpen(true);
   };
+
   const handleBlockCreate = (id: string) => {
     setBlockId(id);
     setBlockWindowOpen(true);

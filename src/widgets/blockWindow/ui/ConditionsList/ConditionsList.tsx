@@ -4,7 +4,7 @@ import {
   type Condition,
   type Group,
 } from "@/src/entities";
-import { Button } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import ConditionItem from "../ConditionItem/ConditionItem";
 import "./ConditionsList.scss";
 interface ConditionsListProps {
@@ -24,18 +24,44 @@ const ConditionsList = ({
     data: conditions,
     isPending,
     isError,
+    refetch: refetchConditions,
   } = useConditions(eventId, blockId);
 
-  const { data: eventGroups, isPending: isGroupsPending } = useGroups<Group[]>(
-    eventId,
-    (data) => data.data.groups.map((group) => group),
+  const {
+    data: eventGroups,
+    isPending: isGroupsPending,
+    isError: isGroupsError,
+    refetch: refetchGroups,
+  } = useGroups<Group[]>(eventId, (data) =>
+    data.data.groups.map((group) => group),
   );
 
   if (isPending || isGroupsPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <Flex justify="center">
+        <Spin />
+      </Flex>
+    );
   }
-  if (isError) {
-    return <div>Ошибка!</div>;
+  if (isError || isGroupsError) {
+    return (
+      <Flex vertical justify="center" align="center">
+        <Typography.Paragraph type="danger">
+          Произошла ошибка. Повторите попытку
+        </Typography.Paragraph>
+        <Button
+          onClick={() => {
+            if (isError) {
+              void refetchConditions();
+              return;
+            }
+            void refetchGroups();
+          }}
+        >
+          Обновить
+        </Button>
+      </Flex>
+    );
   }
 
   const getClearGroups = (conditionGroups: string[], eventGroups: Group[]) => {

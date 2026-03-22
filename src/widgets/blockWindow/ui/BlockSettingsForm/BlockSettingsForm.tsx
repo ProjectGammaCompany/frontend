@@ -2,7 +2,6 @@ import type { BlockSettings, UpdateBlockData } from "@/src/entities";
 import type { ChangeTypeOfKeys } from "@/src/shared/lib";
 import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
-import FormItem from "antd/es/form/FormItem";
 import { useEffect, useState } from "react";
 import { useFormSubmit } from "../../model/useFormSubmit";
 import "./BlockSettingsForm.scss";
@@ -19,8 +18,8 @@ const formInputs: ChangeTypeOfKeys<
   string
 > = {
   isParallel: "Параллельность",
-  points: "Показ очков",
-  rightAnswers: "Показ правильных очков",
+  points: "Показ баллов",
+  rightAnswers: "Показ правильных ответов",
 };
 
 const BlockSettingsForm = ({
@@ -32,6 +31,8 @@ const BlockSettingsForm = ({
 
   const [showSuccessText, setShowSuccessText] = useState(false);
 
+  const [showErrorText, setShowErrorText] = useState(false);
+
   const handleSuccessSubmit = () => {
     setShowSuccessText(true);
     setTimeout(() => {
@@ -39,7 +40,19 @@ const BlockSettingsForm = ({
     }, 4000);
   };
 
-  const submitMutation = useFormSubmit(eventId, blockId, handleSuccessSubmit);
+  const handleErrorSubmit = () => {
+    setShowErrorText(true);
+    setTimeout(() => {
+      setShowErrorText(false);
+    }, 5000);
+  };
+
+  const submitMutation = useFormSubmit(
+    eventId,
+    blockId,
+    handleSuccessSubmit,
+    handleErrorSubmit,
+  );
 
   const handleSubmit = (data: UpdateBlockData) => {
     submitMutation.mutate(data);
@@ -54,6 +67,11 @@ const BlockSettingsForm = ({
   return (
     <Form
       form={form}
+      onChange={() => {
+        if (showErrorText) {
+          setShowErrorText(false);
+        }
+      }}
       requiredMark={false}
       initialValues={initialData}
       onFinish={(data) => handleSubmit(data as BlockSettings)}
@@ -61,25 +79,40 @@ const BlockSettingsForm = ({
       {Object.entries(formInputs).map(([key, label]) => {
         return (
           <Form.Item key={key} className="block-settings-form__switch-wrapper">
-            <FormItem<UpdateBlockData>
+            <Form.Item<UpdateBlockData>
               noStyle
               name={key as keyof UpdateBlockData}
               initialValue={false}
             >
               <Switch />
-            </FormItem>
+            </Form.Item>
             <Typography.Text>{label}</Typography.Text>
           </Form.Item>
         );
       })}
       {showSuccessText && (
-        <FormItem>
-          <Typography.Text>Настройки сохранены</Typography.Text>
-        </FormItem>
+        <Form.Item>
+          <Typography.Paragraph
+            className="block-settings-form__success-text"
+            type="success"
+          >
+            Настройки сохранены
+          </Typography.Paragraph>
+        </Form.Item>
       )}
-      <FormItem className="block-settings-form__submit-btn-wrapper">
+      {showErrorText && (
+        <Form.Item>
+          <Typography.Paragraph
+            type="danger"
+            className="block-settings-form__error-text"
+          >
+            Произошла ошибка. Повторите попытку позже.
+          </Typography.Paragraph>
+        </Form.Item>
+      )}
+      <Form.Item className="block-settings-form__submit-btn-wrapper">
         <Button htmlType="submit">Сохранить</Button>
-      </FormItem>
+      </Form.Item>
     </Form>
   );
 };

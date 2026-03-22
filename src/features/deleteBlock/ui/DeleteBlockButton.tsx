@@ -6,14 +6,16 @@ interface DeleteBlockButtonProps {
   eventId: string;
   blockId: string;
   onSuccess?: () => void | Promise<void>;
+  onError?: () => void;
 }
 
 const DeleteBlockButton = ({
   eventId,
   blockId,
   onSuccess,
+  onError,
 }: DeleteBlockButtonProps) => {
-  const deleteMutation = useDeleteBlock(eventId, blockId, onSuccess);
+  const deleteMutation = useDeleteBlock(eventId, blockId, onSuccess, onError);
   return (
     <Button
       onClick={() => deleteMutation.mutate()}

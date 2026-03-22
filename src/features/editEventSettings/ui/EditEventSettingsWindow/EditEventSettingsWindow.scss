@@ -3,11 +3,16 @@
     position: absolute;
     left: -20px;
     top: -25px;
-    height: 45px;
-    width: 45px;
+    height: 45px !important;
+    width: 45px !important;
     padding: 5px;
+    flex-shrink: 0px;
     background-color: var(--red-color);
     color: white;
+    & svg {
+      height: 35px;
+      width: 35px;
+    }
   }
 
   &__form-wrapper {
