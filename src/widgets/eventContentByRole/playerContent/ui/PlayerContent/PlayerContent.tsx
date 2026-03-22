@@ -3,7 +3,7 @@ import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
 import { getFullFileUrl, useTitle } from "@/src/shared/lib";
 import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
-import { Typography } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import InteractButton from "../InteractButton/InteractButton";
@@ -16,7 +16,7 @@ interface ParticipantContentProps {
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   useTitle("Событие");
   const navigate = useNavigate();
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: [eventId, "playerInfo"],
     queryFn: () => getPlayerInfo(eventId),
     select: (data) => {
@@ -27,11 +27,28 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   const [openLoginGroupWindow, setOpenLoginGroupWindow] = useState(false);
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <Flex justify="center">
+        <Spin />
+      </Flex>
+    );
   }
 
   if (isError) {
-    return <div>Ошибка!</div>;
+    return (
+      <Flex align="center" justify="center" vertical>
+        <Typography.Paragraph type="danger">
+          Произошла ошибка, обновите страницу
+        </Typography.Paragraph>
+        <Button
+          onClick={() => {
+            void refetch();
+          }}
+        >
+          Обновить
+        </Button>
+      </Flex>
+    );
   }
 
   return (

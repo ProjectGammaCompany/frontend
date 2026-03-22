@@ -1,0 +1,10 @@
+.join-group-window {
+  &__submit-btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__error-text {
+    text-align: center;
+  }
+}

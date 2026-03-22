@@ -1,3 +1,4 @@
+import { useNotify } from "@/src/shared/lib";
 import { IconButton, StarSvg } from "@/src/shared/ui";
 import classnames from "classnames";
 import { useState } from "react";
@@ -12,12 +13,25 @@ const ToggleFavoriteEventButton = ({
   id,
   defaultState,
 }: toggleEventButtonProps) => {
+  const notify = useNotify();
   const [state, setState] = useState<boolean>(defaultState);
 
   const handleSuccessToggle = () => {
     setState((prev) => !prev);
   };
-  const toggleMutation = usePutFavoriteState(id, !state, handleSuccessToggle);
+
+  const handleErrorToggle = () => {
+    notify.error({
+      title: "Не удалось обновить данные",
+      description: "Произошла ошибка. Повторите попытку",
+    });
+  };
+  const toggleMutation = usePutFavoriteState(
+    id,
+    !state,
+    handleSuccessToggle,
+    handleErrorToggle,
+  );
 
   const className = classnames("toggle-favorite-event-btn", {
     "toggle-favorite-event-btn_active": state,
@@ -32,6 +46,7 @@ const ToggleFavoriteEventButton = ({
         e.stopPropagation();
         toggleMutation.mutate();
       }}
+      loading={toggleMutation.isPending}
     ></IconButton>
   );
 };

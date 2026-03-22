@@ -10,9 +10,13 @@ export const useSendAnswer = (
     data: AxiosResponse<SendAnswerResponse>,
     variables: string[],
   ) => void,
+  onError?: () => void,
+  onMutate?: () => void,
 ) => {
   return useMutation<AxiosResponse<SendAnswerResponse>, Error, string[]>({
     mutationFn: (answer) => sendAnswer(eventId, blockId, id, answer),
-    onSuccess: onSuccess,
+    onSuccess,
+    onError,
+    onMutate,
   });
 };

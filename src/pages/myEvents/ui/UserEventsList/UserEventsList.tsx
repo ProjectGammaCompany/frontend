@@ -5,7 +5,6 @@ import {
   usePersonalEvents,
   type QueryFnType,
 } from "@/src/entities";
-import { errorText } from "@/src/shared/api";
 import { getFullFileUrl } from "@/src/shared/lib";
 import { LinkEventCard } from "@/src/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
@@ -67,15 +66,7 @@ const UserEventsList = ({ triggerLoading, listType }: UserEventsListProps) => {
           {error && (
             <Flex justify="center" vertical>
               <Typography.Paragraph type="danger">
-                {errorText(
-                  error,
-                  () => undefined,
-                  () => undefined,
-                  undefined,
-                  "Произошла ошибка",
-                  "Произошла ошибка",
-                  "Произошла ошибка",
-                )}
+                Произошла ошибка
               </Typography.Paragraph>
               <Button onClick={() => void fetchNextPage()}>Обновить</Button>
             </Flex>

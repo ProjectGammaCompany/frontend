@@ -1,6 +1,7 @@
 import type { TaskStageData } from "@/src/entities";
 import { useSendAnswer } from "@/src/features";
 import { ChoiceTask, InfoBlock, TextEntryTask } from "@/src/widgets";
+import { Button, Flex, Spin, Typography } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { invalidateGameData } from "../../model/invalidateGameData";
@@ -19,7 +20,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
 
   const [isOverdueTask, setIsOverdueTask] = useState(false);
 
-  const handleSuccessSendingAnswer = () => {
+  const handleSuccessSendAnswer = () => {
     invalidateGameData(eventId);
   };
 
@@ -27,7 +28,7 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
     eventId,
     defaultTask.blockId,
     defaultTask.taskId,
-    handleSuccessSendingAnswer,
+    handleSuccessSendAnswer,
   );
 
   const handleSuccessTimestampFixing = (timestamp: string) => {
@@ -114,11 +115,38 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   }, [isOverdueTask, sendAnswerMutation]);
 
   if (timestampError) {
-    return <div>Произошла ошибка. Перезагрузите страницу.</div>;
+    return (
+      <Flex align="center">
+        <Typography.Paragraph type="danger">
+          Произошла ошибка. Перезагрузите страницу.
+        </Typography.Paragraph>
+      </Flex>
+    );
   }
 
   if (isOverdueTask) {
-    return <div>Просрочка... Отправка пустого ответа...</div>;
+    return (
+      <Flex align="center" justify="center" vertical>
+        <Typography.Paragraph type="danger">
+          Срок выполнения задания истёк. Обновление данных...
+        </Typography.Paragraph>
+        {sendAnswerMutation.isPending && <Spin />}
+        {sendAnswerMutation.isError && (
+          <>
+            <Typography.Paragraph type="danger">
+              Не удалось обновить данные. Повторите попытку
+            </Typography.Paragraph>
+            <Button
+              onClick={() => {
+                sendAnswerMutation.mutate([]);
+              }}
+            >
+              Обновить данные
+            </Button>
+          </>
+        )}
+      </Flex>
+    );
   }
 
   if ([0, 1, 2, 3, 4].includes(task.type)) {

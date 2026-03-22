@@ -3,7 +3,6 @@ import {
   useDeleteNotification,
   useNotifications,
 } from "@/src/entities";
-import { errorText } from "@/src/shared/api";
 import { useNotify } from "@/src/shared/lib";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useState } from "react";
@@ -69,15 +68,7 @@ const NotificationsList = () => {
           {error && (
             <Flex justify="center" vertical>
               <Typography.Paragraph type="danger">
-                {errorText(
-                  error,
-                  () => undefined,
-                  () => undefined,
-                  undefined,
-                  "Произошла ошибка",
-                  "Произошла ошибка",
-                  "Произошла ошибка",
-                )}
+                Произошла ошибка
               </Typography.Paragraph>
               <Button onClick={() => void fetchNextPage()}>Обновить</Button>
             </Flex>

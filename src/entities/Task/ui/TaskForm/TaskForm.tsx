@@ -195,12 +195,7 @@ const TaskForm = <TResponse,>({
           isCorrect: value,
         };
       }
-      if (
-        form.getFieldValue("type") == 1 &&
-        value &&
-        i != index &&
-        opt.isCorrect
-      ) {
+      if (form.getFieldValue("type") == 1 && value && i != index) {
         return {
           ...opt,
           isCorrect: false,

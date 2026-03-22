@@ -1,6 +1,6 @@
 import { useTitle } from "@/src/shared/lib";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
-import { Typography } from "antd";
+import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import { useGameData } from "../../model/useGameData";
 import BlockStageContent from "../BlockStageContent/BlockStageContent";
@@ -13,14 +13,61 @@ const GamePage = () => {
 
   const navigate = useNavigate();
 
-  const { data, isPending, isError } = useGameData(eventId);
+  const { data, isPending, isError, refetch } = useGameData(eventId);
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <>
+        <Header>
+          <div className="game-page-header__content">
+            <div
+              className="game-page-header__icons-wrapper"
+              onClick={() => void navigate("/")}
+            >
+              <BackSvg classname="game-page-header__back-icon" />
+              <Logo className="game-page-header__logo" />
+            </div>
+            <Skeleton.Input active />
+          </div>
+        </Header>
+        <Flex align="center" justify="center" vertical>
+          <Spin />
+        </Flex>
+      </>
+    );
   }
 
   if (isError) {
-    return <div>Ошибка!</div>;
+    return (
+      <>
+        <Header>
+          <div className="game-page-header__content">
+            <div
+              className="game-page-header__icons-wrapper"
+              onClick={() => void navigate("/")}
+            >
+              <BackSvg classname="game-page-header__back-icon" />
+              <Logo className="game-page-header__logo" />
+            </div>
+            <Typography.Text className="game-page-header__error-text">
+              Ошибка!
+            </Typography.Text>
+          </div>
+        </Header>
+        <Flex align="center" justify="center" vertical>
+          <Typography.Paragraph type="danger">
+            Произошла ошибка, обновите страницу
+          </Typography.Paragraph>
+          <Button
+            onClick={() => {
+              void refetch();
+            }}
+          >
+            Обновить
+          </Button>
+        </Flex>
+      </>
+    );
   }
 
   if (data.type === "end") {

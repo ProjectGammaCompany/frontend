@@ -1,4 +1,5 @@
 import type { BlockStage } from "@/src/entities";
+import { useNotify } from "@/src/shared/lib";
 import { TaskSlider } from "@/src/widgets/taskSlider";
 import { Button, Typography } from "antd";
 import { useState } from "react";
@@ -17,6 +18,8 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
     (task) => !task.isCompleted,
   );
 
+  const notify = useNotify();
+
   const [taskId, setTaskId] = useState<string | null>(null);
 
   const selectedTasks = taskId ? [taskId] : [];
@@ -25,10 +28,18 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
     invalidateGameData(eventId);
   };
 
+  const handleErrorSelect = () => {
+    notify.error({
+      title: "Не удалось сохранить выбор задания",
+      description: "Произошла ошибка. Повторите попытку",
+    });
+  };
+
   const selectTaskMutation = useSelectTask(
     eventId,
     block.blockId,
     handleSuccessSelect,
+    handleErrorSelect,
   );
 
   const handleTaskSelect = (selectedTaskId: string) => {
