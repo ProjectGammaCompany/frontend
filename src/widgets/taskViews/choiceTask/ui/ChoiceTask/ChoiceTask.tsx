@@ -81,7 +81,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     if (status === "correct") {
       notify.success({
         title: "Задача успешно пройдена!",
-        description: points ? `Вами получено ${points}` : undefined,
+        description: points ? `Вами получено ${points} баллов` : undefined,
       });
     } else if (status === "incorrect") {
       notify.error({
@@ -90,7 +90,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     } else {
       notify.warning({
         title: "Задача пройдена частично правильно.",
-        description: points ? `Вами получено ${points}` : undefined,
+        description: points ? `Вами получено ${points} баллов` : undefined,
       });
     }
     setTimeout(() => {
