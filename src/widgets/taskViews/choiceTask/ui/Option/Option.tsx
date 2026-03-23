@@ -7,9 +7,17 @@ interface OptionProps {
   clickFn: (id: string, value: boolean) => void;
   selected: boolean;
   className?: string;
+  disabled: boolean;
 }
 
-const Option = ({ id, value, clickFn, selected, className }: OptionProps) => {
+const Option = ({
+  id,
+  value,
+  clickFn,
+  selected,
+  className,
+  disabled,
+}: OptionProps) => {
   const classNames = classnames("option__wrapper", className);
 
   return (
@@ -22,6 +30,7 @@ const Option = ({ id, value, clickFn, selected, className }: OptionProps) => {
         }}
       >
         <Checkbox
+          disabled={disabled}
           checked={selected}
           onChange={({ target }) => clickFn(id, target.checked)}
           classNames={{

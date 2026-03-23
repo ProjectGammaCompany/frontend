@@ -6,7 +6,7 @@ import { queryClient } from "@/src/shared/api";
 import { useNotify } from "@/src/shared/lib";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Option from "../Option/Option";
 import "./ChoiceTask.scss";
 interface ChoiceTaskProps {
@@ -45,19 +45,20 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     files: data.files,
     timestamp: data.timestamp,
   };
-
-  const [isExpirationFnCanceled, SetIsExpirationFnCanceled] = useState(false);
-
   const hintTextMap: Record<1 | 2, string> = {
     1: "Выберите 1 правильный ответ",
     2: "Выберите правильные ответы",
   };
+
+  const [isExpirationFnCanceled, SetIsExpirationFnCanceled] = useState(false);
 
   const [answer, setAnswer] = useState<string[]>([]);
 
   const [rightAnswer, setRightAnswer] = useState<string[] | undefined>(
     undefined,
   );
+
+  const [choiceAnswerDisabled, setChoiceAnswerDisabled] = useState(false);
 
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
 
@@ -73,10 +74,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     setAnswer((prev) => [...prev, id]);
   };
 
-  const handleSuccessAnswerSending = (
-    data: AxiosResponse<SendAnswerResponse>,
-  ) => {
-    setSendButtonDisabled(true);
+  const handleSuccessSendAnswer = (data: AxiosResponse<SendAnswerResponse>) => {
     const { points, rightAnswerId, status } = data.data;
     SetIsExpirationFnCanceled(true);
     setRightAnswer(rightAnswerId);
@@ -104,11 +102,20 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     }, 5000);
   };
 
+  const handleErrorSendAnswer = () => {
+    setSendButtonDisabled(false);
+    notify.error({
+      title: "Не удалось сохранить ответ",
+      description: "Произошла ошибка. Повторите попытку",
+    });
+  };
+
   const sendAnswerMutation = useSendAnswer(
     eventId,
     blockId,
     id,
-    handleSuccessAnswerSending,
+    handleSuccessSendAnswer,
+    handleErrorSendAnswer,
   );
 
   const getOptionClassName = (
@@ -125,10 +132,17 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       : "choice-task__option_incorrect";
   };
 
+  useEffect(() => {
+    console.log("isError ", sendAnswerMutation.isError);
+    console.log("sendButtonDisabled ", sendButtonDisabled);
+    console.log("комбо ", !sendAnswerMutation.isError && sendButtonDisabled);
+  }, [sendAnswerMutation.isError, sendButtonDisabled]);
+
   return (
     <TaskView
       taskData={taskData}
       onExpirationTimeFn={() => {
+        setChoiceAnswerDisabled(true);
         sendAnswerMutation.mutate(answer);
       }}
       isExpirationFnCanceled={isExpirationFnCanceled}
@@ -141,6 +155,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
             id={option.id}
             value={option.value}
             selected={answer.includes(option.id)}
+            disabled={choiceAnswerDisabled}
             clickFn={handleOptionClick}
             className={getOptionClassName(option.id, answer, rightAnswer)}
           />
@@ -152,8 +167,14 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
           blockId={blockId}
           taskId={id}
           disabled={sendButtonDisabled}
+          timeIsUpError={sendAnswerMutation.isError}
           answer={answer}
-          onSuccess={handleSuccessAnswerSending}
+          onSuccess={handleSuccessSendAnswer}
+          onError={handleErrorSendAnswer}
+          onMutate={() => {
+            setSendButtonDisabled(true);
+            setChoiceAnswerDisabled(true);
+          }}
         />
       </div>
     </TaskView>

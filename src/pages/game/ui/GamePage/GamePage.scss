@@ -4,7 +4,8 @@
     align-items: center;
   }
 
-  &__title {
+  &__title,
+  &__error-text {
     color: white !important;
   }
 

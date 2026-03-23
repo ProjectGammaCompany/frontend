@@ -10,6 +10,9 @@ interface SendAnswerButtonProps {
   answer: string[];
   disabled?: boolean;
   onSuccess: (data: AxiosResponse<SendAnswerResponse>) => void;
+  onError: () => void;
+  timeIsUpError: boolean;
+  onMutate?: () => void;
 }
 
 const SendAnswerButton = ({
@@ -18,13 +21,26 @@ const SendAnswerButton = ({
   taskId,
   answer,
   disabled,
+  timeIsUpError,
+  onMutate,
   onSuccess,
+  onError,
 }: SendAnswerButtonProps) => {
-  const sendAnswerMutation = useSendAnswer(eventId, blockId, taskId, onSuccess);
+  const sendAnswerMutation = useSendAnswer(
+    eventId,
+    blockId,
+    taskId,
+    onSuccess,
+    onError,
+    onMutate,
+  );
   return (
     <Button
-      onClick={() => sendAnswerMutation.mutate(answer)}
-      disabled={answer.length == 0 || disabled}
+      onClick={() => {
+        sendAnswerMutation.mutate(answer);
+      }}
+      loading={sendAnswerMutation.isPending}
+      disabled={timeIsUpError ? false : answer.length == 0 || disabled}
     >
       Отправить
     </Button>

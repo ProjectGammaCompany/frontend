@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useStats } from "../../model/useStats";
 import "./StatsPageContent.scss";
 interface StatsPageContentProps {
@@ -6,14 +6,31 @@ interface StatsPageContentProps {
 }
 
 const StatsPageContent = ({ eventId }: StatsPageContentProps) => {
-  const { data, isPending, isError } = useStats(eventId);
+  const { data, isPending, isError, refetch } = useStats(eventId);
 
   if (isPending) {
-    return <div>Загрузка...</div>;
+    return (
+      <Flex justify="center">
+        <Spin />
+      </Flex>
+    );
   }
 
   if (isError) {
-    return <div>Ошибка!</div>;
+    return (
+      <Flex justify="center" align="center" vertical>
+        <Typography.Paragraph type="danger">
+          Возникла ошибка при загрузке. Обновите страницу
+        </Typography.Paragraph>
+        <Button
+          onClick={() => {
+            void refetch();
+          }}
+        >
+          Обновить
+        </Button>
+      </Flex>
+    );
   }
   return (
     <div className="stats-page-content">
