@@ -1,0 +1,38 @@
+.group-stats-table {
+  &__user-rank-col {
+    width: 100px;
+  }
+
+  &__current-user-cell.ant-table-cell-fix {
+    background-color: var(--table-row-accent-bg);
+  }
+
+  &__current-user-cell {
+    background-color: var(--table-row-accent-bg);
+  }
+
+  &__user-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__avatar {
+    display: none;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media (min-width: 700px) {
+  .group-stats-table {
+    &__user-rank-col {
+      width: auto;
+    }
+
+    &__avatar {
+      display: block;
+    }
+  }
+}

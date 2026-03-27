@@ -99,10 +99,69 @@ export const handlers = [
       ],
     });
   }),
-  // http.put(`${baseUrl}events/personal/favorites`, async () => {
-  //   await sleep(5000);
-  //   return new HttpResponse(null, {
-  //     status: 500,
-  //   });
-  // }),
+  http.get(`${baseUrl}event/:eventId/playerStats`, () => {
+    return HttpResponse.json({
+      fullStats: true,
+      groupEvent: false,
+      userId: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+      users: [
+        {
+          id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+          username: "test_user1@gmail.com",
+          current: false,
+          avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+          points: 10,
+        },
+        {
+          id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
+          username: "test_user2@gmail.com",
+          current: true,
+          avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+          points: 20,
+        },
+      ],
+      groups: [
+        {
+          id: "1",
+          name: "Группа 1",
+          users: [
+            {
+              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+              username: "test_user1@gmail.com",
+              current: false,
+              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+              points: 10,
+            },
+            {
+              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
+              username: "test_user2@gmail.com",
+              current: false,
+              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+              points: 20,
+            },
+          ],
+        },
+        {
+          id: "2",
+          name: "Группа 2",
+          users: [
+            {
+              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d6",
+              username: "test_user3@gmail.com",
+              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+              current: true,
+              points: 30,
+            },
+            {
+              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d7",
+              username: "test_user4@gmail.com",
+              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+              points: 40,
+              current: false,
+            },
+          ],
+        },
+      ],
+    });
+  }),
 ];
