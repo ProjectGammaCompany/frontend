@@ -5,9 +5,9 @@ import { http, HttpResponse } from "msw";
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
 
-// function sleep(ms: number) {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export const handlers = [
   http.get(`${baseUrl}events/joinRequiredFields/:joinCode`, () => {
@@ -99,69 +99,108 @@ export const handlers = [
       ],
     });
   }),
-  http.get(`${baseUrl}event/:eventId/playerStats`, () => {
+  http.get(`${baseUrl}event/:eventId/playerInfo`, () => {
     return HttpResponse.json({
-      fullStats: true,
-      groupEvent: false,
-      userId: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
-      users: [
+      eventId: "2dd9c86f-8789-40b6-9710-b41ee6e27b61",
+      title: "Учебное событие 2",
+      rated: false,
+      description: "Какое-то события",
+      tags: [
         {
-          id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
-          username: "test_user1@gmail.com",
-          current: false,
-          avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-          points: 10,
-        },
-        {
-          id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
-          username: "test_user2@gmail.com",
-          current: true,
-          avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-          points: 20,
+          id: "942d88d6-e097-40ee-b2d9-f7cf35a0d251",
+          name: "english",
         },
       ],
-      groups: [
+      cover: "",
+      startDate: "",
+      endDate: "",
+      lastEditionDate: "17.03.2026 09:11:05.547",
+      authors: [
         {
-          id: "1",
-          name: "Группа 1",
-          users: [
-            {
-              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
-              username: "test_user1@gmail.com",
-              current: false,
-              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-              points: 10,
-            },
-            {
-              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
-              username: "test_user2@gmail.com",
-              current: false,
-              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-              points: 20,
-            },
-          ],
-        },
-        {
-          id: "2",
-          name: "Группа 2",
-          users: [
-            {
-              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d6",
-              username: "test_user3@gmail.com",
-              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-              current: true,
-              points: 30,
-            },
-            {
-              id: "90d2bc31-e9e4-4694-80d9-8530f3d469d7",
-              username: "test_user4@gmail.com",
-              avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
-              points: 40,
-              current: false,
-            },
-          ],
+          id: "a939c976-5b6e-45e1-a5fc-5f8061fc2a28",
+          email: "test_user7@gmail.com",
+          avatar: "9db989a9-d8b5-4f0f-8b6f-77a9d46e4b97.png",
         },
       ],
+      rate: 0,
+      favorite: false,
+      status: "finished",
+      canBeDownloaded: false,
+      isPrivate: false,
+      needGroup: false,
     });
   }),
+
+  http.post(`${baseUrl}event/:eventId/rate`, async () => {
+    await sleep(5000);
+    return new HttpResponse(null, {
+      status: 200,
+    });
+  }),
+
+  // http.get(`${baseUrl}event/:eventId/playerStats`, () => {
+  //   return HttpResponse.json({
+  //     fullStats: true,
+  //     groupEvent: false,
+  //     userId: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+  //     users: [
+  //       {
+  //         id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+  //         username: "test_user1@gmail.com",
+  //         current: false,
+  //         avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //         points: 10,
+  //       },
+  //       {
+  //         id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
+  //         username: "test_user2@gmail.com",
+  //         current: true,
+  //         avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //         points: 20,
+  //       },
+  //     ],
+  //     groups: [
+  //       {
+  //         id: "1",
+  //         name: "Группа 1",
+  //         users: [
+  //           {
+  //             id: "90d2bc31-e9e4-4694-80d9-8530f3d469d4",
+  //             username: "test_user1@gmail.com",
+  //             current: false,
+  //             avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //             points: 10,
+  //           },
+  //           {
+  //             id: "90d2bc31-e9e4-4694-80d9-8530f3d469d5",
+  //             username: "test_user2@gmail.com",
+  //             current: false,
+  //             avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //             points: 20,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: "2",
+  //         name: "Группа 2",
+  //         users: [
+  //           {
+  //             id: "90d2bc31-e9e4-4694-80d9-8530f3d469d6",
+  //             username: "test_user3@gmail.com",
+  //             avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //             current: true,
+  //             points: 30,
+  //           },
+  //           {
+  //             id: "90d2bc31-e9e4-4694-80d9-8530f3d469d7",
+  //             username: "test_user4@gmail.com",
+  //             avatar: "4e02a81e-c94c-4e29-b261-f0bda0b0faa0.jpg",
+  //             points: 40,
+  //             current: false,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   });
+  // }),
 ];

@@ -1,10 +1,10 @@
-import { getPlayerInfo } from "@/src/entities";
+import { getPlayerInfo, useRateEvent } from "@/src/entities";
 import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
-import { getFullFileUrl, useTitle } from "@/src/shared/lib";
+import { getFullFileUrl, useNotify, useTitle } from "@/src/shared/lib";
 import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Flex, Spin, Typography } from "antd";
-import { useState } from "react";
+import { Button, Flex, Rate, Spin, Typography } from "antd";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import InteractButton from "../InteractButton/InteractButton";
 import "./PlayerContent.scss";
@@ -16,6 +16,7 @@ interface ParticipantContentProps {
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   useTitle("Событие");
   const navigate = useNavigate();
+  const notify = useNotify();
   const { data, isPending, isError, refetch } = useQuery({
     queryKey: [eventId, "playerInfo"],
     queryFn: () => getPlayerInfo(eventId),
@@ -25,6 +26,43 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   });
 
   const [openLoginGroupWindow, setOpenLoginGroupWindow] = useState(false);
+
+  const [rated, setRated] = useState(true);
+
+  const [rate, setRate] = useState<undefined | number>(undefined);
+
+  const handleRateSuccess = () => {
+    notify.success({
+      title: "Оценка отправлена",
+      description: "Благодарим за оценку!",
+    });
+    setRated(true);
+  };
+
+  const handleRateError = () => {
+    notify.error({
+      title: "Не удалось оценить событие",
+      description: "Произошла ошибка. Оцените событие позднее.",
+    });
+  };
+
+  const rateEventMutation = useRateEvent(
+    eventId,
+    handleRateSuccess,
+    handleRateError,
+  );
+
+  const handleSubmitRateBtn = () => {
+    if (typeof rate === "number") {
+      rateEventMutation.mutate(rate);
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      setRated(data.rated);
+    }
+  }, [data]);
 
   if (isPending) {
     return (
@@ -73,9 +111,24 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
             defaultState={data.favorite}
             id={eventId}
           />
-          <Typography.Text>
-            <b>Рейтинг:</b> <strong>{data.rate} / 5</strong>
-          </Typography.Text>
+          <Flex vertical gap={20}>
+            <Typography.Text>
+              <b>Рейтинг:</b> <strong>{data.rate} / 5</strong>
+            </Typography.Text>
+            {!rated && data.status === "finished" && (
+              <Flex vertical gap={10} align="stretch">
+                <Rate value={rate} onChange={(value) => setRate(value)} />
+                <Button
+                  disabled={typeof rate != "number"}
+                  loading={rateEventMutation.isPending}
+                  onClick={handleSubmitRateBtn}
+                  className="player-content__rate-btn"
+                >
+                  Оценить событие
+                </Button>
+              </Flex>
+            )}
+          </Flex>
         </div>
       </div>
       {data.tags.length > 0 && (
