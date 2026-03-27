@@ -39,6 +39,13 @@ const AntConfigProvider = ({ children }: AntConfigProviderProps) => {
             titleMarginBottom: 0,
             titleMarginTop: 0,
           },
+          Table: {
+            headerBg: "#5c30ff",
+            headerColor: "white",
+            headerFilterHoverBg: "#9375ff",
+            headerSortActiveBg: "#8664ff",
+            headerSortHoverBg: "#9375ff",
+          },
         },
         token: {
           colorPrimary: "#5c30ff",

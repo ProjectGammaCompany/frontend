@@ -29,6 +29,7 @@ export {
   getNextStage,
   getPlayerInfo,
   getUserEvents,
+  joinEvent,
   selectBlockReorderingState,
   selectEventName,
   setBlockReorderingState,
@@ -36,8 +37,11 @@ export {
   useEditingEventData,
   useGroups,
   useJoinCodeData,
+  useJoinEvent,
   useJoinRequiredFields,
   usePersonalEvents,
+  usePlayerStats,
+  useRole,
   useUpdateBlocksOrder,
   type BlockItemData,
   type BlockStage,
@@ -50,6 +54,8 @@ export {
   type getEditingEventDataResponse,
   type GetNextStageResponse,
   type Group,
+  type GroupStats,
+  type JoinDetails,
   type QueryFnType,
   type ServerGroup,
   type TaskItem,
@@ -58,6 +64,8 @@ export {
   type TaskStageData,
   type UseGroupsQueryData,
   type UseJoinCodeDataResult,
+  type UseJoinEventResponse,
+  type UserStats,
 } from "./Event";
 
 export {
@@ -124,10 +132,3 @@ export {
   type GetNotificationsQueryData,
   type NotificationType,
 } from "./Notification";
-
-export {
-  joinEvent,
-  useJoinEvent,
-  type JoinDetails,
-  type UseJoinEventResponse,
-} from "./User";

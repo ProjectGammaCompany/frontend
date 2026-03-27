@@ -1,10 +1,9 @@
+import { useRole } from "@/src/entities";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
 import { EventHeader } from "@/src/widgets";
-import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router";
-import { getRole } from "../../api";
 import MainContent from "../MainContent/MainContent";
 import "./EventPage.scss";
 
@@ -12,17 +11,7 @@ const EventPage = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
 
-  const { data, isError, isPending, refetch, error } = useQuery({
-    queryKey: ["userRole"],
-    queryFn: () => {
-      if (eventId) {
-        return getRole(eventId);
-      }
-      return Promise.reject(Error("Некорректный id"));
-    },
-    staleTime: 0,
-    select: (data) => data.data.role,
-  });
+  const { data, isError, isPending, refetch, error } = useRole(eventId);
 
   const getErrorBlock = (status: number) => {
     switch (status) {
