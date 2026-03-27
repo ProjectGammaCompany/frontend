@@ -41,6 +41,7 @@ export {
   useJoinRequiredFields,
   usePersonalEvents,
   usePlayerStats,
+  useRateEvent,
   useRole,
   useUpdateBlocksOrder,
   type BlockItemData,

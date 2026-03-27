@@ -4,6 +4,7 @@ export interface GetPlayerInfoResponse {
   title: string;
   description: string;
   rate: number;
+  rated: boolean;
   favorite: boolean;
   tags: Tag[];
   startDate?: string;
