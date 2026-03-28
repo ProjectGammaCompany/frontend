@@ -1,0 +1,30 @@
+.user-stats-table {
+  &__user-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__avatar {
+    display: none;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+  }
+
+  &__username {
+    font-weight: 600;
+  }
+
+  &__current-user-row {
+    background-color: var(--table-row-accent-bg);
+  }
+}
+
+@media (min-width: 700px) {
+  .user-stats-table {
+    &__avatar {
+      display: block;
+    }
+  }
+}

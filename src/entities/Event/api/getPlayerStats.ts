@@ -1,23 +1,25 @@
 import { axiosInstance } from "@/src/shared/api";
 
 export interface GetPlayerStatsResponse {
+  userId: string;
   fullStats: boolean;
   groupEvent: boolean;
-  users?: User[];
-  groups?: Group[];
+  users?: UserDTO[];
+  groups?: GroupDTO[];
 }
 
-interface Group {
+export interface GroupDTO {
   id: string;
   name: string;
-  users: User[];
+  users: UserDTO[];
 }
 
-interface User {
+export interface UserDTO {
   id: string;
   username: string;
   avatar?: string;
   points: number;
+  current: boolean;
 }
 
 export const getPlayerStats = (eventId: string) => {

@@ -73,3 +73,20 @@ export {
   type TaskStage,
   type TaskStageData,
 } from "./api/getNextStage.ts";
+
+export { useRole } from "./model/useRole.ts";
+
+export {
+  useJoinEvent,
+  type UseJoinEventResponse,
+} from "./model/useJoinEvent.ts";
+
+export {
+  usePlayerStats,
+  type GroupStats,
+  type UserStats,
+} from "./model/usePlayerStats.ts";
+
+export { joinEvent, type JoinDetails } from "./api/joinEvent.ts";
+
+export { useRateEvent } from "./model/useRateEvent.ts";

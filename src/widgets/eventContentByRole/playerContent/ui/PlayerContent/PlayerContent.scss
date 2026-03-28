@@ -74,4 +74,18 @@
     display: flex;
     justify-content: center;
   }
+
+  &__rate-btn {
+    text-wrap: wrap;
+    max-width: 130px;
+    padding-block: 10px;
+  }
+}
+
+@media (min-width: 350px) {
+  .player-content {
+    &__rate-btn {
+      max-width: none;
+    }
+  }
 }

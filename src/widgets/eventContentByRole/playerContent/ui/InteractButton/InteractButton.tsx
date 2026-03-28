@@ -45,6 +45,7 @@ const InteractButton = ({
         disabled={disabled && status != "finished"}
         onClick={handleClick}
         className="interact-btn"
+        type="primary"
       >
         {status === "not started"
           ? "Начать"
