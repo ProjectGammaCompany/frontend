@@ -1,3 +1,4 @@
+import { handleError } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Button, Form, Input, Typography } from "antd";
 import Password from "antd/es/input/Password";
@@ -24,18 +25,19 @@ const JoinGroupWindow = ({
 }: JoinGroupWindowProps) => {
   const [errorText, setErrorText] = useState("");
 
-  const handleForbidden = () => {
-    setErrorText("Группы с введёнными данными не существует");
-  };
-
-  const handleError = () => {
-    setErrorText("Произошла ошибка. Повторите попытку позже");
+  const handleJoinGroupError = (error: Error) => {
+    return handleError<void>(error, {
+      axiosHandlers: {
+        403: () => setErrorText("Группы с введёнными данными не существует"),
+      },
+      defaultHandler: () =>
+        setErrorText("Произошла ошибка. Повторите попытку позже"),
+    });
   };
   const joinGroupMutation = useJoinGroup(
     eventId,
     onSuccess,
-    handleForbidden,
-    handleError,
+    handleJoinGroupError,
   );
   const handleFinish = (values: FormData) => {
     setErrorText("");
