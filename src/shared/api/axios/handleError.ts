@@ -1,45 +1,20 @@
 import { isAxiosError, type AxiosError } from "axios";
 
-export const handleError = (
+type StatusHandler<T extends string | void> = (error: AxiosError) => T;
+
+interface HandleErrorOptions<T extends string | void> {
+  axiosHandlers?: Record<number, StatusHandler<T>>;
+  defaultHandler: (error: Error) => T;
+}
+export const handleError = <T extends string | void>(
   error: Error,
-  onForbidden: (error?: AxiosError) => void,
-  onError: (error?: Error) => void,
-  onNotFound?: (error?: AxiosError) => void,
-  onForbiddenText?: string,
-  onNotFoundText?: string,
-  onErrorText?: string,
+  options: HandleErrorOptions<T>,
 ) => {
   if (isAxiosError(error)) {
-    const axiosError = error as AxiosError;
-    if (axiosError.response?.status == 403) {
-      onForbidden(error);
-      return onForbiddenText;
+    const status = error.response?.status;
+    if (status && options.axiosHandlers?.[status]) {
+      return options.axiosHandlers?.[status](error);
     }
-    if (axiosError.response?.status == 404) {
-      onNotFound?.(error);
-      return onNotFoundText;
-    }
+    return options.defaultHandler(error);
   }
-  onError(error);
-  return onErrorText;
-};
-
-export const errorText = (
-  error: Error,
-  onForbidden: (error?: AxiosError) => void,
-  onError: (error?: Error) => void,
-  onNotFound?: (error?: AxiosError) => void,
-  onForbiddenText?: string,
-  onNotFoundText?: string,
-  onErrorText?: string,
-) => {
-  return handleError(
-    error,
-    onForbidden,
-    onError,
-    onNotFound,
-    onForbiddenText,
-    onNotFoundText,
-    onErrorText,
-  );
 };

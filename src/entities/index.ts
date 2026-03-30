@@ -133,3 +133,9 @@ export {
   type GetNotificationsQueryData,
   type NotificationType,
 } from "./Notification";
+
+export {
+  useChangePassword,
+  useRecoverCodeValidity,
+  useSendCodeByEmail,
+} from "./User";

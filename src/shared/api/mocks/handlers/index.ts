@@ -131,10 +131,23 @@ export const handlers = [
     });
   }),
 
-  http.post(`${baseUrl}event/:eventId/rate`, async () => {
+  http.post(`${baseUrl}auth/recoverPasswordCode`, async () => {
     await sleep(5000);
     return new HttpResponse(null, {
       status: 200,
+    });
+  }),
+  http.get(`${baseUrl}auth/recoverPasswordCodeValidity`, async () => {
+    await sleep(5000);
+    return HttpResponse.json({
+      validity: true,
+    });
+  }),
+  http.put(`${baseUrl}auth/password`, async () => {
+    await sleep(5000);
+    return HttpResponse.json({
+      accessToken: "12345",
+      refreshToken: "1234567",
     });
   }),
 
