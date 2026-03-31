@@ -1,4 +1,4 @@
-import { TaskView } from "@/src/entities";
+import { TaskView, type TaskStageFile } from "@/src/entities";
 import type { SendAnswerResponse } from "@/src/features";
 import { SendAnswerButton, useSendAnswer } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
@@ -21,7 +21,7 @@ interface ChoiceTaskData {
   description?: string;
   type: 1 | 2;
   options?: TaskOption[];
-  files: string[];
+  files: TaskStageFile[];
   time?: number;
   timestamp?: string;
 }

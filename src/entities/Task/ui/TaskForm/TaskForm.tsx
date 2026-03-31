@@ -20,15 +20,15 @@ import classnames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qrcode-logo";
 import { v4 as uuidv4 } from "uuid";
-import { getNormalizedFileList } from "../../model/getNormalizedFileList";
-import { mapUrlsToFileList } from "../../model/mapUrlsToFileList";
-import { TYPE_OPTIONS } from "../../model/typeOptions";
 import {
-  useFormSubmit,
   type ClientOption,
   type FullTaskData,
   type TaskFormData,
-} from "../../model/useFormSubmit";
+} from "../../api/createTask.ts";
+import { getNormalizedFileList } from "../../model/getNormalizedFileList";
+import { mapUrlsToFileList } from "../../model/mapUrlsToFileList";
+import { TYPE_OPTIONS } from "../../model/typeOptions";
+import { useFormSubmit } from "../../model/useFormSubmit";
 import { OptionItem } from "../OptionItem/OptionItem";
 import "./TaskForm.scss";
 
@@ -126,13 +126,15 @@ const TaskForm = <TResponse,>({
 
     setFileList(normalized);
 
-    const urls = normalized
+    const files = normalized
       .filter(
         (file): file is UploadFile & { url: string } =>
           file.status === "done" && !!file.url,
       )
-      .map((file) => file.url);
-    form.setFieldValue("files", urls);
+      .map((file) => {
+        return { url: file.url, name: file.name };
+      });
+    form.setFieldValue("files", files);
   };
 
   const handleQRCodeDownloading = () => {
@@ -250,6 +252,7 @@ const TaskForm = <TResponse,>({
       const hiddenLink = document.createElement("a");
       hiddenLink.href = getFullFileUrl(file.url);
       hiddenLink.target = "_blank";
+      hiddenLink.download = file.name;
       hiddenLink.style.display = "none";
       document.body.appendChild(hiddenLink);
       hiddenLink.click();
@@ -265,10 +268,12 @@ const TaskForm = <TResponse,>({
 
   //todo: посмотреть правильный вариант
   useEffect(() => {
-    const urls = fileList
+    const files = fileList
       .filter((f) => f.status === "done" && f.url)
-      .map((f) => f.url!);
-    form.setFieldValue("files", urls);
+      .map((f) => {
+        return { url: f.url!, name: f.name };
+      });
+    form.setFieldValue("files", files);
   }, [fileList, form]);
 
   useEffect(() => {

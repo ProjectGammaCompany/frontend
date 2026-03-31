@@ -18,9 +18,14 @@ export interface TaskStageData {
   description?: string;
   type: number;
   options?: TaskOption[];
-  files: string[];
+  files: TaskStageFile[];
   time?: number;
   timestamp?: string;
+}
+
+export interface TaskStageFile {
+  url: string;
+  name: string;
 }
 
 export interface BlockStage {

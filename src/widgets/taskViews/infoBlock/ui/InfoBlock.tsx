@@ -1,5 +1,5 @@
-import { TaskView } from "@/src/entities";
-import { useSendAnswer } from "@/src/features";
+import { TaskView, type TaskStageFile } from "@/src/entities";
+import { useSendAnswer } from "@/src/features/sendTaskAnswer";
 import { queryClient } from "@/src/shared/api";
 import { useNotify } from "@/src/shared/lib";
 import { Button } from "antd";
@@ -14,7 +14,7 @@ interface InfoBlockData {
   blockId: string;
   name: string;
   description?: string;
-  files: string[];
+  files: TaskStageFile[];
 }
 
 const InfoBlock = ({ data }: InfoBlockProps) => {

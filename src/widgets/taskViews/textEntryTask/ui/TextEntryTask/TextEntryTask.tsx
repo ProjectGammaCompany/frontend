@@ -1,4 +1,4 @@
-import { TaskView } from "@/src/entities";
+import { TaskView, type TaskStageFile } from "@/src/entities";
 import {
   SendAnswerButton,
   useSendAnswer,
@@ -22,7 +22,7 @@ interface TextEntryTaskData {
   taskId: string;
   name: string;
   description?: string;
-  files: string[];
+  files: TaskStageFile[];
   time?: number;
   timestamp?: string;
   eventId: string;

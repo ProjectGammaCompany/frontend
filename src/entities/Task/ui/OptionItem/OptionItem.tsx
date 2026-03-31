@@ -2,7 +2,7 @@ import { useDebounce } from "@/src/shared/lib";
 import { TrashSvg } from "@/src/shared/ui";
 import { Button, Input } from "antd";
 import { useEffect, useState } from "react";
-import type { ClientOption } from "../../model/useFormSubmit";
+import type { ClientOption } from "../../api/createTask";
 import "./OptionItem.scss";
 
 interface OptionItemProps {

@@ -1,11 +1,12 @@
 import { axiosInstance } from "@/src/shared/api";
+import type { TaskFile } from "./createTask";
 
 export interface GetEditorTaskDataResponse {
   name: string;
   description?: string;
   type: number; // начинаем с 1
   options: ServerOption[];
-  files: string[];
+  files: TaskFile[];
   points?: number;
   time: number; // в секундах
   partialPoints: boolean;
