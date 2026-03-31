@@ -1,7 +1,6 @@
 import { TaskView } from "@/src/entities";
 import type { SendAnswerResponse } from "@/src/features";
-import { SendAnswerButton } from "@/src/features";
-import { useSendAnswer } from "@/src/features/sendTaskAnswer";
+import { SendAnswerButton, useSendAnswer } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
 import { useNotify } from "@/src/shared/lib";
 import { Typography } from "antd";

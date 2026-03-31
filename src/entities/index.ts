@@ -114,6 +114,7 @@ export {
 export {
   ConditionForm,
   createCondition,
+  deleteCondition,
   updateCondition,
   useUpdateGroups,
   type ConditionData,
