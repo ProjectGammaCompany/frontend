@@ -4,7 +4,7 @@ import {
   type JoinDetails,
   type UseJoinEventResponse,
 } from "@/src/entities";
-import { errorText } from "@/src/shared/api";
+import { handleError } from "@/src/shared/api";
 import { CustomModalWindow } from "@/src/shared/ui";
 import { Button, Form, Input, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -37,15 +37,24 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
 
   const [form] = useForm<JoinForm>();
 
-  const handleSuccessJoin = (response: UseJoinEventResponse) => {
+  const handleJoinEventSuccess = (response: UseJoinEventResponse) => {
     void navigate(`event/${response.data.eventId}`);
+  };
+
+  const handleJoinEventError = (error: Error) => {
+    return handleError<void>(error, {
+      defaultHandler: () =>
+        setErrorMessage("Произошла ошибка. Повторите попытку"),
+      axiosHandlers: {
+        403: () => setErrorMessage("Введены некорректные данные"),
+      },
+    });
   };
 
   const joinEventMutation = useJoinEvent(
     usedJoinCode,
-    handleSuccessJoin,
-    () => setErrorMessage("Введены некорректные данные"),
-    () => setErrorMessage("Произошла ошибка. Повторите попытку"),
+    handleJoinEventSuccess,
+    handleJoinEventError,
   );
 
   const handleAfterClose = () => {
@@ -143,15 +152,14 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
           <div className="join-with-code-window__btn-wrapper">
             {requiredFieldsError && (
               <Typography.Paragraph type="danger">
-                {errorText(
-                  requiredFieldsError,
-                  () => undefined,
-                  () => undefined,
-                  undefined,
-                  "Некорректный код",
-                  undefined,
-                  "Произошла ошибка. Повторите попытку",
-                )}
+                {handleError<string>(requiredFieldsError, {
+                  axiosHandlers: {
+                    403: () => {
+                      return "Некорректный код";
+                    },
+                  },
+                  defaultHandler: () => "Произошла ошибка. Повторите попытку",
+                })}
               </Typography.Paragraph>
             )}
             <Button

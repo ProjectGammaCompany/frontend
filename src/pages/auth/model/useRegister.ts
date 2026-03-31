@@ -1,18 +1,14 @@
-import { handleError } from "@/src/shared/api";
 import { settingsStorage, tokenStorage } from "@/src/shared/lib";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../api/register";
 
 export const useRegister = (
   onSuccess: () => void,
-  onForbiddenError: () => void,
-  onError: () => void,
+  onError: (error: Error) => void,
 ) => {
   return useMutation({
     mutationFn: register,
-    onError: (error) => {
-      handleError(error, onForbiddenError, onError);
-    },
+    onError,
     onSuccess: (data) => {
       tokenStorage.setTokens(data.data.accessToken, data.data.refreshToken);
       settingsStorage.setRememberMe();

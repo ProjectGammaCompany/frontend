@@ -1,5 +1,6 @@
 import { AuthPage } from "@/src/pages/auth";
 import { EventPage } from "@/src/pages/event";
+import { ForgotPasswordPage } from "@/src/pages/forgotPassword";
 import { GamePage } from "@/src/pages/game";
 import { HomePage } from "@/src/pages/home";
 import { MyEventsPage } from "@/src/pages/myEvents";
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
         path: "/auth",
         middleware: [authMiddleware],
         Component: AuthPage,
+      },
+      {
+        path: "/forgot-password",
+        middleware: [authMiddleware],
+        Component: ForgotPasswordPage,
       },
       {
         path: "/",

@@ -39,11 +39,11 @@ export default defineConfig([
     settings: {
       "boundaries/elements": [
         { type: "app", pattern: "src/app/*" },
-        { type: "pages", pattern: "pages/*" },
-        { type: "widgets", pattern: "widgets/*" },
-        { type: "features", pattern: "features/*" },
-        { type: "entities", pattern: "entities/*" },
-        { type: "shared", pattern: "shared/*" },
+        { type: "pages", pattern: "src/pages/*" },
+        { type: "widgets", pattern: "src/widgets/*" },
+        { type: "features", pattern: "src/features/*" },
+        { type: "entities", pattern: "src/entities/*" },
+        { type: "shared", pattern: "src/shared/*" },
       ],
       "boundaries/include": ["src/**/*.*"],
       "boundaries/entry": ["index.ts", "index.tsx"],
@@ -54,56 +54,57 @@ export default defineConfig([
       },
     },
     rules: {
+      ...boundaries.configs.recommended.rules,
       "import/no-unresolved": ["error", { caseSensitive: true }],
-      "boundaries/entry-point": [
-        "error",
-        {
-          default: "disallow",
-          message:
-            "Разрешён импорт только из index.ts. Глубокие импорты между слайсами запрещены.",
-          rules: [
-            {
-              target: ["app", "pages", "widgets", "features", "entities"],
-              allow: ["index.ts", "index.tsx"],
-              importKind: "value",
-            },
-            {
-              target: ["shared"],
-              allow: "*",
-            },
-          ],
-        },
-      ],
-      "boundaries/element-types": [
-        "error",
+      "boundaries/dependencies": [
+        2,
         {
           default: "disallow",
           message:
             "${dependency.type} нельзя импортировать в ${file.type}. Импорт слайсов вышележащих слоёв в слайсы нижележащих запрещён.",
           rules: [
             {
-              from: "shared",
-              allow: ["shared"],
+              from: { type: "shared" },
+              allow: { to: { type: "shared" } },
             },
             {
-              from: "entities",
-              allow: ["shared"],
+              from: { type: "entities" },
+              allow: { to: { type: "shared" } },
             },
             {
-              from: "features",
-              allow: ["entities", "shared"],
+              from: { type: "features" },
+              allow: { to: { type: ["entities", "shared"] } },
             },
             {
-              from: "widgets",
-              allow: ["features", "entities", "shared"],
+              from: { type: "widgets" },
+              allow: { to: { type: ["features", "entities", "shared"] } },
             },
             {
-              from: "pages",
-              allow: ["widgets", "features", "entities", "shared"],
+              from: { type: "pages" },
+              allow: {
+                to: { type: ["widgets", "features", "entities", "shared"] },
+              },
             },
             {
-              from: "app",
-              allow: ["pages", "widgets", "features", "entities", "shared"],
+              from: { type: "app" },
+              allow: {
+                to: {
+                  type: ["pages", "widgets", "features", "entities", "shared"],
+                },
+              },
+            },
+            {
+              message:
+                "Разрешён импорт только из public API слайса (index.ts / index.tsx).",
+              to: {
+                type: ["app", "pages", "widgets", "features", "entities"],
+                internalPath: "!index.ts",
+              },
+              disallow: {
+                from: {
+                  type: "*",
+                },
+              },
             },
           ],
         },

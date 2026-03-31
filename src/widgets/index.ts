@@ -17,6 +17,8 @@ export { ChoiceTask } from "./taskViews/choiceTask";
 export { InfoBlock } from "./taskViews/infoBlock";
 export { TextEntryTask } from "./taskViews/textEntryTask";
 
+export { TaskSlider } from "./taskSlider";
+
 export {
   ConditionWindow,
   type ConditionWindowMode,

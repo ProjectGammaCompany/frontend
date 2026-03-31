@@ -25,7 +25,7 @@ export const useInteractButtonFunctioning = (
           "Europe/Moscow",
         );
         if (initialDate < parsedStartDate) {
-          startInterval = setInterval(() => {
+          startInterval = window.setInterval(() => {
             const date = dayjs(Date.now());
             if (date >= parsedStartDate) {
               setDisabled(false);
@@ -45,7 +45,7 @@ export const useInteractButtonFunctioning = (
           if (!startDate) {
             setDisabled(false);
           }
-          endInterval = setInterval(() => {
+          endInterval = window.setInterval(() => {
             const date = dayjs(Date.now());
             if (date >= parsedEndDate) {
               setDisabled(true);

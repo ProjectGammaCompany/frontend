@@ -1,4 +1,4 @@
-import { errorText } from "@/src/shared/api";
+import { handleError } from "@/src/shared/api";
 import { useTitle } from "@/src/shared/lib";
 import { Flex, Spin, Typography } from "antd";
 import { useProfileData } from "../../model/useProfileData";
@@ -22,15 +22,9 @@ const ProfilePage = () => {
     return (
       <Flex justify="center">
         <Typography.Paragraph type="danger">
-          {errorText(
-            error,
-            () => undefined,
-            () => undefined,
-            undefined,
-            "Произошла ошибка. Перезагрузите страницу.",
-            "Произошла ошибка. Перезагрузите страницу.",
-            "Произошла ошибка. Перезагрузите страницу.",
-          )}
+          {handleError<string>(error, {
+            defaultHandler: () => "Произошла ошибка. Перезагрузите страницу.",
+          })}
         </Typography.Paragraph>
       </Flex>
     );

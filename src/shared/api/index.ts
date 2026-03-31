@@ -5,4 +5,4 @@ export { queryClient } from "./reactQuery/queryClient";
 
 export { uploadFile, type UploadFileResponse } from "./endpoints/uploadFile.ts";
 
-export { errorText, handleError } from "./axios/handleError.ts";
+export { handleError } from "./axios/handleError.ts";
