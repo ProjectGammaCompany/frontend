@@ -1,4 +1,4 @@
-// eslint-disable-next-line boundaries/element-types, boundaries/entry-point
+/* eslint-disable boundaries/dependencies */
 import type { store } from "@/src/app/providers/reduxProvider/store";
 
 export type RootState = ReturnType<typeof store.getState>;

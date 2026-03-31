@@ -52,7 +52,7 @@ const TaskView = ({
 
   useEffect(() => {
     if (!defaultTime) return;
-    const counter = setInterval(() => {
+    const counter = window.setInterval(() => {
       setTime((prev) => {
         if (prev <= 1) {
           return 0;
