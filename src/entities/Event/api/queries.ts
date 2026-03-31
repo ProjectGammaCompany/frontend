@@ -6,4 +6,5 @@ export const eventQueries = {
   getJoinRequiredFields: (joinCode: string) =>
     [joinCode, "joinRequiredFields"] as const,
   getJoinCodeData: (eventId: string) => [eventId, "joinCodeData"] as const,
+  getUserRole: (eventId: string) => [eventId, "userRole"] as const,
 };
