@@ -8,7 +8,7 @@ const ProfilePageHeaderContent = () => {
   const { pathname } = useLocation();
   return (
     <div className="profile-page-header-content">
-      <Logo />
+      <Logo className="profile-page-header-content__logo" />
       <Typography.Title level={1} className="profile-page-header-content__text">
         Профиль
       </Typography.Title>

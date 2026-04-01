@@ -4,6 +4,9 @@
     align-items: center;
   }
 
+  &__title {
+    font-size: 16px !important;
+  }
   &__title,
   &__error-text {
     color: white !important;
@@ -15,10 +18,22 @@
     color: white;
   }
 
+  &__logo {
+    width: 130px;
+  }
+
   &__content {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+@media (min-width: 400px) {
+  .game-page-header {
+    &__title {
+      font-size: 22px !important;
+    }
   }
 }

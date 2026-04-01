@@ -35,7 +35,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
             <Logo className="event-page-header__logo" />
           </div>
           <Typography.Title level={1} className="event-page-header__title">
-            {role === 0 ? "Страница события" : "Редактор"}
+            {role === 0 ? "Событие" : "Редактор"}
           </Typography.Title>
           {role === 1 && (
             <IconButton

@@ -7,7 +7,7 @@ const NotificationPageHeaderContent = () => {
   const { pathname } = useLocation();
   return (
     <div className="notifications-page-header-content">
-      <Logo />
+      <Logo className="notifications-page-header-content__logo" />
       <Typography.Title
         level={1}
         className="notifications-page-header-content__text"

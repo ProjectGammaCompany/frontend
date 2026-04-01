@@ -9,6 +9,7 @@
   margin-inline: 50px;
   padding: 15px;
   height: 70dvh;
+  transition: background-color 0.2s ease-in-out;
 
   &__header,
   &__description {
@@ -55,5 +56,11 @@
         width: 45px;
       }
     }
+  }
+}
+
+@media (hover: hover) {
+  .task-slider-item:hover {
+    background-color: var(--hover-primary-color);
   }
 }

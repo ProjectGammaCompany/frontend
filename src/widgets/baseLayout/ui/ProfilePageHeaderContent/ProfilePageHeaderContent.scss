@@ -3,9 +3,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 5px;
 
   &__text {
     color: white !important;
+  }
+
+  &__logo {
+    width: 130px;
   }
 
   &__buttons-wrapper {
