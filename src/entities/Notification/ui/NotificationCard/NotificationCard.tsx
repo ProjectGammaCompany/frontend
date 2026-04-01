@@ -19,9 +19,18 @@ export const NotificationCard = ({
   notification,
   onDelete,
 }: NotificationCardProps) => {
-  const { id, date, extra, type } = notification;
+  const {
+    id,
+    date,
+    favoriteEventStartExtra: eventStartExtra,
+    type,
+    eventEndExtra,
+  } = notification;
 
   const navigate = useNavigate();
+
+  const extra =
+    type === "favoriteEventStart" ? eventStartExtra! : eventEndExtra!;
 
   const notificationData = getNotificationData(type, extra, navigate);
 
