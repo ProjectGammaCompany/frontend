@@ -1,4 +1,7 @@
 .filters-window {
+  &__title {
+    text-align: center;
+  }
   &__submit-btn {
     width: 200px;
     height: 40px;
@@ -9,5 +12,9 @@
       display: flex;
       justify-content: center;
     }
+  }
+
+  &__form-item {
+    margin-bottom: 5px;
   }
 }

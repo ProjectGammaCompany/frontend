@@ -44,21 +44,35 @@ const FiltersWindow = ({
   };
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
-      <Typography.Title level={1}>Фильтры</Typography.Title>
+      <Typography.Title level={1} className="filters-window__title">
+        Фильтры
+      </Typography.Title>
       <Form
         form={form}
         labelWrap
         layout="vertical"
         initialValues={initialValues}
         onFinish={handleFormFinish}
+        styles={{
+          root: {
+            marginBottom: "0px !important",
+            margin: "0px !important",
+          },
+        }}
       >
-        <Form.Item<Filters> name="favorites">
+        <Form.Item<Filters>
+          name="favorites"
+          className="filters-window__form-item"
+        >
           <CustomSwitch title="Избранное" />
         </Form.Item>
-        <Form.Item<Filters> name="active">
+        <Form.Item<Filters> name="active" className="filters-window__form-item">
           <CustomSwitch title="Активные" />
         </Form.Item>
-        <Form.Item<Filters> name="decliningRating">
+        <Form.Item<Filters>
+          name="decliningRating"
+          className="filters-window__form-item"
+        >
           <CustomSwitch title="По убыванию рейтинга" />
         </Form.Item>
         <Form.Item<Filters> name="tags" label="Теги">
