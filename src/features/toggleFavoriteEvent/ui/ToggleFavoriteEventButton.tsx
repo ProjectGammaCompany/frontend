@@ -1,5 +1,6 @@
 import { useNotify } from "@/src/shared/lib";
-import { IconButton, StarSvg } from "@/src/shared/ui";
+import { StarSvg } from "@/src/shared/ui";
+import { Button } from "antd";
 import classnames from "classnames";
 import { useState } from "react";
 import { usePutFavoriteState } from "../model/usePutFavoriteState";
@@ -37,17 +38,16 @@ const ToggleFavoriteEventButton = ({
     "toggle-favorite-event-btn_active": state,
   });
   return (
-    <IconButton
+    <Button
       icon={<StarSvg />}
       className={className}
-      iconWrapperClassname="toggle-favorite-event-btn__icon-wrapper"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         toggleMutation.mutate();
       }}
       loading={toggleMutation.isPending}
-    ></IconButton>
+    />
   );
 };
 

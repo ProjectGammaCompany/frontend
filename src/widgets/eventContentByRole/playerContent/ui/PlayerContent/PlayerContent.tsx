@@ -157,7 +157,9 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
       )}
       {data.description && (
         <div className="player-content__description-wrapper">
-          <Typography.Title level={2}>Описание события</Typography.Title>
+          <Typography.Title level={2} className="player-content__title">
+            Описание события
+          </Typography.Title>
           <Typography.Paragraph>{data.description}</Typography.Paragraph>
         </div>
       )}

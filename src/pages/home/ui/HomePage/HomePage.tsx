@@ -7,14 +7,14 @@ import { Button } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router";
-import { getParams } from "../lib/paramsLib/getParams";
-import type { Filters } from "../model/useAllEvents";
-import CreateEventWindow from "./CreateEventWindow/CreateEventWindow";
-import EventsList from "./EventsList/EventsList";
-import FiltersWindow from "./FiltersWindow/FiltersWindow";
-import FloatButtonsGroup from "./FloatButtonsGroup/FloatButtonsGroup";
+import { getParams } from "../../lib/paramsLib/getParams";
+import type { Filters } from "../../model/useAllEvents";
+import CreateEventWindow from "../CreateEventWindow/CreateEventWindow";
+import EventsList from "../EventsList/EventsList";
+import FiltersWindow from "../FiltersWindow/FiltersWindow";
+import FloatButtonsGroup from "../FloatButtonsGroup/FloatButtonsGroup";
+import JoinWithCodeWindow from "../JoinWithCodeWindow/JoinWithCodeWindow";
 import "./HomePage.scss";
-import JoinWithCodeWindow from "./JoinWithCodeWindow/JoinWithCodeWindow";
 
 export const HomePage = () => {
   useTitle("Главная");
@@ -73,6 +73,8 @@ export const HomePage = () => {
       <div className="home-page__participate-btn-wrapper">
         <Button
           className="home-page__participate-btn"
+          block
+          type="primary"
           onClick={() => setIsJoinWithCodeWindowOpen(true)}
         >
           Присоединиться по коду

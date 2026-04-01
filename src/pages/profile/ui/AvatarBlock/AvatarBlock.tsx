@@ -29,7 +29,7 @@ const AvatarBlock = ({ avatar }: AvatarBlockProps) => {
           className="profile-page__avatar-img"
         />
       ) : (
-        <div className="profile-page__avatar-img">
+        <div className="profile-page__avatar-icon-wrapper">
           <ProfileSvg />
         </div>
       )}

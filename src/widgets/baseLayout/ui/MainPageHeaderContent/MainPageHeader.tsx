@@ -21,6 +21,13 @@ const MainPageHeaderContent = ({ pathname }: MainPageHeaderContentProps) => {
       <Logo />
       <Search
         className="main-page-header-content__search"
+        allowClear
+        onClear={() => {
+          setSearchParams((searchParams) => {
+            searchParams.delete("title");
+            return searchParams;
+          });
+        }}
         onSearch={(value) => {
           setSearchParams((searchParams) => {
             searchParams.set("title", value);

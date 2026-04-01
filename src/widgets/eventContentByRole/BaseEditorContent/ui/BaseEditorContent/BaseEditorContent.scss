@@ -19,6 +19,18 @@
     }
   }
 
+  &__stats-btn {
+    height: 45px;
+    width: 45px;
+    z-index: 3 !important;
+    color: white;
+
+    &-icon {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
   &__save-block-reordering-btn {
     display: block;
     position: absolute;
