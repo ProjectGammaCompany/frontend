@@ -1,6 +1,6 @@
 import { getPlayerInfo, useRateEvent } from "@/src/entities";
 import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
-import { getFullFileUrl, useNotify, useTitle } from "@/src/shared/lib";
+import { getFullFileUrl, Seo, useNotify } from "@/src/shared/lib";
 import { DefaultEventCoverSvg } from "@/src/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Rate, Spin, Typography } from "antd";
@@ -14,7 +14,6 @@ interface ParticipantContentProps {
 }
 
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
-  useTitle("Событие");
   const navigate = useNavigate();
   const notify = useNotify();
   const { data, isPending, isError, refetch } = useQuery({
@@ -89,8 +88,25 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
     );
   }
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: data.title,
+    description: data.description,
+    image: data.cover ? getFullFileUrl(data.cover) : undefined,
+    startDate: data.startDate,
+    endDate: data.endDate,
+    url: `https://hse-eduplay.ru/event/${eventId}`,
+  };
+
   return (
     <div className="player-content">
+      <Seo
+        title="Событие"
+        description={`Информация о событии ${data.title}.`}
+        canonical={`/event/${eventId}`}
+        schemaMarkup={schemaMarkup}
+      />
       <Typography.Title level={1} className="player-content__title">
         {data.title}
       </Typography.Title>

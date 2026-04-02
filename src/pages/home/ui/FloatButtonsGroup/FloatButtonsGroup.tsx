@@ -30,7 +30,7 @@ const FloatButtonsGroup = ({
               root: "home-page__my-events-btn",
             }}
             onClick={() => {
-              void navigate("/myEvents");
+              void navigate("/my-events");
             }}
             icon={<MyEventsSvg />}
           />

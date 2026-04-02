@@ -17,7 +17,7 @@ const BaseLayout = () => {
     home: <MainPageHeaderContent pathname={pathname} />,
     profile: <ProfilePageHeaderContent />,
     notifications: <NotificationPageHeaderContent />,
-    myEvents: <MyEventsPageHeaderContent />,
+    "my-events": <MyEventsPageHeaderContent />,
   };
 
   const key = getRouteKey(pathname);

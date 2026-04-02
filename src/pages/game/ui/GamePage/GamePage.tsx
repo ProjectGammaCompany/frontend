@@ -1,3 +1,4 @@
+import { Seo } from "@/src/shared/lib";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
 import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
@@ -75,6 +76,12 @@ const GamePage = () => {
   return (
     <>
       <Header>
+        <Seo
+          title="Прохождение"
+          description="Страница прохождения события."
+          canonical={`/event/${eventId}/game`}
+          noIndex
+        />
         <div className="game-page-header__content">
           <div
             className="game-page-header__icons-wrapper"
