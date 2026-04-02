@@ -8,8 +8,17 @@
     gap: 10px;
   }
 
+  &__title {
+    text-align: center;
+  }
+
   &__timer-text {
     margin-top: 10px;
     font-variant-numeric: tabular-nums;
+
+    &_running-out {
+      color: var(--red-color);
+      font-weight: 600;
+    }
   }
 }

@@ -1,8 +1,8 @@
 import { QrCodeScanner } from "@/src/shared/lib";
-import { Button, Input, Typography } from "antd";
+import { Button, Flex, Input, Typography } from "antd";
 import type { Html5QrcodeScannerConfig } from "html5-qrcode/esm/html5-qrcode-scanner";
 import { useState } from "react";
-
+import "./QRBlock.scss";
 interface QRBlockProps {
   answer: string[];
   onSuccessScanning: (decodedText: string) => void;
@@ -23,7 +23,7 @@ const QRInputBlock = ({
   const [cameraOpen, setCameraOpen] = useState(false);
 
   const hintTextMap: Record<"text" | "qr", string> = {
-    text: "Введите последовательность символов, составляющую QR-код",
+    text: "Введите последовательность символов, составляющую QR-код:",
     qr: "Отсканируйте QR-код:",
   };
 
@@ -48,8 +48,12 @@ const QRInputBlock = ({
     <>
       <Typography.Paragraph>{hintTextMap[inputMode]}</Typography.Paragraph>
       {inputMode === "qr" ? (
-        <div>
-          <Button disabled={disabled} onClick={() => setCameraOpen(true)}>
+        <Flex vertical align="center">
+          <Button
+            disabled={disabled}
+            onClick={() => setCameraOpen(true)}
+            type="primary"
+          >
             Открыть камеру
           </Button>
           <QrCodeScanner
@@ -61,7 +65,7 @@ const QRInputBlock = ({
             config={qrCodeScannerConfig}
             verbose
           />
-        </div>
+        </Flex>
       ) : (
         <div>
           <Input
@@ -78,6 +82,7 @@ const QRInputBlock = ({
           if (disabled) return;
           setInputMode(inputMode === "text" ? "qr" : "text");
         }}
+        className="qr-block__change-input-text"
       >
         {changeInputTextMap[inputMode]}
       </Typography.Paragraph>
