@@ -1,5 +1,5 @@
 import { getEditingEventData, setName, type Condition } from "@/src/entities";
-import { useTitle } from "@/src/shared/lib";
+import { Seo } from "@/src/shared/lib";
 import {
   BaseEditorContent,
   BlockWindow,
@@ -25,7 +25,6 @@ interface EditorContentProps {
 }
 
 const EditorContent = ({ eventId }: EditorContentProps) => {
-  useTitle("Редактор события");
   const dispatch = useDispatch();
 
   const taskOrder = useSelector(selectTaskOrder);
@@ -147,6 +146,12 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   }
   return (
     <div>
+      <Seo
+        title="Редактор события"
+        description="Страница редактирования события."
+        canonical={`/event/${eventId}`}
+        noIndex
+      />
       <BaseEditorContent
         eventId={eventId}
         onTaskClick={handleTaskClick}

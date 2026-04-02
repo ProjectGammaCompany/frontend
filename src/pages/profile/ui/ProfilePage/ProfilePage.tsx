@@ -1,6 +1,6 @@
 import { useUpdateUsername } from "@/src/entities";
 import { handleError } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+import { Seo, useNotify } from "@/src/shared/lib";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useEffectEvent } from "react";
@@ -14,6 +14,15 @@ interface ProfileFormData {
 }
 const ProfilePage = () => {
   const notify = useNotify();
+
+  const ProfilePageSeo = (
+    <Seo
+      title="Профиль"
+      description="Страница профиля пользователя."
+      canonical={`/profile`}
+      noIndex
+    />
+  );
 
   const { data, isError, isPending, error } = useProfileData();
 
@@ -52,6 +61,7 @@ const ProfilePage = () => {
   if (isPending) {
     return (
       <Flex align="center" justify="center">
+        {ProfilePageSeo}
         <Spin />
       </Flex>
     );
@@ -60,6 +70,7 @@ const ProfilePage = () => {
   if (isError) {
     return (
       <Flex justify="center">
+        {ProfilePageSeo}
         <Typography.Paragraph type="danger">
           {handleError<string>(error, {
             defaultHandler: () => "Произошла ошибка. Перезагрузите страницу.",
@@ -71,6 +82,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
+      {ProfilePageSeo}
       <div className="profile-page__main-info-block">
         <AvatarBlock avatar={data.avatar} />
         <Form<ProfileFormData>
