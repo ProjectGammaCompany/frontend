@@ -5,4 +5,4 @@ resources:
 
 images:
   - name: evgenbolat/eduplay-frontend
-    newTag: sha-e07daaf
+    newTag: sha-85f5f14
