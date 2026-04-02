@@ -1,4 +1,4 @@
-import { useTitle, type ChangeTypeOfKeys } from "@/src/shared/lib";
+import { Seo, type ChangeTypeOfKeys } from "@/src/shared/lib";
 import {
   selectFiltersWindowState,
   setIsFiltersWindowOpen,
@@ -17,7 +17,6 @@ import JoinWithCodeWindow from "../JoinWithCodeWindow/JoinWithCodeWindow";
 import "./HomePage.scss";
 
 export const HomePage = () => {
-  useTitle("Главная");
   const [params, setParams] = useSearchParams();
 
   const [createEventWindowOpen, setIsCreateEventWindoWOpen] = useState(false);
@@ -68,8 +67,21 @@ export const HomePage = () => {
     });
   };
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "HSE EduPlay",
+    url: "https://hse-eduplay.ru",
+  };
+
   return (
     <div className="home-page">
+      <Seo
+        title="Главная"
+        description="Платформа для создания и проведения квестов и контрольных мероприятий."
+        canonical={`/`}
+        schemaMarkup={schemaMarkup}
+      />
       <div className="home-page__participate-btn-wrapper">
         <Button
           className="home-page__participate-btn"

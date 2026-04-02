@@ -1,11 +1,10 @@
-import { useTitle } from "@/src/shared/lib";
+import { Seo } from "@/src/shared/lib";
 import { BackSvg, Header, Logo } from "@/src/shared/ui";
 import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import StatsPageContent from "../StatsPageContent/StatsPageContent";
 import "./StatsPage.scss";
 const StatsPage = () => {
-  useTitle("Статистика");
   const navigate = useNavigate();
   const { eventId } = useParams();
 
@@ -14,6 +13,12 @@ const StatsPage = () => {
   }
   return (
     <div>
+      <Seo
+        title="Статистика"
+        description="Страница статистики события."
+        canonical={`/event/${eventId}/stats`}
+        noIndex
+      />
       <Header>
         <div className="stats-page-header__content">
           <div

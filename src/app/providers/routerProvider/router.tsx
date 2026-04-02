@@ -68,7 +68,7 @@ const router = createBrowserRouter([
                     Component: NotificationPage,
                   },
                   {
-                    path: "myEvents",
+                    path: "my-events",
                     Component: MyEventsPage,
                   },
                 ],
