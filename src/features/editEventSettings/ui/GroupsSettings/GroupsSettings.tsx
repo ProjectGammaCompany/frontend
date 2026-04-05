@@ -1,4 +1,4 @@
-import type { ClientGroup } from "@/src/entities";
+import type { ClientGroup } from "@/entities";
 import { Button, Form } from "antd";
 import { useWatch } from "antd/es/form/Form";
 import { v4 as uuidv4 } from "uuid";

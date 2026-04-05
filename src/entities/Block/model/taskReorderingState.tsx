@@ -1,5 +1,5 @@
-import type { RootState } from "@/src/shared/lib"
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { RootState } from "@/shared/lib";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface TaskReorderingState {
   value: boolean;
@@ -19,8 +19,7 @@ export const tasksReorderingSlice = createSlice({
   },
 });
 
-export const { setTasksReorderingState } =
-  tasksReorderingSlice.actions;
+export const { setTasksReorderingState } = tasksReorderingSlice.actions;
 
 export const selectTasksReorderingState = (state: RootState) =>
   state.tasksReorderingState.value;

@@ -1,4 +1,4 @@
-import type { RootState } from "@/src/shared/lib";
+import type { RootState } from "@/shared/lib";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface taskDataState {

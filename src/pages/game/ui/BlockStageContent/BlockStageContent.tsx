@@ -1,6 +1,6 @@
-import type { BlockStage } from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
-import { TaskSlider } from "@/src/widgets";
+import type { BlockStage } from "@/entities";
+import { useNotify } from "@/shared/lib";
+import { TaskSlider } from "@/widgets";
 import { Button, Typography } from "antd";
 import { useState } from "react";
 import { invalidateGameData } from "../../model/invalidateGameData";

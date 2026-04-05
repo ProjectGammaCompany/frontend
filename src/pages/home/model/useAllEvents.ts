@@ -1,8 +1,4 @@
-import {
-  eventQueries,
-  getEvents,
-  type getEventsResponse,
-} from "@/src/entities";
+import { eventQueries, getEvents, type getEventsResponse } from "@/entities";
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 

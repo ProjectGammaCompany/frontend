@@ -1,5 +1,5 @@
-import { getTags } from "@/src/entities";
-import { CustomModalWindow, CustomSwitch } from "@/src/shared/ui";
+import { getTags } from "@/entities";
+import { CustomModalWindow, CustomSwitch } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Select, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";

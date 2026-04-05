@@ -3,7 +3,7 @@ import {
   useGroups,
   type Condition,
   type Group,
-} from "@/src/entities";
+} from "@/entities";
 import { Button, Flex, Spin, Typography } from "antd";
 import ConditionItem from "../ConditionItem/ConditionItem";
 import "./ConditionsList.scss";

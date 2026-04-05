@@ -2,14 +2,9 @@ import {
   useChangePassword,
   useRecoverCodeValidity,
   useSendCodeByEmail,
-} from "@/src/entities";
-import { handleError } from "@/src/shared/api";
-import {
-  Seo,
-  settingsStorage,
-  tokenStorage,
-  useNotify,
-} from "@/src/shared/lib";
+} from "@/entities";
+import { handleError } from "@/shared/api";
+import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib";
 import { Button, Flex, Form, Input, Typography } from "antd";
 import Password from "antd/es/input/Password";
 import { useEffect, useEffectEvent, useState } from "react";

@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 import type { FullTaskData } from "../model/useFormSubmit";
 import { type ServerOption } from "./getEditorTaskData";
 

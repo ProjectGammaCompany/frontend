@@ -1,7 +1,7 @@
-import { useRole } from "@/src/entities";
-import { Seo } from "@/src/shared/lib";
-import { BackSvg, Header, Logo } from "@/src/shared/ui";
-import { EventHeader } from "@/src/widgets";
+import { useRole } from "@/entities";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, Logo } from "@/shared/ui";
+import { EventHeader } from "@/widgets";
 import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router";

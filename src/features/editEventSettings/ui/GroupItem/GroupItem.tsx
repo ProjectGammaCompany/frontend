@@ -1,6 +1,6 @@
-import type { ClientGroup } from "@/src/entities";
-import { useDebounce } from "@/src/shared/lib";
-import { IconButton, TrashSvg } from "@/src/shared/ui";
+import type { ClientGroup } from "@/entities";
+import { useDebounce } from "@/shared/lib";
+import { IconButton, TrashSvg } from "@/shared/ui";
 import { Input } from "antd";
 import Password from "antd/es/input/Password";
 import { useEffect, useState } from "react";

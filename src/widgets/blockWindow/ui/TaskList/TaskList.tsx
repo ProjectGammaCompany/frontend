@@ -3,8 +3,8 @@ import {
   setTasksReorderingState,
   useTasks,
   useUpdateTasksOrder,
-} from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
+} from "@/entities";
+import { useNotify } from "@/shared/lib";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useCallback } from "react";

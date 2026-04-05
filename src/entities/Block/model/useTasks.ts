@@ -1,4 +1,4 @@
-import { getTasks } from "@/src/entities";
+import { getTasks } from "@/entities";
 import { useQuery } from "@tanstack/react-query";
 import { blockQueries } from "../api/queries";
 

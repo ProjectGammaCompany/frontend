@@ -1,5 +1,5 @@
-import { axiosInstance } from "@/src/shared/api";
-import type { TokensResponse } from "@/src/shared/models";
+import { axiosInstance } from "@/shared/api";
+import type { TokensResponse } from "@/shared/models";
 
 export interface loginProps {
   email: string;

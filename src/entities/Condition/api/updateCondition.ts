@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 import type { ConditionData } from "./createCondition";
 
 export interface UpdateConditionResponse {

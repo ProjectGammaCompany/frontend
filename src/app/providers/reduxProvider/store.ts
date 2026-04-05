@@ -2,17 +2,20 @@ import {
   blockReorderingReducer,
   eventNameReducer,
   tasksReorderingReducer,
-} from "@/src/entities";
-import { conditionDataReducer, taskDataReducer } from "@/src/pages/event";
-import { filtersWindowStateReducer } from "@/src/widgets";
-import { configureStore } from "@reduxjs/toolkit";
+} from "@/entities";
+import { conditionDataReducer, taskDataReducer } from "@/pages/event";
+import { filtersWindowStateReducer } from "@/widgets";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+export const rootReducer = combineReducers({
+  eventName: eventNameReducer,
+  taskData: taskDataReducer,
+  conditionData: conditionDataReducer,
+  blockReorderingState: blockReorderingReducer,
+  tasksReorderingState: tasksReorderingReducer,
+  filtersWindowState: filtersWindowStateReducer,
+});
+
 export const store = configureStore({
-  reducer: {
-    eventName: eventNameReducer,
-    taskData: taskDataReducer,
-    conditionData: conditionDataReducer,
-    blockReorderingState: blockReorderingReducer,
-    tasksReorderingState: tasksReorderingReducer,
-    filtersWindowState: filtersWindowStateReducer,
-  },
+  reducer: rootReducer,
 });

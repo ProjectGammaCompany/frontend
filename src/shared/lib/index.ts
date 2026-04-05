@@ -33,3 +33,5 @@ export { MessageContext, useMessage };
 export { QrCodeScanner } from "./qrCodeScanner";
 
 export { Seo } from "./seo";
+
+export { basicRender, renderWithStoreAndRouter } from "./testFunctions";

@@ -2,8 +2,8 @@ import {
   blockQueries,
   type GetTasksResponse,
   type TaskItemData,
-} from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+} from "@/entities";
+import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 
 export const updateTasksOrderInQuery = (

@@ -1,4 +1,4 @@
-import { globalRouter } from "@/src/shared/lib";
+import { globalRouter } from "@/shared/lib";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import "./RootLayout.scss";

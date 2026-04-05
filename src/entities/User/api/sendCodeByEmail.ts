@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 
 export const sendCodeByEmail = (email: string) => {
   return axiosInstance.post("auth/recoverPasswordCode", {

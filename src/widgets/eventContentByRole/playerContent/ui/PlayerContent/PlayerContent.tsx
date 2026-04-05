@@ -1,7 +1,7 @@
-import { getPlayerInfo, useRateEvent } from "@/src/entities";
-import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
-import { getFullFileUrl, Seo, useNotify } from "@/src/shared/lib";
-import { DefaultEventCoverSvg } from "@/src/shared/ui";
+import { getPlayerInfo, useRateEvent } from "@/entities";
+import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/features";
+import { getFullFileUrl, Seo, useNotify } from "@/shared/lib";
+import { DefaultEventCoverSvg } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Rate, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";

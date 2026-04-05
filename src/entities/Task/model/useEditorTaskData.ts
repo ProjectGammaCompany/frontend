@@ -1,4 +1,4 @@
-import { getEditorTaskData } from "@/src/entities";
+import { getEditorTaskData } from "@/entities";
 import { useQuery } from "@tanstack/react-query";
 import { taskQueries } from "../api/queries";
 

@@ -1,11 +1,11 @@
-import { getEditingEventData, setName, type Condition } from "@/src/entities";
+import { getEditingEventData, setName, type Condition } from "@/entities";
 import {
   BaseEditorContent,
   BlockWindow,
   ConditionWindow,
   TaskWindow,
   type TaskWindowMode,
-} from "@/src/widgets";
+} from "@/widgets";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";

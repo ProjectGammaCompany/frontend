@@ -1,4 +1,4 @@
-import { settingsStorage, tokenStorage } from "@/src/shared/lib";
+import { settingsStorage, tokenStorage } from "@/shared/lib";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../api/register";
 

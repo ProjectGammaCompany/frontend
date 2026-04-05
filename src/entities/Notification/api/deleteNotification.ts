@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 
 export const deleteNotification = (id: string) => {
   return axiosInstance.delete(`notifications/${id}`);

@@ -1,4 +1,4 @@
-import { Logo } from "@/src/shared/ui";
+import { Logo } from "@/shared/ui";
 import { Typography } from "antd";
 import { Link, useLocation } from "react-router";
 import NavigationButtons from "../NavigationButtons/NavigationButtons";

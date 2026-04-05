@@ -1,5 +1,5 @@
-import { blockQueries, type GetConditionsResponse } from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+import { blockQueries, type GetConditionsResponse } from "@/entities";
+import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 
 export const removeConditionFromList = (

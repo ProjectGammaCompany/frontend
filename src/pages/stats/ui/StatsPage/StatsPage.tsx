@@ -1,5 +1,5 @@
-import { Seo } from "@/src/shared/lib";
-import { BackSvg, Header, Logo } from "@/src/shared/ui";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, Logo } from "@/shared/ui";
 import { Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import StatsPageContent from "../StatsPageContent/StatsPageContent";

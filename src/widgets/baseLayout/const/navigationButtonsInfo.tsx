@@ -1,9 +1,4 @@
-import {
-  CustomIcon,
-  HomeSvg,
-  NotificationSvg,
-  ProfileSvg,
-} from "@/src/shared/ui";
+import { CustomIcon, HomeSvg, NotificationSvg, ProfileSvg } from "@/shared/ui";
 
 import type { ReactNode } from "react";
 
