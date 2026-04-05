@@ -163,12 +163,13 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
       )}
       {data.startDate && (
         <Typography.Paragraph className="player-content__date-text">
-          <b>Открывается:</b> {data.startDate}
+          <b>Открывается:</b>{" "}
+          {data.startDate.slice(0, data.startDate.length - 7)}
         </Typography.Paragraph>
       )}
       {data.endDate && (
         <Typography.Paragraph className="player-content__date-text">
-          <b>Закрывается:</b> {data.endDate}
+          <b>Закрывается:</b> {data.endDate.slice(0, data.endDate.length - 7)}
         </Typography.Paragraph>
       )}
       {data.description && (
