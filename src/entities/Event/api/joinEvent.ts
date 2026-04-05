@@ -11,7 +11,7 @@ export interface JoinEventResponse {
 }
 export const joinEvent = (joinCode: string, values: JoinDetails) => {
   return axiosInstance.post<JoinEventResponse>(
-    `events/join/${joinCode}`,
+    `event/join/${joinCode}`,
     values,
   );
 };

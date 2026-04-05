@@ -6,6 +6,6 @@ export interface GetJoinCodeDataResponse {
 }
 export const getJoinCodeData = (eventId: string) => {
   return axiosInstance.get<GetJoinCodeDataResponse>(
-    `events/${eventId}/joinCode`,
+    `event/${eventId}/joinCode`,
   );
 };

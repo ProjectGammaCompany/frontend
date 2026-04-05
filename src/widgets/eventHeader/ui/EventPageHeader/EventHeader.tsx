@@ -1,6 +1,7 @@
 import { eventQueries } from "@/src/entities";
 import { EditEventSettingsWindow } from "@/src/features";
 import { queryClient } from "@/src/shared/api";
+import { Seo } from "@/src/shared/lib";
 import {
   BackSvg,
   Header,
@@ -25,6 +26,14 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
   const [open, setIsOpen] = useState<boolean>(false);
   return (
     <>
+      {role == 1 && (
+        <Seo
+          title="Редактор события"
+          description="Страница редактирования события."
+          canonical={`/event/${eventId}`}
+          noIndex
+        />
+      )}
       <Header>
         <div className="event-page-header">
           <div
