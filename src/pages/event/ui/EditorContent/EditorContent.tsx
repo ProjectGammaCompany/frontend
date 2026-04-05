@@ -1,5 +1,4 @@
 import { getEditingEventData, setName, type Condition } from "@/src/entities";
-import { Seo } from "@/src/shared/lib";
 import {
   BaseEditorContent,
   BlockWindow,
@@ -146,12 +145,6 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   }
   return (
     <div>
-      <Seo
-        title="Редактор события"
-        description="Страница редактирования события."
-        canonical={`/event/${eventId}`}
-        noIndex
-      />
       <BaseEditorContent
         eventId={eventId}
         onTaskClick={handleTaskClick}

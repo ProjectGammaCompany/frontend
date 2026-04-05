@@ -157,7 +157,7 @@ const ConditionForm = <TResponse,>({
               onChange={(checked) => {
                 form.setFieldValue("min", checked ? 0 : -1);
               }}
-              title="Набрано не менее заданного количества баллов (&gt;&nbsp;или&nbsp;=)"
+              title="За ранее пройденные задания набрано не менее заданного количества баллов (&gt;&nbsp;или&nbsp;=)"
             />
           </Form.Item>
         </FormItem>
@@ -199,7 +199,7 @@ const ConditionForm = <TResponse,>({
             onChange={(checked) => {
               form.setFieldValue("max", checked ? 0 : -1);
             }}
-            title="Набрано менее заданного количества баллов (&lt;)"
+            title="За ранее пройденные задания набрано менее заданного количества баллов (&lt;)"
           />
         </FormItem>
       </FormItem>

@@ -5,6 +5,6 @@ interface GetJoinRequiredFieldsResponse {
 }
 export const getJoinRequiredFields = (joinCode: string) => {
   return axiosInstance.get<GetJoinRequiredFieldsResponse>(
-    `events/joinRequiredFields/${joinCode}`,
+    `event/joinRequiredFields/${joinCode}`,
   );
 };
