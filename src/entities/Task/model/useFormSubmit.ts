@@ -1,4 +1,4 @@
-import type { PickPartial } from "@/src/shared/lib";
+import type { PickPartial } from "@/shared/lib";
 import { useMutation } from "@tanstack/react-query";
 import type { ServerOption } from "../api/getEditorTaskData";
 

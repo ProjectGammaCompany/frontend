@@ -1,4 +1,4 @@
-import { Seo } from "@/src/shared/lib";
+import { Seo } from "@/shared/lib";
 import { Segmented, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { PAGE_STATES, PAGE_STATES_VALUES } from "../../const/pageStates";
@@ -32,6 +32,7 @@ export const AuthPage = () => {
       />
       <div className="auth-page__content-wrapper">
         <Segmented
+          data-testid="switch form"
           options={PAGE_STATES.map((state) => {
             return {
               ...state,

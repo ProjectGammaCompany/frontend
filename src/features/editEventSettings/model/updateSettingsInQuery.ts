@@ -3,9 +3,9 @@ import {
   type BaseEventFormData,
   type EditingEventSettings,
   type ServerGroup,
-} from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
-import type { ChangeTypeOfKeys } from "@/src/shared/lib";
+} from "@/entities";
+import { queryClient } from "@/shared/api";
+import type { ChangeTypeOfKeys } from "@/shared/lib";
 import type { AxiosResponse } from "axios";
 
 type FormData = BaseEventFormData & {

@@ -1,4 +1,4 @@
-import { BlockCard, type BlockItemData } from "@/src/entities";
+import { BlockCard, type BlockItemData } from "@/entities";
 import { Typography } from "antd";
 import "./BlockItem.scss";
 interface BlockItemProps {

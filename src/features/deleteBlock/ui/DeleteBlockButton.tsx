@@ -1,4 +1,4 @@
-import { TrashSvg } from "@/src/shared/ui";
+import { TrashSvg } from "@/shared/ui";
 import { Button } from "antd";
 import { useDeleteBlock } from "../model/useDeleteBlock";
 import "./DeleteBlockButton.scss";

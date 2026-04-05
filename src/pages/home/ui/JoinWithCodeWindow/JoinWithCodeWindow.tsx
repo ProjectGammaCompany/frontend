@@ -3,9 +3,9 @@ import {
   useJoinRequiredFields,
   type JoinDetails,
   type UseJoinEventResponse,
-} from "@/src/entities";
-import { handleError } from "@/src/shared/api";
-import { CustomModalWindow } from "@/src/shared/ui";
+} from "@/entities";
+import { handleError } from "@/shared/api";
+import { CustomModalWindow } from "@/shared/ui";
 import { Button, Form, Input, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import Password from "antd/es/input/Password";

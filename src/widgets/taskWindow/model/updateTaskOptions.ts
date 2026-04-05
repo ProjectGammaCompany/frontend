@@ -1,5 +1,5 @@
-import { taskQueries, type GetEditorTaskDataResponse } from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+import { taskQueries, type GetEditorTaskDataResponse } from "@/entities";
+import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 
 export const updateTaskData = (

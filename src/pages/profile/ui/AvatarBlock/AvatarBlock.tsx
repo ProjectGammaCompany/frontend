@@ -1,5 +1,5 @@
-import { getFullFileUrl, useFileUpload } from "@/src/shared/lib";
-import { ProfileSvg } from "@/src/shared/ui";
+import { getFullFileUrl, useFileUpload } from "@/shared/lib";
+import { ProfileSvg } from "@/shared/ui";
 import { Button, Upload } from "antd";
 import { useSetAvatar } from "../../model/useSetAvatar";
 import "./AvatarBlock.scss";

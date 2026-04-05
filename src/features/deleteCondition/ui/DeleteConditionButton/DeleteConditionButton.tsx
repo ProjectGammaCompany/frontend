@@ -1,5 +1,5 @@
-import { deleteCondition } from "@/src/entities";
-import { TrashSvg } from "@/src/shared/ui";
+import { deleteCondition } from "@/entities";
+import { TrashSvg } from "@/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
 import "./DeleteConditionButton.scss";

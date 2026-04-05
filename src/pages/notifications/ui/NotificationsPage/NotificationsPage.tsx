@@ -1,4 +1,4 @@
-import { Seo } from "@/src/shared/lib";
+import { Seo } from "@/shared/lib";
 import NotificationsList from "../NotificationsList/NotificationsList";
 import "./NotificationsPage.scss";
 

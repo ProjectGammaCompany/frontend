@@ -1,4 +1,4 @@
-import { IconButton } from "@/src/shared/ui";
+import { IconButton } from "@/shared/ui";
 import classnames from "classnames";
 import { useNavigate } from "react-router";
 import { NAVIGATION_BUTTONS_INFO } from "../../const/navigationButtonsInfo";

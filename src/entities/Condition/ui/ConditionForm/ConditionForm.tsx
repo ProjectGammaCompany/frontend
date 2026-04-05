@@ -1,6 +1,6 @@
-import type { UseGroupsQueryData } from "@/src/entities";
-import { useGroups } from "@/src/entities";
-import { CustomSwitch } from "@/src/shared/ui";
+import type { UseGroupsQueryData } from "@/entities";
+import { useGroups } from "@/entities";
+import { CustomSwitch } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";

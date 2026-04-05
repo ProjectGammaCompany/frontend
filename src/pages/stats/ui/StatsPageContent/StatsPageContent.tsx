@@ -1,4 +1,4 @@
-import { useRole } from "@/src/entities";
+import { useRole } from "@/entities";
 import { Button, Flex, Spin, Typography } from "antd";
 import EditorStats from "../EditorStats/EditorStats";
 import PlayerStats from "../PlayerStats/PlayerStats";

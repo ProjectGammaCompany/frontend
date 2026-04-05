@@ -1,23 +1,20 @@
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
-import { createAxiosInstance } from "..";
+import { baseUrl, createAxiosInstance } from "..";
 import { mockTokenStorage } from "../../lib";
 
 const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";
 
 const server = setupServer(
-  http.post(
-    `${import.meta.env.VITE_APP_BASE_URL as string}auth/refresh`,
-    () => {
-      return HttpResponse.json({
-        accessToken: validAccessToken,
-        refreshToken: validRefreshToken,
-      });
-    },
-  ),
-  http.get(`${import.meta.env.VITE_APP_BASE_URL as string}auth/login`, () => {
+  http.post(`${baseUrl}auth/refresh`, () => {
+    return HttpResponse.json({
+      accessToken: validAccessToken,
+      refreshToken: validRefreshToken,
+    });
+  }),
+  http.post(`${baseUrl}auth/login`, () => {
     return HttpResponse.json({
       accessToken: validAccessToken,
       refreshToken: validRefreshToken,
@@ -35,7 +32,7 @@ describe("Проверка настройки axios-instance", () => {
   test("Должны быть новые токены в хранилище после рефреша", async () => {
     let isUsedAlready = false;
     server.use(
-      http.get(`${import.meta.env.VITE_APP_BASE_URL as string}someURL`, () => {
+      http.get(`${baseUrl}someURL`, () => {
         if (!isUsedAlready) {
           isUsedAlready = true;
           return new HttpResponse(null, { status: 401 });

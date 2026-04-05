@@ -8,10 +8,10 @@ import {
   type GetEditorTaskDataResponse,
   type ServerOption,
   type UpdateTaskResponse,
-} from "@/src/entities";
-import { DeleteTaskButton } from "@/src/features";
-import { useNotify } from "@/src/shared/lib";
-import { CustomModalWindow } from "@/src/shared/ui";
+} from "@/entities";
+import { DeleteTaskButton } from "@/features";
+import { useNotify } from "@/shared/lib";
+import { CustomModalWindow } from "@/shared/ui";
 import { Input } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";

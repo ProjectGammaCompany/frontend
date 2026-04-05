@@ -1,9 +1,5 @@
-import {
-  getFullFileUrl,
-  getRandomString,
-  useFileUpload,
-} from "@/src/shared/lib";
-import { CustomSwitch, IconButton, QRCodeSvg } from "@/src/shared/ui";
+import { getFullFileUrl, getRandomString, useFileUpload } from "@/shared/lib";
+import { CustomSwitch, IconButton, QRCodeSvg } from "@/shared/ui";
 import {
   Button,
   Form,

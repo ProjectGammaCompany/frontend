@@ -1,5 +1,5 @@
-import { blockQueries, type GetTasksResponse } from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+import { blockQueries, type GetTasksResponse } from "@/entities";
+import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 
 export const updateTaskInQuery = (

@@ -1,14 +1,8 @@
-import { eventQueries } from "@/src/entities";
-import { EditEventSettingsWindow } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { Seo } from "@/src/shared/lib";
-import {
-  BackSvg,
-  Header,
-  IconButton,
-  Logo,
-  SettingsSvg,
-} from "@/src/shared/ui";
+import { eventQueries } from "@/entities";
+import { EditEventSettingsWindow } from "@/features";
+import { queryClient } from "@/shared/api";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, IconButton, Logo, SettingsSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router";

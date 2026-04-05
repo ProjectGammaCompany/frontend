@@ -1,4 +1,4 @@
-import { deleteTask } from "@/src/entities";
+import { deleteTask } from "@/entities";
 import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteTask = (

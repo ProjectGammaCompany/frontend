@@ -1,6 +1,6 @@
-import type { TaskStageData } from "@/src/entities";
-import { useSendAnswer } from "@/src/features";
-import { ChoiceTask, InfoBlock, TextEntryTask } from "@/src/widgets";
+import type { TaskStageData } from "@/entities";
+import { useSendAnswer } from "@/features";
+import { ChoiceTask, InfoBlock, TextEntryTask } from "@/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";

@@ -1,8 +1,8 @@
-import { TaskView } from "@/src/entities";
-import type { SendAnswerResponse } from "@/src/features";
-import { SendAnswerButton, useSendAnswer } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+import { TaskView } from "@/entities";
+import type { SendAnswerResponse } from "@/features";
+import { SendAnswerButton, useSendAnswer } from "@/features";
+import { queryClient } from "@/shared/api";
+import { useNotify } from "@/shared/lib";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";

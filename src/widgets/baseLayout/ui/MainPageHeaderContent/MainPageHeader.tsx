@@ -1,4 +1,4 @@
-import { FiltersSvg, IconButton, Logo } from "@/src/shared/ui";
+import { FiltersSvg, IconButton, Logo } from "@/shared/ui";
 import { Input } from "antd";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router";

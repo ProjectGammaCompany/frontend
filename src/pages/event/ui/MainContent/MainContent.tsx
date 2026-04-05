@@ -1,4 +1,4 @@
-import { PlayerContent } from "@/src/widgets";
+import { PlayerContent } from "@/widgets";
 import { Fragment } from "react/jsx-runtime";
 import EditorContent from "../EditorContent/EditorContent";
 import "./MainContent.scss";
