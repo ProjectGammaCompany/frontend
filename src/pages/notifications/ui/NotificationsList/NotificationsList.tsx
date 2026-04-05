@@ -2,8 +2,8 @@ import {
   NotificationCard,
   useDeleteNotification,
   useNotifications,
-} from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
+} from "@/entities";
+import { useNotify } from "@/shared/lib";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useState } from "react";
 import { useOnInView } from "react-intersection-observer";

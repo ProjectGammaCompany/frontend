@@ -4,9 +4,9 @@ import {
   getUserEvents,
   usePersonalEvents,
   type QueryFnType,
-} from "@/src/entities";
-import { getFullFileUrl } from "@/src/shared/lib";
-import { LinkEventCard } from "@/src/widgets";
+} from "@/entities";
+import { getFullFileUrl } from "@/shared/lib";
+import { LinkEventCard } from "@/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useOnInView } from "react-intersection-observer";
 import "./UserEventsList.scss";

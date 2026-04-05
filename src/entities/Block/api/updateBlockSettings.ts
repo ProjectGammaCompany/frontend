@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 import type { BlockSettings } from "./getBlockSettings";
 
 export type UpdateBlockData = Omit<BlockSettings, "name" | "order">;

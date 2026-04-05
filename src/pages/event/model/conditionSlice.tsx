@@ -1,5 +1,5 @@
-import type { Condition } from "@/src/entities";
-import type { RootState } from "@/src/shared/lib";
+import type { Condition } from "@/entities";
+import type { RootState } from "@/shared/lib";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface conditionSlice {

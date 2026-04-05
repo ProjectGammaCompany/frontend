@@ -1,8 +1,5 @@
-import { Seo, type ChangeTypeOfKeys } from "@/src/shared/lib";
-import {
-  selectFiltersWindowState,
-  setIsFiltersWindowOpen,
-} from "@/src/widgets";
+import { Seo, type ChangeTypeOfKeys } from "@/shared/lib";
+import { selectFiltersWindowState, setIsFiltersWindowOpen } from "@/widgets";
 import { Button } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

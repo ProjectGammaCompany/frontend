@@ -1,4 +1,4 @@
-import { axiosInstance, queryClient } from "@/src/shared/api";
+import { axiosInstance, queryClient } from "@/shared/api";
 
 export const logout = () => {
   queryClient.clear();

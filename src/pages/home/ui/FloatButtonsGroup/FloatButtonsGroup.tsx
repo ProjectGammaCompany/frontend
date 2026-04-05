@@ -1,4 +1,4 @@
-import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/src/shared/ui";
+import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/shared/ui";
 import { FloatButton } from "antd";
 import { useNavigate } from "react-router";
 import "./FloatButtonsGroup.scss";

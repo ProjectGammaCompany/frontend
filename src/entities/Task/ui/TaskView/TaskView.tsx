@@ -1,4 +1,4 @@
-import { useMessage } from "@/src/shared/lib";
+import { useMessage } from "@/shared/lib";
 import { Typography } from "antd";
 import dayjs from "dayjs";
 import {

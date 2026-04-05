@@ -5,11 +5,11 @@ import {
   setName,
   useEditingEventData,
   useUpdateBlocksOrder,
-} from "@/src/entities";
-import { AddBlockMenu } from "@/src/features";
-import { useNotify } from "@/src/shared/lib";
-import { StatsSvg } from "@/src/shared/ui";
-import BlockItem from "@/src/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
+} from "@/entities";
+import { AddBlockMenu } from "@/features";
+import { useNotify } from "@/shared/lib";
+import { StatsSvg } from "@/shared/ui";
+import BlockItem from "@/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
 import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
 import { Button, FloatButton, Typography } from "antd";
 import { useCallback, useEffect } from "react";

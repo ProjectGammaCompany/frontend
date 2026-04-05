@@ -1,4 +1,4 @@
-import { Seo } from "@/src/shared/lib";
+import { Seo } from "@/shared/lib";
 import { Collapse } from "antd";
 import { useState, type ReactNode } from "react";
 import UserEventsList from "../UserEventsList/UserEventsList";

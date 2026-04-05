@@ -1,8 +1,8 @@
 import {
   notificationQueries,
   type GetNotificationsQueryData,
-} from "@/src/entities";
-import { queryClient } from "@/src/shared/api";
+} from "@/entities";
+import { queryClient } from "@/shared/api";
 import type { InfiniteData } from "@tanstack/react-query";
 
 export const deleteNotificationFromQuery = (id: string, pageIndex: number) => {

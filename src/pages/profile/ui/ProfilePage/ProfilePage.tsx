@@ -1,6 +1,6 @@
-import { useUpdateUsername } from "@/src/entities";
-import { handleError } from "@/src/shared/api";
-import { Seo, useNotify } from "@/src/shared/lib";
+import { useUpdateUsername } from "@/entities";
+import { handleError } from "@/shared/api";
+import { Seo, useNotify } from "@/shared/lib";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useEffectEvent } from "react";

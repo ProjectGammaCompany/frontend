@@ -7,9 +7,15 @@
     margin-bottom: 10px;
   }
 
-  &__forgot-password-text {
-    text-align: end;
-    width: fit-content;
+  &__forgot-password {
+    &-link {
+      text-align: end;
+      width: fit-content;
+    }
+
+    &-text {
+      color: var(--link-color);
+    }
   }
   &__remember-me-wrapper {
     display: flex;

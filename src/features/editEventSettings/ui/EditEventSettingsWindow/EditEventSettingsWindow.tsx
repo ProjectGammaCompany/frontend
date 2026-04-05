@@ -10,9 +10,9 @@ import {
   type ClientGroup,
   type EditEventSettingsResponse,
   type EditingEventSettings,
-} from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
-import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/src/shared/ui";
+} from "@/entities";
+import { useNotify } from "@/shared/lib";
+import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import type { AxiosResponse } from "axios";

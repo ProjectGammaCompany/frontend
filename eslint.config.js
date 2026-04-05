@@ -49,6 +49,7 @@ export default defineConfig([
       "boundaries/entry": ["index.ts", "index.tsx"],
       "import/resolver": {
         typescript: {
+          project: "./tsconfig.app.json",
           alwaysTryTypes: true,
         },
       },

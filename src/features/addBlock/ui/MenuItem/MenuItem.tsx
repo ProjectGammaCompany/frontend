@@ -1,4 +1,4 @@
-import { BlockCard } from "@/src/entities";
+import { BlockCard } from "@/entities";
 import { Typography } from "antd";
 
 interface MenuItemProps {

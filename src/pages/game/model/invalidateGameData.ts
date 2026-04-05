@@ -1,4 +1,4 @@
-import { queryClient } from "@/src/shared/api";
+import { queryClient } from "@/shared/api";
 
 export const invalidateGameData = (eventId: string) => {
   void queryClient.invalidateQueries({

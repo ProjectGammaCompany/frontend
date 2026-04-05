@@ -1,4 +1,4 @@
-import { handleError } from "@/src/shared/api";
+import { handleError } from "@/shared/api";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { type registerProps } from "../../api/register";
@@ -18,7 +18,7 @@ const RegisterForm = () => {
   const handleRegisterError = (error: Error) => {
     return handleError<void>(error, {
       defaultHandler: () =>
-        setErrorMessage("Произошла ошибка. Повторите попытку позже."),
+        setErrorMessage("Произошла ошибка. Повторите попытку позже"),
       axiosHandlers: {
         403: () =>
           setErrorMessage("Пользователь с указанной почтой уже существует"),

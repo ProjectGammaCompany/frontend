@@ -1,6 +1,6 @@
-import type { GroupStats } from "@/src/entities";
-import { getFullFileUrl } from "@/src/shared/lib";
-import { ProfileSvg } from "@/src/shared/ui";
+import type { GroupStats } from "@/entities";
+import { getFullFileUrl } from "@/shared/lib";
+import { ProfileSvg } from "@/shared/ui";
 import { Table, Typography } from "antd";
 import Column from "antd/es/table/Column";
 import "./GroupStatsTable.scss";

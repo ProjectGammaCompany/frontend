@@ -5,11 +5,11 @@ import {
   useUpdateBlockName,
   type Condition,
   type UpdateBlockData,
-} from "@/src/entities";
-import { DeleteBlockButton } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { useDebounce, useNotify } from "@/src/shared/lib";
-import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/src/shared/ui";
+} from "@/entities";
+import { DeleteBlockButton } from "@/features";
+import { queryClient } from "@/shared/api";
+import { useDebounce, useNotify } from "@/shared/lib";
+import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/shared/ui";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useEffectEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

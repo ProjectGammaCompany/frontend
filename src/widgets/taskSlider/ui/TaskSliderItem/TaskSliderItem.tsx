@@ -1,5 +1,5 @@
-import type { TaskItem } from "@/src/entities";
-import { useWindowWidth } from "@/src/shared/lib";
+import type { TaskItem } from "@/entities";
+import { useWindowWidth } from "@/shared/lib";
 import { Checkbox, ConfigProvider, Typography } from "antd";
 import "./TaskSliderItem.scss";
 interface TaskSliderItemProps {

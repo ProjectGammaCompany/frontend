@@ -1,7 +1,7 @@
-import { TaskView } from "@/src/entities";
-import { useSendAnswer } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+import { TaskView } from "@/entities";
+import { useSendAnswer } from "@/features";
+import { queryClient } from "@/shared/api";
+import { useNotify } from "@/shared/lib";
 import { Button } from "antd";
 import "./InfoBlock.scss";
 interface InfoBlockProps {
