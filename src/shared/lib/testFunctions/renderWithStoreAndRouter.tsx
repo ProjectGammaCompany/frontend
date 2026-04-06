@@ -1,14 +1,16 @@
-import type { RenderOptions } from "@testing-library/react";
-import { render } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { render, type RenderOptions } from "@testing-library/react";
 import React, { type PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 
 // eslint-disable-next-line boundaries/dependencies
 import AntConfigProvider from "@/app/providers/antConfigProvider/AntConfigProvider";
+// eslint-disable-next-line boundaries/dependencies
+import { MessageProvider } from "@/app/providers/messageProvider/messageProvider";
+// eslint-disable-next-line boundaries/dependencies
+import { NotificationProvider } from "@/app/providers/notificationProvider/notificationProvider";
 import { MemoryRouter } from "react-router";
+import type { AppStore, PreloadedState } from "../redux";
 import { setupStore } from "../redux/setupStore";
-import type { AppStore, PreloadedState } from "../redux/types";
 import { ReactQueryWrapper } from "./ReactQueryWrapper";
 
 // This type interface extends the default options for render from RTL, as well
@@ -34,28 +36,36 @@ export function renderWithStoreAndRouter(
   const Wrapper = ({ children }: PropsWithChildren) => {
     if (Stub) {
       return (
-        <MemoryRouter>
-          <ReactQueryWrapper>
-            <Provider store={store}>
-              <AntConfigProvider>{children}</AntConfigProvider>
-            </Provider>
-          </ReactQueryWrapper>
-        </MemoryRouter>
+        <ReactQueryWrapper>
+          <Provider store={store}>
+            <AntConfigProvider>
+              <NotificationProvider>
+                <MessageProvider>{children}</MessageProvider>
+              </NotificationProvider>
+            </AntConfigProvider>
+          </Provider>
+        </ReactQueryWrapper>
       );
     }
     return (
-      <ReactQueryWrapper>
-        <Provider store={store}>
-          <AntConfigProvider>{children}</AntConfigProvider>
-        </Provider>
-      </ReactQueryWrapper>
+      <MemoryRouter>
+        <ReactQueryWrapper>
+          <Provider store={store}>
+            <AntConfigProvider>
+              <NotificationProvider>
+                <MessageProvider>{children}</MessageProvider>
+              </NotificationProvider>
+            </AntConfigProvider>
+          </Provider>
+        </ReactQueryWrapper>
+      </MemoryRouter>
     );
   };
 
-  // Return an object with the store, user, and all of RTL's query functions
+  const screen = render(ui, { wrapper: Wrapper, ...renderOptions });
+
   return {
     store,
-    user: userEvent.setup(),
-    ...render(ui, { wrapper: Wrapper, ...renderOptions }),
+    ...screen,
   };
 }
