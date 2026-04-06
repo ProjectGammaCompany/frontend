@@ -16,6 +16,7 @@ export {
   useAppSelector,
   type AppDispatch,
   type AppStore,
+  type PreloadedState,
   type RootState,
 } from "./redux";
 

@@ -133,7 +133,10 @@ const TaskView = ({
         {title}
       </Typography.Title>
       {defaultTime && defaultTime > 0 ? (
-        <Typography.Paragraph className="task-view__timer-text">
+        <Typography.Paragraph
+          className="task-view__timer-text"
+          data-testid="time-text"
+        >
           <b>Время: </b>
           <Typography.Text
             className={

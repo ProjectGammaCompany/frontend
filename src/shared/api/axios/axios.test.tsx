@@ -24,7 +24,9 @@ const server = setupServer(
 
 describe("Проверка настройки axios-instance", () => {
   beforeAll(() => {
-    server.listen();
+    server.listen({
+      onUnhandledRequest: "error",
+    });
   });
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
