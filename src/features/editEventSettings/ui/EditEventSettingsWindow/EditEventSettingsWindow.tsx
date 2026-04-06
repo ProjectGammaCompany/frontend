@@ -55,6 +55,7 @@ const EditEventSettingsWindow = ({
     select: (data) => {
       return mapServerDataToFormData({ ...data.data, name: title });
     },
+    enabled: open,
   });
 
   const {
