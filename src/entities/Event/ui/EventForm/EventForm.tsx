@@ -141,10 +141,6 @@ export const EventForm = <TData extends EventFormData, TResponse>({
     }
   }, [defaultData, form]);
 
-  useEffect(() => {
-    console.log(privateValue);
-  }, [privateValue]);
-
   return (
     <ConfigProvider
       theme={{

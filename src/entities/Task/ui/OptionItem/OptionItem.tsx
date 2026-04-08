@@ -1,6 +1,7 @@
 import { useDebounce } from "@/shared/lib";
 import { TrashSvg } from "@/shared/ui";
 import { Button, Input } from "antd";
+import classnames from "classnames";
 import { useEffect, useState } from "react";
 import type { ClientOption } from "../../model/useFormSubmit";
 import "./OptionItem.scss";
@@ -26,13 +27,18 @@ export const OptionItem = ({
     onInputValueChange?.(useOptionValueDebounce);
   }, [onInputValueChange, useOptionValueDebounce]);
 
+  const rightAnswerToggleClasses = classnames(
+    "option-item__right-answer-toggle",
+    {
+      "option-item__right-answer-toggle_right": isRightAnswer,
+    },
+  );
+
   return (
     <li className="option-item">
       <Button
-        className="option-item__right-answer-toggle"
-        style={{
-          backgroundColor: isRightAnswer ? "green" : "transparent",
-        }}
+        data-testid={`right-answer-toggle-${initialData.clientId}`}
+        className={rightAnswerToggleClasses}
         onClick={() => {
           onRightAnswerToggle?.(!isRightAnswer);
         }}
