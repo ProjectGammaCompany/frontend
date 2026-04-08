@@ -11,7 +11,7 @@ import { ReactQueryWrapper } from "./ReactQueryWrapper";
 
 export const basicRender = (component: JSX.Element, Stub?: boolean) => {
   if (Stub) {
-    render(
+    return render(
       <ReactQueryWrapper>
         <AntConfigProvider>
           <NotificationProvider>
@@ -21,7 +21,7 @@ export const basicRender = (component: JSX.Element, Stub?: boolean) => {
       </ReactQueryWrapper>,
     );
   } else {
-    render(
+    return render(
       <MemoryRouter>
         <ReactQueryWrapper>
           <AntConfigProvider>

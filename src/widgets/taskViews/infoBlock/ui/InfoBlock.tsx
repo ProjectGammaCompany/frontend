@@ -46,7 +46,7 @@ const InfoBlock = ({ data }: InfoBlockProps) => {
   );
   return (
     <TaskView taskData={{ ...data, title }}>
-      <div className="info-block__next-btn-wrapper">
+      <div className="info-block__next-btn-wrapper" data-testid="info-block">
         <Button
           onClick={() => sendAnswerMutation.mutate([""])}
           loading={sendAnswerMutation.isPending}

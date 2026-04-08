@@ -26,14 +26,12 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [usedJoinCode, setUsedJoinCode] = useState("");
-
   const {
     data: requiredFields,
     error: requiredFieldsError,
     isPending,
     refetch,
-  } = useJoinRequiredFields(usedJoinCode, !!usedJoinCode);
+  } = useJoinRequiredFields(joinCode, false);
 
   const [form] = useForm<JoinForm>();
 
@@ -52,14 +50,13 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
   };
 
   const joinEventMutation = useJoinEvent(
-    usedJoinCode,
+    joinCode,
     handleJoinEventSuccess,
     handleJoinEventError,
   );
 
   const handleAfterClose = () => {
     setJoinCode("");
-    setUsedJoinCode("");
     setErrorMessage("");
     form.resetFields();
   };
@@ -165,9 +162,8 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
             <Button
               className="join-with-code-window__submit-btn"
               disabled={!joinCode}
-              loading={isPending && !!usedJoinCode}
+              loading={isPending && !joinCode}
               onClick={() => {
-                setUsedJoinCode(joinCode);
                 void refetch();
               }}
             >

@@ -57,7 +57,7 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
   };
 
   return (
-    <div className="block-stage-content">
+    <div className="block-stage-content" data-testid="block-stage">
       <Typography.Title level={2} className="block-stage-content__title">
         {block.name}
       </Typography.Title>

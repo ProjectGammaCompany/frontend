@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/shared/api";
-import type { FullTaskData } from "../model/useFormSubmit";
+import type { TaskFormData } from "../model/useFormSubmit";
 
 export interface CreateTaskResponse {
   taskId: string;
@@ -8,7 +8,7 @@ export interface CreateTaskResponse {
 export const createTask = (
   eventId: string,
   blockId: string,
-  data: FullTaskData,
+  data: TaskFormData,
 ) => {
   return axiosInstance.post<CreateTaskResponse>(
     `event/${eventId}/blocks/${blockId}/task`,
