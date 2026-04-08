@@ -52,7 +52,7 @@ const EndGameContent = ({ eventId }: EndGameContentProps) => {
   }, []);
 
   return (
-    <div className="end-game-content">
+    <div className="end-game-content" data-testid="end-game">
       <Typography.Title level={1} className="end-game-content__text">
         Событие пройдено
       </Typography.Title>

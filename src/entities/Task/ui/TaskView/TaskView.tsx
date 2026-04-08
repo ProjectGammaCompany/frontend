@@ -128,7 +128,7 @@ const TaskView = ({
   }, [defaultTime, time]);
 
   return (
-    <div className="task-view">
+    <div className="task-view" data-testid="task-view">
       <Typography.Title level={1} className="task-view__title">
         {title}
       </Typography.Title>

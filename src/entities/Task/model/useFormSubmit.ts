@@ -14,16 +14,15 @@ export interface TaskFormData {
   points?: number;
   time: number;
   partialPoints?: boolean;
+  name: string;
 }
 
-export type FullTaskData = TaskFormData & { name: string };
-
 export const useFormSubmit = <TResponse>(
-  mutationFn: (data: FullTaskData) => Promise<TResponse>,
-  onSuccess?: (response: TResponse, variables: FullTaskData) => void,
+  mutationFn: (data: TaskFormData) => Promise<TResponse>,
+  onSuccess?: (response: TResponse, variables: TaskFormData) => void,
   onError?: () => void,
 ) => {
-  return useMutation<TResponse, Error, FullTaskData>({
+  return useMutation<TResponse, Error, TaskFormData>({
     mutationFn: (data) => mutationFn(data),
     onSuccess,
     onError,
