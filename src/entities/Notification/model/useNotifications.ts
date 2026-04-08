@@ -30,6 +30,6 @@ export const useNotifications = () => {
       }
       return firstPageParam - 1;
     },
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };
