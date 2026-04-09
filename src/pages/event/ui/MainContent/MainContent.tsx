@@ -1,4 +1,5 @@
-import { PlayerContent } from "@/src/widgets";
+import { PlayerContent } from "@/widgets";
+import { Fragment } from "react/jsx-runtime";
 import EditorContent from "../EditorContent/EditorContent";
 import "./MainContent.scss";
 interface MainContentProps {
@@ -9,11 +10,13 @@ interface MainContentProps {
 const MainContent = ({ eventId, role }: MainContentProps) => {
   return (
     <main className="event-page__main-content">
-      {role === 0 ? (
-        <PlayerContent eventId={eventId} />
-      ) : (
-        <EditorContent eventId={eventId} />
-      )}
+      <Fragment key={`${eventId}-${role}`}>
+        {role === 0 ? (
+          <PlayerContent eventId={eventId} />
+        ) : (
+          <EditorContent eventId={eventId} />
+        )}
+      </Fragment>
     </main>
   );
 };

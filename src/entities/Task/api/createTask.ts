@@ -1,6 +1,7 @@
-import { axiosInstance } from "@/src/shared/api";
-import type { PickPartial } from "@/src/shared/lib";
+import type { PickPartial } from "@/shared/lib";
 import type { ServerOption } from "./getEditorTaskData";
+
+import { axiosInstance } from "@/shared/api";
 
 export type ClientOption = PickPartial<ServerOption, "id"> & {
   clientId: string;
@@ -18,6 +19,7 @@ export interface TaskFormData {
   points?: number;
   time: number;
   partialPoints?: boolean;
+  name: string;
 }
 
 export type FullTaskData = TaskFormData & { name: string };
@@ -29,7 +31,7 @@ export interface CreateTaskResponse {
 export const createTask = (
   eventId: string,
   blockId: string,
-  data: FullTaskData,
+  data: TaskFormData,
 ) => {
   return axiosInstance.post<CreateTaskResponse>(
     `event/${eventId}/blocks/${blockId}/task`,

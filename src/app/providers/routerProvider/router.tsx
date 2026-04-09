@@ -1,14 +1,14 @@
-import { AuthPage } from "@/src/pages/auth";
-import { EventPage } from "@/src/pages/event";
-import { ForgotPasswordPage } from "@/src/pages/forgotPassword";
-import { GamePage } from "@/src/pages/game";
-import { HomePage } from "@/src/pages/home";
-import { MyEventsPage } from "@/src/pages/myEvents";
-import { NotificationPage } from "@/src/pages/notifications";
-import { ProfilePage } from "@/src/pages/profile";
-import { StatsPage } from "@/src/pages/stats";
-import { tokenStorage } from "@/src/shared/lib";
-import { BaseLayout } from "@/src/widgets";
+import { AuthPage } from "@/pages/auth";
+import { EventPage } from "@/pages/event";
+import { ForgotPasswordPage } from "@/pages/forgotPassword";
+import { GamePage } from "@/pages/game";
+import { HomePage } from "@/pages/home";
+import { MyEventsPage } from "@/pages/myEvents";
+import { NotificationPage } from "@/pages/notifications";
+import { ProfilePage } from "@/pages/profile";
+import { StatsPage } from "@/pages/stats";
+import { tokenStorage } from "@/shared/lib";
+import { BaseLayout } from "@/widgets";
 import { createBrowserRouter, redirect } from "react-router";
 import { RootLayout } from "./RootLayout";
 
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
                     Component: NotificationPage,
                   },
                   {
-                    path: "myEvents",
+                    path: "my-events",
                     Component: MyEventsPage,
                   },
                 ],

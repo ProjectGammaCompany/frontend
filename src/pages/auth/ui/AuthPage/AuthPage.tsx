@@ -1,4 +1,4 @@
-import { PageMeta, useTitle } from "@/src/shared/lib";
+import { Seo } from "@/shared/lib";
 import { Segmented, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { PAGE_STATES, PAGE_STATES_VALUES } from "../../const/pageStates";
@@ -6,8 +6,6 @@ import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import "./AuthPage.scss";
 export const AuthPage = () => {
-  useTitle("Авторизация");
-
   const [pageState, setPageState] =
     useState<(typeof PAGE_STATES_VALUES)[number]>("login");
 
@@ -26,12 +24,15 @@ export const AuthPage = () => {
   }, []);
   return (
     <div className="auth-page">
-      <PageMeta
-        title="EduPlay – Авторизация"
-        description="Страница регистрации и входа"
+      <Seo
+        title="Авторизация"
+        description="Страница регистрации и входа."
+        canonical="/auth"
+        noIndex
       />
       <div className="auth-page__content-wrapper">
         <Segmented
+          data-testid="switch form"
           options={PAGE_STATES.map((state) => {
             return {
               ...state,

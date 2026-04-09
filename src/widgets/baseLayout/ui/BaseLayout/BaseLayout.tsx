@@ -1,4 +1,4 @@
-import { Header } from "@/src/shared/ui";
+import { Header } from "@/shared/ui";
 import type { ReactNode } from "react";
 import { Outlet, useLocation } from "react-router";
 
@@ -17,7 +17,7 @@ const BaseLayout = () => {
     home: <MainPageHeaderContent pathname={pathname} />,
     profile: <ProfilePageHeaderContent />,
     notifications: <NotificationPageHeaderContent />,
-    myEvents: <MyEventsPageHeaderContent />,
+    "my-events": <MyEventsPageHeaderContent />,
   };
 
   const key = getRouteKey(pathname);

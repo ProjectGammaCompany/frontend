@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 
 export interface GetJoinCodeDataResponse {
   joinCode: string;
@@ -6,6 +6,6 @@ export interface GetJoinCodeDataResponse {
 }
 export const getJoinCodeData = (eventId: string) => {
   return axiosInstance.get<GetJoinCodeDataResponse>(
-    `events/${eventId}/joinCode`,
+    `event/${eventId}/joinCode`,
   );
 };

@@ -1,7 +1,7 @@
-import { TaskView, type TaskStageFile } from "@/src/entities";
-import { useSendAnswer } from "@/src/features/sendTaskAnswer";
-import { queryClient } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+import { TaskView, type TaskStageFile } from "@/entities";
+import { useSendAnswer } from "@/features";
+import { queryClient } from "@/shared/api";
+import { useNotify } from "@/shared/lib";
 import { Button } from "antd";
 import "./InfoBlock.scss";
 interface InfoBlockProps {
@@ -46,7 +46,7 @@ const InfoBlock = ({ data }: InfoBlockProps) => {
   );
   return (
     <TaskView taskData={{ ...data, title }}>
-      <div className="info-block__next-btn-wrapper">
+      <div className="info-block__next-btn-wrapper" data-testid="info-block">
         <Button
           onClick={() => sendAnswerMutation.mutate([""])}
           loading={sendAnswerMutation.isPending}

@@ -1,13 +1,8 @@
-import { eventQueries } from "@/src/entities";
-import { EditEventSettingsWindow } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import {
-  BackSvg,
-  Header,
-  IconButton,
-  Logo,
-  SettingsSvg,
-} from "@/src/shared/ui";
+import { eventQueries } from "@/entities";
+import { EditEventSettingsWindow } from "@/features";
+import { queryClient } from "@/shared/api";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, IconButton, Logo, SettingsSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -25,6 +20,14 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
   const [open, setIsOpen] = useState<boolean>(false);
   return (
     <>
+      {role == 1 && (
+        <Seo
+          title="Редактор события"
+          description="Страница редактирования события."
+          canonical={`/event/${eventId}`}
+          noIndex
+        />
+      )}
       <Header>
         <div className="event-page-header">
           <div
@@ -35,7 +38,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
             <Logo className="event-page-header__logo" />
           </div>
           <Typography.Title level={1} className="event-page-header__title">
-            {role === 0 ? "Страница события" : "Редактор"}
+            {role === 0 ? "Событие" : "Редактор"}
           </Typography.Title>
           {role === 1 && (
             <IconButton

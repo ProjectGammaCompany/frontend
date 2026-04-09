@@ -1,4 +1,4 @@
-import { Logo } from "@/src/shared/ui";
+import { Logo } from "@/shared/ui";
 import { Typography } from "antd";
 import { useLocation } from "react-router";
 import NavigationButtons from "../NavigationButtons/NavigationButtons";
@@ -7,7 +7,7 @@ const NotificationPageHeaderContent = () => {
   const { pathname } = useLocation();
   return (
     <div className="notifications-page-header-content">
-      <Logo />
+      <Logo className="notifications-page-header-content__logo" />
       <Typography.Title
         level={1}
         className="notifications-page-header-content__text"

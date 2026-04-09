@@ -1,4 +1,4 @@
-import { Button, Typography } from "antd";
+import { Button, Spin } from "antd";
 import classnames from "classnames";
 import {
   Html5Qrcode,
@@ -103,17 +103,15 @@ export const QrCodeScanner = ({
 
   return (
     <div className={classNames}>
-      <div>
-        <div id={elementId} className="qr-code-scanner-wrapper">
-          {loading && <Typography>Загрузка...</Typography>}
-          {scanningStarted && (
-            <Button
-              onClick={() => setIsOpen(false)}
-              className="qr-code-scanner__close-btn"
-              icon={<CrossSvg />}
-            />
-          )}
-        </div>
+      <div id={elementId} className="qr-code-scanner-wrapper">
+        {loading && <Spin />}
+        {scanningStarted && (
+          <Button
+            onClick={() => setIsOpen(false)}
+            className="qr-code-scanner__close-btn"
+            icon={<CrossSvg />}
+          />
+        )}
       </div>
     </div>
   );

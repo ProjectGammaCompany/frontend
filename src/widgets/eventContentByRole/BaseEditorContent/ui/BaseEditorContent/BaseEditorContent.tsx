@@ -5,14 +5,16 @@ import {
   setName,
   useEditingEventData,
   useUpdateBlocksOrder,
-} from "@/src/entities";
-import { AddBlockMenu } from "@/src/features";
-import { useNotify } from "@/src/shared/lib";
-import BlockItem from "@/src/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
+} from "@/entities";
+import { AddBlockMenu } from "@/features";
+import { useNotify } from "@/shared/lib";
+import { StatsSvg } from "@/shared/ui";
+import BlockItem from "@/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
 import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
-import { Button, Typography } from "antd";
+import { Button, FloatButton, Typography } from "antd";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { updateBlocksOrderInQuery } from "../../model/updateBlocksOrderInQuery";
 import BlockList from "../BlockList/BlockList";
 import "./BaseEditorContent.scss";
@@ -32,6 +34,7 @@ const BaseEditorContent = ({
 }: EditorContentProps) => {
   const name = useSelector(selectEventName);
   const notify = useNotify();
+  const navigate = useNavigate();
 
   const blockReorderingState = useSelector(selectBlockReorderingState);
 
@@ -159,6 +162,17 @@ const BaseEditorContent = ({
           eventId={eventId}
           blocks={data.blocks}
           onBlockCreate={(id) => onBlockCreate(id)}
+        />
+        <FloatButton
+          icon={<StatsSvg />}
+          type="primary"
+          classNames={{
+            root: "base-editor-content__stats-btn",
+            icon: "base-editor-content__stats-btn-icon",
+          }}
+          onClick={() => {
+            void navigate(`stats`);
+          }}
         />
       </DragDropContext>
       {blockReorderingState && (

@@ -1,13 +1,14 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 
 export interface CustomNotification {
   id: string;
   type: NotificationType;
   date: string;
-  extra: object;
+  favoriteEventStartExtra?: EventStartExtra;
+  eventEndExtra?: EventEndExtra;
 }
 
-export type NotificationType = "eventStart" | "eventEnd";
+export type NotificationType = "favoriteEventStart" | "eventEnd";
 
 export interface EventStartExtra {
   id: string;

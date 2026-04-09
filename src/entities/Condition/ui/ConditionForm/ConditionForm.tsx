@@ -1,6 +1,6 @@
-import type { UseGroupsQueryData } from "@/src/entities";
-import { useGroups } from "@/src/entities";
-import { CustomSwitch } from "@/src/shared/ui";
+import type { UseGroupsQueryData } from "@/entities";
+import { useGroups } from "@/entities";
+import { CustomSwitch } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
@@ -136,72 +136,74 @@ const ConditionForm = <TResponse,>({
       requiredMark={false}
       className="condition-form"
     >
-      <FormItem<ConditionData> className="condition-form__item">
-        <FormItem<ConditionData>>
-          <Form.Item
-            name="min"
-            noStyle
-            rules={[
-              {
-                validator(_, value) {
-                  if (value === -1 && form.getFieldValue("max") === -1) {
-                    return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <CustomSwitch
-              checked={min != -1}
-              onChange={(checked) => {
-                form.setFieldValue("min", checked ? 0 : -1);
-              }}
-              title="Набрано не менее заданного количества баллов (&gt;&nbsp;или&nbsp;=)"
-            />
-          </Form.Item>
-        </FormItem>
-        <Form.Item
-          noStyle
-          shouldUpdate={
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            (prev, cur) => prev.min !== cur.min
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue("min") !== -1 ? (
-              <Form.Item
-                name="min"
-                label="Введите число"
-                className="condition-form__item"
-              >
-                <InputNumber min={0} />
-              </Form.Item>
-            ) : null
-          }
-        </Form.Item>
-        <FormItem<ConditionData>
-          name="max"
-          noStyle
-          rules={[
-            {
-              validator(_, value) {
-                if (value === -1 && form.getFieldValue("min") === -1) {
-                  return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
-                }
-                return Promise.resolve();
-              },
+      <Form.Item<ConditionData>
+        name="min"
+        rules={[
+          {
+            validator(_, value) {
+              if (
+                value === -1 &&
+                form.getFieldValue("max") === -1 &&
+                !(form.getFieldValue("group") as string[] | undefined)?.length
+              ) {
+                return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
+              }
+              return Promise.resolve();
             },
-          ]}
-        >
-          <CustomSwitch
-            checked={max != -1}
-            onChange={(checked) => {
-              form.setFieldValue("max", checked ? 0 : -1);
-            }}
-            title="Набрано менее заданного количества баллов (&lt;)"
-          />
-        </FormItem>
+          },
+        ]}
+      >
+        <CustomSwitch
+          checked={min != -1}
+          onChange={(checked) => {
+            form.setFieldValue("min", checked ? 0 : -1);
+          }}
+          title="За ранее пройденные задания набрано не менее заданного количества баллов (&gt;&nbsp;или&nbsp;=)"
+        />
+      </Form.Item>
+      <Form.Item
+        noStyle
+        shouldUpdate={
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          (prev, cur) => prev.min !== cur.min || prev.max !== cur.max
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("min") !== -1 ? (
+            <Form.Item
+              name="min"
+              label="Введите число"
+              className="condition-form__item condition-form__points-input"
+            >
+              <InputNumber min={0} />
+            </Form.Item>
+          ) : null
+        }
+      </Form.Item>
+      <FormItem<ConditionData>
+        name="max"
+        rules={[
+          {
+            validator(_, value) {
+              if (
+                value === -1 &&
+                form.getFieldValue("min") === -1 &&
+                !(form.getFieldValue("group") as string[] | undefined)?.length
+              ) {
+                return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
+              }
+              return Promise.resolve();
+            },
+          },
+        ]}
+      >
+        <CustomSwitch
+          checked={max != -1}
+          onChange={(checked) => {
+            form.setFieldValue("max", checked ? 0 : -1);
+          }}
+          title="За ранее пройденные задания набрано менее заданного количества баллов (&lt;)"
+        />
       </FormItem>
       <Form.Item
         noStyle
@@ -215,7 +217,7 @@ const ConditionForm = <TResponse,>({
             <Form.Item
               name="max"
               label="Введите число"
-              className="condition-form__item"
+              className="condition-form__item condition-form__points-input"
             >
               <InputNumber min={0} />
             </Form.Item>
@@ -226,6 +228,20 @@ const ConditionForm = <TResponse,>({
         <Form.Item<ConditionData>
           name="group"
           label="Выберите группы, в одной из которых должен состоять участник события"
+          rules={[
+            {
+              validator(_, value: string[] | undefined) {
+                if (
+                  !value?.length &&
+                  form.getFieldValue("min") === -1 &&
+                  form.getFieldValue("max") === -1
+                ) {
+                  return Promise.reject(new Error(SELECT_TYPE_ERROR_MESSAGE));
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
         >
           <Select
             mode="multiple"

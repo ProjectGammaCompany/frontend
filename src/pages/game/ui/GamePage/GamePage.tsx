@@ -1,5 +1,5 @@
-import { useTitle } from "@/src/shared/lib";
-import { BackSvg, Header, Logo } from "@/src/shared/ui";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, Logo } from "@/shared/ui";
 import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import { useGameData } from "../../model/useGameData";
@@ -8,7 +8,6 @@ import EndGameContent from "../EndGameContent/EndGameContent";
 import TaskStageContent from "../TaskStageContent/TaskStageContent";
 import "./GamePage.scss";
 const GamePage = () => {
-  useTitle("Прохождение события");
   const { eventId } = useParams();
 
   const navigate = useNavigate();
@@ -77,13 +76,19 @@ const GamePage = () => {
   return (
     <>
       <Header>
+        <Seo
+          title="Прохождение"
+          description="Страница прохождения события."
+          canonical={`/event/${eventId}/game`}
+          noIndex
+        />
         <div className="game-page-header__content">
           <div
             className="game-page-header__icons-wrapper"
             onClick={() => void navigate("/")}
           >
             <BackSvg classname="game-page-header__back-icon" />
-            <Logo />
+            <Logo className="game-page-header__logo" />
           </div>
           <Typography.Title level={1} className="game-page-header__title">
             Прохождение

@@ -1,9 +1,5 @@
-import {
-  getFullFileUrl,
-  getRandomString,
-  useFileUpload,
-} from "@/src/shared/lib";
-import { CustomSwitch, IconButton, QRCodeSvg } from "@/src/shared/ui";
+import { getFullFileUrl, getRandomString, useFileUpload } from "@/shared/lib";
+import { CustomSwitch, IconButton, QRCodeSvg } from "@/shared/ui";
 import {
   Button,
   Form,
@@ -22,7 +18,6 @@ import QRCode from "react-qrcode-logo";
 import { v4 as uuidv4 } from "uuid";
 import {
   type ClientOption,
-  type FullTaskData,
   type TaskFormData,
 } from "../../api/createTask.ts";
 import { getNormalizedFileList } from "../../model/getNormalizedFileList";
@@ -34,21 +29,21 @@ import "./TaskForm.scss";
 
 interface TaskFormProps<TResponse> {
   initialData?: TaskFormData;
-  name: string;
   submitBtnText: string;
-  mutationFn: (data: FullTaskData) => Promise<TResponse>;
-  onSuccessFn?: (response: TResponse, variables: FullTaskData) => void;
+  mutationFn: (data: TaskFormData) => Promise<TResponse>;
+  onSuccessFn?: (response: TResponse, variables: TaskFormData) => void;
   onSuccessText?: string;
   order: number;
+  className?: string;
 }
 
 const TaskForm = <TResponse,>({
   initialData,
-  name,
   order,
   onSuccessFn,
   submitBtnText,
   onSuccessText,
+  className,
   mutationFn,
 }: TaskFormProps<TResponse>) => {
   const [form] = useForm<TaskFormData>();
@@ -66,7 +61,7 @@ const TaskForm = <TResponse,>({
 
   const handleSuccessSubmit = (
     response: TResponse,
-    variables: FullTaskData,
+    variables: TaskFormData,
   ) => {
     setShowSuccessText(true);
     setTimeout(() => {
@@ -138,7 +133,9 @@ const TaskForm = <TResponse,>({
   };
 
   const handleQRCodeDownloading = () => {
-    QRCodeRef.current?.download("png", name);
+    const filename =
+      (form.getFieldValue("name") as string | undefined) ?? "QR-код";
+    QRCodeRef.current?.download("png", filename);
   };
 
   const handleSelectTaskType = (val: number) => {
@@ -296,8 +293,18 @@ const TaskForm = <TResponse,>({
       requiredMark={false}
       scrollToFirstError={{ behavior: "instant", block: "end", focus: true }}
       onFinish={onFinish}
-      className="task-form"
+      className={"task-form " + className ? className : ""}
     >
+      <Form.Item<TaskFormData>
+        name="name"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input placeholder="Введите название" />
+      </Form.Item>
       <Form.Item<TaskFormData>
         name="description"
         label="Описание"
@@ -313,7 +320,11 @@ const TaskForm = <TResponse,>({
         label="Тип"
         rules={[{ required: true }]}
       >
-        <Select options={TYPE_OPTIONS} onChange={handleSelectTaskType} />
+        <Select
+          data-testid="select-type"
+          options={TYPE_OPTIONS}
+          onChange={handleSelectTaskType}
+        />
       </Form.Item>
       {taskType === 3 && (
         <>

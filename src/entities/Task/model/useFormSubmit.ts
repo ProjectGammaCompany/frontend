@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import type { FullTaskData } from "../api/createTask";
+import type { TaskFormData } from "../api/createTask";
 
 export const useFormSubmit = <TResponse>(
-  mutationFn: (data: FullTaskData) => Promise<TResponse>,
-  onSuccess?: (response: TResponse, variables: FullTaskData) => void,
+  mutationFn: (data: TaskFormData) => Promise<TResponse>,
+  onSuccess?: (response: TResponse, variables: TaskFormData) => void,
   onError?: () => void,
 ) => {
-  return useMutation<TResponse, Error, FullTaskData>({
+  return useMutation<TResponse, Error, TaskFormData>({
     mutationFn: (data) => mutationFn(data),
     onSuccess,
     onError,

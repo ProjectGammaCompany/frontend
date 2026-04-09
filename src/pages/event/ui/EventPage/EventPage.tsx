@@ -1,6 +1,7 @@
-import { useRole } from "@/src/entities";
-import { BackSvg, Header, Logo } from "@/src/shared/ui";
-import { EventHeader } from "@/src/widgets";
+import { useRole } from "@/entities";
+import { Seo } from "@/shared/lib";
+import { BackSvg, Header, Logo } from "@/shared/ui";
+import { EventHeader } from "@/widgets";
 import { Button, Flex, Skeleton, Spin, Typography } from "antd";
 import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router";
@@ -63,6 +64,11 @@ const EventPage = () => {
   if (isPending) {
     return (
       <>
+        <Seo
+          title="Событие"
+          description={`Информация о событии.`}
+          canonical={`/event/${eventId}`}
+        />
         <Header>
           <div className="event-page__error-header-content">
             <div
@@ -85,6 +91,11 @@ const EventPage = () => {
   if (isError) {
     return (
       <>
+        <Seo
+          title="Событие"
+          description={`Информация о событии.`}
+          canonical={`/event/${eventId}`}
+        />
         <Header>
           <div className="event-page__error-header-content">
             <div
@@ -123,6 +134,11 @@ const EventPage = () => {
 
   return (
     <>
+      <Seo
+        title="Событие"
+        description={`Информация о событии.`}
+        canonical={`/event/${eventId}`}
+      />
       <EventHeader role={data} eventId={eventId} />
       <MainContent eventId={eventId} role={data} />
     </>

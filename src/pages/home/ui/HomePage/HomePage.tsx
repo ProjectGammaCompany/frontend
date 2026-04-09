@@ -1,23 +1,19 @@
-import { useTitle, type ChangeTypeOfKeys } from "@/src/shared/lib";
-import {
-  selectFiltersWindowState,
-  setIsFiltersWindowOpen,
-} from "@/src/widgets";
+import { Seo, type ChangeTypeOfKeys } from "@/shared/lib";
+import { selectFiltersWindowState, setIsFiltersWindowOpen } from "@/widgets";
 import { Button } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router";
-import { getParams } from "../lib/paramsLib/getParams";
-import type { Filters } from "../model/useAllEvents";
-import CreateEventWindow from "./CreateEventWindow/CreateEventWindow";
-import EventsList from "./EventsList/EventsList";
-import FiltersWindow from "./FiltersWindow/FiltersWindow";
-import FloatButtonsGroup from "./FloatButtonsGroup/FloatButtonsGroup";
+import { getParams } from "../../lib/paramsLib/getParams";
+import type { Filters } from "../../model/useAllEvents";
+import CreateEventWindow from "../CreateEventWindow/CreateEventWindow";
+import EventsList from "../EventsList/EventsList";
+import FiltersWindow from "../FiltersWindow/FiltersWindow";
+import FloatButtonsGroup from "../FloatButtonsGroup/FloatButtonsGroup";
+import JoinWithCodeWindow from "../JoinWithCodeWindow/JoinWithCodeWindow";
 import "./HomePage.scss";
-import JoinWithCodeWindow from "./JoinWithCodeWindow/JoinWithCodeWindow";
 
 export const HomePage = () => {
-  useTitle("Главная");
   const [params, setParams] = useSearchParams();
 
   const [createEventWindowOpen, setIsCreateEventWindoWOpen] = useState(false);
@@ -68,11 +64,26 @@ export const HomePage = () => {
     });
   };
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "HSE EduPlay",
+    url: "https://hse-eduplay.ru",
+  };
+
   return (
     <div className="home-page">
+      <Seo
+        title="Главная"
+        description="Платформа для создания и проведения квестов и контрольных мероприятий."
+        canonical={`/`}
+        schemaMarkup={schemaMarkup}
+      />
       <div className="home-page__participate-btn-wrapper">
         <Button
           className="home-page__participate-btn"
+          block
+          type="primary"
           onClick={() => setIsJoinWithCodeWindowOpen(true)}
         >
           Присоединиться по коду

@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 import type { TaskFile } from "./createTask";
 
 export interface GetEditorTaskDataResponse {

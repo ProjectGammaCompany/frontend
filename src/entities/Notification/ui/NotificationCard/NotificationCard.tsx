@@ -1,4 +1,4 @@
-import { CrossSvg } from "@/src/shared/ui/index.ts";
+import { CrossSvg } from "@/shared/ui/index.ts";
 import { Button, Typography } from "antd";
 import { useNavigate } from "react-router";
 import type { CustomNotification } from "../../api/getNotifications.ts";
@@ -19,9 +19,18 @@ export const NotificationCard = ({
   notification,
   onDelete,
 }: NotificationCardProps) => {
-  const { id, date, extra, type } = notification;
+  const {
+    id,
+    date,
+    favoriteEventStartExtra: eventStartExtra,
+    type,
+    eventEndExtra,
+  } = notification;
 
   const navigate = useNavigate();
+
+  const extra =
+    type === "favoriteEventStart" ? eventStartExtra! : eventEndExtra!;
 
   const notificationData = getNotificationData(type, extra, navigate);
 

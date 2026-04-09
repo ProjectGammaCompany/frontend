@@ -1,11 +1,11 @@
-import { getTags, type UseJoinCodeDataResult } from "@/src/entities";
+import { getTags, type UseJoinCodeDataResult } from "@/entities";
 import {
   getFullFileUrl,
   useFileUpload,
   useMessage,
   type ChangeTypeOfKeys,
-} from "@/src/shared/lib";
-import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/src/shared/ui";
+} from "@/shared/lib";
+import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Button,
@@ -140,10 +140,6 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       form.setFieldsValue(defaultData);
     }
   }, [defaultData, form]);
-
-  useEffect(() => {
-    console.log(privateValue);
-  }, [privateValue]);
 
   return (
     <ConfigProvider

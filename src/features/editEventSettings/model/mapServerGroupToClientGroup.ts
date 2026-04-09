@@ -1,4 +1,4 @@
-import type { ClientGroup, ServerGroup } from "@/src/entities";
+import type { ClientGroup, ServerGroup } from "@/entities";
 import { v4 as uuidv4 } from "uuid";
 
 export const mapServerGroupToClientGroup = (groups: ServerGroup[]) => {

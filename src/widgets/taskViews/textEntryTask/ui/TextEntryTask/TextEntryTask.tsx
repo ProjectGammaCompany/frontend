@@ -1,11 +1,11 @@
-import { TaskView, type TaskStageFile } from "@/src/entities";
+import { TaskView, type TaskStageFile } from "@/entities";
 import {
   SendAnswerButton,
   useSendAnswer,
   type SendAnswerResponse,
-} from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+} from "@/features";
+import { queryClient } from "@/shared/api";
+import { useNotify } from "@/shared/lib";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";

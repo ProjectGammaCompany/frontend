@@ -1,4 +1,4 @@
-import { MessageContext } from "@/src/shared/lib";
+import { MessageContext } from "@/shared/lib";
 import { message } from "antd";
 import { type ReactNode } from "react";
 export const MessageProvider = ({ children }: { children: ReactNode }) => {

@@ -4,6 +4,15 @@
   &__right-answer-toggle {
     width: 45px;
     height: 45px;
+    background-color: transparent !important;
+
+    &_right {
+      background-color: green !important;
+    }
+
+    &:hover {
+      background-color: transparent !important;
+    }
   }
 
   &__delete-btn {

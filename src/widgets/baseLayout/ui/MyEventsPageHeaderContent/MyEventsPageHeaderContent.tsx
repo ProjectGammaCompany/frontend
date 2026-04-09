@@ -1,6 +1,6 @@
-import { Logo } from "@/src/shared/ui";
+import { Logo } from "@/shared/ui";
 import { Typography } from "antd";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import NavigationButtons from "../NavigationButtons/NavigationButtons";
 import "./MyEventsPageHeaderContent.scss";
 
@@ -8,7 +8,9 @@ const MyEventsPageHeaderContent = () => {
   const { pathname } = useLocation();
   return (
     <div className="my-events-page-header-content">
-      <Logo />
+      <Link to="/">
+        <Logo className="my-events-page-header-content__logo" />
+      </Link>
       <Typography.Title
         level={1}
         className="my-events-page-header-content__text"

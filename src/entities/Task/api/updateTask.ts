@@ -1,5 +1,6 @@
-import { axiosInstance } from "@/src/shared/api";
-import type { FullTaskData } from "../api/createTask";
+import { axiosInstance } from "@/shared/api";
+
+import type { TaskFormData } from "./createTask";
 import { type ServerOption } from "./getEditorTaskData";
 
 export interface UpdateTaskResponse {
@@ -11,7 +12,7 @@ export const updateTask = (
   eventId: string,
   blockId: string,
   taskId: string,
-  data: FullTaskData,
+  data: TaskFormData,
 ) => {
   return axiosInstance.put<UpdateTaskResponse>(
     `event/${eventId}/blocks/${blockId}/tasks/${taskId}`,

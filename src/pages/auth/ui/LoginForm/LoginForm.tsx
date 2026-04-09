@@ -1,5 +1,6 @@
-import { handleError } from "@/src/shared/api";
-import { Flex, Switch, Typography } from "antd";
+import { handleError } from "@/shared/api";
+import { CustomSwitch } from "@/shared/ui";
+import { Flex, Typography } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { type loginProps } from "../../api/login";
@@ -24,7 +25,7 @@ const LoginForm = () => {
           setErrorMessage("Пользователя с указанными данными не существует"),
       },
       defaultHandler: () =>
-        setErrorMessage("Произошла ошибка. Повторите попытку позже."),
+        setErrorMessage("Произошла ошибка. Повторите попытку позже"),
     });
   };
 
@@ -37,6 +38,7 @@ const LoginForm = () => {
   return (
     <AuthForm<loginProps>
       name="login"
+      test-id="login-form"
       fields={[
         {
           name: "email",
@@ -55,20 +57,20 @@ const LoginForm = () => {
       onFinish={(values) => loginMutation.mutate(values)}
       extra={
         <div className="login-form__extra">
-          <div className="login-form__remember-me-wrapper">
-            <Switch
-              value={rememberMe}
-              onChange={() => setRememberMe((prevState) => !prevState)}
-              disabled={loginMutation.isPending}
-            />
-            <Typography>Запомнить меня</Typography>
-          </div>
+          <CustomSwitch
+            value={rememberMe}
+            onChange={() => setRememberMe((prevState) => !prevState)}
+            disabled={loginMutation.isPending}
+            title="Запомнить меня"
+          />
           <Flex justify="end">
             <Link
               to="/forgot-password"
-              className="login-form__forgot-password-text"
+              className="login-form__forgot-password-link"
             >
-              <Typography.Link>Забыли пароль?</Typography.Link>
+              <Typography className="login-form__forgot-password-text">
+                Забыли пароль?
+              </Typography>
             </Link>
           </Flex>
         </div>

@@ -1,5 +1,5 @@
-import { axiosInstance } from "@/src/shared/api";
-import type { PickPartial } from "@/src/shared/lib";
+import { axiosInstance } from "@/shared/api";
+import type { PickPartial } from "@/shared/lib";
 import type { ServerGroup } from "./getEditingEventSettings";
 
 interface EditingEventSettings {

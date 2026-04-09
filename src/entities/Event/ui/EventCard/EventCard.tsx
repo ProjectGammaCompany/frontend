@@ -1,4 +1,4 @@
-import { DefaultEventCoverSvg } from "@/src/shared/ui";
+import { DefaultEventCoverSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import type { ReactNode } from "react";
 import "./EventCard.scss";

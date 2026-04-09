@@ -4,9 +4,9 @@ import {
   type BaseEventFormData,
   type CreateEventData,
   type CreateEventResponse,
-} from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
-import { CustomModalWindow } from "@/src/shared/ui";
+} from "@/entities";
+import { useNotify } from "@/shared/lib";
+import { CustomModalWindow } from "@/shared/ui";
 import type { AxiosResponse } from "axios";
 import { useNavigate } from "react-router";
 

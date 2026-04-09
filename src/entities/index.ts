@@ -140,4 +140,5 @@ export {
   useChangePassword,
   useRecoverCodeValidity,
   useSendCodeByEmail,
+  useUpdateUsername,
 } from "./User";

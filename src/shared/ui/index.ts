@@ -26,3 +26,5 @@ export { QuestionSvg } from "./svg/QuestionSvg.tsx";
 export { SettingsSvg } from "./svg/SettingsSvg.tsx";
 export { StarSvg } from "./svg/StarSvg.tsx";
 export { TrashSvg } from "./svg/TrashSvg.tsx";
+
+export { StatsSvg } from "./svg/StatsSvg.tsx";

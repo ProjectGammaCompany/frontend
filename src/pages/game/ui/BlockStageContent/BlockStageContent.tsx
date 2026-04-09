@@ -1,6 +1,6 @@
-import type { BlockStage } from "@/src/entities";
-import { useNotify } from "@/src/shared/lib";
-import { TaskSlider } from "@/src/widgets";
+import type { BlockStage } from "@/entities";
+import { useNotify } from "@/shared/lib";
+import { TaskSlider } from "@/widgets";
 import { Button, Typography } from "antd";
 import { useState } from "react";
 import { invalidateGameData } from "../../model/invalidateGameData";
@@ -57,7 +57,7 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
   };
 
   return (
-    <div className="block-stage-content">
+    <div className="block-stage-content" data-testid="block-stage">
       <Typography.Title level={2} className="block-stage-content__title">
         {block.name}
       </Typography.Title>

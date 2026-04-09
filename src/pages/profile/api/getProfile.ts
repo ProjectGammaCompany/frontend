@@ -1,7 +1,8 @@
-import { axiosInstance } from "@/src/shared/api";
+import { axiosInstance } from "@/shared/api";
 
 export interface GetProfileResponse {
   avatar: string;
+  email: string;
   username: string;
 }
 export const getProfile = () => {

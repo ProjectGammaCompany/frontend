@@ -1,5 +1,5 @@
-import type { TaskItem } from "@/src/entities";
-import { BackSvg } from "@/src/shared/ui";
+import type { TaskItem } from "@/entities";
+import { BackSvg } from "@/shared/ui";
 import { Button, Carousel } from "antd";
 import TaskSliderItem from "../TaskSliderItem/TaskSliderItem";
 import "./TaskSlider.scss";

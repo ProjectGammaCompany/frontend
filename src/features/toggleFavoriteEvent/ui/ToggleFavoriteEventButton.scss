@@ -1,8 +1,16 @@
 .toggle-favorite-event-btn {
-  height: 45px;
-  width: 45px;
-  padding: 5px;
+  height: 45px !important;
+  width: 45px !important;
+  flex-shrink: 0;
   color: gray;
+
+  & .ant-btn-loading-icon {
+    scale: 2;
+  }
+  & svg {
+    height: 35px;
+    width: 35px;
+  }
 
   &_active {
     color: var(--favorite-color);
@@ -10,9 +18,5 @@
     &:hover {
       color: var(--favorite-color) !important;
     }
-  }
-  &__icon-wrapper {
-    height: 45px;
-    width: 45px;
   }
 }

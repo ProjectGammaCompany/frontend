@@ -48,9 +48,9 @@ export const useInteractButtonFunctioning = (
           endInterval = window.setInterval(() => {
             const date = dayjs(Date.now());
             if (date >= parsedEndDate) {
-              setDisabled(true);
               if (status === "not started") {
                 setIsHidden(true);
+                setDisabled(true);
               }
               clearInterval(endInterval);
             }

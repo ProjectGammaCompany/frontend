@@ -1,7 +1,14 @@
-import type { TaskStageFile } from "@/src/entities";
+import type { TaskStageFile } from "@/entities";
+import { useMessage } from "@/shared/lib";
 import { Typography } from "antd";
 import dayjs from "dayjs";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import FileItem from "../FileItem/FileItem";
 import "./TaskView.scss";
 interface TaskViewProps {
@@ -31,6 +38,10 @@ const TaskView = ({
   };
 
   const hasTriggeredRef = useRef(false);
+
+  const message = useMessage();
+
+  const hasNotificationTimeTriggeredRef = useRef(false);
 
   const [time, setTime] = useState(defaultTime ?? 0);
 
@@ -79,28 +90,62 @@ const TaskView = ({
     }
   }, [defaultTime, timestamp]);
 
-  useEffect(() => {
-    console.log(time);
-  }, [time]);
+  const onTimeIsUp = useEffectEvent(() => {
+    if (timestamp && !hasTriggeredRef.current) {
+      hasTriggeredRef.current = true;
+      onExpirationTimeFn?.();
+    }
+  });
 
-  //todo: фикс зависимостей
+  const onNotifyTime = useEffectEvent(() => {
+    if (timestamp) {
+      hasNotificationTimeTriggeredRef.current = true;
+      message.warning("У вас осталось 15 секунд!");
+    }
+  });
+
   useEffect(() => {
     if (
       !isExpirationFnCanceled &&
       defaultTime &&
-      timestamp &&
-      time == 0 &&
-      !hasTriggeredRef.current
+      defaultTime > 0 &&
+      time <= 0
     ) {
-      onExpirationTimeFn?.();
+      onTimeIsUp();
     }
-  }, [time, isExpirationFnCanceled]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [time, defaultTime, isExpirationFnCanceled]);
+
+  useEffect(() => {
+    if (
+      defaultTime &&
+      defaultTime > 0 &&
+      time <= 15 &&
+      !hasNotificationTimeTriggeredRef.current
+    ) {
+      onNotifyTime();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultTime, time]);
+
   return (
-    <div className="task-view">
-      <Typography.Title level={1}>{title}</Typography.Title>
+    <div className="task-view" data-testid="task-view">
+      <Typography.Title level={1} className="task-view__title">
+        {title}
+      </Typography.Title>
       {defaultTime && defaultTime > 0 ? (
-        <Typography.Paragraph className="task-view__timer-text">
-          <b>Время:</b> {getCounterString(time)}
+        <Typography.Paragraph
+          className="task-view__timer-text"
+          data-testid="time-text"
+        >
+          <b>Время: </b>
+          <Typography.Text
+            className={
+              time < 30 ? "task-view__timer-text_running-out" : undefined
+            }
+          >
+            {getCounterString(time)}
+          </Typography.Text>
         </Typography.Paragraph>
       ) : undefined}
       {description && (

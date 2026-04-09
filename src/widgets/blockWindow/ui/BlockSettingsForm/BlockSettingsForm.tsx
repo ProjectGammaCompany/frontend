@@ -1,5 +1,5 @@
-import type { BlockSettings, UpdateBlockData } from "@/src/entities";
-import type { ChangeTypeOfKeys } from "@/src/shared/lib";
+import type { BlockSettings, UpdateBlockData } from "@/entities";
+import type { ChangeTypeOfKeys } from "@/shared/lib";
 import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";

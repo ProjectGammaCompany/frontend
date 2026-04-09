@@ -1,7 +1,7 @@
-import { getPlayerInfo, useRateEvent } from "@/src/entities";
-import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/src/features";
-import { getFullFileUrl, useNotify, useTitle } from "@/src/shared/lib";
-import { DefaultEventCoverSvg } from "@/src/shared/ui";
+import { getPlayerInfo, useRateEvent } from "@/entities";
+import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/features";
+import { getFullFileUrl, Seo, useNotify } from "@/shared/lib";
+import { DefaultEventCoverSvg } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Rate, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";
@@ -14,7 +14,6 @@ interface ParticipantContentProps {
 }
 
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
-  useTitle("Событие");
   const navigate = useNavigate();
   const notify = useNotify();
   const { data, isPending, isError, refetch } = useQuery({
@@ -89,8 +88,25 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
     );
   }
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: data.title,
+    description: data.description,
+    image: data.cover ? getFullFileUrl(data.cover) : undefined,
+    startDate: data.startDate,
+    endDate: data.endDate,
+    url: `https://hse-eduplay.ru/event/${eventId}`,
+  };
+
   return (
     <div className="player-content">
+      <Seo
+        title="Событие"
+        description={`Информация о событии ${data.title}.`}
+        canonical={`/event/${eventId}`}
+        schemaMarkup={schemaMarkup}
+      />
       <Typography.Title level={1} className="player-content__title">
         {data.title}
       </Typography.Title>
@@ -147,17 +163,20 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
       )}
       {data.startDate && (
         <Typography.Paragraph className="player-content__date-text">
-          <b>Открывается:</b> {data.startDate}
+          <b>Открывается:</b>{" "}
+          {data.startDate.slice(0, data.startDate.length - 7)}
         </Typography.Paragraph>
       )}
       {data.endDate && (
         <Typography.Paragraph className="player-content__date-text">
-          <b>Закрывается:</b> {data.endDate}
+          <b>Закрывается:</b> {data.endDate.slice(0, data.endDate.length - 7)}
         </Typography.Paragraph>
       )}
       {data.description && (
         <div className="player-content__description-wrapper">
-          <Typography.Title level={2}>Описание события</Typography.Title>
+          <Typography.Title level={2} className="player-content__title">
+            Описание события
+          </Typography.Title>
           <Typography.Paragraph>{data.description}</Typography.Paragraph>
         </div>
       )}

@@ -1,5 +1,5 @@
-import { queryClient } from "@/src/shared/api";
-import { settingsStorage, tokenStorage } from "@/src/shared/lib";
+import { queryClient } from "@/shared/api";
+import { settingsStorage, tokenStorage } from "@/shared/lib";
 import { useEffect } from "react";
 
 //todo: переместить в отдельную директорию

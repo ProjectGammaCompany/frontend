@@ -12,21 +12,21 @@ const getTimeString = (time: "day" | "hour") => {
 
 const handleClick = (
   type: NotificationType,
-  extra: object,
+  extra: EventStartExtra | EventEndExtra,
   navigate: NavigateFunction,
 ) => {
   if (type === "eventEnd") {
     const preparedExtra = extra as EventEndExtra;
     if (preparedExtra.timeLeft) {
-      void navigate(`event/${preparedExtra.id}/game`);
+      void navigate(`/event/${preparedExtra.id}/game`);
     }
     if (preparedExtra.notStartedFavorite) {
-      void navigate(`event/${preparedExtra.id}`);
+      void navigate(`/event/${preparedExtra.id}`);
     }
-    void navigate(`event/${preparedExtra.id}/stats`);
+    void navigate(`/event/${preparedExtra.id}/stats`);
   } else {
     const preparedExtra = extra as EventStartExtra;
-    void navigate(`event/${preparedExtra.id}/game`);
+    void navigate(`/event/${preparedExtra.id}`);
   }
 };
 
@@ -67,14 +67,14 @@ const getEndEventData = (
 
 export const getNotificationData = (
   type: NotificationType,
-  extra: object,
+  extra: EventEndExtra | EventStartExtra,
   navigate: NavigateFunction,
 ) => {
   const notificationData: Record<NotificationType, NotificationData> = {
-    eventStart: {
+    favoriteEventStart: {
       header: "Избранное событие начнётся через 5 минут",
       body: `Событие "${(extra as EventStartExtra).eventName}" начнётся через 5 минут. Нажмите на уведомление для перехода к нему.`,
-      onClick: () => handleClick("eventEnd", extra, navigate),
+      onClick: () => handleClick(type, extra, navigate),
     },
     eventEnd: getEndEventData(extra as EventEndExtra, navigate),
   };

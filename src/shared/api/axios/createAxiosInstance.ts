@@ -3,9 +3,11 @@ import { globalRouter, type TokenStorage } from "../../lib";
 import type { TokensResponse } from "../../models";
 import { refreshTokens } from "../endpoints/refreshTokens";
 
+export const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
+
 export const createAxiosInstance = (tokenStorage: TokenStorage) => {
   const instance = axios.create({
-    baseURL: import.meta.env.VITE_APP_BASE_URL as string,
+    baseURL: baseUrl,
     paramsSerializer: {
       indexes: null,
     },

@@ -1,11 +1,11 @@
-import { TaskView, type TaskStageFile } from "@/src/entities";
-import type { SendAnswerResponse } from "@/src/features";
-import { SendAnswerButton, useSendAnswer } from "@/src/features";
-import { queryClient } from "@/src/shared/api";
-import { useNotify } from "@/src/shared/lib";
+import { TaskView, type TaskStageFile } from "@/entities";
+import type { SendAnswerResponse } from "@/features";
+import { SendAnswerButton, useSendAnswer } from "@/features";
+import { queryClient } from "@/shared/api";
+import { useNotify } from "@/shared/lib";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Option from "../Option/Option";
 import "./ChoiceTask.scss";
 interface ChoiceTaskProps {
@@ -130,12 +130,6 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       ? "choice-task__option_correct"
       : "choice-task__option_incorrect";
   };
-
-  useEffect(() => {
-    console.log("isError ", sendAnswerMutation.isError);
-    console.log("sendButtonDisabled ", sendButtonDisabled);
-    console.log("комбо ", !sendAnswerMutation.isError && sendButtonDisabled);
-  }, [sendAnswerMutation.isError, sendButtonDisabled]);
 
   return (
     <TaskView

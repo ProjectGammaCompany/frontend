@@ -1,4 +1,4 @@
-import { deleteBlock } from "@/src/entities";
+import { deleteBlock } from "@/entities";
 import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteBlock = (

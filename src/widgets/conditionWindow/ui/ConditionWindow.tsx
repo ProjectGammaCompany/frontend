@@ -6,10 +6,10 @@ import {
   type Condition,
   type CreateConditionResponse,
   type UpdateConditionResponse,
-} from "@/src/entities";
-import { DeleteConditionButton } from "@/src/features";
-import { useNotify } from "@/src/shared/lib";
-import { CustomModalWindow } from "@/src/shared/ui";
+} from "@/entities";
+import { DeleteConditionButton } from "@/features";
+import { useNotify } from "@/shared/lib";
+import { CustomModalWindow } from "@/shared/ui";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";

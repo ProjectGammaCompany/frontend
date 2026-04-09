@@ -1,11 +1,16 @@
-import { useTitle } from "@/src/shared/lib";
+import { Seo } from "@/shared/lib";
 import NotificationsList from "../NotificationsList/NotificationsList";
 import "./NotificationsPage.scss";
 
 const NotificationsPage = () => {
-  useTitle("Уведомления");
   return (
     <div className="notifications-page">
+      <Seo
+        title="Уведомления"
+        description="Страница уведомлений пользователя."
+        canonical={`/notifications`}
+        noIndex
+      />
       <NotificationsList />
     </div>
   );

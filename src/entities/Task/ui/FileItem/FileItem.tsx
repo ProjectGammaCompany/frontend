@@ -1,5 +1,5 @@
-import { getFullFileUrl } from "@/src/shared/lib";
-import { FileSvg, PictureSvg } from "@/src/shared/ui";
+import { getFullFileUrl } from "@/shared/lib";
+import { FileSvg, PictureSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import "./FileItem.scss";
 
