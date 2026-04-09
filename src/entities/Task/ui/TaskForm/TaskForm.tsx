@@ -16,10 +16,7 @@ import classnames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qrcode-logo";
 import { v4 as uuidv4 } from "uuid";
-import {
-  type ClientOption,
-  type TaskFormData,
-} from "../../api/createTask.ts";
+import { type ClientOption, type TaskFormData } from "../../api/createTask.ts";
 import { getNormalizedFileList } from "../../model/getNormalizedFileList";
 import { mapUrlsToFileList } from "../../model/mapUrlsToFileList";
 import { TYPE_OPTIONS } from "../../model/typeOptions";

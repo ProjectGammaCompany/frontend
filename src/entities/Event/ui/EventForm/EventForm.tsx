@@ -113,7 +113,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
       onSuccess: (data) => {
         onSuccess?.(data.data);
         //@ts-expect-error форма недостаточно умная
-        form.setFieldValue("cover", data.data);
+        form.setFieldValue("cover", data.data.url);
       },
       onError: (error) => {
         onError?.(error);
