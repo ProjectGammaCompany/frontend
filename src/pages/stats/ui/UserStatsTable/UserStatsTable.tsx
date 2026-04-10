@@ -73,7 +73,9 @@ const UserStatsTable = ({ users }: UserStatsTableProps) => {
                   className="user-stats-table__avatar"
                 />
               ) : (
-                <ProfileSvg />
+                <div className="user-stats-table__avatar user-stats-table__avatar_icon">
+                  <ProfileSvg />
+                </div>
               )}
               <Typography.Text className="user-stats-table__username">
                 {userPreview.userName}

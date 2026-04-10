@@ -22,8 +22,6 @@ export interface TaskFormData {
   name: string;
 }
 
-export type FullTaskData = TaskFormData & { name: string };
-
 export interface CreateTaskResponse {
   taskId: string;
 }

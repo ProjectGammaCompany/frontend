@@ -94,7 +94,9 @@ const GroupsStatsTable = ({ groups }: GroupsStatsTableProps) => {
                 className="group-stats-table__avatar"
               />
             ) : (
-              <ProfileSvg />
+              <div className="roup-stats-table__avatar roup-stats-table__avatar_icon">
+                <ProfileSvg />
+              </div>
             )}
             <Typography.Text className="group-stats-table__username">
               {record.userName}

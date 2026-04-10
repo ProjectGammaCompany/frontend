@@ -1,4 +1,4 @@
-import { getFullFileUrl, getRandomString, useFileUpload } from "@/shared/lib";
+import { getRandomString, handleDownload, useFileUpload } from "@/shared/lib";
 import { CustomSwitch, IconButton, QRCodeSvg } from "@/shared/ui";
 import {
   Button,
@@ -233,7 +233,7 @@ const TaskForm = <TResponse,>({
   };
 
   const onFinish = (values: TaskFormData) => {
-    const taskName = name ?? `Задание ${order}`;
+    const taskName = values.name ?? `Задание ${order}`;
     let type = values.type;
     if (type === 3 && textInputType === "qr") {
       type = 4;
@@ -243,14 +243,7 @@ const TaskForm = <TResponse,>({
 
   const handlePreview = (file: UploadFile<unknown>) => {
     if (file.url) {
-      const hiddenLink = document.createElement("a");
-      hiddenLink.href = getFullFileUrl(file.url);
-      hiddenLink.target = "_blank";
-      hiddenLink.download = file.name;
-      hiddenLink.style.display = "none";
-      document.body.appendChild(hiddenLink);
-      hiddenLink.click();
-      document.removeChild(hiddenLink);
+      void handleDownload(file.url, file.name);
     }
   };
 

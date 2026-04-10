@@ -5,5 +5,5 @@ export interface GroupData {
   groupPassword: string;
 }
 export const joinGroup = (eventId: string, groupData: GroupData) => {
-  return axiosInstance.post(`events/${eventId}/join`, groupData);
+  return axiosInstance.post(`event/${eventId}/join`, groupData);
 };

@@ -1,4 +1,4 @@
-import { getFullFileUrl } from "@/shared/lib";
+import { handleDownload } from "@/shared/lib";
 import { FileSvg, PictureSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import "./FileItem.scss";
@@ -21,16 +21,14 @@ const FileItem = ({ path, iconType = "default", name }: FileItemProps) => {
   const IconComponent = icon[iconType];
   return (
     <li className="file-item__wrapper">
-      <a
-        href={getFullFileUrl(path)}
-        target="_blank"
-        download={name}
+      <div
+        onClick={() => void handleDownload(path, name)}
         className="file-item"
       >
         <div className="file-item__icon">
           <IconComponent />
         </div>
-      </a>
+      </div>
       <Typography.Paragraph className="file-item__text">
         {name}
       </Typography.Paragraph>
