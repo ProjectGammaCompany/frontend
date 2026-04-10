@@ -1,6 +1,15 @@
 .notifications-list {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 10px;
-  padding-right: 20px;
+
+  &__empty {
+    margin-top: 20dvh;
+
+    &-text {
+      text-align: center;
+      font-weight: 500;
+    }
+  }
 }

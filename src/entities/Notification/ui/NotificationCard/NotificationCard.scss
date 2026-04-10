@@ -3,7 +3,9 @@
   container-type: inline-size;
   container-name: notification-card;
   color: white;
-  background-color: var(--primary-color);
+  flex-grow: 1;
+  border: 3px solid var(--primary-color);
+  background-color: white;
   border-radius: 15px;
   padding: 25px 15px 15px 15px;
 
@@ -11,23 +13,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    color: black;
 
     &-text {
-      color: white;
+      color: black;
       font-size: 16px;
       font-weight: 600;
     }
   }
 
   &__date {
-    color: white;
+    color: black;
     min-width: 100px;
     text-align: right;
   }
 
   &__body {
-    color: white;
+    color: black;
   }
 
   &__delete-btn {
@@ -35,7 +37,7 @@
     top: 15px;
     right: 10px;
     background-color: transparent;
-    color: white;
+    color: gray;
     border: none;
     height: 20px;
     width: 20px;
@@ -45,7 +47,7 @@
     }
     &.ant-btn:hover,
     &.ant-btn:focus {
-      color: white !important;
+      color: var(--red-color) !important;
       background-color: transparent !important;
       border: 0px transparent !important;
     }
@@ -54,7 +56,7 @@
 
 @media (hover: hover) {
   .notification-card:hover {
-    background-color: var(--hover-primary-color);
+    background-color: var(--light-color);
     cursor: pointer;
   }
 }

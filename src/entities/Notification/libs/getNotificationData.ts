@@ -19,9 +19,11 @@ const handleClick = (
     const preparedExtra = extra as EventEndExtra;
     if (preparedExtra.timeLeft) {
       void navigate(`/event/${preparedExtra.id}/game`);
+      return;
     }
     if (preparedExtra.notStartedFavorite) {
       void navigate(`/event/${preparedExtra.id}`);
+      return;
     }
     void navigate(`/event/${preparedExtra.id}/stats`);
   } else {

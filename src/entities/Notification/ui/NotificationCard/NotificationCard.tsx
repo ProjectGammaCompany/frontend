@@ -6,6 +6,7 @@ import { getNotificationData } from "../../libs/getNotificationData.ts";
 import "./NotificationCard.scss";
 interface NotificationCardProps {
   notification: CustomNotification;
+  deleteBtnLoading: boolean;
   onDelete: (id: string) => void;
 }
 
@@ -17,6 +18,7 @@ export interface NotificationData {
 
 export const NotificationCard = ({
   notification,
+  deleteBtnLoading,
   onDelete,
 }: NotificationCardProps) => {
   const {
@@ -44,6 +46,7 @@ export const NotificationCard = ({
       <Button
         icon={<CrossSvg />}
         onClick={(e) => handleDelete(e)}
+        loading={deleteBtnLoading}
         className="notification-card__delete-btn"
       />
       <div className="notification-card__header">
@@ -51,7 +54,7 @@ export const NotificationCard = ({
           {notificationData.header}
         </Typography.Paragraph>
         <Typography.Paragraph className="notification-card__date">
-          {date}
+          {date.slice(0, date.length - 7)}
         </Typography.Paragraph>
       </div>
       <Typography.Paragraph className="notification-card__body">

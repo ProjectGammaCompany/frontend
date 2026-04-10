@@ -10,6 +10,19 @@
     object-fit: cover;
     height: 50px;
     width: 50px;
+
+    &_icon {
+      background-color: var(--primary-color);
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+
+      & svg {
+        width: 35px;
+        height: 35px;
+      }
+    }
   }
 
   &__username {
@@ -24,7 +37,10 @@
 @media (min-width: 700px) {
   .user-stats-table {
     &__avatar {
-      display: block;
+      display: flex;
+      &_icon {
+        display: flex;
+      }
     }
   }
 }

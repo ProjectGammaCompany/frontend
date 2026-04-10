@@ -7,16 +7,19 @@ export const useInteractButtonFunctioning = (
 ) => {
   const [disabled, setDisabled] = useState(true);
 
-  const [hidden, setIsHidden] = useState(false);
+  const [hidden, setIsHidden] = useState(true);
 
   useEffect(() => {
     const initialDate = dayjs(Date.now());
     let startInterval = 0;
     let endInterval = 0;
+    let hiddenState = true;
+    let disabledState = true;
 
-    if (status != "finished") {
+    if (status == "not started") {
       if (!startDate && !endDate) {
         setDisabled(false);
+        setIsHidden(false);
         return;
       }
 
@@ -25,6 +28,7 @@ export const useInteractButtonFunctioning = (
           "Europe/Moscow",
         );
         if (initialDate < parsedStartDate) {
+          hiddenState = false;
           startInterval = window.setInterval(() => {
             const date = dayjs(Date.now());
             if (date >= parsedStartDate) {
@@ -33,7 +37,8 @@ export const useInteractButtonFunctioning = (
             }
           }, 1000);
         } else {
-          setDisabled(false);
+          hiddenState = false;
+          disabledState = false;
         }
       }
 
@@ -43,26 +48,29 @@ export const useInteractButtonFunctioning = (
         );
         if (initialDate < parsedEndDate) {
           if (!startDate) {
-            setDisabled(false);
+            hiddenState = false;
+            disabledState = false;
           }
           endInterval = window.setInterval(() => {
             const date = dayjs(Date.now());
             if (date >= parsedEndDate) {
-              if (status === "not started") {
-                setIsHidden(true);
-                setDisabled(true);
-              }
+              setIsHidden(true);
+              setDisabled(true);
               clearInterval(endInterval);
             }
           }, 1000);
         } else {
-          if (status === "not started") {
-            setIsHidden(true);
-          }
-          setDisabled(true);
+          disabledState = true;
+          hiddenState = true;
         }
       }
+    } else {
+      disabledState = false;
+      hiddenState = false;
     }
+
+    setDisabled(disabledState);
+    setIsHidden(hiddenState);
 
     return () => {
       clearInterval(startInterval);

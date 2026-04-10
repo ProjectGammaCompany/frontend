@@ -1,10 +1,15 @@
+import { getFullFileUrl } from "@/shared/lib";
 import type { UploadFile } from "antd";
 import type { TaskFile } from "../api/createTask";
 
 export const mapUrlsToFileList = (files: TaskFile[]): UploadFile[] =>
-  files.map((file, index) => ({
-    uid: `${index}`,
-    name: file.name,
-    status: "done",
-    url: file.url,
-  }));
+  files.map((file, index) => {
+    console.log(file);
+    return {
+      uid: `${index}`,
+      name: file.name,
+      status: "done",
+      url: file.url,
+      thumbUrl: getFullFileUrl(file.url),
+    };
+  });

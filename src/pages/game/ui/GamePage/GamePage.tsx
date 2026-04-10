@@ -21,7 +21,7 @@ const GamePage = () => {
           <div className="game-page-header__content">
             <div
               className="game-page-header__icons-wrapper"
-              onClick={() => void navigate("/")}
+              onClick={() => void navigate(`/event/${eventId}`)}
             >
               <BackSvg classname="game-page-header__back-icon" />
               <Logo className="game-page-header__logo" />
@@ -43,7 +43,7 @@ const GamePage = () => {
           <div className="game-page-header__content">
             <div
               className="game-page-header__icons-wrapper"
-              onClick={() => void navigate("/")}
+              onClick={() => void navigate(`/event/${eventId}`)}
             >
               <BackSvg classname="game-page-header__back-icon" />
               <Logo className="game-page-header__logo" />
@@ -85,7 +85,7 @@ const GamePage = () => {
         <div className="game-page-header__content">
           <div
             className="game-page-header__icons-wrapper"
-            onClick={() => void navigate("/")}
+            onClick={() => void navigate(`/event/${eventId}`)}
           >
             <BackSvg classname="game-page-header__back-icon" />
             <Logo className="game-page-header__logo" />

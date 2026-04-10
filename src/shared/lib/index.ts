@@ -9,7 +9,7 @@ export {
 
 export { settingsStorage, type SettingsStorage } from "./settingsStorage";
 
-export { getFullFileUrl, useFileUpload } from "./workWithFiles";
+export { getFullFileUrl, handleDownload, useFileUpload } from "./workWithFiles";
 
 export {
   useAppDispatch,
