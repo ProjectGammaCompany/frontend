@@ -1,4 +1,4 @@
-import { getFullFileUrl, getRandomString, useFileUpload } from "@/shared/lib";
+import { getRandomString, handleDownload, useFileUpload } from "@/shared/lib";
 import { CustomSwitch, IconButton, QRCodeSvg } from "@/shared/ui";
 import {
   Button,
@@ -16,14 +16,11 @@ import classnames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qrcode-logo";
 import { v4 as uuidv4 } from "uuid";
+import { type ClientOption, type TaskFormData } from "../../api/createTask.ts";
 import { getNormalizedFileList } from "../../model/getNormalizedFileList";
 import { mapUrlsToFileList } from "../../model/mapUrlsToFileList";
 import { TYPE_OPTIONS } from "../../model/typeOptions";
-import {
-  useFormSubmit,
-  type ClientOption,
-  type TaskFormData,
-} from "../../model/useFormSubmit";
+import { useFormSubmit } from "../../model/useFormSubmit";
 import { OptionItem } from "../OptionItem/OptionItem";
 import "./TaskForm.scss";
 
@@ -121,13 +118,15 @@ const TaskForm = <TResponse,>({
 
     setFileList(normalized);
 
-    const urls = normalized
+    const files = normalized
       .filter(
         (file): file is UploadFile & { url: string } =>
           file.status === "done" && !!file.url,
       )
-      .map((file) => file.url);
-    form.setFieldValue("files", urls);
+      .map((file) => {
+        return { url: file.url, name: file.name };
+      });
+    form.setFieldValue("files", files);
   };
 
   const handleQRCodeDownloading = () => {
@@ -234,7 +233,7 @@ const TaskForm = <TResponse,>({
   };
 
   const onFinish = (values: TaskFormData) => {
-    const taskName = name ?? `Задание ${order}`;
+    const taskName = values.name ?? `Задание ${order}`;
     let type = values.type;
     if (type === 3 && textInputType === "qr") {
       type = 4;
@@ -244,13 +243,7 @@ const TaskForm = <TResponse,>({
 
   const handlePreview = (file: UploadFile<unknown>) => {
     if (file.url) {
-      const hiddenLink = document.createElement("a");
-      hiddenLink.href = getFullFileUrl(file.url);
-      hiddenLink.target = "_blank";
-      hiddenLink.style.display = "none";
-      document.body.appendChild(hiddenLink);
-      hiddenLink.click();
-      document.removeChild(hiddenLink);
+      void handleDownload(file.url, file.name);
     }
   };
 
@@ -262,10 +255,12 @@ const TaskForm = <TResponse,>({
 
   //todo: посмотреть правильный вариант
   useEffect(() => {
-    const urls = fileList
+    const files = fileList
       .filter((f) => f.status === "done" && f.url)
-      .map((f) => f.url!);
-    form.setFieldValue("files", urls);
+      .map((f) => {
+        return { url: f.url!, name: f.name };
+      });
+    form.setFieldValue("files", files);
   }, [fileList, form]);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import {
   useNotifications,
 } from "@/entities";
 import { useNotify } from "@/shared/lib";
-import { Button, Flex, Spin, Typography } from "antd";
+import { Button, Empty, Flex, Spin, Typography } from "antd";
 import { useState } from "react";
 import { useOnInView } from "react-intersection-observer";
 import { deleteNotificationFromQuery } from "../../model/deleteNotificationFromQuery";
@@ -43,19 +43,39 @@ const NotificationsList = () => {
     deleteNotificationMutation.mutate(id);
   };
 
+  const isListEmpty =
+    !isFetching &&
+    data?.pages?.length === 1 &&
+    data.pages[0].data.notifications.length === 0;
+
   return (
     <div>
       <ul className="notifications-list">
-        {data?.pages.map((page, index) =>
-          page.data.notifications.map((notification) => (
-            <NotificationCard
-              key={notification.id}
-              notification={notification}
-              onDelete={(id) => {
-                handleDeleteNotifications(id, index);
-              }}
-            />
-          )),
+        {isListEmpty ? (
+          <Empty
+            className="notifications-list__empty"
+            description={
+              <Typography.Text className="notifications-list__empty-text">
+                Список уведомлений пуст
+              </Typography.Text>
+            }
+          />
+        ) : (
+          data?.pages.map((page, index) =>
+            page.data.notifications.map((notification) => (
+              <NotificationCard
+                key={notification.id}
+                notification={notification}
+                deleteBtnLoading={
+                  deleteNotificationMutation.isPending &&
+                  deleteNotificationMutation.variables === notification.id
+                }
+                onDelete={(id) => {
+                  handleDeleteNotifications(id, index);
+                }}
+              />
+            )),
+          )
         )}
       </ul>
       {(isFetching || error) && (

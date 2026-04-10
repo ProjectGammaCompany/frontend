@@ -1,3 +1,4 @@
+import type { TaskStageFile } from "@/entities";
 import { useMessage } from "@/shared/lib";
 import { Typography } from "antd";
 import dayjs from "dayjs";
@@ -15,7 +16,7 @@ interface TaskViewProps {
     title: string;
     defaultTime?: number;
     description?: string;
-    files: string[];
+    files: TaskStageFile[];
     timestamp?: string;
   };
   isExpirationFnCanceled?: boolean;
@@ -158,9 +159,16 @@ const TaskView = ({
           <Typography.Title level={2}>Файлы</Typography.Title>
           <ul className="task-view__file-list">
             {files.map((file) => {
-              const fileExst = file.split(".").at(-1) ?? "";
+              const fileExst = file.name.split(".").at(-1) ?? "";
               const iconType = getFileType(fileExst);
-              return <FileItem key={file} path={file} iconType={iconType} />;
+              return (
+                <FileItem
+                  key={file.url}
+                  path={file.url}
+                  name={file.name}
+                  iconType={iconType}
+                />
+              );
             })}
           </ul>
         </div>

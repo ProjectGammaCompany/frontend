@@ -1,4 +1,4 @@
-import { getFullFileUrl } from "@/shared/lib";
+import { handleDownload } from "@/shared/lib";
 import { FileSvg, PictureSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import "./FileItem.scss";
@@ -7,11 +7,12 @@ type IconType = "pic" | "default";
 
 interface FileItemProps {
   path: string;
+  name: string;
   iconType?: IconType;
 }
 
 //todo: рассмотреть перенос в shared
-const FileItem = ({ path, iconType = "default" }: FileItemProps) => {
+const FileItem = ({ path, iconType = "default", name }: FileItemProps) => {
   const icon: Record<IconType, React.ComponentType> = {
     pic: PictureSvg,
     default: FileSvg,
@@ -20,18 +21,16 @@ const FileItem = ({ path, iconType = "default" }: FileItemProps) => {
   const IconComponent = icon[iconType];
   return (
     <li className="file-item__wrapper">
-      <a
-        href={getFullFileUrl(path)}
-        target="_blank"
-        download={path}
+      <div
+        onClick={() => void handleDownload(path, name)}
         className="file-item"
       >
         <div className="file-item__icon">
           <IconComponent />
         </div>
-      </a>
+      </div>
       <Typography.Paragraph className="file-item__text">
-        {path}
+        {name}
       </Typography.Paragraph>
     </li>
   );

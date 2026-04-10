@@ -23,7 +23,7 @@ describe("InteractButton", () => {
     expect(button).not.toBeDisabled();
   });
 
-  it("active, when the event is not started, startDate is less than the current date and endDate isn't provided", () => {
+  it("active, when the event is not started, startDate is less than the current date and endDate isn't provided", async () => {
     const currentDate = dayjs(Date.now());
     const startDate = currentDate
       .subtract(3, "minute")
@@ -40,13 +40,13 @@ describe("InteractButton", () => {
       />,
     );
 
-    const button = screen.getByRole("button", { name: /Начать/i });
+    const button = await screen.findByRole("button", { name: /Начать/i });
 
     expect(button).toBeInTheDocument();
     expect(button).not.toBeDisabled();
   });
 
-  it("active, when the event is not started, startDate is less than the current date and endDate is greater than currentDate", () => {
+  it("active, when the event is not started, startDate is less than the current date and endDate is greater than currentDate", async () => {
     const currentDate = dayjs(Date.now());
     const startDate = currentDate
       .subtract(3, "minute")
@@ -66,13 +66,13 @@ describe("InteractButton", () => {
       />,
     );
 
-    const button = screen.getByRole("button", { name: /Начать/i });
+    const button = await screen.findByRole("button", { name: /Начать/i });
 
     expect(button).toBeInTheDocument();
     expect(button).not.toBeDisabled();
   });
 
-  it("disabled, when the event is not started, startDate is greater than the current date and endDate is not provided", () => {
+  it("disabled, when the event is not started, startDate is greater than the current date and endDate is not provided", async () => {
     const currentDate = dayjs(Date.now());
     const startDate = currentDate.add(3, "minute").format("DD.MM.YYYY HH:mm");
 
@@ -88,7 +88,7 @@ describe("InteractButton", () => {
       />,
     );
 
-    const button = screen.getByRole("button", { name: /Начать/i });
+    const button = await screen.findByRole("button", { name: /Начать/i });
 
     expect(button).toBeInTheDocument();
     expect(button).toBeDisabled();

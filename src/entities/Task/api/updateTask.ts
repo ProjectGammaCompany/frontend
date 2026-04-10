@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/shared/api";
-import type { TaskFormData } from "../model/useFormSubmit";
+
+import type { TaskFormData } from "./createTask";
 import { type ServerOption } from "./getEditorTaskData";
 
 export interface UpdateTaskResponse {

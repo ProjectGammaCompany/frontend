@@ -1,3 +1,4 @@
+import type { TaskStageFile } from "@/entities";
 import { basicRender } from "@/shared/lib";
 import { act, screen } from "@testing-library/react";
 import dayjs from "dayjs";
@@ -14,7 +15,7 @@ describe("TaskView", () => {
       title: string;
       defaultTime?: number;
       description?: string;
-      files: string[];
+      files: TaskStageFile[];
       timestamp?: string;
     } = {
       title: "",
@@ -45,7 +46,7 @@ describe("TaskView", () => {
       title: string;
       defaultTime?: number;
       description?: string;
-      files: string[];
+      files: TaskStageFile[];
       timestamp?: string;
     } = {
       title: "",

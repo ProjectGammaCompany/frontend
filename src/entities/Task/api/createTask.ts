@@ -1,5 +1,26 @@
+import type { PickPartial } from "@/shared/lib";
+import type { ServerOption } from "./getEditorTaskData";
+
 import { axiosInstance } from "@/shared/api";
-import type { TaskFormData } from "../model/useFormSubmit";
+
+export type ClientOption = PickPartial<ServerOption, "id"> & {
+  clientId: string;
+};
+
+export interface TaskFile {
+  url: string;
+  name: string;
+}
+export interface TaskFormData {
+  description?: string;
+  type: number;
+  options?: ClientOption[];
+  files: TaskFile[];
+  points?: number;
+  time: number;
+  partialPoints?: boolean;
+  name: string;
+}
 
 export interface CreateTaskResponse {
   taskId: string;
