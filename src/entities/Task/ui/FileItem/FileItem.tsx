@@ -7,11 +7,12 @@ type IconType = "pic" | "default";
 
 interface FileItemProps {
   path: string;
+  name: string;
   iconType?: IconType;
 }
 
 //todo: рассмотреть перенос в shared
-const FileItem = ({ path, iconType = "default" }: FileItemProps) => {
+const FileItem = ({ path, iconType = "default", name }: FileItemProps) => {
   const icon: Record<IconType, React.ComponentType> = {
     pic: PictureSvg,
     default: FileSvg,
@@ -23,7 +24,7 @@ const FileItem = ({ path, iconType = "default" }: FileItemProps) => {
       <a
         href={getFullFileUrl(path)}
         target="_blank"
-        download={path}
+        download={name}
         className="file-item"
       >
         <div className="file-item__icon">
@@ -31,7 +32,7 @@ const FileItem = ({ path, iconType = "default" }: FileItemProps) => {
         </div>
       </a>
       <Typography.Paragraph className="file-item__text">
-        {path}
+        {name}
       </Typography.Paragraph>
     </li>
   );

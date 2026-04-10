@@ -72,6 +72,7 @@ export {
   type TaskOption,
   type TaskStage,
   type TaskStageData,
+  type TaskStageFile,
 } from "./api/getNextStage.ts";
 
 export { useRole } from "./model/useRole.ts";

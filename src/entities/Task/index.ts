@@ -14,7 +14,7 @@ export { deleteTask } from "./api/deleteTask.ts";
 
 export { default as TaskView } from "./ui/TaskView/TaskView.tsx";
 
-export { type ClientOption } from "./model/useFormSubmit.ts";
+export { type ClientOption } from "./api/createTask.ts";
 
 export { useEditorTaskData } from "./model/useEditorTaskData.ts";
 

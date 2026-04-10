@@ -1,4 +1,4 @@
-import { TaskView } from "@/entities";
+import { TaskView, type TaskStageFile } from "@/entities";
 import { useSendAnswer } from "@/features";
 import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
@@ -14,7 +14,7 @@ interface InfoBlockData {
   blockId: string;
   name: string;
   description?: string;
-  files: string[];
+  files: TaskStageFile[];
 }
 
 const InfoBlock = ({ data }: InfoBlockProps) => {

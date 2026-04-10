@@ -1,9 +1,10 @@
 import type { UploadFile } from "antd";
+import type { TaskFile } from "../api/createTask";
 
-export const mapUrlsToFileList = (urls: string[]): UploadFile[] =>
-  urls.map((url, index) => ({
+export const mapUrlsToFileList = (files: TaskFile[]): UploadFile[] =>
+  files.map((file, index) => ({
     uid: `${index}`,
-    name: url.split("/").pop() ?? `file-${index}`,
+    name: file.name,
     status: "done",
-    url,
+    url: file.url,
   }));

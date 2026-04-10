@@ -63,6 +63,7 @@ export {
   type TaskOption,
   type TaskStage,
   type TaskStageData,
+  type TaskStageFile,
   type UseGroupsQueryData,
   type UseJoinCodeDataResult,
   type UseJoinEventResponse,
