@@ -1,11 +1,31 @@
 import { Seo } from "@/shared/lib";
 import { Segmented, Typography } from "antd";
+import {
+  AnimatePresence,
+  motion,
+  type TargetAndTransition,
+} from "motion/react";
 import { useEffect, useState } from "react";
 import { PAGE_STATES, PAGE_STATES_VALUES } from "../../const/pageStates";
 import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import "./AuthPage.scss";
 export const AuthPage = () => {
+  const INITIAL_LOGIN_FORM_STYLES: TargetAndTransition = {
+    x: "-100dvw",
+
+    transition: {
+      duration: 0.5,
+    },
+  };
+
+  const INITIAL_REGISTER_FORM_STYLES: TargetAndTransition = {
+    x: "100dvw",
+    transition: {
+      duration: 0.5,
+    },
+  };
+
   const [pageState, setPageState] =
     useState<(typeof PAGE_STATES_VALUES)[number]>("login");
 
@@ -48,7 +68,37 @@ export const AuthPage = () => {
           block
         />
         <div className="auth-page__form-wrapper">
-          {pageState === "login" ? <LoginForm /> : <RegisterForm />}
+          <AnimatePresence>
+            {pageState === "login" ? (
+              <motion.div
+                key="login"
+                initial={INITIAL_LOGIN_FORM_STYLES}
+                animate={{
+                  x: 0,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
+                exit={INITIAL_LOGIN_FORM_STYLES}
+              >
+                <LoginForm />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="register"
+                initial={INITIAL_REGISTER_FORM_STYLES}
+                animate={{
+                  x: 0,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
+                exit={INITIAL_REGISTER_FORM_STYLES}
+              >
+                <RegisterForm />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
