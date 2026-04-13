@@ -1,6 +1,6 @@
 import { Seo } from "@/shared/lib";
 import { BackSvg, Header, Logo } from "@/shared/ui";
-import { Button, Flex, Skeleton, Spin, Typography } from "antd";
+import { Button, Flex, Spin, Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import { useGameData } from "../../model/useGameData";
 import BlockStageContent from "../BlockStageContent/BlockStageContent";
@@ -17,19 +17,12 @@ const GamePage = () => {
   if (isPending) {
     return (
       <>
-        <Header>
-          <div className="game-page-header__content">
-            <div
-              className="game-page-header__icons-wrapper"
-              onClick={() => void navigate(`/event/${eventId}`)}
-            >
-              <BackSvg classname="game-page-header__back-icon" />
-              <Logo className="game-page-header__logo" />
-            </div>
-            <Skeleton.Input active />
-          </div>
-        </Header>
-        <Flex align="center" justify="center" vertical>
+        <Flex
+          align="center"
+          justify="center"
+          vertical
+          className="game-page__loading-content"
+        >
           <Spin />
         </Flex>
       </>

@@ -1,5 +1,6 @@
 import { DefaultEventCoverSvg } from "@/shared/ui";
 import { Typography } from "antd";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import "./EventCard.scss";
 interface EventCardProps {
@@ -11,7 +12,16 @@ interface EventCardProps {
 
 const EventCard = ({ title, description, cover, extra }: EventCardProps) => {
   return (
-    <div className="event-card">
+    <motion.div
+      className="event-card"
+      whileHover={{
+        scale: 1.05,
+        // backgroundColor: "var(--hover-primary-color)",
+      }}
+      whileTap={{
+        scale: 0.95,
+      }}
+    >
       <Typography.Title level={2} className="event-card__title">
         {title}
       </Typography.Title>
@@ -34,7 +44,7 @@ const EventCard = ({ title, description, cover, extra }: EventCardProps) => {
         )}
       </div>
       {extra}
-    </div>
+    </motion.div>
   );
 };
 
