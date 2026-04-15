@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import classnames from "classnames";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qrcode-logo";
 import { v4 as uuidv4 } from "uuid";
@@ -424,24 +425,55 @@ const TaskForm = <TResponse,>({
           <Button>Добавить файлы</Button>
         </Upload>
       </Form.Item>
-      {showSuccessText && onSuccessText && (
-        <Form.Item<TaskFormData> noStyle>
-          <Typography.Paragraph
-            type="success"
-            className="task-form__success-text"
+      <AnimatePresence>
+        {showSuccessText && onSuccessText && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
-            {onSuccessText}
-          </Typography.Paragraph>
-        </Form.Item>
-      )}
+            <Form.Item<TaskFormData> noStyle>
+              <Typography.Paragraph
+                type="success"
+                className="task-form__success-text"
+              >
+                {onSuccessText}
+              </Typography.Paragraph>
+            </Form.Item>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {showErrorText && (
-        <Form.Item<TaskFormData> noStyle>
-          <Typography.Paragraph type="danger" className="task-form__error-text">
-            Произошла ошибка. Повторите попытку позже
-          </Typography.Paragraph>
-        </Form.Item>
-      )}
+      <AnimatePresence>
+        {showErrorText && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <Form.Item<TaskFormData> noStyle>
+              <Typography.Paragraph
+                type="danger"
+                className="task-form__error-text"
+              >
+                Произошла ошибка. Повторите попытку позже
+              </Typography.Paragraph>
+            </Form.Item>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Form.Item className="task-form__submit-btn-wrapper">
         <Button
           type="primary"

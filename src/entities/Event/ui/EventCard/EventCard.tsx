@@ -14,13 +14,13 @@ const EventCard = ({ title, description, cover, extra }: EventCardProps) => {
   return (
     <motion.div
       className="event-card"
-      whileHover={{
-        scale: 1.05,
-        // backgroundColor: "var(--hover-primary-color)",
-      }}
-      whileTap={{
-        scale: 0.95,
-      }}
+      // whileHover={{
+      //   scale: 1.05,
+      //   // backgroundColor: "var(--hover-primary-color)",
+      // }}
+      // whileTap={{
+      //   scale: 0.95,
+      // }}
     >
       <Typography.Title level={2} className="event-card__title">
         {title}

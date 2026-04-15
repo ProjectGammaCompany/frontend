@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import type { ConditionData } from "../../api/createCondition";
 import { getBlocksOptions } from "../../api/getBlocksOptions";
@@ -284,20 +285,48 @@ const ConditionForm = <TResponse,>({
         )}
       </FormItem>
 
-      {showSuccessText && onSuccessText && (
-        <FormItem noStyle>
-          <Typography.Paragraph type="success">
-            {onSuccessText}
-          </Typography.Paragraph>
-        </FormItem>
-      )}
-      {submitMutation.isError && (
-        <FormItem noStyle>
-          <Typography.Paragraph type="danger">
-            Произошла ошибка. Повторите попытку позже.
-          </Typography.Paragraph>
-        </FormItem>
-      )}
+      <AnimatePresence>
+        {showSuccessText && onSuccessText && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <FormItem noStyle>
+              <Typography.Paragraph type="success">
+                {onSuccessText}
+              </Typography.Paragraph>
+            </FormItem>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {submitMutation.isError && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <FormItem noStyle>
+              <Typography.Paragraph type="danger">
+                Произошла ошибка. Повторите попытку позже.
+              </Typography.Paragraph>
+            </FormItem>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <FormItem noStyle>
         <Button htmlType="submit" loading={submitMutation.isPending}>
           {submitBtnText}
