@@ -1,14 +1,27 @@
 .option {
   &__wrapper {
     display: flex;
-    background-color: lightgray;
+    background-color: var(--light-color);
     padding: 5px;
     border-radius: 5px;
     align-items: center;
     gap: 10px;
+    color: inherit;
+    border: 4px solid white;
+    transition: border ease-in-out 0.5s;
   }
   &__icon {
     height: 45px;
     width: 45px;
+
+    &:where(
+        .css-dev-only-do-not-override-ch9ese
+      ).ant-checkbox-disabled.ant-checkbox-checked {
+      background-color: var(--primary-color);
+
+      &::after {
+        border-color: white !important;
+      }
+    }
   }
 }

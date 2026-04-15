@@ -21,6 +21,7 @@ import {
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import { Dayjs } from "dayjs";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type ReactNode } from "react";
 import "./EventForm.scss";
 
@@ -342,16 +343,30 @@ export const EventForm = <TData extends EventFormData, TResponse>({
             </Tooltip>
           </div>
         </Form.Item>
-        {showSuccessText && onSuccessText && (
-          <Form.Item>
-            <Typography.Paragraph
-              type="success"
-              className="event-form__submit-text"
+        <AnimatePresence>
+          {showSuccessText && onSuccessText && (
+            <motion.div
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
             >
-              {onSuccessText}
-            </Typography.Paragraph>
-          </Form.Item>
-        )}
+              <Form.Item>
+                <Typography.Paragraph
+                  type="success"
+                  className="event-form__submit-text"
+                >
+                  {onSuccessText}
+                </Typography.Paragraph>
+              </Form.Item>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <Form.Item className="event-form__submit-btn-wrapper">
           <Button
             type="primary"

@@ -5,6 +5,7 @@ import {
 } from "@/entities";
 import { useNotify } from "@/shared/lib";
 import { Button, Empty, Flex, Spin, Typography } from "antd";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { useOnInView } from "react-intersection-observer";
 import { deleteNotificationFromQuery } from "../../model/deleteNotificationFromQuery";
@@ -51,32 +52,45 @@ const NotificationsList = () => {
   return (
     <div>
       <ul className="notifications-list">
-        {isListEmpty ? (
-          <Empty
-            className="notifications-list__empty"
-            description={
-              <Typography.Text className="notifications-list__empty-text">
-                Список уведомлений пуст
-              </Typography.Text>
-            }
-          />
-        ) : (
-          data?.pages.map((page, index) =>
-            page.data.notifications.map((notification) => (
-              <NotificationCard
-                key={notification.id}
-                notification={notification}
-                deleteBtnLoading={
-                  deleteNotificationMutation.isPending &&
-                  deleteNotificationMutation.variables === notification.id
-                }
-                onDelete={(id) => {
-                  handleDeleteNotifications(id, index);
-                }}
-              />
-            )),
-          )
-        )}
+        <AnimatePresence>
+          {isListEmpty ? (
+            <Empty
+              className="notifications-list__empty"
+              description={
+                <Typography.Text className="notifications-list__empty-text">
+                  Список уведомлений пуст
+                </Typography.Text>
+              }
+            />
+          ) : (
+            data?.pages.map((page, index) =>
+              page.data.notifications.map((notification) => (
+                <motion.li
+                  key={notification.id}
+                  exit={{
+                    x: "200dvw",
+                    height: 0,
+                    transition: {
+                      duration: 0.5,
+                    },
+                  }}
+                >
+                  <NotificationCard
+                    key={notification.id}
+                    notification={notification}
+                    deleteBtnLoading={
+                      deleteNotificationMutation.isPending &&
+                      deleteNotificationMutation.variables === notification.id
+                    }
+                    onDelete={(id) => {
+                      handleDeleteNotifications(id, index);
+                    }}
+                  />
+                </motion.li>
+              )),
+            )
+          )}
+        </AnimatePresence>
       </ul>
       {(isFetching || error) && (
         <Flex

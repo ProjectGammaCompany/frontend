@@ -1,5 +1,7 @@
+import { useWindowWidth } from "@/shared/lib";
 import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/shared/ui";
-import { FloatButton } from "antd";
+import { Button } from "antd";
+import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router";
 import "./FloatButtonsGroup.scss";
 interface FloatButtonsGroupProps {
@@ -14,37 +16,123 @@ const FloatButtonsGroup = ({
   setCreateEventWindowOpen,
 }: FloatButtonsGroupProps) => {
   const navigate = useNavigate();
+
+  const width = useWindowWidth();
+
+  const isDesktop = width >= 700;
+
+  const baseBottom = isDesktop ? "20px" : "80px";
+  const baseRight = isDesktop ? "2dvw" : "5dvw";
+
   return (
     <>
-      <FloatButton
+      <Button
+        shape="circle"
         classNames={{
-          root: "home-page__actions-btn",
+          root: "float-buttons-group__actions-btn",
+        }}
+        style={{
+          bottom: baseBottom,
+          right: baseRight,
+          position: "fixed",
         }}
         onClick={() => setOpen(!open)}
         icon={<MoreSvg />}
       />
-      {open && (
-        <>
-          <FloatButton
-            classNames={{
-              root: "home-page__my-events-btn",
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="float-buttons-group__button-wrapper"
+            initial={{
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 0,
+              scale: 0.8,
             }}
-            onClick={() => {
-              void navigate("/my-events");
+            animate={{
+              y: "-70px",
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 1,
+              scale: 1,
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                delay: 0.05,
+              },
             }}
-            icon={<MyEventsSvg />}
-          />
-          <FloatButton
-            classNames={{
-              root: "home-page__create-event-btn",
+            exit={{
+              y: "20px",
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 0,
+              scale: 0.8,
+              transition: {
+                duration: 0.2,
+              },
             }}
-            onClick={() => {
-              setCreateEventWindowOpen();
+          >
+            <Button
+              classNames={{
+                root: "float-buttons-group__my-events-btn",
+              }}
+              shape="circle"
+              onClick={() => {
+                void navigate("/my-events");
+              }}
+              icon={<MyEventsSvg />}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 0,
+              scale: 0.8,
             }}
-            icon={<CreateEventSvg />}
-          />
-        </>
-      )}
+            animate={{
+              x: "-70px",
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 1,
+              scale: 1,
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                delay: 0.05,
+              },
+            }}
+            exit={{
+              x: "30px",
+              bottom: baseBottom,
+              right: baseRight,
+              opacity: 0,
+              scale: 0.8,
+              transition: {
+                duration: 0.2,
+              },
+            }}
+            className="float-buttons-group__button-wrapper"
+          >
+            <Button
+              shape="circle"
+              classNames={{
+                root: "float-buttons-group__create-event-btn",
+              }}
+              onClick={() => {
+                setCreateEventWindowOpen();
+              }}
+              icon={<CreateEventSvg />}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

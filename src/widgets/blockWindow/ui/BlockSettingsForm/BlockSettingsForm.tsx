@@ -2,6 +2,7 @@ import type { BlockSettings, UpdateBlockData } from "@/entities";
 import type { ChangeTypeOfKeys } from "@/shared/lib";
 import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useFormSubmit } from "../../model/useFormSubmit";
 import "./BlockSettingsForm.scss";
@@ -90,26 +91,54 @@ const BlockSettingsForm = ({
           </Form.Item>
         );
       })}
-      {showSuccessText && (
-        <Form.Item>
-          <Typography.Paragraph
-            className="block-settings-form__success-text"
-            type="success"
+      <AnimatePresence>
+        {showSuccessText && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
-            Настройки сохранены
-          </Typography.Paragraph>
-        </Form.Item>
-      )}
-      {showErrorText && (
-        <Form.Item>
-          <Typography.Paragraph
-            type="danger"
-            className="block-settings-form__error-text"
+            <Form.Item>
+              <Typography.Paragraph
+                className="block-settings-form__success-text"
+                type="success"
+              >
+                Настройки сохранены
+              </Typography.Paragraph>
+            </Form.Item>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showErrorText && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
-            Произошла ошибка. Повторите попытку позже.
-          </Typography.Paragraph>
-        </Form.Item>
-      )}
+            <Form.Item>
+              <Typography.Paragraph
+                type="danger"
+                className="block-settings-form__error-text"
+              >
+                Произошла ошибка. Повторите попытку позже.
+              </Typography.Paragraph>
+            </Form.Item>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Form.Item className="block-settings-form__submit-btn-wrapper">
         <Button htmlType="submit">Сохранить</Button>
       </Form.Item>

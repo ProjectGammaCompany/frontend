@@ -1,53 +1,30 @@
-.home-page {
+.float-buttons-group {
   &__actions-btn {
-    width: 60px;
-    height: 60px;
+    position: fixed;
+    z-index: 1000;
+    width: 60px !important;
+    height: 60px !important;
     color: var(--primary-color);
-    bottom: 80px !important;
-    right: 5dvw !important;
 
     & > span {
       width: 30px;
       height: 30px;
     }
+  }
+
+  &__button-wrapper {
+    position: fixed;
+    height: fit-content;
+    z-index: 999;
   }
   &__my-events-btn,
   &__create-event-btn {
     color: var(--primary-color);
-    width: 60px;
+    width: 60px !important;
     height: 60px;
     & > span {
       width: 30px;
       height: 30px;
-    }
-  }
-
-  &__my-events-btn {
-    bottom: calc(80px + 70px) !important;
-    right: calc(5dvw + 10px) !important;
-  }
-
-  &__create-event-btn {
-    bottom: calc(80px + 10px) !important;
-    right: calc(5dvw + 70px) !important;
-  }
-}
-
-@media (min-width: 700px) {
-  .home-page {
-    &__actions-btn {
-      bottom: 20px !important;
-      right: 2dvw !important;
-    }
-
-    &__my-events-btn {
-      bottom: calc(20px + 70px) !important;
-      right: calc(2dvw + 10px) !important;
-    }
-
-    &__create-event-btn {
-      bottom: calc(20px + 10px) !important;
-      right: calc(2dvw + 70px) !important;
     }
   }
 }
