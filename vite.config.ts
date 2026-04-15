@@ -25,7 +25,7 @@ export default defineConfig({
       exclude: excludedRoutes,
       readable: true,
       changefreq: {
-        "/": "daily",
+        "/": "monthly",
       },
       priority: {
         "/": 1,

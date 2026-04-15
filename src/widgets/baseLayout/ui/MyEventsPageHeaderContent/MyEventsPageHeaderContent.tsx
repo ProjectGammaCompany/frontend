@@ -8,7 +8,7 @@ const MyEventsPageHeaderContent = () => {
   const { pathname } = useLocation();
   return (
     <div className="my-events-page-header-content">
-      <Link to="/">
+      <Link to="/home">
         <Logo className="my-events-page-header-content__logo" />
       </Link>
       <Typography.Title

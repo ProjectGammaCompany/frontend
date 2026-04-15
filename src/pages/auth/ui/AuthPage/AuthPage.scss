@@ -1,16 +1,29 @@
 .auth-page {
   height: calc(100dvh - 15px);
-  padding-inline: 5dvw;
-  padding-top: 5dvh;
+  padding-inline: 3dvw;
+  padding-top: 3dvh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 30px !important;
+    text-align: center;
+    color: white !important;
+  }
+
+  &__description {
+    color: white;
+    text-align: center;
+  }
 
   &__content-wrapper {
-    flex-grow: 1;
+    flex-grow: 0;
     position: relative;
     overflow: hidden;
     background-color: white;
     border-radius: 10px;
+    width: 100%;
     max-width: 500px;
     min-width: 300px;
     height: 400px;

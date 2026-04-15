@@ -73,7 +73,7 @@ const ForgotPasswordPage = () => {
   ) => {
     tokenStorage.setTokens(accessToken, refreshToken);
     settingsStorage.setRememberMe();
-    void navigate("/");
+    void navigate("/home");
   };
 
   const handleChangePasswordError = () => {

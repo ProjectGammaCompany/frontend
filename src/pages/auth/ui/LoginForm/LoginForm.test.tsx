@@ -103,7 +103,7 @@ describe("LoginForm", () => {
         Component: LoginForm,
       },
       {
-        path: "/",
+        path: "/home",
         Component: Home,
       },
     ]);
@@ -133,7 +133,7 @@ describe("LoginForm", () => {
         Component: LoginForm,
       },
       {
-        path: "/",
+        path: "/home",
         Component: Home,
       },
     ]);

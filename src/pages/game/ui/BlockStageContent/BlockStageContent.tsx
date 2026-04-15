@@ -1,5 +1,5 @@
-import type { BlockStage } from "@/entities";
-import { useNotify } from "@/shared/lib";
+import { type BlockStage } from "@/entities";
+import { getShuffledArray, useNotify } from "@/shared/lib";
 import { TaskSlider } from "@/widgets";
 import { Button, Typography } from "antd";
 import { useState } from "react";
@@ -17,6 +17,8 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
   const filteredTasks = blockStageData.block.tasks.filter(
     (task) => !task.isCompleted,
   );
+
+  const shuffledTasks = getShuffledArray(filteredTasks);
 
   const notify = useNotify();
 
@@ -65,7 +67,7 @@ const BlockStageContent = ({ eventId, blockStageData }: BlockStageProps) => {
         Пройдите все задания данного блока
       </Typography.Paragraph>
       <TaskSlider
-        tasks={filteredTasks}
+        tasks={shuffledTasks}
         onTaskChoice={handleTaskSelect}
         selectedTasks={selectedTasks}
       />

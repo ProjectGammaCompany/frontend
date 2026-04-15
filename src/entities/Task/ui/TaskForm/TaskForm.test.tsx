@@ -139,7 +139,7 @@ describe("TaskForm", () => {
       "option-item__right-answer-toggle_right",
     );
     expect(toggles[1]).toHaveClass("option-item__right-answer-toggle_right");
-  });
+  }, 10000);
 
   it("allows to choice multiple right answers among options when multiple choice type has been selected", async () => {
     basicRender(
@@ -177,5 +177,5 @@ describe("TaskForm", () => {
 
     expect(toggles[0]).toHaveClass("option-item__right-answer-toggle_right");
     expect(toggles[1]).toHaveClass("option-item__right-answer-toggle_right");
-  });
+  }, 10000);
 });

@@ -1,5 +1,6 @@
 import type { TaskStageData } from "@/entities";
 import { useSendAnswer } from "@/features";
+import { getShuffledArray } from "@/shared/lib";
 import { ChoiceTask, InfoBlock, TextEntryTask } from "@/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
 import dayjs from "dayjs";
@@ -61,12 +62,26 @@ const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
         }}
       />
     ),
-    1: ({ data }) => (
-      <ChoiceTask data={{ ...data, type: 1, eventId: eventId }} />
-    ),
-    2: ({ data }) => (
-      <ChoiceTask data={{ ...data, type: 2, eventId: eventId }} />
-    ),
+    1: ({ data }) => {
+      const shuffledTasks = data.options
+        ? getShuffledArray(data.options)
+        : data.options;
+      return (
+        <ChoiceTask
+          data={{ ...data, type: 1, eventId: eventId, options: shuffledTasks }}
+        />
+      );
+    },
+    2: ({ data }) => {
+      const shuffledTasks = data.options
+        ? getShuffledArray(data.options)
+        : data.options;
+      return (
+        <ChoiceTask
+          data={{ ...data, type: 2, eventId: eventId, options: shuffledTasks }}
+        />
+      );
+    },
     3: ({ data }) => (
       <TextEntryTask data={{ ...data, type: "text", eventId: eventId }} />
     ),
