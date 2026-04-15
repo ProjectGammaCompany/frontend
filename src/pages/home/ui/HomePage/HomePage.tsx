@@ -64,20 +64,12 @@ export const HomePage = () => {
     });
   };
 
-  const schemaMarkup = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "HSE EduPlay",
-    url: "https://hse-eduplay.ru",
-  };
-
   return (
     <div className="home-page">
       <Seo
         title="Главная"
         description="Платформа для создания и проведения квестов и контрольных мероприятий."
-        canonical={`/`}
-        schemaMarkup={schemaMarkup}
+        canonical={`/home`}
       />
       <div className="home-page__participate-btn-wrapper">
         <Button
