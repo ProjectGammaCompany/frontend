@@ -17,9 +17,11 @@
   &__rate-block,
   &__navigate-btn {
     margin-top: 30px;
+    overflow: hidden;
   }
 }
 
 .root-layout_on-end-game-stage {
+  transition: background-color ease-in-out 1s;
   background-color: var(--primary-color);
 }

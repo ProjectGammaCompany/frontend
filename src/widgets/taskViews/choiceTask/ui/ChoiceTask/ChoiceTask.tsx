@@ -98,7 +98,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       void queryClient.invalidateQueries({
         queryKey: [eventId, "game"],
       });
-    }, 5000);
+    }, 3000);
   };
 
   const handleErrorSendAnswer = () => {

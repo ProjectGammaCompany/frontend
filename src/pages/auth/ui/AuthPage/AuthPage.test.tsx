@@ -1,5 +1,5 @@
 import { basicRender } from "@/shared/lib/testFunctions/basicRender";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { AuthPage } from "./AuthPage";
@@ -27,8 +27,10 @@ describe("AuthPage", () => {
 
     expect(screen.getByText("Забыли пароль?")).toBeInTheDocument();
 
-    expect(
-      screen.queryByLabelText("Повторный ввод пароля"),
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByLabelText("Повторный ввод пароля"),
+      ).not.toBeInTheDocument();
+    });
   });
 });

@@ -1,32 +1,37 @@
-.game-page-header {
-  &__icons-wrapper {
-    display: flex;
-    align-items: center;
+.game-page {
+  &__loading-content {
+    margin-top: 40dvh;
   }
+  &-header {
+    &__icons-wrapper {
+      display: flex;
+      align-items: center;
+    }
 
-  &__title {
-    font-size: 16px !important;
-  }
-  &__title,
-  &__error-text {
-    color: white !important;
-  }
+    &__title {
+      font-size: 16px !important;
+    }
+    &__title,
+    &__error-text {
+      color: white !important;
+    }
 
-  &__back-icon {
-    height: 30px;
-    width: 32px;
-    color: white;
-  }
+    &__back-icon {
+      height: 30px;
+      width: 32px;
+      color: white;
+    }
 
-  &__logo {
-    width: 130px;
-  }
+    &__logo {
+      width: 130px;
+    }
 
-  &__content {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    &__content {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 }
 

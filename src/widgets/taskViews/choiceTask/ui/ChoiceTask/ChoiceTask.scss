@@ -1,11 +1,11 @@
 .choice-task {
   &__option {
     &_incorrect {
-      border: 1px solid red;
+      border: 4px solid rgba(255, 0, 0, 0.5);
     }
 
     &_correct {
-      border: 1px solid green;
+      border: 4px solid rgba(0, 163, 0, 0.5);
     }
     &-list {
       display: flex;

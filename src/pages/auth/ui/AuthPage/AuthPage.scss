@@ -7,16 +7,25 @@
 
   &__content-wrapper {
     flex-grow: 1;
+    position: relative;
+    overflow: hidden;
     background-color: white;
     border-radius: 10px;
     max-width: 500px;
     min-width: 300px;
-    height: fit-content;
+    height: 400px;
   }
 
   &__form-wrapper {
+    position: relative;
     padding-inline: 15px;
     padding-bottom: 5px;
+
+    & > div {
+      position: absolute;
+      width: calc(100% - 30px);
+      flex-shrink: 0;
+    }
   }
 
   &__segmented {

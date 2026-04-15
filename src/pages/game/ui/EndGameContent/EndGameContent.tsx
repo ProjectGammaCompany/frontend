@@ -1,10 +1,10 @@
 import { useRateEvent } from "@/entities";
 import { useNotify } from "@/shared/lib";
 import { Button, ConfigProvider, Rate, Typography } from "antd";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "./EndGameContent.scss";
-
 interface EndGameContentProps {
   eventId: string;
 }
@@ -53,16 +53,54 @@ const EndGameContent = ({ eventId }: EndGameContentProps) => {
 
   return (
     <div className="end-game-content" data-testid="end-game">
-      <Typography.Title level={1} className="end-game-content__text">
-        Событие пройдено
-      </Typography.Title>
-      <Typography.Title
-        level={2}
-        className="end-game-content__text end-game-content__text-congrats"
+      <motion.div
+        initial={{
+          scale: 10,
+        }}
+        animate={{
+          scale: 2,
+          transition: {
+            delay: 0.5,
+            duration: 1,
+            type: "spring",
+          },
+        }}
       >
-        Поздравляем!
-      </Typography.Title>
-      <div className="end-game-content__rate-block">
+        <Typography.Title level={1} className="end-game-content__text">
+          Событие пройдено
+        </Typography.Title>
+      </motion.div>
+      <motion.div
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+          transition: {
+            delay: 1.5,
+          },
+        }}
+      >
+        <Typography.Title
+          level={2}
+          className="end-game-content__text end-game-content__text-congrats"
+        >
+          Поздравляем!
+        </Typography.Title>
+      </motion.div>
+      <motion.div
+        className="end-game-content__rate-block"
+        initial={{
+          height: 0,
+        }}
+        animate={{
+          height: "auto",
+          transition: {
+            delay: 2,
+            type: "tween",
+          },
+        }}
+      >
         <Typography.Paragraph className="end-game-content__text">
           Оцените событие
         </Typography.Paragraph>
@@ -81,21 +119,33 @@ const EndGameContent = ({ eventId }: EndGameContentProps) => {
             disabled={rateEventMutation.isPending}
           />
         </ConfigProvider>
-      </div>
-      <Button
-        className="end-game-content__navigate-btn"
-        ghost
-        onClick={() => {
-          if (typeof rateValue === "number") {
-            rateEventMutation.mutate(rateValue);
-            return;
-          }
-          void navigate(`/event/${eventId}/stats`);
+      </motion.div>
+      <motion.div
+        initial={{
+          opacity: 0,
         }}
-        loading={rateEventMutation.isPending}
+        animate={{
+          opacity: 1,
+          transition: {
+            delay: 2,
+          },
+        }}
       >
-        Перейти к результатам
-      </Button>
+        <Button
+          className="end-game-content__navigate-btn"
+          ghost
+          onClick={() => {
+            if (typeof rateValue === "number") {
+              rateEventMutation.mutate(rateValue);
+              return;
+            }
+            void navigate(`/event/${eventId}/stats`);
+          }}
+          loading={rateEventMutation.isPending}
+        >
+          Перейти к результатам
+        </Button>
+      </motion.div>
     </div>
   );
 };
