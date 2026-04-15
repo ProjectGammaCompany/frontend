@@ -52,7 +52,7 @@ const EventPage = () => {
         </Typography.Paragraph>
         <Button
           onClick={() => {
-            void navigate("/");
+            void navigate("/home");
           }}
         >
           Вернуться на главную страницу
@@ -73,7 +73,7 @@ const EventPage = () => {
           <div className="event-page__error-header-content">
             <div
               className="event-page__icons-wrapper"
-              onClick={() => void navigate("/")}
+              onClick={() => void navigate("/home")}
             >
               <BackSvg classname="event-page__back-icon" />
               <Logo className="event-page__logo" />
@@ -100,7 +100,7 @@ const EventPage = () => {
           <div className="event-page__error-header-content">
             <div
               className="event-page__icons-wrapper"
-              onClick={() => void navigate("/")}
+              onClick={() => void navigate("/home")}
             >
               <BackSvg classname="event-page__back-icon" />
               <Logo className="event-page__logo" />

@@ -1,7 +1,7 @@
 export type HeaderRoute = "home" | "profile" | "notifications" | "my-events";
 export const getRouteKey = (pathname: string): HeaderRoute | null => {
   switch (pathname) {
-    case "/":
+    case "/home":
       return "home";
     case "/profile":
       return "profile";
