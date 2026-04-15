@@ -1,3 +1,4 @@
+import { Seo } from "@/shared/lib";
 import { Button, ConfigProvider, Flex, Typography } from "antd";
 import { motion } from "motion/react";
 import { useEffect } from "react";
@@ -11,6 +12,15 @@ const LandingPage = () => {
     "Викторины",
     "И другие интерактивные события",
   ];
+
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "EduPlay",
+    url: "https://hse-eduplay.ru",
+    description:
+      "Платформа для создания и проведения квестов и интерактивных мероприятий",
+  };
   useEffect(() => {
     const el = document.getElementById("root-layout");
 
@@ -26,6 +36,13 @@ const LandingPage = () => {
   }, []);
   return (
     <div className="landing-page">
+      <Seo
+        title="EduPlay – платформа для создания квестов и интерактивных мероприятий"
+        description="EduPlay — платформа для создания и проведения квестов, тестов и интерактивных мероприятий. Подходит для обучения, мероприятий и оценки знаний."
+        canonical={`/`}
+        schemaMarkup={schemaMarkup}
+        specificTitle
+      />
       <ConfigProvider>
         <Typography.Title
           level={1}

@@ -7,6 +7,7 @@ interface SeoProps {
   image?: string;
   noIndex?: boolean;
   schemaMarkup?: Record<string, unknown>;
+  specificTitle?: boolean;
 }
 
 export const Seo = ({
@@ -16,9 +17,10 @@ export const Seo = ({
   image,
   schemaMarkup,
   noIndex,
+  specificTitle,
 }: SeoProps) => (
   <Helmet>
-    <title>{`${title} | HSE EduPlay`}</title>
+    <title>{specificTitle ? title : `${title} | HSE EduPlay`}</title>
 
     <meta name="description" content={description} />
     <link rel="canonical" href={"https://hse-eduplay.ru" + canonical} />
