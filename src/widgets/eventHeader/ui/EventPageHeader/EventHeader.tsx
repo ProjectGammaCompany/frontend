@@ -32,7 +32,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
         <div className="event-page-header">
           <div
             className="event-page-header__icons-wrapper"
-            onClick={() => void navigate("/")}
+            onClick={() => void navigate("/home")}
           >
             <BackSvg classname="event-page-header__back-icon" />
             <Logo className="event-page-header__logo" />

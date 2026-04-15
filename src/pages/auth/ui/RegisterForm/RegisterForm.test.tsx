@@ -127,7 +127,7 @@ describe("RegisterForm", () => {
         Component: RegisterForm,
       },
       {
-        path: "/",
+        path: "/home",
         Component: Home,
       },
     ]);

@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(true);
 
   const handleSuccessLogin = () => {
-    void navigate("/");
+    void navigate("/home");
   };
 
   const [errorMessage, setErrorMessage] = useState("");

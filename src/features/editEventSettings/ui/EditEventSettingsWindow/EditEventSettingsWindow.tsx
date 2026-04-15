@@ -92,7 +92,7 @@ const EditEventSettingsWindow = ({
   const deleteEventMutation = useMutation({
     mutationFn: () => deleteEvent(eventId),
     onSuccess: () => {
-      void navigate("/");
+      void navigate("/home");
     },
     onError: () => {
       notify.error({

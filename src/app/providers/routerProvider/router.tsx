@@ -3,6 +3,7 @@ import { EventPage } from "@/pages/event";
 import { ForgotPasswordPage } from "@/pages/forgotPassword";
 import { GamePage } from "@/pages/game";
 import { HomePage } from "@/pages/home";
+import { LandingPage } from "@/pages/landing";
 import { MyEventsPage } from "@/pages/myEvents";
 import { NotificationPage } from "@/pages/notifications";
 import { ProfilePage } from "@/pages/profile";
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     path: "/",
     Component: RootLayout,
     children: [
+      {
+        index: true,
+        Component: LandingPage,
+      },
       {
         path: "/auth",
         middleware: [authMiddleware],
@@ -56,7 +61,7 @@ const router = createBrowserRouter([
                 Component: BaseLayout,
                 children: [
                   {
-                    index: true,
+                    path: "home",
                     Component: HomePage,
                   },
                   {
@@ -93,7 +98,7 @@ function privateRoutesMiddleware() {
 function authMiddleware() {
   if (tokenStorage.getAccessToken()) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw redirect("/");
+    throw redirect("/home");
   }
 }
 

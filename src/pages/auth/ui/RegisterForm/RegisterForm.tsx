@@ -12,7 +12,7 @@ const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSuccessRegister = () => {
-    void navigate("/");
+    void navigate("/home");
   };
 
   const handleRegisterError = (error: Error) => {

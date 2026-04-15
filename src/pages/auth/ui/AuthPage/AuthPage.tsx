@@ -46,10 +46,17 @@ export const AuthPage = () => {
     <div className="auth-page">
       <Seo
         title="Авторизация"
-        description="Страница регистрации и входа."
+        description="Страница регистрации и входа в платформу для создания и проведения квестов и контрольных мероприятий."
         canonical="/auth"
-        noIndex
       />
+      <div>
+        <Typography.Title level={1} className="auth-page__title">
+          EduPlay
+        </Typography.Title>
+        <Typography.Paragraph className="auth-page__description" italic>
+          Платформа квестов и интерактивных событий
+        </Typography.Paragraph>
+      </div>
       <div className="auth-page__content-wrapper">
         <Segmented
           data-testid="switch form"
