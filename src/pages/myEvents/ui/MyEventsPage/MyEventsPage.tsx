@@ -2,7 +2,7 @@ import { Seo } from "@/shared/lib";
 import { Collapse } from "antd";
 import { useState, type ReactNode } from "react";
 import UserEventsList from "../UserEventsList/UserEventsList";
-
+import "./MyEventsPage.scss";
 interface ItemType {
   key: string;
   label: string;
@@ -52,7 +52,7 @@ const MyEvents = () => {
     setActiveKey(undefined);
   };
   return (
-    <div>
+    <div className="my-events-page__content">
       <Seo
         title="Мои события"
         description="Страница событий пользователя."
