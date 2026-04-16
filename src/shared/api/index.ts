@@ -1,5 +1,5 @@
 export { axiosInstance } from "./axios/axios";
-export { baseUrl, createAxiosInstance } from "./axios/createAxiosInstance";
+export { baseApiUrl, createAxiosInstance } from "./axios/createAxiosInstance";
 
 export { queryClient } from "./reactQuery/queryClient";
 

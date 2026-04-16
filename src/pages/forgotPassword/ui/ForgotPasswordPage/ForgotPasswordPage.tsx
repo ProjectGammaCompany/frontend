@@ -2,14 +2,14 @@ import {
   useChangePassword,
   useRecoverCodeValidity,
   useSendCodeByEmail,
-} from "@/entities";
-import { handleError } from "@/shared/api";
-import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib";
-import { Button, Flex, Form, Input, Typography } from "antd";
-import Password from "antd/es/input/Password";
-import { useEffect, useEffectEvent, useState } from "react";
-import { useNavigate } from "react-router";
-import "./ForgotPasswordPage.scss";
+} from "@/entities"
+import { handleError } from "@/shared/api"
+import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib"
+import { Button, Flex, Form, Input, Typography } from "antd"
+import Password from "antd/es/input/Password"
+import { useEffect, useEffectEvent, useState } from "react"
+import { useNavigate } from "react-router"
+import "./ForgotPasswordPage.scss"
 interface EmailFormData {
   email: string;
 }
@@ -155,7 +155,7 @@ const ForgotPasswordPage = () => {
       <Seo
         title="Восстановление пароля"
         description="Страница восстановления пароля."
-        canonical="/forgot-password"
+        canonical="forgot-password"
         noIndex
       />
       <div className="forgot-password-page__content-wrapper">

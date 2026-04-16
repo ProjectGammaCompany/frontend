@@ -39,7 +39,7 @@ const LandingPage = () => {
       <Seo
         title="EduPlay – платформа для создания квестов и интерактивных мероприятий"
         description="EduPlay — платформа для создания и проведения квестов, тестов и интерактивных мероприятий. Подходит для обучения, мероприятий и оценки знаний."
-        canonical={`/`}
+        canonical={``}
         schemaMarkup={schemaMarkup}
         specificTitle
       />

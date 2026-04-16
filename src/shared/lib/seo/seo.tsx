@@ -10,6 +10,8 @@ interface SeoProps {
   specificTitle?: boolean;
 }
 
+const baseUrl = import.meta.env.VITE_APP_BASE_URL as string;
+
 export const Seo = ({
   title,
   description,
@@ -21,21 +23,22 @@ export const Seo = ({
 }: SeoProps) => (
   <Helmet>
     <title>{specificTitle ? title : `${title} | HSE EduPlay`}</title>
-
     <meta name="description" content={description} />
-    <link rel="canonical" href={"https://hse-eduplay.ru" + canonical} />
-
+    <link rel="canonical" href={baseUrl + canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    {image && <meta property="og:image" content={image} />}
-
+    <meta property="og:url" content={baseUrl + canonical} />
+    (
+    <meta
+      property="og:image"
+      content={image ?? `${baseUrl}image/preview/preview.png`}
+    />
+    )
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={image} />}
-
     {schemaMarkup && (
       <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
     )}

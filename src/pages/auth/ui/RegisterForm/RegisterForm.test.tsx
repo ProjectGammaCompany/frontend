@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -70,7 +70,7 @@ describe("RegisterForm", () => {
 
   it("shows user existing error message when gets 403 status code", async () => {
     server.use(
-      http.post(`${baseUrl}auth/register`, () => {
+      http.post(`${baseApiUrl}auth/register`, () => {
         return new HttpResponse(null, {
           status: 403,
         });
@@ -93,7 +93,7 @@ describe("RegisterForm", () => {
 
   it("shows error message when gets error status code", async () => {
     server.use(
-      http.post(`${baseUrl}auth/register`, () => {
+      http.post(`${baseApiUrl}auth/register`, () => {
         return new HttpResponse(null, {
           status: 500,
         });
@@ -116,7 +116,7 @@ describe("RegisterForm", () => {
 
   it("navigates to home page after success register", async () => {
     server.use(
-      http.post(`${baseUrl}auth/register`, () => {
+      http.post(`${baseApiUrl}auth/register`, () => {
         return HttpResponse.json({
           accessToken: "123456",
           refreshToken: "1234567",

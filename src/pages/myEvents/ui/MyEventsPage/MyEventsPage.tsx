@@ -56,7 +56,7 @@ const MyEvents = () => {
       <Seo
         title="Мои события"
         description="Страница событий пользователя."
-        canonical={`/my-events`}
+        canonical={`my-events`}
         noIndex
       />
       <Collapse

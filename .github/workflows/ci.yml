@@ -37,7 +37,7 @@ jobs:
       - name: create env file
         run: |
           cat <<EOF > .env.test
-          VITE_APP_BASE_URL=https://api.hse-eduplay.ru/
+          VITE_APP_BASE_API_URL=https://api.hse-eduplay.ru/
           VITE_FILE_BASE_URL=https://files.hse-eduplay.ru/eduplay-bucket/uploads/
           EOF
 
@@ -57,7 +57,9 @@ jobs:
       - name: create env file
         run: |
           cat <<EOF > .env.production
-          VITE_APP_BASE_URL=https://api.hse-eduplay.ru/
+          VITE_APP_BASE_API_URL=https://api.hse-eduplay.ru/
+          VITE_APP_BASE_URL=https://hse-eduplay.ru/
+          VITE_APP_BASE_URL=https://hse-eduplay.ru/
           VITE_FILE_BASE_URL=https://files.hse-eduplay.ru/eduplay-bucket/uploads/
           EOF
 

@@ -19,7 +19,7 @@ const ProfilePage = () => {
     <Seo
       title="Профиль"
       description="Страница профиля пользователя."
-      canonical={`/profile`}
+      canonical={`profile`}
       noIndex
     />
   );

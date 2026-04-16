@@ -1,20 +1,20 @@
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
-import { baseUrl, createAxiosInstance } from "..";
+import { baseApiUrl, createAxiosInstance } from "..";
 import { mockTokenStorage } from "../../lib";
 
 const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";
 
 const server = setupServer(
-  http.post(`${baseUrl}auth/refresh`, () => {
+  http.post(`${baseApiUrl}auth/refresh`, () => {
     return HttpResponse.json({
       accessToken: validAccessToken,
       refreshToken: validRefreshToken,
     });
   }),
-  http.post(`${baseUrl}auth/login`, () => {
+  http.post(`${baseApiUrl}auth/login`, () => {
     return HttpResponse.json({
       accessToken: validAccessToken,
       refreshToken: validRefreshToken,
@@ -34,7 +34,7 @@ describe("Проверка настройки axios-instance", () => {
   test("Должны быть новые токены в хранилище после рефреша", async () => {
     let isUsedAlready = false;
     server.use(
-      http.get(`${baseUrl}someURL`, () => {
+      http.get(`${baseApiUrl}someURL`, () => {
         if (!isUsedAlready) {
           isUsedAlready = true;
           return new HttpResponse(null, { status: 401 });

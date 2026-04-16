@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
@@ -19,7 +19,7 @@ describe("GamePage", () => {
 
   it("shows endGameContent, when it gets type end", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/nextStage`, () => {
+      http.get(`${baseApiUrl}event/:eventId/nextStage`, () => {
         return HttpResponse.json({
           type: "end",
         });
@@ -39,7 +39,7 @@ describe("GamePage", () => {
 
   it("shows block stage, when it gets type block", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/nextStage`, () => {
+      http.get(`${baseApiUrl}event/:eventId/nextStage`, () => {
         return HttpResponse.json({
           type: "block",
           block: {
@@ -64,7 +64,7 @@ describe("GamePage", () => {
 
   it("shows task stage, when it gets type task", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/nextStage`, () => {
+      http.get(`${baseApiUrl}event/:eventId/nextStage`, () => {
         return HttpResponse.json({
           type: "task",
           task: {
@@ -77,7 +77,7 @@ describe("GamePage", () => {
         });
       }),
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
