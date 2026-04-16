@@ -1,6 +1,6 @@
-import { Seo } from "@/shared/lib";
-import NotificationsList from "../NotificationsList/NotificationsList";
-import "./NotificationsPage.scss";
+import { Seo } from "@/shared/lib"
+import NotificationsList from "../NotificationsList/NotificationsList"
+import "./NotificationsPage.scss"
 
 const NotificationsPage = () => {
   return (
@@ -8,7 +8,7 @@ const NotificationsPage = () => {
       <Seo
         title="Уведомления"
         description="Страница уведомлений пользователя."
-        canonical={`/notifications`}
+        canonical={`notifications`}
         noIndex
       />
       <NotificationsList />

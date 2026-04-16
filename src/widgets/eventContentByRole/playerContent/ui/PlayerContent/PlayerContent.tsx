@@ -104,7 +104,7 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
       <Seo
         title="Событие"
         description={`Информация о событии ${data.title}.`}
-        canonical={`/event/${eventId}`}
+        canonical={`event/${eventId}`}
         schemaMarkup={schemaMarkup}
       />
       <Typography.Title level={1} className="player-content__title">

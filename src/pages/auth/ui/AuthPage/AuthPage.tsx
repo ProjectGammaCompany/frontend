@@ -52,7 +52,7 @@ export const AuthPage = () => {
       <Seo
         title="Авторизация"
         description="Страница регистрации и входа в платформу для создания и проведения квестов и контрольных мероприятий."
-        canonical="/auth"
+        canonical="auth"
       />
       <div>
         <Typography.Title level={1} className="auth-page__title">

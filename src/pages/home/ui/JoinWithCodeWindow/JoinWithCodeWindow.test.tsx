@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -35,7 +35,7 @@ describe("JoinWithCodeWindow", () => {
     const code = "12345";
 
     server.use(
-      http.get(`${baseUrl}event/joinRequiredFields/:joinCode`, () => {
+      http.get(`${baseApiUrl}event/joinRequiredFields/:joinCode`, () => {
         return HttpResponse.json({
           groupFields: false,
         });
@@ -62,7 +62,7 @@ describe("JoinWithCodeWindow", () => {
     const code = "12345";
 
     server.use(
-      http.get(`${baseUrl}event/joinRequiredFields/:joinCode`, () => {
+      http.get(`${baseApiUrl}event/joinRequiredFields/:joinCode`, () => {
         return HttpResponse.json({
           groupFields: true,
         });

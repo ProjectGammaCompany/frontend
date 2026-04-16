@@ -67,7 +67,7 @@ const EventPage = () => {
         <Seo
           title="Событие"
           description={`Информация о событии.`}
-          canonical={`/event/${eventId}`}
+          canonical={`event/${eventId}`}
         />
         <Header>
           <div className="event-page__error-header-content">
@@ -94,7 +94,7 @@ const EventPage = () => {
         <Seo
           title="Событие"
           description={`Информация о событии.`}
-          canonical={`/event/${eventId}`}
+          canonical={`event/${eventId}`}
         />
         <Header>
           <div className="event-page__error-header-content">
@@ -137,7 +137,7 @@ const EventPage = () => {
       <Seo
         title="Событие"
         description={`Информация о событии.`}
-        canonical={`/event/${eventId}`}
+        canonical={`event/${eventId}`}
       />
       <EventHeader role={data} eventId={eventId} />
       <MainContent eventId={eventId} role={data} />

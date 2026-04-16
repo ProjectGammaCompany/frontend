@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender, renderWithStoreAndRouter } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
@@ -27,7 +27,7 @@ describe("EventPage", () => {
 
   it("shows not found error, when gets response with status code 404", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/role`, () => {
+      http.get(`${baseApiUrl}event/:eventId/role`, () => {
         return new HttpResponse(null, {
           status: 404,
         });
@@ -43,7 +43,7 @@ describe("EventPage", () => {
 
   it("shows forbidden access error, when gets response with status code 403", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/role`, () => {
+      http.get(`${baseApiUrl}event/:eventId/role`, () => {
         return new HttpResponse(null, {
           status: 403,
         });
@@ -57,7 +57,7 @@ describe("EventPage", () => {
 
   it("shows error, when gets response with error status code", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/role`, () => {
+      http.get(`${baseApiUrl}event/:eventId/role`, () => {
         return new HttpResponse(null, {
           status: 500,
         });
@@ -73,12 +73,12 @@ describe("EventPage", () => {
 
   it("pass editor role when gets 1 from api", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/role`, () => {
+      http.get(`${baseApiUrl}event/:eventId/role`, () => {
         return HttpResponse.json({
           role: 1,
         });
       }),
-      http.get(`${baseUrl}event/:eventId`, () => {
+      http.get(`${baseApiUrl}event/:eventId`, () => {
         return HttpResponse.json({
           name: "event",
           blocks: [],
@@ -98,12 +98,12 @@ describe("EventPage", () => {
 
   it("pass player role when gets 0 from api", async () => {
     server.use(
-      http.get(`${baseUrl}event/:eventId/role`, () => {
+      http.get(`${baseApiUrl}event/:eventId/role`, () => {
         return HttpResponse.json({
           role: 0,
         });
       }),
-      http.get(`${baseUrl}event/:eventId/playerInfo`, () => {
+      http.get(`${baseApiUrl}event/:eventId/playerInfo`, () => {
         return new HttpResponse(null, {
           status: 500,
         });

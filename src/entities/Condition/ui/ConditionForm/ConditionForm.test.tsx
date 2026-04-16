@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -15,7 +15,7 @@ describe("ConditionForm", () => {
       onUnhandledRequest: "error",
     });
     server.use(
-      http.get(`${baseUrl}event/1234/groups`, () => {
+      http.get(`${baseApiUrl}event/1234/groups`, () => {
         return HttpResponse.json({
           groups: [
             {
@@ -25,7 +25,7 @@ describe("ConditionForm", () => {
           ],
         });
       }),
-      http.get(`${baseUrl}event/:eventId/blocks`, () => {
+      http.get(`${baseApiUrl}event/:eventId/blocks`, () => {
         return HttpResponse.json({
           blocks: [],
         });

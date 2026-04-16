@@ -1,5 +1,5 @@
 import type { TaskStageData } from "@/entities";
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
@@ -20,7 +20,7 @@ describe("TaskStageContent", () => {
   it("shows info block when gets 0 task type", async () => {
     server.use(
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
@@ -45,7 +45,7 @@ describe("TaskStageContent", () => {
   it("shows single choice task  when gets 1 task type", async () => {
     server.use(
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
@@ -71,7 +71,7 @@ describe("TaskStageContent", () => {
   it("shows multiple choice task when gets 2 task type", async () => {
     server.use(
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
@@ -97,7 +97,7 @@ describe("TaskStageContent", () => {
   it("shows text entry task when gets 3 task type", async () => {
     server.use(
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
@@ -122,7 +122,7 @@ describe("TaskStageContent", () => {
   it("shows qr-code scanning task when gets 4 task type", async () => {
     server.use(
       http.put(
-        `${baseUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
+        `${baseApiUrl}event/:eventId/blocks/:blockId/tasks/:taskId/timestamp`,
         () => {
           return new HttpResponse(null, {
             status: 200,
