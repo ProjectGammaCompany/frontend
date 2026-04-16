@@ -24,7 +24,7 @@ const EventHeader = ({ role, eventId }: EventHeaderProps) => {
         <Seo
           title="Редактор события"
           description="Страница редактирования события."
-          canonical={`/event/${eventId}`}
+          canonical={`event/${eventId}`}
           noIndex
         />
       )}

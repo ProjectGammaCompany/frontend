@@ -1,4 +1,4 @@
-import { baseUrl } from "@/shared/api";
+import { baseApiUrl } from "@/shared/api";
 import { basicRender, settingsStorage } from "@/shared/lib";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -49,7 +49,7 @@ describe("LoginForm", () => {
 
   it("shows no user error message when gets 403 status code", async () => {
     server.use(
-      http.post(`${baseUrl}auth/login`, () => {
+      http.post(`${baseApiUrl}auth/login`, () => {
         return new HttpResponse(null, {
           status: 403,
         });
@@ -69,7 +69,7 @@ describe("LoginForm", () => {
 
   it("shows error message when gets error status code", async () => {
     server.use(
-      http.post(`${baseUrl}auth/login`, () => {
+      http.post(`${baseApiUrl}auth/login`, () => {
         return new HttpResponse(null, {
           status: 500,
         });
@@ -89,7 +89,7 @@ describe("LoginForm", () => {
 
   it("navigates to home page after success login", async () => {
     server.use(
-      http.post(`${baseUrl}auth/login`, () => {
+      http.post(`${baseApiUrl}auth/login`, () => {
         return HttpResponse.json({
           accessToken: "123456",
           refreshToken: "1234567",
@@ -119,7 +119,7 @@ describe("LoginForm", () => {
 
   it("sets rememberMe in storage if switch is turned and login is success", async () => {
     server.use(
-      http.post(`${baseUrl}auth/login`, () => {
+      http.post(`${baseApiUrl}auth/login`, () => {
         return HttpResponse.json({
           accessToken: "123456",
           refreshToken: "1234567",

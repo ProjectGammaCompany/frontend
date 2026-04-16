@@ -16,7 +16,7 @@ const StatsPage = () => {
       <Seo
         title="Статистика"
         description="Страница статистики события."
-        canonical={`/event/${eventId}/stats`}
+        canonical={`event/${eventId}/stats`}
         noIndex
       />
       <Header>

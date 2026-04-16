@@ -72,7 +72,7 @@ const GamePage = () => {
         <Seo
           title="Прохождение"
           description="Страница прохождения события."
-          canonical={`/event/${eventId}/game`}
+          canonical={`event/${eventId}/game`}
           noIndex
         />
         <div className="game-page-header__content">

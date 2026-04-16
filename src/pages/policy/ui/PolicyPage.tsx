@@ -1,7 +1,7 @@
-import { Seo } from "@/shared/lib";
-import { Button, Flex } from "antd";
-import { useNavigate } from "react-router";
-import "./PolicyPage.scss";
+import { Seo } from "@/shared/lib"
+import { Button, Flex } from "antd"
+import { useNavigate } from "react-router"
+import "./PolicyPage.scss"
 
 const PolicyPage = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const PolicyPage = () => {
       <Seo
         title="Политика конфиденциальности"
         description="Политика конфидециальности платформы"
-        canonical="/policy"
+        canonical="policy"
       />
       <p>
         1. Общие положения 1.1 Настоящая Политика в отношении обработки
