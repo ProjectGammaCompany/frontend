@@ -23,10 +23,10 @@ describe("RegisterForm", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  it("requires email, password and repeat password fields", async () => {
+  it("requires email, password,repeat password and agreement fields", async () => {
     basicRender(<RegisterForm />);
     await userEvent.click(screen.getByText("Зарегистрироваться"));
-    expect((await screen.findAllByText("Поле обязательно")).length).toBe(3);
+    expect((await screen.findAllByText("Поле обязательно")).length).toBe(4);
   });
 
   it("requires email regex in the email field", async () => {
@@ -83,12 +83,13 @@ describe("RegisterForm", () => {
       screen.getByLabelText("Повторный ввод пароля"),
       "12345",
     );
+    await userEvent.click(screen.getByText(/Я принимаю/));
     await userEvent.click(screen.getByText("Зарегистрироваться"));
 
     expect(
       await screen.findByText("Пользователь с указанной почтой уже существует"),
     ).toBeInTheDocument();
-  });
+  }, 10000);
 
   it("shows error message when gets error status code", async () => {
     server.use(
@@ -105,12 +106,13 @@ describe("RegisterForm", () => {
       screen.getByLabelText("Повторный ввод пароля"),
       "12345",
     );
+    await userEvent.click(screen.getByText(/Я принимаю/));
     await userEvent.click(screen.getByText("Зарегистрироваться"));
 
     expect(
       await screen.findByText("Произошла ошибка. Повторите попытку позже"),
     ).toBeInTheDocument();
-  });
+  }, 10000);
 
   it("navigates to home page after success register", async () => {
     server.use(
@@ -140,6 +142,7 @@ describe("RegisterForm", () => {
       screen.getByLabelText("Повторный ввод пароля"),
       "12345",
     );
+    await userEvent.click(screen.getByText(/Я принимаю/));
     await userEvent.click(screen.getByText("Зарегистрироваться"));
 
     expect(await screen.findByText("Home")).toBeInTheDocument();

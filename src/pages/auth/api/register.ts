@@ -1,11 +1,11 @@
 import { axiosInstance } from "@/shared/api";
 import type { TokensResponse } from "@/shared/models";
 
-export interface registerProps {
+export interface RegisterProps {
   email: string;
   password: string;
   repeatPassword: string;
 }
-export const register = (values: registerProps) => {
+export const register = (values: RegisterProps) => {
   return axiosInstance.post<TokensResponse>("auth/register", values);
 };

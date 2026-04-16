@@ -1,5 +1,6 @@
 import { Seo } from "@/shared/lib";
 import { Segmented, Typography } from "antd";
+import classnames from "classnames";
 import {
   AnimatePresence,
   motion,
@@ -42,6 +43,10 @@ export const AuthPage = () => {
       }
     };
   }, []);
+
+  const contentWrapperClassNames = classnames("auth-page__content-wrapper", {
+    "auth-page__content-wrapper_register": pageState === "register",
+  });
   return (
     <div className="auth-page">
       <Seo
@@ -57,7 +62,7 @@ export const AuthPage = () => {
           Платформа квестов и интерактивных событий
         </Typography.Paragraph>
       </div>
-      <div className="auth-page__content-wrapper">
+      <div className={contentWrapperClassNames}>
         <Segmented
           data-testid="switch form"
           options={PAGE_STATES.map((state) => {

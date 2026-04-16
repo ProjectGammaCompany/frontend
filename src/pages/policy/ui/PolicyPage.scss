@@ -1,0 +1,8 @@
+.policy-page {
+  height: calc(100dvh - 15px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
