@@ -32,7 +32,7 @@ export const Seo = ({
     (
     <meta
       property="og:image"
-      content={image ?? `${baseUrl}image/preview/preview.png`}
+      content={image ?? `${baseUrl}img/preview/preview.png`}
     />
     )
     <meta name="twitter:card" content="summary_large_image" />
