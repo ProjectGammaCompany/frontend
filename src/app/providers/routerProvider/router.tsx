@@ -6,8 +6,10 @@ import { HomePage } from "@/pages/home";
 import { LandingPage } from "@/pages/landing";
 import { MyEventsPage } from "@/pages/myEvents";
 import { NotificationPage } from "@/pages/notifications";
+import { PolicyPage } from "@/pages/policy";
 import { ProfilePage } from "@/pages/profile";
 import { StatsPage } from "@/pages/stats";
+import { TermsPage } from "@/pages/terms";
 import { tokenStorage } from "@/shared/lib";
 import { BaseLayout } from "@/widgets";
 import { createBrowserRouter, redirect } from "react-router";
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: LandingPage,
+      },
+      {
+        path: "/policy",
+        Component: PolicyPage,
+      },
+      {
+        path: "/terms",
+        Component: TermsPage,
       },
       {
         path: "/auth",

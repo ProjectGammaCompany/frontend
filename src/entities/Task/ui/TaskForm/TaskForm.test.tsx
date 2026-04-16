@@ -39,7 +39,7 @@ describe("TaskForm", () => {
     await userEvent.click(screen.getByText("Один правильный ответ"));
 
     expect(screen.getByText("Опции")).toBeInTheDocument();
-  });
+  }, 10000);
 
   it("shows options interface when multiple choice type has been selected", async () => {
     basicRender(

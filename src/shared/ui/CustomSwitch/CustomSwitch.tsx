@@ -1,12 +1,14 @@
 import { Switch, Typography } from "antd";
 import type { SwitchChangeEventHandler } from "antd/es/switch";
 import type React from "react";
+import type { ReactNode } from "react";
 import "./CustomSwitch.scss";
 interface CustomSwitchProps {
   value?: boolean;
   title?: string;
   onChange?: SwitchChangeEventHandler | undefined;
   checked?: boolean;
+  titleNode?: ReactNode;
   disabled?: boolean;
 }
 
@@ -16,6 +18,7 @@ const CustomSwitch = ({
   ref,
   title,
   disabled,
+  titleNode,
   checked,
   ...rest
 }: CustomSwitchProps & {
@@ -33,6 +36,7 @@ const CustomSwitch = ({
         {...rest}
         className="switch"
       />
+      {titleNode && titleNode}
       {title && <Typography.Text>{title}</Typography.Text>}
     </label>
   );
