@@ -35,7 +35,7 @@ const LandingPage = () => {
     };
   }, []);
   return (
-    <div className="landing-page">
+    <main className="landing-page">
       <Seo
         title="EduPlay – платформа для создания квестов и интерактивных мероприятий"
         description="EduPlay — платформа для создания и проведения квестов, тестов и интерактивных мероприятий. Подходит для обучения, мероприятий и оценки знаний."
@@ -109,7 +109,7 @@ const LandingPage = () => {
           </Button>
         </Flex>
       </ConfigProvider>
-    </div>
+    </main>
   );
 };
 
