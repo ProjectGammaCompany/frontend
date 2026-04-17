@@ -1,6 +1,6 @@
 import { eventQueries } from "@/entities";
 import { queryClient } from "@/shared/api";
-import { getFullFileUrl } from "@/shared/lib";
+import { getFullFileUrl, getImgUrl } from "@/shared/lib";
 import { LinkEventCard } from "@/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect } from "react";
@@ -38,7 +38,11 @@ const EventsList = ({ filters }: EventsListProps) => {
               title={card.title}
               id={card.id}
               description={card.description}
-              cover={card.cover ? getFullFileUrl(card.cover) : undefined}
+              cover={
+                card.cover
+                  ? getFullFileUrl(getImgUrl(card.cover, "m"))
+                  : undefined
+              }
               rating={card.rate}
               favorite={card.favorite}
               tags={card.tags.map((t) => t.name)}

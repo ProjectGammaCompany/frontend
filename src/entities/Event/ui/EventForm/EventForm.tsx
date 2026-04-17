@@ -1,6 +1,8 @@
 import { getTags, type UseJoinCodeDataResult } from "@/entities";
 import {
   getFullFileUrl,
+  getImgUrl,
+  getNormalizedFileList,
   useFileUpload,
   useMessage,
   type ChangeTypeOfKeys,
@@ -17,6 +19,7 @@ import {
   Tooltip,
   Typography,
   Upload,
+  type UploadFile,
   type UploadProps,
 } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
@@ -103,6 +106,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+
   const fileUploadMutation = useFileUpload();
 
   const customRequest: UploadProps["customRequest"] = ({
@@ -112,16 +117,39 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   }) => {
     fileUploadMutation.mutate(file as File, {
       onSuccess: (data) => {
-        onSuccess?.(data.data);
-        //@ts-expect-error форма недостаточно умная
-        form.setFieldValue("cover", data.data);
+        onSuccess?.(
+          {
+            url: data.data,
+          },
+          file,
+        );
       },
       onError: (error) => {
         onError?.(error);
-        //@ts-expect-error форма недостаточно умная
-        form.setFieldValue("cover", undefined);
       },
     });
+  };
+
+  const handleFilesChangeChange: UploadProps["onChange"] = ({ fileList }) => {
+    console.log(fileList);
+    const normalized = getNormalizedFileList(fileList);
+
+    setFileList(normalized);
+
+    console.log(normalized);
+
+    const files = normalized.filter(
+      (file): file is UploadFile & { url: string } =>
+        file.status === "done" && !!file.url,
+    );
+
+    if (files.length) {
+      console.log(files);
+      const url = files[0].url;
+      console.log(url);
+      //@ts-expect-error can't find the type
+      form.setFieldValue("cover", url);
+    }
   };
 
   const onFinish = (values: TData) => {
@@ -175,12 +203,15 @@ export const EventForm = <TData extends EventFormData, TResponse>({
               },
             }}
           >
-            <Form.Item<EventFormData> name="cover">
+            <Form.Item<EventFormData> name="cover" noStyle />
+            <Form.Item<EventFormData>>
               <Upload
                 showUploadList={false}
                 listType="picture-card"
                 maxCount={1}
+                onChange={handleFilesChangeChange}
                 disabled={fileUploadMutation.isPending}
+                fileList={fileList}
                 accept="image/*"
                 customRequest={customRequest}
                 onPreview={() => null}
@@ -188,10 +219,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
               >
                 {cover ? (
                   <img
-                    src={getFullFileUrl(
-                      //@ts-expect-error форма недостаточно умная у antd
-                      form.getFieldValue("cover") as string,
-                    )}
+                    src={getFullFileUrl(getImgUrl(cover, "m"))}
                     className="event-form__cover-img"
                   />
                 ) : (
