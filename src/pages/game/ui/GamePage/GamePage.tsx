@@ -88,7 +88,7 @@ const GamePage = () => {
           </Typography.Title>
         </div>
       </Header>
-      <main>
+      <main className="game-page__main">
         {data.type === "block" ? (
           <BlockStageContent
             key={data.block.blockId}

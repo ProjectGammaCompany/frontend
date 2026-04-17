@@ -33,6 +33,10 @@
       justify-content: space-between;
     }
   }
+
+  &__main {
+    height: calc(100dvh - 15px - 80px);
+  }
 }
 
 @media (min-width: 400px) {
