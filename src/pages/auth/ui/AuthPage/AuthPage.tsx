@@ -49,7 +49,7 @@ export const AuthPage = () => {
   });
   return (
     <main className="auth-page">
-      <div>
+      <div className="auth-page__content">
         <Seo
           title="Авторизация"
           description="Страница регистрации и входа в платформу для создания и проведения квестов и контрольных мероприятий."

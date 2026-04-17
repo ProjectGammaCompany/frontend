@@ -26,14 +26,14 @@ const StatsPage = () => {
             onClick={() => void navigate(`/event/${eventId}`)}
           >
             <BackSvg classname="stats-page-header__back-icon" />
-            <Logo />
+            <Logo className="stats-page-header__logo" />
           </div>
           <Typography.Title level={1} className="stats-page-header__title">
             Статистика
           </Typography.Title>
         </div>
       </Header>
-      <main>
+      <main className="stats-page__main">
         <StatsPageContent eventId={eventId} />
       </main>
     </div>

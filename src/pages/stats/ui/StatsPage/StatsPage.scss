@@ -21,5 +21,15 @@
       align-items: center;
       justify-content: space-between;
     }
+
+    &__logo {
+      width: 100px;
+    }
+  }
+
+  &__main {
+    height: calc(100dvh - 15px - 80px);
+    padding-bottom: 30px;
+    overflow-y: auto;
   }
 }
