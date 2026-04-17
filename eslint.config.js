@@ -56,7 +56,10 @@ export default defineConfig([
     },
     rules: {
       ...boundaries.configs.recommended.rules,
-      "import/no-unresolved": ["error", { caseSensitive: true }],
+      "import/no-unresolved": [
+        "error",
+        { caseSensitive: true, ignore: ["^virtual:"] },
+      ],
       "boundaries/dependencies": [
         2,
         {

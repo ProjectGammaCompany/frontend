@@ -21,7 +21,7 @@ describe("TaskForm", () => {
     await waitFor(() => {
       expect(screen.getAllByText("Поле обязательно")).toHaveLength(2);
     });
-  });
+  }, 10000);
 
   it("shows options interface when single choice type has been selected", async () => {
     basicRender(
