@@ -1,0 +1,10 @@
+.group-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 20px;
+
+  &__select-group {
+    min-width: 200px;
+  }
+}

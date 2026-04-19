@@ -1,5 +1,4 @@
 export const getImgUrl = (url: string, type: "s" | "m") => {
-  console.log(url);
   const imgExt = ["png", "jpeg", "jpg"];
   if (url.split(".").length === 2) {
     const [id, ext] = url.split(".");

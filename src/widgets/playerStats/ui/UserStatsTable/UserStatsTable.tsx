@@ -1,5 +1,5 @@
 import type { UserStats } from "@/entities";
-import { getFullFileUrl } from "@/shared/lib";
+import { getFullFileUrl, getImgUrl } from "@/shared/lib";
 import { ProfileSvg } from "@/shared/ui";
 import { Table, Typography } from "antd";
 import Column from "antd/es/table/Column";
@@ -69,7 +69,7 @@ const UserStatsTable = ({ users }: UserStatsTableProps) => {
             <div className="user-stats-table__user-preview">
               {userPreview.avatar ? (
                 <img
-                  src={getFullFileUrl(userPreview.avatar)}
+                  src={getFullFileUrl(getImgUrl(userPreview.avatar, "m"))}
                   className="user-stats-table__avatar"
                 />
               ) : (

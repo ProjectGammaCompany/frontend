@@ -1,7 +1,6 @@
 import { useRole } from "@/entities";
+import { EditorStats, PlayerStats } from "@/widgets";
 import { Button, Flex, Spin, Typography } from "antd";
-import EditorStats from "../EditorStats/EditorStats";
-import PlayerStats from "../PlayerStats/PlayerStats";
 interface StatsPageContentProps {
   eventId: string;
 }

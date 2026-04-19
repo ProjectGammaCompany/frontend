@@ -1,0 +1,49 @@
+.users-stats-table {
+  &__user-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__answers-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  &__avatar {
+    display: none;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+
+    &_icon {
+      background-color: var(--primary-color);
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+
+      & svg {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  &__username {
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 700px) {
+  .users-stats-table {
+    &__avatar {
+      display: flex;
+      &_icon {
+        display: flex;
+      }
+    }
+  }
+}
