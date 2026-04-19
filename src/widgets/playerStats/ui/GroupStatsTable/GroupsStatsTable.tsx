@@ -3,6 +3,7 @@ import { getFullFileUrl } from "@/shared/lib";
 import { ProfileSvg } from "@/shared/ui";
 import { Table, Typography } from "antd";
 import Column from "antd/es/table/Column";
+import { getImgUrl } from "../../../../shared/lib/workWithFiles/getImgUrl";
 import "./GroupStatsTable.scss";
 interface GroupsStatsTableProps {
   groups: GroupStats[];
@@ -90,7 +91,7 @@ const GroupsStatsTable = ({ groups }: GroupsStatsTableProps) => {
           <div className="group-stats-table__user-preview">
             {record.avatar ? (
               <img
-                src={getFullFileUrl(record.avatar)}
+                src={getFullFileUrl(getImgUrl(record.avatar, "m"))}
                 className="group-stats-table__avatar"
               />
             ) : (

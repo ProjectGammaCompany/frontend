@@ -91,3 +91,9 @@ export {
 export { joinEvent, type JoinDetails } from "./api/joinEvent.ts";
 
 export { useRateEvent } from "./model/useRateEvent.ts";
+
+export {
+  useEditorStats,
+  type EditorGroupStats,
+  type EditorUserStats,
+} from "./model/useEditorStats.tsx";

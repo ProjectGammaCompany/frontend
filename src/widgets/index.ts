@@ -24,3 +24,6 @@ export {
   type ConditionWindowMode,
 } from "./conditionWindow/index.ts";
 export { TaskWindow, type TaskWindowMode } from "./taskWindow";
+
+export { EditorStats } from "./editorStats";
+export { PlayerStats } from "./playerStats";
