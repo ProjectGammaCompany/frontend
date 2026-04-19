@@ -2,83 +2,74 @@
   overflow-y: auto;
   height: 100dvh;
   padding-bottom: 100px;
-  &__text {
-    color: white !important;
 
-    &_centered {
-      text-align: center;
-    }
-
-    &_right-align {
-      text-align: end;
-    }
-  }
-
-  &__extra-text {
-    margin-top: 10px;
-  }
-
-  &__events {
-    &-list {
-      list-style: circle;
-      background-color: white;
-      border-radius: 15px;
-      padding: 10px;
-      margin-bottom: 0px;
-    }
-    &-item {
-      padding: 20px 10px;
-      border-radius: 15px;
-      background-color: var(--primary-color);
-      &:active {
-        scale: 0.95;
-      }
-      transition:
-        background-color ease-out 0.2s,
-        scale ease-in 0.2s;
-    }
-  }
-
-  &__main-title {
-    font-size: 50px !important;
+  &__hero {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 15px;
     text-align: center;
-    margin-top: 5dvh;
+
+    background: linear-gradient(135deg, var(--primary-color), #7b5cff);
+
+    &-title {
+      font-size: clamp(36px, 6vw, 64px) !important;
+      color: white !important;
+    }
+    &-subtitle {
+      max-width: 500px;
+      color: var(--light-color) !important;
+      font-size: 18px;
+    }
   }
 
-  &__auth-text {
-    margin-top: 50px;
-    font-size: 18px;
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  &__explain-text {
-    margin-top: 20px;
+  &__feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
   }
 
-  &__auth-btn {
-    scale: 1;
-    transition: scale ease-in 0.2s;
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 20px;
+    text-align: center;
+
+    &-btn {
+      width: 200px;
+      border-radius: 999px;
+      padding: 0 30px;
+      height: 50px;
+    }
+
+    &-text {
+      color: white !important;
+    }
   }
 }
 
 .root-layout_on-landing-page {
   background-color: var(--primary-color);
   transition: background-color 1s ease-in-out;
-}
-
-@media (hover: hover) {
-  .landing-page {
-    &__events-item {
-      &:hover {
-        background-color: var(--hover-primary-color);
-        scale: 1.01;
-      }
-      &:active {
-        scale: 0.95;
-      }
-    }
-
-    &__auth-btn:hover {
-      scale: 1.5;
-    }
-  }
 }
