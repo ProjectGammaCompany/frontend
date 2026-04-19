@@ -1,5 +1,5 @@
 import { Seo } from "@/shared/lib";
-import { Button, ConfigProvider, Flex, Typography } from "antd";
+import { Button, Typography } from "antd";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -21,6 +21,21 @@ const LandingPage = () => {
     description:
       "Платформа для создания и проведения квестов и интерактивных мероприятий",
   };
+
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
   useEffect(() => {
     const el = document.getElementById("root-layout");
 
@@ -43,72 +58,75 @@ const LandingPage = () => {
         schemaMarkup={schemaMarkup}
         specificTitle
       />
-      <ConfigProvider>
-        <Typography.Title
-          level={1}
-          className="landing-page__main-title landing-page__text"
-        >
+      <motion.section
+        className="landing-page__hero"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Typography.Title level={1} className="landing-page__hero-title">
           EduPlay
         </Typography.Title>
-        <Typography.Title
-          level={2}
-          className="landing-page__text landing-page__text_centered"
-        >
-          Кто мы?
-        </Typography.Title>
-        <Typography.Paragraph className="landing-page__text landing-page__text_centered landing-page__explain-text">
-          Та самая платформа, где ты можешь создать собственные:
+
+        <Typography.Paragraph className="landing-page__hero-subtitle">
+          Платформа для создания квестов, тестов и интерактивных мероприятий
         </Typography.Paragraph>
-        <motion.ul
-          className="landing-page__events-list"
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-            transition: {
-              delay: 0.5,
-            },
-          }}
+
+        <Button
+          size="large"
+          type="primary"
+          className="landing-page__cta-btn"
+          onClick={() => void navigate("/auth")}
+        >
+          Начать бесплатно
+        </Button>
+      </motion.section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="landing-page__features"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
         >
           {EVENTS.map((el) => (
-            <li key={el}>
-              <Typography.Paragraph
-                className="landing-page__text landing-page__text_centered landing-page__events-item"
-                strong
-              >
-                {el}
-              </Typography.Paragraph>
-            </li>
+            <motion.div
+              key={el}
+              className="landing-page__feature-card"
+              variants={item}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Typography.Text strong>{el}</Typography.Text>
+            </motion.div>
           ))}
-        </motion.ul>
-        <Typography.Paragraph
-          className="landing-page__text landing-page__text_right-align landing-page__extra-text"
-          italic
-          strong
+        </motion.div>
+      </motion.section>
+      <motion.section
+        className="landing-page__cta"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+      >
+        <Typography.Title level={3} className="landing-page__cta-text">
+          Попробуй EduPlay прямо сейчас
+        </Typography.Title>
+
+        <Button
+          type="primary"
+          size="large"
+          className="landing-page__cta-btn"
+          onClick={() => void navigate("/auth")}
         >
-          При этом добавив в них образовательный контент! ;&#41;
-        </Typography.Paragraph>
-        <Typography.Paragraph
-          className="landing-page__text landing-page__text_centered landing-page__auth-text"
-          strong
-        >
-          Авторизируйся и испытай нашу универсальную платформу!
-        </Typography.Paragraph>
-        <Flex justify="center">
-          <Button
-            onClick={() => {
-              void navigate("/auth");
-            }}
-            size="large"
-            classNames={{
-              root: "landing-page__auth-btn",
-            }}
-          >
-            Авторизоваться
-          </Button>
-        </Flex>
-      </ConfigProvider>
+          Авторизоваться
+        </Button>
+      </motion.section>
     </main>
   );
 };
