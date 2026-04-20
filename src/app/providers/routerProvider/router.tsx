@@ -1,4 +1,5 @@
 import { AuthPage } from "@/pages/auth";
+import { ErrorPage } from "@/pages/error";
 import { EventPage } from "@/pages/event";
 import { ForgotPasswordPage } from "@/pages/forgotPassword";
 import { GamePage } from "@/pages/game";
@@ -18,6 +19,7 @@ import { RootLayout } from "./RootLayout";
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     Component: RootLayout,
     children: [
       {
