@@ -177,7 +177,9 @@ const PlayerContent = ({ eventId }: ParticipantContentProps) => {
           <Typography.Title level={2} className="player-content__title">
             Описание события
           </Typography.Title>
-          <Typography.Paragraph>{data.description}</Typography.Paragraph>
+          <Typography.Paragraph className="player-content__description">
+            {data.description}
+          </Typography.Paragraph>
         </div>
       )}
       <div className="player-content__interact-btn-wrapper">
