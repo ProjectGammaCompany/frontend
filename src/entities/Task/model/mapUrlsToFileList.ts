@@ -4,7 +4,6 @@ import type { TaskFile } from "../api/createTask";
 
 export const mapUrlsToFileList = (files: TaskFile[]): UploadFile[] =>
   files.map((file, index) => {
-    console.log(file);
     return {
       uid: `${index}`,
       name: file.name,

@@ -12,6 +12,10 @@
     text-align: center;
   }
 
+  &__description {
+    white-space: pre-line;
+  }
+
   &__timer-text {
     margin-top: 10px;
     font-variant-numeric: tabular-nums;

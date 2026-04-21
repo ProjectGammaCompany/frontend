@@ -10,6 +10,7 @@
   &__avatar-icon-wrapper {
     aspect-ratio: 1/1;
     object-fit: cover;
+    object-position: center;
     width: min(30dvw, 200px);
     border-radius: 50%;
   }

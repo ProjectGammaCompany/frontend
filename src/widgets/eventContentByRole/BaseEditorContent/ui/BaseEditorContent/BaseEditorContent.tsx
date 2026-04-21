@@ -171,7 +171,7 @@ const BaseEditorContent = ({
             icon: "base-editor-content__stats-btn-icon",
           }}
           onClick={() => {
-            void navigate(`stats`);
+            void navigate(`/event/${eventId}/stats`);
           }}
         />
       </DragDropContext>

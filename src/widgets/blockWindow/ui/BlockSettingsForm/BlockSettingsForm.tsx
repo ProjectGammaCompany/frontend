@@ -4,6 +4,7 @@ import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { updateBlockSettingsInQuery } from "../../model/updateBlockSettingsInQuery";
 import { useFormSubmit } from "../../model/useFormSubmit";
 import "./BlockSettingsForm.scss";
 
@@ -34,7 +35,10 @@ const BlockSettingsForm = ({
 
   const [showErrorText, setShowErrorText] = useState(false);
 
-  const handleSuccessSubmit = () => {
+  const handleSuccessSubmit = (variables?: UpdateBlockData) => {
+    if (variables) {
+      updateBlockSettingsInQuery(eventId, blockId, variables);
+    }
     setShowSuccessText(true);
     setTimeout(() => {
       setShowSuccessText(false);

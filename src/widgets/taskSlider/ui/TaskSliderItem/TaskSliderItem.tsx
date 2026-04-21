@@ -39,33 +39,34 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
   };
 
   return (
-    <div onClick={handleClick} className="task-slider-item">
-      <div>
-        <Typography.Title level={3} className="task-slider-item__header">
-          {task.name}
-        </Typography.Title>
-        <ConfigProvider
-          theme={{
-            token: {
-              controlInteractiveSize: windowWidth >= 700 ? 45 : 20,
-            },
-          }}
-        >
-          <Checkbox
-            checked={isSelected}
-            classNames={{
-              root: "task-slider-item__checkbox",
-              icon: "task-slider-item__checkbox-icon",
+    <div className="task-slider-item__wrapper">
+      <div onClick={handleClick} className="task-slider-item">
+        <div>
+          <Typography.Title level={3} className="task-slider-item__header">
+            {task.name}
+          </Typography.Title>
+          <ConfigProvider
+            theme={{
+              token: {
+                controlInteractiveSize: windowWidth >= 700 ? 45 : 20,
+              },
             }}
-          />
-        </ConfigProvider>
-      </div>
-      {task.time ? (
-        <Typography.Paragraph className="task-slider-item__title">
-          Время на выполнение: {getTimeString(task.time)}
-        </Typography.Paragraph>
-      ) : undefined}
-      {/* {task.description && (
+          >
+            <Checkbox
+              checked={isSelected}
+              classNames={{
+                root: "task-slider-item__checkbox",
+                icon: "task-slider-item__checkbox-icon",
+              }}
+            />
+          </ConfigProvider>
+        </div>
+        {task.time ? (
+          <Typography.Paragraph className="task-slider-item__title">
+            Время на выполнение: {getTimeString(task.time)}
+          </Typography.Paragraph>
+        ) : undefined}
+        {/* {task.description && (
         <div className="task-slider-item__description-wrapper">
           <Typography.Text className="task-slider-item__title">
             Описание
@@ -75,9 +76,10 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
           </Typography.Paragraph>
         </div>
       )} */}
-      <Typography.Paragraph className="task-slider-item__title task-slider-item__type">
-        Тип: {getTaskTypeString(task.type)}
-      </Typography.Paragraph>
+        <Typography.Paragraph className="task-slider-item__title task-slider-item__type">
+          Тип: {getTaskTypeString(task.type)}
+        </Typography.Paragraph>
+      </div>
     </div>
   );
 };

@@ -51,6 +51,12 @@ const BlockWindow = ({
     }
   });
 
+  const [settingFormData, setSettingsFormData] = useState<UpdateBlockData>({
+    isParallel: false,
+    points: false,
+    rightAnswers: false,
+  });
+
   const { data, isPending, isError } = useBlockSettings(eventId, blockId);
 
   const tasksReorderingState = useSelector(selectTasksReorderingState);
@@ -105,6 +111,11 @@ const BlockWindow = ({
   useEffect(() => {
     if (data) {
       setName(data.name);
+      setSettingsFormData({
+        isParallel: data.isParallel,
+        points: data.points,
+        rightAnswers: data.rightAnswers,
+      });
     }
   }, [data]);
 
@@ -126,12 +137,6 @@ const BlockWindow = ({
     onError();
     return <></>;
   }
-
-  const settingFormData: UpdateBlockData = {
-    isParallel: data.isParallel,
-    points: data.points,
-    rightAnswers: data.rightAnswers,
-  };
 
   return (
     <CustomModalWindow

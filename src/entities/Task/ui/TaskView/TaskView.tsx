@@ -151,7 +151,9 @@ const TaskView = ({
       {description && (
         <div>
           <Typography.Title level={2}>Описание</Typography.Title>
-          <Typography.Paragraph>{description}</Typography.Paragraph>
+          <Typography.Paragraph className="task-view__description">
+            {description}
+          </Typography.Paragraph>
         </div>
       )}
       {files && files.length > 0 && (
