@@ -50,7 +50,7 @@ const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
         children={undefined}
         submitBtnText="Создать"
         onSuccessFn={(data: RequestResponse) => {
-          void navigate(`event/${data.data.eventId}`);
+          void navigate(`/event/${data.data.eventId}`);
         }}
         onError={handleFailedCreating}
       />

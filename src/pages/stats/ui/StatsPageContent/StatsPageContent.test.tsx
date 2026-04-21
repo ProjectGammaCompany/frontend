@@ -73,8 +73,6 @@ describe("StatsPageContent", () => {
       }),
     );
 
-    console.log(`${baseApiUrl}event/23/role`);
-
     basicRender(<StatsPageContent eventId="23" />);
 
     expect(

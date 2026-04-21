@@ -7,12 +7,12 @@ import {
 export const useUpdateBlockSettings = (
   eventId: string,
   blockId: string,
-  onSuccess?: () => void,
+  onSuccess?: (variables?: UpdateBlockData) => void,
   onError?: () => void,
 ) => {
   return useMutation<unknown, Error, UpdateBlockData>({
     mutationFn: (data) => updateBlockSettings(eventId, blockId, data),
-    onSuccess,
+    onSuccess: (_data, variables) => onSuccess?.(variables),
     onError,
   });
 };

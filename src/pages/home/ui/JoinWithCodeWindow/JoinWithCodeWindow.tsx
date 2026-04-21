@@ -36,7 +36,7 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
   const [form] = useForm<JoinForm>();
 
   const handleJoinEventSuccess = (response: UseJoinEventResponse) => {
-    void navigate(`event/${response.data.eventId}`);
+    void navigate(`/event/${response.data.eventId}`);
   };
 
   const handleJoinEventError = (error: Error) => {

@@ -1,6 +1,7 @@
 .task-slider-item {
   position: relative;
   display: flex;
+  flex-grow: 1;
   gap: 10px;
   flex-direction: column;
   align-items: stretch;
@@ -8,12 +9,23 @@
   border-radius: 15px;
   margin-inline: 50px;
   padding: 15px;
+  max-width: 600px;
   height: 70dvh;
   transition: background-color 0.2s ease-in-out;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
   &__header,
   &__description {
     color: white !important;
+  }
+
+  &__header {
+    width: 85%;
   }
 
   &__title {

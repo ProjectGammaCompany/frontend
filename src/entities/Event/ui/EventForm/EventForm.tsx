@@ -1,4 +1,4 @@
-import { getTags, type UseJoinCodeDataResult } from "@/entities";
+import { getTags, type UseJoinCodeDataResult } from "@/entities"
 import {
   getFullFileUrl,
   getImgUrl,
@@ -6,9 +6,9 @@ import {
   useFileUpload,
   useMessage,
   type ChangeTypeOfKeys,
-} from "@/shared/lib";
-import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui";
-import { useMutation, useQuery } from "@tanstack/react-query";
+} from "@/shared/lib"
+import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import {
   Button,
   ConfigProvider,
@@ -21,12 +21,12 @@ import {
   Upload,
   type UploadFile,
   type UploadProps,
-} from "antd";
-import { useForm, useWatch } from "antd/es/form/Form";
-import { Dayjs } from "dayjs";
-import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState, type ReactNode } from "react";
-import "./EventForm.scss";
+} from "antd"
+import { useForm, useWatch } from "antd/es/form/Form"
+import { Dayjs } from "dayjs"
+import { AnimatePresence, motion } from "motion/react"
+import { useEffect, useState, type ReactNode } from "react"
+import "./EventForm.scss"
 
 //todo добавит switch на показ таблицы всей
 export interface BaseEventFormData {
@@ -131,12 +131,9 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   };
 
   const handleFilesChangeChange: UploadProps["onChange"] = ({ fileList }) => {
-    console.log(fileList);
     const normalized = getNormalizedFileList(fileList);
 
     setFileList(normalized);
-
-    console.log(normalized);
 
     const files = normalized.filter(
       (file): file is UploadFile & { url: string } =>
@@ -144,9 +141,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
     );
 
     if (files.length) {
-      console.log(files);
       const url = files[0].url;
-      console.log(url);
       //@ts-expect-error can't find the type
       form.setFieldValue("cover", url);
     }
