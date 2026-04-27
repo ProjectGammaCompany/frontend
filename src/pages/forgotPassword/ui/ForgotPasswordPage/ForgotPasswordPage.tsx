@@ -2,14 +2,14 @@ import {
   useChangePassword,
   useRecoverCodeValidity,
   useSendCodeByEmail,
-} from "@/entities"
-import { handleError } from "@/shared/api"
-import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib"
-import { Button, Flex, Form, Input, Typography } from "antd"
-import Password from "antd/es/input/Password"
-import { useEffect, useEffectEvent, useState } from "react"
-import { useNavigate } from "react-router"
-import "./ForgotPasswordPage.scss"
+} from "@/entities";
+import { handleError } from "@/shared/api";
+import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib";
+import { Button, Flex, Form, Input, Typography } from "antd";
+import Password from "antd/es/input/Password";
+import { useEffect, useEffectEvent, useState } from "react";
+import { useNavigate } from "react-router";
+import "./ForgotPasswordPage.scss";
 interface EmailFormData {
   email: string;
 }
@@ -95,7 +95,6 @@ const ForgotPasswordPage = () => {
 
   const handleCodeFormSubmit = (code: string) => {
     setCode(code);
-    void refetch();
   };
 
   const handleCodeError = useEffectEvent((error: Error) => {
@@ -120,6 +119,7 @@ const ForgotPasswordPage = () => {
     changePasswordMutation.mutate({
       code: code!,
       password: values.password,
+      repeatPassword: values.repeatPassword,
     });
   };
 
@@ -149,6 +149,16 @@ const ForgotPasswordPage = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    console.log(isRefetching, isPending, code);
+  }, [code, isPending, isRefetching]);
+
+  useEffect(() => {
+    if (code) {
+      void refetch();
+    }
+  }, [code, refetch]);
 
   return (
     <div className="forgot-password-page">
@@ -215,7 +225,7 @@ const ForgotPasswordPage = () => {
                 loading={changePasswordMutation.isPending}
                 className="forgot-password-page__submit-btn"
               >
-                {!changePasswordMutation.isPending && "Обновить пароль"}
+                Обновить пароль
               </Button>
             </Flex>
           </Form>
@@ -224,7 +234,11 @@ const ForgotPasswordPage = () => {
             onFinish={({ code }) => handleCodeFormSubmit(code)}
             layout="vertical"
           >
-            <Form.Item<CodeFormData> name="code" label="Введите код">
+            <Form.Item<CodeFormData>
+              name="code"
+              label="Введите код"
+              rules={[{ required: true }]}
+            >
               <Input />
             </Form.Item>
             <Flex justify="space-around" gap={15}>
@@ -241,7 +255,7 @@ const ForgotPasswordPage = () => {
                 loading={isRefetching || (isPending && !!code)}
                 className="forgot-password-page__submit-btn"
               >
-                {!isRefetching && (!isPending || code) && "Далее"}
+                Далее
               </Button>
             </Flex>
           </Form>

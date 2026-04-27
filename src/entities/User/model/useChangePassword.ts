@@ -6,6 +6,7 @@ import { changePassword } from "../api/changePassword";
 interface UseChangePasswordVariables {
   code: string;
   password: string;
+  repeatPassword: string;
 }
 
 type OnSuccessFn = (accessToken: string, refreshToken: string) => void;
@@ -18,7 +19,8 @@ export const useChangePassword = (
     Error,
     UseChangePasswordVariables
   >({
-    mutationFn: ({ code, password }) => changePassword(code, password),
+    mutationFn: ({ code, password, repeatPassword }) =>
+      changePassword(code, password, repeatPassword),
     onSuccess: (data) =>
       onSuccess(data.data.accessToken, data.data.refreshToken),
     onError,

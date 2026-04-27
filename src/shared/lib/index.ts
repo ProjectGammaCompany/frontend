@@ -10,6 +10,7 @@ export {
 export { settingsStorage, type SettingsStorage } from "./settingsStorage";
 
 export {
+  downloadApk,
   getFullFileUrl,
   getImgUrl,
   getNormalizedFileList,

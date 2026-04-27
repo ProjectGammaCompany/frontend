@@ -72,7 +72,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     if (status === "correct") {
       notify.success({
         title: "Задача успешно пройдена!",
-        description: points ? `Вами получено ${points}` : undefined,
+        description: points ? `Вами получено баллов: ${points}` : undefined,
       });
     } else if (status === "incorrect") {
       notify.error({
@@ -81,7 +81,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     } else {
       notify.warning({
         title: "Задача пройдена частично правильно.",
-        description: points ? `Вами получено ${points}` : undefined,
+        description: points ? `Вами получено баллов: ${points}` : undefined,
       });
     }
     setTimeout(() => {
