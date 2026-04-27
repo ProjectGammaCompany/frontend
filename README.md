@@ -44,7 +44,7 @@
 
 Поток данных между слоями **однонаправлен**. (т.е. widgets могут использовать только нижележащие слои)
 
-_Подробнее о каждом слое можно ознакомиться в README соответствующей папки._
+_Подробнее c каждым слоем можно ознакомиться в README соответствующей папки._
 
 ### Допускаемое содержание каждого слайса:
 
@@ -78,14 +78,17 @@ _Подробнее о каждом слое можно ознакомиться
 6.  HTTP-клиент – **Axios**
 7.  Кэширование данных – **React Query**
 8.  Store данных – **Redux Toolkit**
-9.  Тестирование – **React Testing Library**
+9.  Тестирование – **Vitest + React Testing Library**
+10. SEO – **react-helmet-async + vite-plugin-sitemap**
+11. Анимации – **motion**
 
 ### Специфичный для проекта
 
 1. Drag-And-Drop – hello-pangea/dnd
+2. html5-qrcode – сканирование QR-кодов
+3. react-qrcode-logo – генерация QR-кодов
 
 ---
-
 
 ## Договорённости
 
@@ -99,11 +102,34 @@ _Подробнее о каждом слое можно ознакомиться
 
 1. Используется бэм-подход
    Каждый класс оформляется в формате:
-   1. **блок блок\_\_модификатор\_\_значение** – компонент независим и переиспользуем.
-   2. блок\_\_элемент **блок\_\_элемент\_\_модификатор\_\_значение** – компонент зависим от своего блока.
+   1. **блок блок\_\_модификатор_значение** – компонент независим и переиспользуем.
+   2. блок\_\_элемент **блок\_\_элемент\_\_модификатор_значение** – компонент зависим от своего блока.
 
 ### Работа с сетевыми запросами
 
 1. При использовании React Query в QueryFn передавать функцию-обёртку над вызовом axios-клиента.
 2. Типизировать ответ соответствующим интерфейсом.
 3. Типизировать ошибку конструкцией **AxiosError\<ApiError\>**
+4. Использовать в компонентах кастомные хуки обёртки над стандартными хуками React Query. (должны содержаться в models). Пример:
+   ```
+   export const useBlockSettings = (eventId: string, blockId: string) => {
+   return useQuery({
+      queryKey: blockQueries.getSettings(eventId, blockId),
+      queryFn: () => getBlockSettings(eventId, blockId),
+      select: (data) => data.data,
+      retry: false,
+   });
+   };
+   ```
+5. При добавлении новых кастомных хуков React Query queryKey описывать в специальном query.ts файле для повторного переиспользования. Пример:
+   ```
+   export const blockQueries = {
+   base: (eventId: string) => [eventId] as const,
+   getTasks: (eventId: string, blockId: string) =>
+    [...blockQueries.base(eventId), blockId, "tasksList"] as const,
+   getConditions: (eventId: string, blockId: string) =>
+    [...blockQueries.base(eventId), blockId, "conditionsList"] as const,
+   getSettings: (eventId: string, blockId: string) =>
+    [...blockQueries.base(eventId), blockId, "settings"] as const,
+   };
+   ```
