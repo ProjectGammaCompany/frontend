@@ -19,7 +19,7 @@ export const useNotifications = () => {
     queryFn: ({ pageParam }) => getNotifications(pageParam, 10),
     queryKey: notificationQueries.getNotifications(),
     getNextPageParam: (lastPage, _, lastPageParam) => {
-      if (lastPage.data.notifications.length <= 10) {
+      if (lastPage.data.notifications.length == 0) {
         return undefined;
       }
       return lastPageParam + 1;

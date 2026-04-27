@@ -18,6 +18,7 @@ const NotificationsList = () => {
   const [deletingNotificationPage, setDeletingNotificationPage] = useState(0);
 
   const inViewRef = useOnInView((inView) => {
+    console.log(inView, !isFetching, hasNextPage);
     if (inView && !isFetching && hasNextPage) {
       void fetchNextPage();
     }
@@ -50,7 +51,7 @@ const NotificationsList = () => {
     data.pages[0].data.notifications.length === 0;
 
   return (
-    <div>
+    <div className="notifications-list__wrapper">
       <ul className="notifications-list">
         <AnimatePresence>
           {isListEmpty ? (
