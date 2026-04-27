@@ -1,6 +1,6 @@
 import { useUpdateUsername } from "@/entities";
 import { handleError } from "@/shared/api";
-import { Seo, useNotify } from "@/shared/lib";
+import { downloadApk, Seo, useNotify } from "@/shared/lib";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useEffectEvent } from "react";
@@ -109,19 +109,22 @@ const ProfilePage = () => {
             </Typography.Text>
             <Typography.Paragraph>{data.email}</Typography.Paragraph>
           </div>
-          <div className="profile-page__username-input-wrapper">
-            <Form.Item<ProfileFormData>
-              name="username"
-              className="profile-page__username-form-item"
-              label="Имя пользователя"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item<ProfileFormData>
+            name="username"
+            className="profile-page__username-form-item"
+            label="Имя пользователя"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <div className="profile-page__interact-block">
+            <Button className="profile-page__android-btn" onClick={downloadApk}>
+              Перейти на Android
+            </Button>
             <Button
               htmlType="submit"
               type="primary"

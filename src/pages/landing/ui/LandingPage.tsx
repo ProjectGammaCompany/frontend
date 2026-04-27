@@ -1,4 +1,4 @@
-import { Seo } from "@/shared/lib";
+import { downloadApk, Seo } from "@/shared/lib";
 import { Button, Typography } from "antd";
 import { motion } from "motion/react";
 import { useEffect } from "react";
@@ -125,6 +125,14 @@ const LandingPage = () => {
           onClick={() => void navigate("/auth")}
         >
           Авторизоваться
+        </Button>
+        <Button
+          type="primary"
+          size="large"
+          className="landing-page__cta-btn"
+          onClick={downloadApk}
+        >
+          Получить Android-приложение
         </Button>
       </motion.section>
     </main>

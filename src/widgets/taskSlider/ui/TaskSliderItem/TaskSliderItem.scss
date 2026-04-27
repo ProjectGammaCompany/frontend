@@ -11,6 +11,8 @@
   padding: 15px;
   max-width: 600px;
   height: 70dvh;
+  transform: translateZ(0);
+  will-change: transform, background-color;
   transition: background-color 0.2s ease-in-out;
 
   &__wrapper {
