@@ -15,9 +15,9 @@ export const GroupItem = ({ group, onChange, onDelete }: GroupItemProps) => {
 
   const [password, setPassword] = useState(group.password);
 
-  const loginDebounce = useDebounce(login, 1500);
+  const loginDebounce = useDebounce(login, 500);
 
-  const passwordDebounce = useDebounce(password, 1500);
+  const passwordDebounce = useDebounce(password, 500);
 
   useEffect(() => {
     onChange?.(loginDebounce, passwordDebounce);

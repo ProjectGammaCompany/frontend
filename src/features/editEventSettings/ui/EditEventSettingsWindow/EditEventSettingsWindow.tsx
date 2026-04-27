@@ -140,6 +140,12 @@ const EditEventSettingsWindow = ({
             isJoinCodeError={isJoinCodeDataError}
             onError={handleFailedUpdate}
             joinCode={joinCodeData}
+            onCoverLoadError={() => {
+              notify.error({
+                title: "Не удалось загрузить файл",
+                description: "Произошла ошибка. Повторите попытку позже",
+              });
+            }}
             mutationFn={(data) => editEventSettings(eventId, data)}
             onSuccessFn={(response, variables) => {
               const newData = {

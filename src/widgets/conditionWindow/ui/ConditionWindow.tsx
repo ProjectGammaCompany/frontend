@@ -67,6 +67,7 @@ const ConditionWindow = (
       updateConditionGroups?.(groups);
       updateGroupsInConditionsQuery(eventId, blockId, id, groups);
       setGroupsSelectLoading(false);
+      setIsOpen(false);
     }
   };
 
@@ -133,6 +134,10 @@ const ConditionWindow = (
                 id: condition.id,
                 blockOrder: response.data.blockOrder,
               });
+              notify.success({
+                title: "Условие обновлено",
+              });
+              setIsOpen(false);
             }}
             onHangingGroups={handleHangingGroups}
             submitBtnText="Сохранить"
