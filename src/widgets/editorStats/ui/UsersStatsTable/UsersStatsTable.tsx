@@ -101,7 +101,11 @@ const UsersStatsTable = ({ users }: UsersStatsTableProps) => {
             <div className="users-stats-table__answers-preview">
               <Typography.Text>
                 {answers.correct} / {answers.total},{" "}
-                {Math.round((answers.correct / answers.total) * 100)}%
+                {Math.round(
+                  (answers.total > 0 ? answers.correct / answers.total : 0) *
+                    100,
+                )}
+                %
               </Typography.Text>
               <Progress
                 size={20}
