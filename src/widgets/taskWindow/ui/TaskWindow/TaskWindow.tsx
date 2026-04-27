@@ -99,6 +99,12 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
           className="task-window__task-form"
           submitBtnText="Сохранить"
           order={order}
+          onFileLoadError={() => {
+            notify.error({
+              title: "Не удалось загрузить файл",
+              description: "Произошла ошибка. Повторите попытку позже",
+            });
+          }}
           mutationFn={(data) => updateTask(eventId, blockId, id, data)}
           initialData={{
             ...data,
@@ -129,6 +135,12 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
           className="task-window__task-form"
           submitBtnText="Создать"
           order={order}
+          onFileLoadError={() => {
+            notify.error({
+              title: "Не удалось загрузить файл",
+              description: "Произошла ошибка. Повторите попытку позже",
+            });
+          }}
           mutationFn={(data) => createTask(eventId, blockId, data)}
           onSuccessFn={(data, variables) => {
             addTaskToList(

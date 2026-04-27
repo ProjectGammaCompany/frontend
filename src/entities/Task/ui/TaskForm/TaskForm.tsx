@@ -36,6 +36,7 @@ interface TaskFormProps<TResponse> {
   onSuccessFn?: (response: TResponse, variables: TaskFormData) => void;
   onSuccessText?: string;
   order: number;
+  onFileLoadError?: () => void;
   className?: string;
 }
 
@@ -45,6 +46,7 @@ const TaskForm = <TResponse,>({
   onSuccessFn,
   submitBtnText,
   onSuccessText,
+  onFileLoadError,
   className,
   mutationFn,
 }: TaskFormProps<TResponse>) => {
@@ -113,6 +115,7 @@ const TaskForm = <TResponse,>({
           file,
         );
       } catch (e) {
+        onFileLoadError?.();
         onError?.(e as Error);
       }
     })();

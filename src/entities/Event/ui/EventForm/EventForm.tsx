@@ -1,4 +1,4 @@
-import { getTags, type UseJoinCodeDataResult } from "@/entities"
+import { getTags, type UseJoinCodeDataResult } from "@/entities";
 import {
   getFullFileUrl,
   getImgUrl,
@@ -6,9 +6,9 @@ import {
   useFileUpload,
   useMessage,
   type ChangeTypeOfKeys,
-} from "@/shared/lib"
-import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui"
-import { useMutation, useQuery } from "@tanstack/react-query"
+} from "@/shared/lib";
+import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   Button,
   ConfigProvider,
@@ -21,12 +21,12 @@ import {
   Upload,
   type UploadFile,
   type UploadProps,
-} from "antd"
-import { useForm, useWatch } from "antd/es/form/Form"
-import { Dayjs } from "dayjs"
-import { AnimatePresence, motion } from "motion/react"
-import { useEffect, useState, type ReactNode } from "react"
-import "./EventForm.scss"
+} from "antd";
+import { useForm, useWatch } from "antd/es/form/Form";
+import { Dayjs } from "dayjs";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState, type ReactNode } from "react";
+import "./EventForm.scss";
 
 //todo добавит switch на показ таблицы всей
 export interface BaseEventFormData {
@@ -57,6 +57,7 @@ interface EventFormProps<TData extends EventFormData, TResponse> {
   onSuccessText?: string;
   showSuccessText?: boolean;
   onError: () => void;
+  onCoverLoadError?: () => void;
   onSuccessFn?: (
     data: TResponse,
     variables: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
@@ -70,6 +71,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   onError,
   showSuccessText,
   defaultData,
+  onCoverLoadError,
   submitBtnText,
   joinCode,
   isJoinCodePending,
@@ -125,6 +127,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         );
       },
       onError: (error) => {
+        onCoverLoadError?.();
         onError?.(error);
       },
     });

@@ -16,6 +16,7 @@ export const GroupsSettings = () => {
     login: string,
     password: string,
   ) => {
+    console.log("меняю");
     const newArray = groups.map((group, i) => {
       if (i === index) {
         return {

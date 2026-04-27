@@ -47,6 +47,12 @@ const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
           };
           return createEvent(preparedData);
         }}
+        onCoverLoadError={() => {
+          notify.error({
+            title: "Не удалось загрузить файл",
+            description: "Произошла ошибка. Повторите попытку позже",
+          });
+        }}
         children={undefined}
         submitBtnText="Создать"
         onSuccessFn={(data: RequestResponse) => {
