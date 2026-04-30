@@ -117,14 +117,8 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
     handleErrorSendAnswer,
   );
 
-  const getOptionClassName = (
-    id: string,
-    answer: string[],
-    rightAnswer?: string[],
-  ) => {
+  const getOptionClassName = (id: string, rightAnswer?: string[]) => {
     if (!rightAnswer) return "";
-
-    if (!answer.includes(id)) return "";
 
     return rightAnswer.includes(id)
       ? "choice-task__option_correct"
@@ -150,7 +144,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
             selected={answer.includes(option.id)}
             disabled={choiceAnswerDisabled}
             clickFn={handleOptionClick}
-            className={getOptionClassName(option.id, answer, rightAnswer)}
+            className={getOptionClassName(option.id, rightAnswer)}
           />
         ))}
       </ul>

@@ -1,6 +1,7 @@
 import type { TaskItem } from "@/entities";
 import { useWindowWidth } from "@/shared/lib";
 import { Checkbox, ConfigProvider, Typography } from "antd";
+import { motion } from "motion/react";
 import "./TaskSliderItem.scss";
 interface TaskSliderItemProps {
   task: TaskItem;
@@ -40,7 +41,13 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
 
   return (
     <div className="task-slider-item__wrapper">
-      <div onClick={handleClick} className="task-slider-item">
+      <motion.div
+        onClick={handleClick}
+        className="task-slider-item"
+        whileHover={{
+          backgroundColor: "var(--hover-primary-color)",
+        }}
+      >
         <div>
           <Typography.Title level={3} className="task-slider-item__header">
             {task.name}
@@ -79,7 +86,7 @@ const TaskSliderItem = ({ task, onClick, isSelected }: TaskSliderItemProps) => {
         <Typography.Paragraph className="task-slider-item__title task-slider-item__type">
           Тип: {getTaskTypeString(task.type)}
         </Typography.Paragraph>
-      </div>
+      </motion.div>
     </div>
   );
 };

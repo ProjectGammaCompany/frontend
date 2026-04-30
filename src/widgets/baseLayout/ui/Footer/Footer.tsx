@@ -1,4 +1,5 @@
 import { IconButton } from "@/shared/ui";
+import { ConfigProvider } from "antd";
 import classnames from "classnames";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
@@ -17,19 +18,29 @@ const Footer = ({ pathname }: FooterProps) => {
     <footer ref={targetRef} className="footer">
       <div className="footer__content">
         {NAVIGATION_BUTTONS_INFO.map((buttonInfo) => (
-          <IconButton
-            className={classnames("footer__icon-btn", {
-              "footer__icon-btn_active": pathname === buttonInfo.pathname,
-            })}
-            key={buttonInfo.pathname}
-            icon={buttonInfo.icon}
-            iconWrapperClassname="footer__icon-wrapper"
-            onClick={() => {
-              if (buttonInfo.pathname != pathname) {
-                void navigate(buttonInfo.pathname);
-              }
+          <ConfigProvider
+            theme={{
+              components: {
+                Button: {
+                  defaultHoverBg: "var(--light-color)",
+                },
+              },
             }}
-          />
+            key={buttonInfo.pathname}
+          >
+            <IconButton
+              className={classnames("footer__icon-btn", {
+                "footer__icon-btn_active": pathname === buttonInfo.pathname,
+              })}
+              icon={buttonInfo.icon}
+              iconWrapperClassname="footer__icon-wrapper"
+              onClick={() => {
+                if (buttonInfo.pathname != pathname) {
+                  void navigate(buttonInfo.pathname);
+                }
+              }}
+            />
+          </ConfigProvider>
         ))}
       </div>
     </footer>
