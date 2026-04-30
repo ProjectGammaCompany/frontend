@@ -23,7 +23,7 @@ const LinkEventCard = ({
   tags,
 }: LinkEventCardProps) => {
   return (
-    <Link to={`/event/${id}`} className="link-event-card">
+    <Link to={`/event/${id}`} className="link-event-card" draggable="false">
       <EventCard
         title={title}
         description={description}

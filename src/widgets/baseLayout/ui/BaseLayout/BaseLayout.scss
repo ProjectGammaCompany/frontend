@@ -3,7 +3,7 @@
   container-type: inline-size;
   container-name: base-layout;
   &__main {
-    height: calc(100dvh - 80px - 65px - 15px);
+    height: calc(100dvh - 80px - 40px - 15px);
     overflow-y: auto;
     padding-top: 10px;
   }

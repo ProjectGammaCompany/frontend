@@ -10,12 +10,13 @@
   border-radius: 10px;
   padding: 10px;
   &__wrapper {
-    top: 0;
+    display: flex;
+    top: 0px;
     left: 0;
     z-index: 3;
     position: absolute;
     width: 100%;
-    height: calc(100dvh - 100px);
+    height: 100dvh;
     justify-content: center;
     align-items: center;
     background-color: var(--primary-backdrop-color);
@@ -29,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color ease-in-out 200ms;
   }
   &__text {
     position: absolute;

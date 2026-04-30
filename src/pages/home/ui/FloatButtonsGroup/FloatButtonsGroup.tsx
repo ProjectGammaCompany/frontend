@@ -21,7 +21,7 @@ const FloatButtonsGroup = ({
 
   const isDesktop = width >= 700;
 
-  const baseBottom = isDesktop ? "20px" : "80px";
+  const baseBottom = isDesktop ? "20px" : "90px";
   const baseRight = isDesktop ? "2dvw" : "5dvw";
 
   return (

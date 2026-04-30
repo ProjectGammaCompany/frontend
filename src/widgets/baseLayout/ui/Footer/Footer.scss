@@ -1,15 +1,18 @@
 .footer {
+  margin-top: -35px;
   display: block;
+  position: relative;
   height: 65px;
-  width: 100%;
-  background-color: var(--primary-color);
-  border-radius: 10px;
+  background: rgba(93, 48, 255, 0.878);
+  border-radius: 28px;
   padding: 5px;
+  box-shadow: 0 8px 32px rgba(93, 48, 255, 0.67);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   &__content {
     height: 100%;
     width: 100%;
-    background-color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,22 +22,19 @@
 
   &__icon-btn {
     width: 25%;
-    background-color: var(--link-color);
+    background-color: transparent;
     color: var(--light-color);
     height: 50px;
     padding: 2px;
+    border: none !important;
     &_active {
-      color: white;
-    }
-
-    &:hover {
-      color: white !important;
+      color: var(--primary-color) !important;
+      background-color: white;
     }
   }
   &__icon-wrapper {
     height: 100%;
     width: 100%;
-    background-color: var(--primary-color);
     padding: 5px;
     border-radius: 5px;
   }
@@ -43,5 +43,16 @@
 @media (min-width: 700px) {
   .footer {
     display: none;
+  }
+}
+
+@media (hover: hover) {
+  .footer {
+    &__icon-wrapper:hover:not(.footer__icon-btn_active) {
+      color: var(--primary-color);
+    }
+    &__icon-btn_active:hover {
+      color: var(--light-color);
+    }
   }
 }
