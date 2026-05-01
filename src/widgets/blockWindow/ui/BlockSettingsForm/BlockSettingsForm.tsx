@@ -1,4 +1,8 @@
-import type { BlockSettings, UpdateBlockData } from "@/entities";
+import {
+  updateBlockValueInQuery,
+  type BlockSettings,
+  type UpdateBlockData,
+} from "@/entities";
 import type { ChangeTypeOfKeys } from "@/shared/lib";
 import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -38,6 +42,10 @@ const BlockSettingsForm = ({
   const handleSuccessSubmit = (variables?: UpdateBlockData) => {
     if (variables) {
       updateBlockSettingsInQuery(eventId, blockId, variables);
+      updateBlockValueInQuery(eventId, blockId, {
+        key: "isParallel",
+        value: variables.isParallel,
+      });
     }
     setShowSuccessText(true);
     setTimeout(() => {

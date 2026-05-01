@@ -29,7 +29,6 @@ const AddBlockMenu = ({
 
   const className = classnames("add-block-menu", {
     "add-block-menu_open": openMenu,
-    "add-block-menu_hidden": isHidden,
   });
 
   const handleFailedBlockAdding = () => {
