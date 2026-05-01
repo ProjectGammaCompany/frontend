@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: -120px;
+  bottom: -180px;
   width: 100%;
   max-width: 300px;
   z-index: 4;
@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: row;
     background-color: var(--light-color);
-    padding: 15px 30px;
+    padding: 15px 10px;
     border-radius: 15px 15px 0 0;
     width: 100%;
     justify-content: space-between;
@@ -39,10 +39,6 @@
   }
 
   &_open {
-    bottom: 0;
-  }
-
-  &_hidden {
-    bottom: -190px;
+    bottom: -10px;
   }
 }

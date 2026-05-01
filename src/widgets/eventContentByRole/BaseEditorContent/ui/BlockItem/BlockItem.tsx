@@ -1,4 +1,5 @@
 import { BlockCard, type BlockItemData } from "@/entities";
+import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui";
 import { Typography } from "antd";
 import "./BlockItem.scss";
 interface BlockItemProps {
@@ -10,13 +11,11 @@ interface BlockItemProps {
 const BlockItem = ({ data, index, onClick }: BlockItemProps) => {
   return (
     <li onClick={onClick}>
-      <BlockCard index={index} draggableId={data.id}>
+      <BlockCard index={index} draggableId={data.id} title={data.name}>
         <Typography.Text className="block-item__order-text">
           {data.order}
         </Typography.Text>
-        {data.conditionsWithoutBlocks && (
-          <div className="block-item__connection" />
-        )}
+        {data.isParallel ? <ParallelBlockSvg /> : <CoherentBlockSvg />}
       </BlockCard>
     </li>
   );

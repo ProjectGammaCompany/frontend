@@ -1,6 +1,7 @@
 import {
   selectTasksReorderingState,
   setTasksReorderingState,
+  updateBlockValueInQuery,
   useBlockSettings,
   useUpdateBlockName,
   type Condition,
@@ -72,9 +73,17 @@ const BlockWindow = ({
     });
   };
 
+  const handleSuccessBlockNameUpdate = (name: string) => {
+    updateBlockValueInQuery(eventId, blockId, {
+      key: "name",
+      value: name,
+    });
+  };
+
   const updateBlockNameMutation = useUpdateBlockName(
     eventId,
     blockId,
+    handleSuccessBlockNameUpdate,
     handleErrorBlockNameUpdate,
   );
 

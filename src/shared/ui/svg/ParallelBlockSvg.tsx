@@ -1,0 +1,83 @@
+export const ParallelBlockSvg = () => {
+  return (
+    <svg
+      width="80"
+      height="54"
+      viewBox="0 0 80 54"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="1"
+        y="18"
+        width="18"
+        height="18"
+        rx="4"
+        stroke="white"
+        stroke-width="2"
+      />
+      <rect
+        x="61"
+        y="35"
+        width="18"
+        height="18"
+        rx="4"
+        stroke="white"
+        stroke-width="2"
+      />
+      <rect
+        x="61"
+        y="1"
+        width="18"
+        height="18"
+        rx="4"
+        stroke="white"
+        stroke-width="2"
+      />
+      <path
+        d="M20 27H40"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="40"
+        y1="27"
+        x2="40"
+        y2="10"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="60"
+        y1="10"
+        x2="40"
+        y2="10"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="1"
+        y1="-1"
+        x2="18"
+        y2="-1"
+        transform="matrix(0 1 1 0 41 26)"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <line
+        x1="1"
+        y1="-1"
+        x2="21"
+        y2="-1"
+        transform="matrix(-1 0 0 1 61 45)"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};

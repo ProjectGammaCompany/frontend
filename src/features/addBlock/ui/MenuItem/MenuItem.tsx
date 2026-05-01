@@ -1,32 +1,23 @@
 import { BlockCard } from "@/entities";
-import { Typography } from "antd";
+import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui";
 
 interface MenuItemProps {
   type: "parallel" | "consistent";
   index: number;
 }
 
-//todo: поменять подписи на svg картинки
 const MenuItem = ({ type, index }: MenuItemProps) => {
   return (
-    <BlockCard draggableId={type} index={index}>
-      {type === "consistent" ? (
-        <Typography
-          style={{
-            color: "white",
-          }}
-        >
-          Послед
-        </Typography>
-      ) : (
-        <Typography
-          style={{
-            color: "white",
-          }}
-        >
-          Паралл
-        </Typography>
-      )}
+    <BlockCard
+      draggableId={type}
+      index={index}
+      title={
+        type === "consistent"
+          ? "Линейный блок задач"
+          : "Параллельный блок задач"
+      }
+    >
+      {type === "consistent" ? <CoherentBlockSvg /> : <ParallelBlockSvg />}
     </BlockCard>
   );
 };

@@ -84,6 +84,7 @@ export {
   setTasksReorderingState,
   tasksReorderingReducer,
   updateBlockSettings,
+  updateBlockValueInQuery,
   useBlockSettings,
   useConditions,
   useTasks,
