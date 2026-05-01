@@ -31,3 +31,5 @@ export { StatsSvg } from "./svg/StatsSvg.tsx";
 
 export { CoherentBlockSvg } from "./svg/CoherentBlockSvg.tsx";
 export { ParallelBlockSvg } from "./svg/ParallelBlockSvg.tsx";
+
+export { NotificationIcon } from "./NotificationIcon/NotificationIcon.tsx";
