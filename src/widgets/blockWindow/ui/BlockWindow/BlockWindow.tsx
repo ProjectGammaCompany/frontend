@@ -58,7 +58,7 @@ const BlockWindow = ({
     rightAnswers: false,
   });
 
-  const { data, isPending, isError } = useBlockSettings(eventId, blockId);
+  const { data, isPending, isError } = useBlockSettings(eventId, blockId, open);
 
   const tasksReorderingState = useSelector(selectTasksReorderingState);
 
@@ -99,6 +99,9 @@ const BlockWindow = ({
       title: "Блок успешно удалён",
     });
     setIsOpen(false);
+    queryClient.removeQueries({
+      queryKey: [eventId, blockId],
+    });
   };
 
   const handleErrorBlockDeleting = () => {
