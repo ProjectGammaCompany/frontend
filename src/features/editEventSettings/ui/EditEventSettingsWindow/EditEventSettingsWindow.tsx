@@ -11,6 +11,7 @@ import {
   type EditEventSettingsResponse,
   type EditingEventSettings,
 } from "@/entities";
+import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/shared/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -92,6 +93,9 @@ const EditEventSettingsWindow = ({
   const deleteEventMutation = useMutation({
     mutationFn: () => deleteEvent(eventId),
     onSuccess: () => {
+      queryClient.removeQueries({
+        queryKey: [eventId],
+      });
       void navigate("/home");
     },
     onError: () => {

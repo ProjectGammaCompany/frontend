@@ -10,6 +10,7 @@ import {
   type UpdateTaskResponse,
 } from "@/entities";
 import { DeleteTaskButton } from "@/features";
+import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { CustomModalWindow } from "@/shared/ui";
 import type { AxiosResponse } from "axios";
@@ -65,6 +66,9 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
   const handleSuccessDelete = () => {
     if (id) {
       removeTaskFromList(eventId, blockId, id);
+      queryClient.removeQueries({
+        queryKey: [eventId, blockId, id],
+      });
       setIsOpen(false);
     }
   };

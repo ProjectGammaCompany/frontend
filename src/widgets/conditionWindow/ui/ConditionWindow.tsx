@@ -8,6 +8,7 @@ import {
   type UpdateConditionResponse,
 } from "@/entities";
 import { DeleteConditionButton } from "@/features";
+import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { CustomModalWindow } from "@/shared/ui";
 import { Typography } from "antd";
@@ -58,6 +59,9 @@ const ConditionWindow = (
   const handleSuccessDelete = () => {
     if (condition) {
       removeConditionFromList(eventId, blockId, condition?.id);
+      queryClient.removeQueries({
+        queryKey: [eventId, blockId, condition.id],
+      });
       setIsOpen(false);
     }
   };
