@@ -4,7 +4,7 @@ export interface SendAnswerResponse {
   rightAnswer?: string[];
   rightAnswerId?: string[];
   points?: number;
-  status: "correct" | "incorrect" | "partially";
+  status: "correct" | "incorrect" | "partial";
 }
 export const sendAnswer = (
   eventId: string,

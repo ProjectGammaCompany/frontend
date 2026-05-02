@@ -144,7 +144,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
     );
   }
   return (
-    <div>
+    <>
       <BaseEditorContent
         eventId={eventId}
         onTaskClick={handleTaskClick}
@@ -196,7 +196,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
           />
         </>
       )}
-    </div>
+    </>
   );
 };
 

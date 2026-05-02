@@ -1,7 +1,7 @@
 import "./NotificationIcon.scss";
 
 interface NotificationIconProps {
-  type: "correct" | "incorrect" | "partially";
+  type: "correct" | "incorrect" | "partial";
   className?: string;
 }
 
