@@ -1,6 +1,6 @@
 import { NotificationIcon } from "@/shared/ui";
 export const getTaskNotificationStyle = (
-  type: "correct" | "incorrect" | "partially",
+  type: "correct" | "incorrect" | "partial",
   title: string,
   description?: string,
 ) => {

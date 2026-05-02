@@ -129,7 +129,9 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
 
     return rightAnswer.includes(id)
       ? "choice-task__option_correct"
-      : "choice-task__option_incorrect";
+      : answer.includes(id)
+        ? "choice-task__option_incorrect"
+        : "";
   };
 
   return (

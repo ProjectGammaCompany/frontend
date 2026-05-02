@@ -57,7 +57,7 @@ const AddBlockMenu = ({
     (result: DropResult) => {
       const { source, destination, draggableId } = result;
       if (!destination) {
-        setShowArea(false);
+        // setShowArea(false);
         return;
       }
 
