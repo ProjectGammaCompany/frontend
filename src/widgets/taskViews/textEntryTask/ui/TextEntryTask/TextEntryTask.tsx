@@ -6,7 +6,7 @@ import {
 } from "@/features";
 import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
-import { NotificationIcon } from "@/shared/ui";
+import { getTaskNotificationStyle } from "@/shared/lib/notifications";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -71,22 +71,25 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
     setRightAnswer(rightAnswer);
 
     if (status === "correct") {
-      notify.success({
-        title: "Задача успешно пройдена!",
-        description: points ? `Вами получено баллов: ${points}` : undefined,
-        icon: <NotificationIcon type="correct" />,
-      });
+      notify.success(
+        getTaskNotificationStyle(
+          status,
+          "Задача успешно пройдена!",
+          points ? `Вами получено баллов: ${points}` : undefined,
+        ),
+      );
     } else if (status === "incorrect") {
-      notify.error({
-        title: "Задача пройдена неправильно!",
-        icon: <NotificationIcon type="incorrect" />,
-      });
+      notify.error(
+        getTaskNotificationStyle(status, "Задача пройдена неправильно!"),
+      );
     } else {
-      notify.warning({
-        title: "Задача пройдена частично правильно.",
-        description: points ? `Вами получено баллов: ${points}` : undefined,
-        icon: <NotificationIcon type="partially" />,
-      });
+      notify.warning(
+        getTaskNotificationStyle(
+          status,
+          "Задача пройдена частично правильно.",
+          points ? `Вами получено баллов: ${points}` : undefined,
+        ),
+      );
     }
     setTimeout(() => {
       const el = document.getElementById("root");
