@@ -81,7 +81,7 @@ const BaseEditorContent = ({
       }
 
       if (
-        destination.droppableId === draggableId &&
+        destination.droppableId === source.droppableId &&
         destination.index === source.index
       ) {
         return;
@@ -90,13 +90,13 @@ const BaseEditorContent = ({
       if (!data) {
         return;
       }
-      dispatch(setBlockReorderingState(true));
 
       const newBlocks = Array.from(data.blocks);
       const movedBlock = data.blocks.find((block) => block.id === draggableId);
       if (!movedBlock) {
         return;
       }
+      dispatch(setBlockReorderingState(true));
       newBlocks.splice(source.index, 1);
       newBlocks.splice(destination.index, 0, movedBlock);
       newBlocks.forEach((block, index) => {

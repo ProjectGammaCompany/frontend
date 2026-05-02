@@ -34,7 +34,9 @@ const CustomModalWindow = ({
           <CrossSvg />
         </div>
       }
-      maskClosable={false}
+      mask={{
+        closable: false,
+      }}
       destroyOnHidden
       classNames={{
         container: "custom-modal-window__container",
