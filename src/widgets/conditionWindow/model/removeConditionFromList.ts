@@ -1,4 +1,4 @@
-import { blockQueries, type GetConditionsResponse } from "@/entities";
+import { type GetConditionsResponse, blockQueries } from "@/entities/Block";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

@@ -1,4 +1,4 @@
-import type { BlockItemData } from "@/entities";
+import type { BlockItemData } from "@/entities/Event";
 import { Droppable } from "@hello-pangea/dnd";
 import { type JSX } from "react";
 import "./BlockList.scss";

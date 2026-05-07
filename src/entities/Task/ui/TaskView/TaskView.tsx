@@ -1,4 +1,3 @@
-import type { TaskStageFile } from "@/entities";
 import { useMessage } from "@/shared/lib";
 import { Typography } from "antd";
 import dayjs from "dayjs";
@@ -11,6 +10,11 @@ import {
 } from "react";
 import FileItem from "../FileItem/FileItem";
 import "./TaskView.scss";
+
+export interface TaskStageFile {
+  url: string;
+  name: string;
+}
 interface TaskViewProps {
   taskData: {
     title: string;

@@ -1,4 +1,4 @@
-import { deleteCondition } from "@/entities";
+import { deleteCondition } from "@/entities/Condition";
 import { TrashSvg } from "@/shared/ui";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
@@ -30,7 +30,7 @@ const DeleteConditionButton = ({
       onClick={() => deleteMutation.mutate()}
       className="delete-condition-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };

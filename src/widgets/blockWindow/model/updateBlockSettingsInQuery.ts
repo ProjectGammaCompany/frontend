@@ -1,4 +1,4 @@
-import { blockQueries, type UpdateBlockData } from "@/entities";
+import { blockQueries, type UpdateBlockData } from "@/entities/Block";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

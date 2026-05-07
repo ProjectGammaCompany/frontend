@@ -5,8 +5,8 @@ import {
   setName,
   useEditingEventData,
   useUpdateBlocksOrder,
-} from "@/entities";
-import { AddBlockMenu } from "@/features";
+} from "@/entities/Event";
+import { AddBlockMenu } from "@/features/addBlock";
 import { useNotify } from "@/shared/lib";
 import { StatsSvg } from "@/shared/ui";
 import BlockItem from "@/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";

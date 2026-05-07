@@ -2,7 +2,7 @@ import {
   blockQueries,
   type Condition,
   type GetConditionsResponse,
-} from "@/entities";
+} from "@/entities/Block";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

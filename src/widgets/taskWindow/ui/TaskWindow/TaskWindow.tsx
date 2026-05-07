@@ -1,15 +1,15 @@
 import {
-  createTask,
-  TaskForm,
-  updateTask,
-  useEditorTaskData,
   type ClientOption,
   type CreateTaskResponse,
   type GetEditorTaskDataResponse,
   type ServerOption,
+  TaskForm,
   type UpdateTaskResponse,
-} from "@/entities";
-import { DeleteTaskButton } from "@/features";
+  createTask,
+  updateTask,
+  useEditorTaskData,
+} from "@/entities/Task";
+import { DeleteTaskButton } from "@/features/deleteTask";
 import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { CustomModalWindow } from "@/shared/ui";

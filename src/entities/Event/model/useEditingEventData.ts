@@ -1,4 +1,4 @@
-import { eventQueries, getEditingEventData } from "@/entities";
+import { eventQueries, getEditingEventData } from "@/entities/Event";
 import { useQuery } from "@tanstack/react-query";
 
 export const useEditingEventData = (eventId: string) => {

@@ -1,12 +1,10 @@
-import { getEditingEventData, setName, type Condition } from "@/entities";
-import {
-  BaseEditorContent,
-  BlockWindow,
-  ConditionWindow,
-  TaskWindow,
-  type TaskWindowMode,
-} from "@/widgets";
-import { useQuery } from "@tanstack/react-query";
+import type { Condition } from "@/entities/Block";
+import { setName, useEditingEventData } from "@/entities/Event";
+import { BlockWindow } from "@/widgets/blockWindow";
+import { ConditionWindow } from "@/widgets/conditionWindow";
+// eslint-disable-next-line boundaries/dependencies
+import { BaseEditorContent } from "@/widgets/eventContentByRole/BaseEditorContent";
+import { TaskWindow, type TaskWindowMode } from "@/widgets/taskWindow";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,11 +28,7 @@ const EditorContent = ({ eventId }: EditorContentProps) => {
   const editTaskId = useSelector(selectTaskId);
   const currentCondition = useSelector(selectCondition);
 
-  const { data, isPending, isError, refetch } = useQuery({
-    queryKey: [eventId, "data"],
-    queryFn: () => getEditingEventData(eventId),
-    select: (data) => data.data,
-  });
+  const { data, isPending, isError, refetch } = useEditingEventData(eventId);
 
   const [taskWindowMode, setTaskWindowMode] =
     useState<TaskWindowMode>("create");

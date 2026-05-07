@@ -1,4 +1,4 @@
-import type { BlockItemData } from "@/entities";
+import type { BlockItemData } from "@/entities/Event";
 import { useNotify } from "@/shared/lib";
 import { BackSvg } from "@/shared/ui";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";

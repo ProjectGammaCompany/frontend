@@ -1,4 +1,4 @@
-import type { ClientGroup } from "@/entities";
+import type { ClientGroup } from "@/entities/Event";
 import { useDebounce } from "@/shared/lib";
 import { IconButton, TrashSvg } from "@/shared/ui";
 import { Input } from "antd";

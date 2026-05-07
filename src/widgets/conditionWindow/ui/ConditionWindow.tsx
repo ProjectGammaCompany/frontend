@@ -1,19 +1,24 @@
+import type { Condition } from "@/entities/Block";
 import {
   ConditionForm,
   createCondition,
   updateCondition,
   useUpdateGroups,
-  type Condition,
   type CreateConditionResponse,
   type UpdateConditionResponse,
-} from "@/entities";
-import { DeleteConditionButton } from "@/features";
+} from "@/entities/Condition";
+import {
+  useBlockOptions,
+  useGroups,
+  type UseGroupsQueryData,
+} from "@/entities/Event";
+import { DeleteConditionButton } from "@/features/deleteCondition";
 import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { CustomModalWindow } from "@/shared/ui";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addConditionToList } from "../model/addConditionToList";
 import { removeConditionFromList } from "../model/removeConditionFromList";
 import { updateConditionInQuery } from "../model/updateConditionInQuery";
@@ -105,6 +110,41 @@ const ConditionWindow = (
     });
   };
 
+  const {
+    data: blockOptions,
+    isPending: isBlockOptionsPending,
+    isError: isBlockOptionsError,
+    refetch,
+  } = useBlockOptions(eventId, (data) =>
+    data.map((block) => {
+      return {
+        value: block.id,
+        label: block.name,
+      };
+    }),
+  );
+
+  const mapGroupsToSelectOption = (data: UseGroupsQueryData) => {
+    return data.data.groups.map((group) => {
+      return {
+        label: group.name,
+        value: group.id,
+      };
+    });
+  };
+
+  const { data: eventGroups, isPending: isEventGroupsPending } = useGroups<
+    {
+      label: string;
+      value: string;
+    }[]
+  >(eventId, mapGroupsToSelectOption);
+
+  useEffect(() => {
+    if (open) {
+      void refetch();
+    }
+  }, [open, refetch]);
   return (
     <CustomModalWindow
       open={open}
@@ -128,7 +168,11 @@ const ConditionWindow = (
       <div className="condition-window__body">
         {condition ? (
           <ConditionForm<AxiosResponse<UpdateConditionResponse>>
-            eventId={eventId}
+            blockOptions={blockOptions}
+            groups={eventGroups}
+            isGroupsPending={isEventGroupsPending}
+            isBlockOptionsPending={isBlockOptionsPending}
+            isBlockOptionsError={isBlockOptionsError}
             mutationFn={(data) =>
               updateCondition(eventId, blockId, condition.id, data)
             }
@@ -151,7 +195,11 @@ const ConditionWindow = (
           />
         ) : (
           <ConditionForm<AxiosResponse<CreateConditionResponse>>
-            eventId={eventId}
+            groups={eventGroups}
+            isGroupsPending={isEventGroupsPending}
+            blockOptions={blockOptions}
+            isBlockOptionsPending={isBlockOptionsPending}
+            isBlockOptionsError={isBlockOptionsError}
             mutationFn={(data) => createCondition(eventId, blockId, data)}
             submitBtnText="Создать"
             onSuccessFn={(response, variables) => {

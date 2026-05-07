@@ -3,7 +3,7 @@ import {
   useJoinRequiredFields,
   type JoinDetails,
   type UseJoinEventResponse,
-} from "@/entities";
+} from "@/entities/Event";
 import { handleError } from "@/shared/api";
 import { CustomModalWindow } from "@/shared/ui";
 import { Button, Form, Input, Typography } from "antd";

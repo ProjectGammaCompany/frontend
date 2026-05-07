@@ -1,4 +1,4 @@
-import { getTags, type UseJoinCodeDataResult } from "@/entities";
+import { type UseJoinCodeDataResult } from "@/entities/Event";
 import {
   getFullFileUrl,
   getImgUrl,
@@ -8,7 +8,7 @@ import {
   type ChangeTypeOfKeys,
 } from "@/shared/lib";
 import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   Button,
   ConfigProvider,
@@ -28,7 +28,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type ReactNode } from "react";
 import "./EventForm.scss";
 
-//todo добавит switch на показ таблицы всей
+interface TagOption {
+  label: string;
+  value: string;
+}
 export interface BaseEventFormData {
   name: string;
   description: string;
@@ -49,6 +52,7 @@ interface EventFormProps<TData extends EventFormData, TResponse> {
   submitBtnText: string;
   joinCode?: UseJoinCodeDataResult;
   isJoinCodePending?: boolean;
+  tagOptions: TagOption[] | undefined;
   isJoinCodeError?: boolean;
   mutationFn: (
     data: ChangeTypeOfKeys<TData, "startDate" | "endDate", string>,
@@ -71,6 +75,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
   onError,
   showSuccessText,
   defaultData,
+  tagOptions,
   onCoverLoadError,
   submitBtnText,
   joinCode,
@@ -88,18 +93,6 @@ export const EventForm = <TData extends EventFormData, TResponse>({
     mutationFn: (data) => mutationFn(data),
     onSuccess: onSuccessFn,
     onError,
-  });
-
-  const { data: tags } = useQuery({
-    queryKey: ["eventTags"],
-    queryFn: getTags,
-    select: (data) =>
-      data.data.tags.map((tag) => {
-        return {
-          label: tag.name,
-          value: tag.id,
-        };
-      }),
   });
 
   const [form] = useForm<TData>();
@@ -261,7 +254,7 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         >
           <Select
             mode="multiple"
-            options={tags}
+            options={tagOptions}
             optionRender={(option) => (
               <Typography.Paragraph className="event-form__tag-list-option">
                 {option.data.label}

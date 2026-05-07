@@ -1,4 +1,4 @@
-import type { TaskItem } from "@/entities";
+import type { TaskItem } from "@/entities/Event";
 import { BackSvg } from "@/shared/ui";
 import { Button, Carousel } from "antd";
 import TaskSliderItem from "../TaskSliderItem/TaskSliderItem";

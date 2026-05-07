@@ -1,4 +1,4 @@
-import type { TaskStageData } from "@/entities";
+import type { TaskStageData } from "@/entities/Event";
 import { baseApiUrl } from "@/shared/api";
 import { basicRender } from "@/shared/lib";
 import { screen } from "@testing-library/react";

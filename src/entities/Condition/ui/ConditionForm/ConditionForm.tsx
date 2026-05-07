@@ -1,38 +1,47 @@
-import type { UseGroupsQueryData } from "@/entities";
-import { useGroups } from "@/entities";
 import { CustomSwitch } from "@/shared/ui";
-import { useQuery } from "@tanstack/react-query";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import type { ConditionData } from "../../api/createCondition";
-import { getBlocksOptions } from "../../api/getBlocksOptions";
-import { mapBlockOptionsToSelectOption } from "../../model/mapBlockOptionsToSelectOption";
 import { useFormSubmit } from "../../model/useFormSubmit";
 import "./ConditionForm.scss";
 
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
 interface ConditionFormProps<TResponse> {
-  eventId: string;
   initialData?: ConditionData;
   onSuccessFn?: (response: TResponse, variables: ConditionData) => void;
   mutationFn: (values: ConditionData) => Promise<TResponse>;
   submitBtnText: string;
   onSuccessText?: string;
   groupsLoaded?: boolean;
+  groups: SelectOption[] | undefined;
+  isGroupsPending: boolean;
+  blockOptions: SelectOption[] | undefined;
+  isBlockOptionsError: boolean;
+  isBlockOptionsPending: boolean;
+
   groupsError?: boolean;
   onHangingGroups?: (fixedGroups: string[]) => void;
 }
 
 const ConditionForm = <TResponse,>({
-  eventId,
   initialData,
   onSuccessFn,
   mutationFn,
+  groups,
+  isGroupsPending,
   submitBtnText,
   onSuccessText,
   onHangingGroups,
+  blockOptions,
+  isBlockOptionsError,
+  isBlockOptionsPending,
   groupsError,
   groupsLoaded,
 }: ConditionFormProps<TResponse>) => {
@@ -45,32 +54,6 @@ const ConditionForm = <TResponse,>({
   const min = useWatch("min", form);
 
   const [showSuccessText, setShowSuccessText] = useState(false);
-
-  const mapGroupsToSelectOption = (data: UseGroupsQueryData) => {
-    return data.data.groups.map((group) => {
-      return {
-        label: group.name,
-        value: group.id,
-      };
-    });
-  };
-
-  const { data: eventGroups, isPending: isEventGroupsPending } = useGroups<
-    {
-      label: string;
-      value: string;
-    }[]
-  >(eventId, mapGroupsToSelectOption);
-
-  const {
-    data: blockOptions,
-    isPending,
-    isError,
-  } = useQuery({
-    queryKey: [],
-    queryFn: () => getBlocksOptions(eventId),
-    select: (data) => data.data.blocks,
-  });
 
   const handleSuccessSubmit = (
     response: TResponse,
@@ -99,9 +82,9 @@ const ConditionForm = <TResponse,>({
         ...initialData,
       };
       if (initialData.group) {
-        if (eventGroups) {
+        if (groups) {
           let triggerGroupsUpdate = false;
-          const eventGroupIdArray = eventGroups.map((group) => group.value);
+          const eventGroupIdArray = groups.map((group) => group.value);
           const newGroups: string[] = [];
           initialData.group.forEach((group) => {
             if (!eventGroupIdArray.includes(group)) {
@@ -119,7 +102,7 @@ const ConditionForm = <TResponse,>({
     }
   }, [
     blockOptions,
-    eventGroups,
+    groups,
     form,
     groupsError,
     groupsLoaded,
@@ -225,7 +208,7 @@ const ConditionForm = <TResponse,>({
           ) : null
         }
       </Form.Item>
-      {eventGroups && eventGroups.length > 0 && (
+      {groups && groups.length > 0 && (
         <Form.Item<ConditionData>
           name="group"
           label="Выберите группы, в одной из которых должен состоять участник события"
@@ -246,9 +229,9 @@ const ConditionForm = <TResponse,>({
         >
           <Select
             mode="multiple"
-            disabled={(groupsError ?? isEventGroupsPending) || groupsLoaded}
-            loading={isEventGroupsPending || groupsLoaded}
-            options={eventGroups}
+            disabled={(groupsError ?? isGroupsPending) || groupsLoaded}
+            loading={isGroupsPending || groupsLoaded}
+            options={groups}
             optionRender={(option) => (
               <Typography.Paragraph className="condition-form__group-list-option">
                 {option.data.label}
@@ -271,15 +254,8 @@ const ConditionForm = <TResponse,>({
         className="condition-form__block-select-wrapper"
         rules={[{ required: true }]}
       >
-        {!isError ? (
-          <Select
-            loading={isPending}
-            options={
-              blockOptions
-                ? mapBlockOptionsToSelectOption(blockOptions)
-                : undefined
-            }
-          />
+        {!isBlockOptionsError ? (
+          <Select loading={isBlockOptionsPending} options={blockOptions} />
         ) : (
           <Typography.Text>Произошла ошибка, попробуйте позже</Typography.Text>
         )}

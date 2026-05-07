@@ -1,4 +1,4 @@
-import { blockQueries, getBlockSettings } from "@/entities";
+import { blockQueries, getBlockSettings } from "@/entities/Block";
 import { useQuery } from "@tanstack/react-query";
 
 export const useBlockSettings = (

@@ -1,7 +1,13 @@
-import type { TaskStageData } from "@/entities";
-import { useSendAnswer } from "@/features";
+import type { TaskStageData } from "@/entities/Event";
+import { useSendAnswer } from "@/features/sendTaskAnswer";
 import { getShuffledArray } from "@/shared/lib";
-import { ChoiceTask, InfoBlock, TextEntryTask } from "@/widgets";
+
+// eslint-disable-next-line boundaries/dependencies
+import { ChoiceTask } from "@/widgets/taskViews/choiceTask";
+// eslint-disable-next-line boundaries/dependencies
+import { InfoBlock } from "@/widgets/taskViews/infoBlock";
+// eslint-disable-next-line boundaries/dependencies
+import { TextEntryTask } from "@/widgets/taskViews/textEntryTask";
 import { Button, Flex, Spin, Typography } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";

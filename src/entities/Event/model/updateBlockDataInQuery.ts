@@ -1,4 +1,7 @@
-import { eventQueries, type getEditingEventDataResponse } from "@/entities";
+import {
+  eventQueries,
+  type getEditingEventDataResponse,
+} from "@/entities/Event";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

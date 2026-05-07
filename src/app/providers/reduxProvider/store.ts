@@ -1,10 +1,7 @@
-import {
-  blockReorderingReducer,
-  eventNameReducer,
-  tasksReorderingReducer,
-} from "@/entities";
+import { tasksReorderingReducer } from "@/entities/Block";
+import { blockReorderingReducer, eventNameReducer } from "@/entities/Event";
 import { conditionDataReducer, taskDataReducer } from "@/pages/event";
-import { filtersWindowStateReducer } from "@/widgets";
+import { filtersWindowStateReducer } from "@/widgets/baseLayout";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 export const rootReducer = combineReducers({

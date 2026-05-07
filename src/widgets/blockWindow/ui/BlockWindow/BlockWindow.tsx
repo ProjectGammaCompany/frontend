@@ -1,13 +1,13 @@
 import {
-  selectTasksReorderingState,
-  setTasksReorderingState,
-  updateBlockValueInQuery,
-  useBlockSettings,
-  useUpdateBlockName,
   type Condition,
   type UpdateBlockData,
-} from "@/entities";
-import { DeleteBlockButton } from "@/features";
+  selectTasksReorderingState,
+  setTasksReorderingState,
+  useBlockSettings,
+  useUpdateBlockName,
+} from "@/entities/Block";
+import { eventQueries, updateBlockValueInQuery } from "@/entities/Event";
+import { DeleteBlockButton } from "@/features/deleteBlock";
 import { queryClient } from "@/shared/api";
 import { useDebounce, useNotify } from "@/shared/lib";
 import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/shared/ui";
@@ -93,7 +93,7 @@ const BlockWindow = ({
 
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
-      queryKey: [eventId, "data"],
+      queryKey: eventQueries.getEditingEventData(eventId),
     });
     notify.success({
       title: "Блок успешно удалён",
@@ -130,6 +130,12 @@ const BlockWindow = ({
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    if (open) {
+      setWindowState("tasks");
+    }
+  }, [open]);
 
   useEffect(() => {
     onChangedName(debounceName);

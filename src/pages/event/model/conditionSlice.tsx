@@ -1,4 +1,4 @@
-import type { Condition } from "@/entities";
+import type { Condition } from "@/entities/Block";
 import type { RootState } from "@/shared/lib";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 

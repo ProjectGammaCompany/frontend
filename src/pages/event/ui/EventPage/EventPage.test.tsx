@@ -78,6 +78,9 @@ describe("EventPage", () => {
           role: 1,
         });
       }),
+      http.get(`${baseApiUrl}tags`, () => {
+        return HttpResponse.json([]);
+      }),
       http.get(`${baseApiUrl}event/:eventId`, () => {
         return HttpResponse.json({
           name: "event",

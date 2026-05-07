@@ -1,4 +1,4 @@
-import type { UserStats } from "@/entities";
+import type { UserStats } from "@/entities/Event";
 import { getFullFileUrl, getImgUrl } from "@/shared/lib";
 import { ProfileSvg } from "@/shared/ui";
 import { Table, Typography } from "antd";

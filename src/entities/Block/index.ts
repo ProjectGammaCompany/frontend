@@ -45,5 +45,3 @@ export {
   setTasksReorderingState,
   default as tasksReorderingReducer,
 } from "./model/taskReorderingState.tsx";
-
-export { updateBlockValueInQuery } from "./model/updateBlockDataInQuery.ts";

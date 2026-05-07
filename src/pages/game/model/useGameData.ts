@@ -1,9 +1,9 @@
-import { getNextStage } from "@/entities";
+import { eventQueries, getNextStage } from "@/entities/Event";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGameData = (eventId?: string) => {
   return useQuery({
-    queryKey: [eventId, "game"],
+    queryKey: eventQueries.getGameData(eventId ?? ""),
     queryFn: () => {
       if (eventId) {
         return getNextStage(eventId);

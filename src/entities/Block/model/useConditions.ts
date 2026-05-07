@@ -2,7 +2,7 @@ import {
   blockQueries,
   getConditions,
   type GetConditionsResponse,
-} from "@/entities";
+} from "@/entities/Block";
 import { useQuery } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 

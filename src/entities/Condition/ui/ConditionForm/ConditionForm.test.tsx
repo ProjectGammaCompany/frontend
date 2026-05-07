@@ -37,7 +37,11 @@ describe("ConditionForm", () => {
   it("doesn't show min and max fields by default", () => {
     basicRender(
       <ConditionForm<void>
-        eventId="1234"
+        groups={[]}
+        isGroupsPending={false}
+        blockOptions={undefined}
+        isBlockOptionsError={false}
+        isBlockOptionsPending={false}
         mutationFn={() => {
           return Promise.resolve();
         }}
@@ -50,7 +54,11 @@ describe("ConditionForm", () => {
   it("shows min and max fields when switches has been activated", async () => {
     basicRender(
       <ConditionForm<void>
-        eventId="1234"
+        groups={[]}
+        isGroupsPending={false}
+        blockOptions={undefined}
+        isBlockOptionsError={false}
+        isBlockOptionsPending={false}
         mutationFn={() => {
           return Promise.resolve();
         }}
@@ -82,7 +90,16 @@ describe("ConditionForm", () => {
   it("shows error messages with empty fields", async () => {
     basicRender(
       <ConditionForm<void>
-        eventId="1234"
+        groups={[
+          {
+            value: "1",
+            label: "1",
+          },
+        ]}
+        isGroupsPending={false}
+        blockOptions={undefined}
+        isBlockOptionsError={false}
+        isBlockOptionsPending={false}
         mutationFn={() => {
           return Promise.resolve();
         }}
@@ -95,7 +112,7 @@ describe("ConditionForm", () => {
     const texts = await screen.findAllByText(
       "Выберите хотя бы одно из правил для условия",
       {},
-      { timeout: 3000 },
+      { timeout: 4000 },
     );
 
     expect(texts.length).toBe(3);

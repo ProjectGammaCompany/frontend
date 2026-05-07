@@ -11,8 +11,6 @@ import { useClearTokens } from "./providers/useClearTokensOnClose";
 import "./styles/App.scss";
 
 //todo: добавить отправку lastEditionDate в каждый put/post/delete запрос в editor'е
-//todo: перенести useQuery и useMutation в model по соседству с используемым api
-//todo: поправить index.ts в entities (у event)
 function App() {
   useClearTokens();
 

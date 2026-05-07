@@ -1,4 +1,4 @@
-import { taskQueries, type GetEditorTaskDataResponse } from "@/entities";
+import { type GetEditorTaskDataResponse, taskQueries } from "@/entities/Task";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

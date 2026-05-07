@@ -1,7 +1,7 @@
 import {
   notificationQueries,
   type GetNotificationsQueryData,
-} from "@/entities";
+} from "@/entities/Notification";
 import { queryClient } from "@/shared/api";
 import type { InfiniteData } from "@tanstack/react-query";
 

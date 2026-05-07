@@ -2,7 +2,7 @@ import {
   useChangePassword,
   useRecoverCodeValidity,
   useSendCodeByEmail,
-} from "@/entities";
+} from "@/entities/User";
 import { handleError } from "@/shared/api";
 import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib";
 import { Button, Flex, Form, Input, Typography } from "antd";

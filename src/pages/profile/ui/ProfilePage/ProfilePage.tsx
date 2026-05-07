@@ -1,10 +1,9 @@
-import { useUpdateUsername } from "@/entities";
+import { useProfileData, useUpdateUsername } from "@/entities/User";
 import { handleError } from "@/shared/api";
 import { downloadApk, Seo, useNotify } from "@/shared/lib";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useEffectEvent } from "react";
-import { useProfileData } from "../../model/useProfileData";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
 import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";

@@ -2,7 +2,7 @@ import {
   NotificationCard,
   useDeleteNotification,
   useNotifications,
-} from "@/entities";
+} from "@/entities/Notification";
 import { useNotify } from "@/shared/lib";
 import { Button, Empty, Flex, Spin, Typography } from "antd";
 import { AnimatePresence, motion } from "motion/react";

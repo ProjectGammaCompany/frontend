@@ -1,4 +1,4 @@
-import type { GetTasksResponse } from "@/entities";
+import type { GetTasksResponse } from "@/entities/Block";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

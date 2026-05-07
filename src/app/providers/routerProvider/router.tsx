@@ -12,7 +12,7 @@ import { ProfilePage } from "@/pages/profile";
 import { StatsPage } from "@/pages/stats";
 import { TermsPage } from "@/pages/terms";
 import { tokenStorage } from "@/shared/lib";
-import { BaseLayout } from "@/widgets";
+import { BaseLayout } from "@/widgets/baseLayout";
 import { createBrowserRouter, redirect } from "react-router";
 import { RootLayout } from "./RootLayout";
 

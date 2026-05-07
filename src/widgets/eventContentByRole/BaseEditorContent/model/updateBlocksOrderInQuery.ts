@@ -1,8 +1,8 @@
 import {
-  eventQueries,
   type BlockItemData,
+  eventQueries,
   type getEditingEventDataResponse,
-} from "@/entities";
+} from "@/entities/Event";
 import { queryClient } from "@/shared/api";
 import type { AxiosResponse } from "axios";
 

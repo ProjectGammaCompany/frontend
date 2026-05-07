@@ -1,4 +1,4 @@
-import { BlockCard } from "@/entities";
+import { BlockCard } from "@/entities/Block";
 import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui";
 
 interface MenuItemProps {

@@ -1,4 +1,4 @@
-import type { TaskItemData } from "@/entities";
+import type { TaskItemData } from "@/entities/Block";
 import { DraggableCard } from "@/shared/lib";
 import { Typography } from "antd";
 import "./TaskItem.scss";

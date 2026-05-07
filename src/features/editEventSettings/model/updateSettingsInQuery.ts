@@ -1,9 +1,9 @@
 import {
-  eventQueries,
   type BaseEventFormData,
   type EditingEventSettings,
   type ServerGroup,
-} from "@/entities";
+  eventQueries,
+} from "@/entities/Event";
 import { queryClient } from "@/shared/api";
 import type { ChangeTypeOfKeys } from "@/shared/lib";
 import type { AxiosResponse } from "axios";

@@ -30,7 +30,7 @@ const DeleteTaskButton = ({
       onClick={() => deleteMutation.mutate()}
       className="delete-task-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };

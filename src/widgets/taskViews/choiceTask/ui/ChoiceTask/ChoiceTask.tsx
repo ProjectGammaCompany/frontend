@@ -1,6 +1,10 @@
-import { TaskView, type TaskStageFile } from "@/entities";
-import type { SendAnswerResponse } from "@/features";
-import { SendAnswerButton, useSendAnswer } from "@/features";
+import { type TaskStageFile, eventQueries } from "@/entities/Event";
+import { TaskView } from "@/entities/Task";
+import {
+  SendAnswerButton,
+  type SendAnswerResponse,
+  useSendAnswer,
+} from "@/features/sendTaskAnswer";
 import { queryClient } from "@/shared/api";
 import { useNotify } from "@/shared/lib";
 import { getTaskNotificationStyle } from "@/shared/lib/notifications";
@@ -103,7 +107,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       const el = document.getElementById("root");
       el?.scrollTo({ top: 0, behavior: "smooth" });
       void queryClient.invalidateQueries({
-        queryKey: [eventId, "game"],
+        queryKey: eventQueries.getGameData(eventId),
       });
     }, 3000);
   };

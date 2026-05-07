@@ -1,5 +1,5 @@
-import { eventQueries } from "@/entities";
-import { EditEventSettingsWindow } from "@/features";
+import { eventQueries } from "@/entities/Event";
+import { EditEventSettingsWindow } from "@/features/editEventSettings";
 import { queryClient } from "@/shared/api";
 import { Seo } from "@/shared/lib";
 import { BackSvg, Header, IconButton, Logo, SettingsSvg } from "@/shared/ui";

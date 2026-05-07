@@ -1,8 +1,8 @@
-import { getPlayerInfo, useRateEvent } from "@/entities";
-import { JoinGroupWindow, ToggleFavoriteEventButton } from "@/features";
+import { usePlayerInfo, useRateEvent } from "@/entities/Event";
+import { JoinGroupWindow } from "@/features/joinGroup";
+import { ToggleFavoriteEventButton } from "@/features/toggleFavoriteEvent";
 import { getFullFileUrl, Seo, useNotify } from "@/shared/lib";
 import { DefaultEventCoverSvg } from "@/shared/ui";
-import { useQuery } from "@tanstack/react-query";
 import { Button, Flex, Rate, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -16,13 +16,7 @@ interface ParticipantContentProps {
 const PlayerContent = ({ eventId }: ParticipantContentProps) => {
   const navigate = useNavigate();
   const notify = useNotify();
-  const { data, isPending, isError, refetch } = useQuery({
-    queryKey: [eventId, "playerInfo"],
-    queryFn: () => getPlayerInfo(eventId),
-    select: (data) => {
-      return data.data;
-    },
-  });
+  const { data, isPending, isError, refetch } = usePlayerInfo(eventId);
 
   const [openLoginGroupWindow, setOpenLoginGroupWindow] = useState(false);
 

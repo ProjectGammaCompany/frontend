@@ -22,7 +22,7 @@ const DeleteBlockButton = ({
       loading={deleteMutation.isPending}
       className="delete-block-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };
