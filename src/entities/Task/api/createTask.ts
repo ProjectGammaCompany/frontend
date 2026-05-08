@@ -2,6 +2,7 @@ import type { PickPartial } from "@/shared/lib/tsTypes";
 import type { ServerOption } from "./getEditorTaskData";
 
 import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export type ClientOption = PickPartial<ServerOption, "id"> & {
   clientId: string;
@@ -33,6 +34,6 @@ export const createTask = (
 ) => {
   return axiosInstance.post<CreateTaskResponse>(
     `event/${eventId}/blocks/${blockId}/task`,
-    data,
+    { ...data, lastEditionDate: getCurrentStringDate() },
   );
 };

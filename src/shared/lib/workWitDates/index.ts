@@ -1,1 +1,1 @@
-export { getCurrentStringData } from "./getCurrentStringData";
+export { getCurrentStringDate } from "./getCurrentStringData";

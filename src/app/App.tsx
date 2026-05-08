@@ -10,7 +10,6 @@ import { NotificationProvider } from "./providers/notificationProvider/notificat
 import router from "./providers/routerProvider/router";
 import "./styles/App.scss";
 
-//todo: добавить отправку lastEditionDate в каждый put/post/delete запрос в editor'е
 function App() {
   useClearTokens();
 

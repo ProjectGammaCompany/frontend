@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export interface AddBlockResponse {
   blockId: string;
@@ -20,5 +21,6 @@ export const addBlock = ({
     name,
     isParallel,
     order,
+    lastEditionDate: getCurrentStringDate(),
   });
 };

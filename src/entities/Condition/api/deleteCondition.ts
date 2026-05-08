@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export const deleteCondition = (
   eventId: string,
@@ -7,5 +8,10 @@ export const deleteCondition = (
 ) => {
   return axiosInstance.delete(
     `event/${eventId}/blocks/${blockId}/conditions/${conditionId}`,
+    {
+      data: {
+        lastEditionDate: getCurrentStringDate(),
+      },
+    },
   );
 };

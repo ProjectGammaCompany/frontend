@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/shared/api/axios";
 
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 import type { TaskFormData } from "./createTask";
 import { type ServerOption } from "./getEditorTaskData";
 
@@ -16,6 +17,6 @@ export const updateTask = (
 ) => {
   return axiosInstance.put<UpdateTaskResponse>(
     `event/${eventId}/blocks/${blockId}/tasks/${taskId}`,
-    data,
+    { ...data, lastEditionDate: getCurrentStringDate() },
   );
 };
