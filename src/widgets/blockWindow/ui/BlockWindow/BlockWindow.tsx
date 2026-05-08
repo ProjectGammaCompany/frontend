@@ -8,9 +8,12 @@ import {
 } from "@/entities/Block";
 import { eventQueries, updateBlockValueInQuery } from "@/entities/Event";
 import { DeleteBlockButton } from "@/features/deleteBlock";
-import { queryClient } from "@/shared/api";
-import { useDebounce, useNotify } from "@/shared/lib";
-import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/shared/ui";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useDebounce } from "@/shared/lib/customHooks";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { SettingsSvg } from "@/shared/ui/svg";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useEffectEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

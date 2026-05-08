@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
 
 export interface getRoleResponse {
   role: number;

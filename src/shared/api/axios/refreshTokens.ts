@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { TokensResponse } from "../../model";
+import type { TokensResponse } from "../../model/types";
 
 const refreshClient = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API_URL as string,

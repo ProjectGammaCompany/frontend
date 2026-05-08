@@ -1,5 +1,5 @@
-import { queryClient } from "@/shared/api";
-import { getFullFileUrl, getImgUrl } from "@/shared/lib";
+import { queryClient } from "@/shared/api/reactQuery";
+import { getFullFileUrl, getImgUrl } from "@/shared/lib/workWithFiles";
 
 import { eventQueries } from "@/entities/Event";
 import { LinkEventCard } from "@/widgets/linkEventCard";

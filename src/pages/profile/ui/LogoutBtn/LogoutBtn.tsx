@@ -1,4 +1,5 @@
-import { settingsStorage, tokenStorage } from "@/shared/lib";
+import { settingsStorage } from "@/shared/lib/settingsStorage";
+import { tokenStorage } from "@/shared/lib/tokenStorage";
 import { Button } from "antd";
 import { useNavigate } from "react-router";
 import { useLogout } from "../../model/useLogout";

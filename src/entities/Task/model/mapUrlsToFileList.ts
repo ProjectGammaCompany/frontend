@@ -1,4 +1,4 @@
-import { getFullFileUrl } from "@/shared/lib";
+import { getFullFileUrl } from "@/shared/lib/workWithFiles";
 import type { UploadFile } from "antd";
 import type { TaskFile } from "../api/createTask";
 

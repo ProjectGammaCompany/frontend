@@ -1,13 +1,15 @@
 import { type UseJoinCodeDataResult } from "@/entities/Event";
+import { useMessage } from "@/shared/lib/messages";
+import type { ChangeTypeOfKeys } from "@/shared/lib/tsTypes";
 import {
   getFullFileUrl,
   getImgUrl,
   getNormalizedFileList,
   useFileUpload,
-  useMessage,
-  type ChangeTypeOfKeys,
-} from "@/shared/lib";
-import { CustomDatePicker, CustomSwitch, QuestionSvg } from "@/shared/ui";
+} from "@/shared/lib/workWithFiles";
+import { CustomDatePicker } from "@/shared/ui/CustomDatePicker";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { QuestionSvg } from "@/shared/ui/svg";
 import { useMutation } from "@tanstack/react-query";
 import {
   Button,

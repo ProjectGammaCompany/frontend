@@ -13,9 +13,9 @@ import {
   type UseGroupsQueryData,
 } from "@/entities/Event";
 import { DeleteConditionButton } from "@/features/deleteCondition";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow } from "@/shared/ui";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";

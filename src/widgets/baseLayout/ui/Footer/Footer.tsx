@@ -1,4 +1,4 @@
-import { IconButton } from "@/shared/ui";
+import { IconButton } from "@/shared/ui/IconButton";
 import { ConfigProvider } from "antd";
 import classnames from "classnames";
 import { useRef } from "react";

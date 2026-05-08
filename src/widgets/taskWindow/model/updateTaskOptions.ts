@@ -1,5 +1,5 @@
 import { type GetEditorTaskDataResponse, taskQueries } from "@/entities/Task";
-import { queryClient } from "@/shared/api";
+import { queryClient } from "@/shared/api/reactQuery";
 import type { AxiosResponse } from "axios";
 
 export const updateTaskData = (
@@ -11,7 +11,6 @@ export const updateTaskData = (
   queryClient.setQueryData(
     taskQueries.editorTaskData(eventId, blockId, id),
     (oldData: AxiosResponse<GetEditorTaskDataResponse>) => {
-      //todo: check if splice is bad
       if (oldData) {
         const newData: AxiosResponse<GetEditorTaskDataResponse> = {
           ...oldData,

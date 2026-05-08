@@ -1,6 +1,7 @@
+import type { UploadFileResponse } from "@/shared/api/endpoints";
+import { uploadFile } from "@/shared/api/endpoints";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
-import { uploadFile, type UploadFileResponse } from "../../api";
 
 export const useFileUpload = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

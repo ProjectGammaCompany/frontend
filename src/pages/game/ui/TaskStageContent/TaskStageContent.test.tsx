@@ -1,6 +1,6 @@
 import type { TaskStageData } from "@/entities/Event";
-import { baseApiUrl } from "@/shared/api";
-import { basicRender } from "@/shared/lib";
+import { baseApiUrl } from "@/shared/api/axios";
+import { basicRender } from "@/shared/lib/testFunctions";
 import { screen } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";

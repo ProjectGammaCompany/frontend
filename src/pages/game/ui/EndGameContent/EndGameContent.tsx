@@ -1,5 +1,5 @@
 import { useRateEvent } from "@/entities/Event";
-import { useNotify } from "@/shared/lib";
+import { useNotify } from "@/shared/lib/notifications";
 import { Button, ConfigProvider, Rate, Typography } from "antd";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";

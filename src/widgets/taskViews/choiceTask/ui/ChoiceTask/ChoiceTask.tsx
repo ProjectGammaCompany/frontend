@@ -5,9 +5,11 @@ import {
   type SendAnswerResponse,
   useSendAnswer,
 } from "@/features/sendTaskAnswer";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { getTaskNotificationStyle } from "@/shared/lib/notifications";
+import { queryClient } from "@/shared/api/reactQuery";
+import {
+  getTaskNotificationStyle,
+  useNotify,
+} from "@/shared/lib/notifications";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -17,7 +19,6 @@ interface ChoiceTaskProps {
   data: ChoiceTaskData;
 }
 
-//todo: change
 interface ChoiceTaskData {
   taskId: string;
   eventId: string;
@@ -36,7 +37,6 @@ interface TaskOption {
   value: string;
 }
 
-//todo: Просмотреть ещё раз логику реагирования на истечение времени, рефакторинг переменных, проверка useEffect
 const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const notify = useNotify();
 

@@ -1,5 +1,5 @@
-import { useDebounce } from "@/shared/lib";
-import { TrashSvg } from "@/shared/ui";
+import { useDebounce } from "@/shared/lib/customHooks";
+import { TrashSvg } from "@/shared/ui/svg";
 import { Button, Input } from "antd";
 import classnames from "classnames";
 import { useEffect, useState } from "react";

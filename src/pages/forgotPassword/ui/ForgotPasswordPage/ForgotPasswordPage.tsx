@@ -3,8 +3,11 @@ import {
   useRecoverCodeValidity,
   useSendCodeByEmail,
 } from "@/entities/User";
-import { handleError } from "@/shared/api";
-import { Seo, settingsStorage, tokenStorage, useNotify } from "@/shared/lib";
+import { handleError } from "@/shared/api/axios";
+import { useNotify } from "@/shared/lib/notifications";
+import { Seo } from "@/shared/lib/seo";
+import { settingsStorage } from "@/shared/lib/settingsStorage";
+import { tokenStorage } from "@/shared/lib/tokenStorage";
 import { Button, Flex, Form, Input, Typography } from "antd";
 import Password from "antd/es/input/Password";
 import { useEffect, useEffectEvent, useState } from "react";

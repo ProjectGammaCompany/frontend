@@ -1,7 +1,7 @@
-import { Seo } from "@/shared/lib"
-import { Button, Flex } from "antd"
-import { useNavigate } from "react-router"
-import "./PolicyPage.scss"
+import { Seo } from "@/shared/lib/seo";
+import { Button, Flex } from "antd";
+import { useNavigate } from "react-router";
+import "./PolicyPage.scss";
 
 const PolicyPage = () => {
   const navigate = useNavigate();

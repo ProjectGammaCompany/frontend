@@ -1,7 +1,7 @@
-import type { PickPartial } from "@/shared/lib";
+import type { PickPartial } from "@/shared/lib/tsTypes";
 import type { ServerOption } from "./getEditorTaskData";
 
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
 
 export type ClientOption = PickPartial<ServerOption, "id"> & {
   clientId: string;

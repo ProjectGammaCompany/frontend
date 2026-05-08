@@ -1,5 +1,5 @@
-import { baseApiUrl } from "@/shared/api";
-import { basicRender } from "@/shared/lib";
+import { baseApiUrl } from "@/shared/api/axios";
+import { basicRender } from "@/shared/lib/testFunctions";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";

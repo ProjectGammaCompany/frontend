@@ -1,4 +1,4 @@
-import { basicRender } from "@/shared/lib";
+import { basicRender } from "@/shared/lib/testFunctions";
 import { act, screen } from "@testing-library/react";
 import dayjs from "dayjs";
 import { describe, expect, it, vi } from "vitest";

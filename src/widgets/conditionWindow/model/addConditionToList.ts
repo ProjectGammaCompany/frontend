@@ -1,6 +1,6 @@
 import { type GetConditionsResponse, blockQueries } from "@/entities/Block";
 import type { ConditionData } from "@/entities/Condition";
-import { queryClient } from "@/shared/api";
+import { queryClient } from "@/shared/api/reactQuery";
 import type { AxiosResponse } from "axios";
 
 export const addConditionToList = (

@@ -4,8 +4,8 @@ import {
   type JoinDetails,
   type UseJoinEventResponse,
 } from "@/entities/Event";
-import { handleError } from "@/shared/api";
-import { CustomModalWindow } from "@/shared/ui";
+import { handleError } from "@/shared/api/axios";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import { Button, Form, Input, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import Password from "antd/es/input/Password";

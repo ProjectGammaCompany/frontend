@@ -1,5 +1,5 @@
 import type { GetProfileResponse } from "@/entities/User";
-import { queryClient } from "@/shared/api";
+import { queryClient } from "@/shared/api/reactQuery";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { setAvatar } from "../api/setAvatar";

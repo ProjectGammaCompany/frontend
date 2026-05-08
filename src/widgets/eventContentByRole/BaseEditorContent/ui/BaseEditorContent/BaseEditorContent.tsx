@@ -7,8 +7,8 @@ import {
   useUpdateBlocksOrder,
 } from "@/entities/Event";
 import { AddBlockMenu } from "@/features/addBlock";
-import { useNotify } from "@/shared/lib";
-import { StatsSvg } from "@/shared/ui";
+import { useNotify } from "@/shared/lib/notifications";
+import { StatsSvg } from "@/shared/ui/svg";
 import BlockItem from "@/widgets/eventContentByRole/BaseEditorContent/ui/BlockItem/BlockItem";
 import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
 import { Button, FloatButton, Typography } from "antd";
@@ -26,7 +26,6 @@ interface EditorContentProps {
   onBlockCreate: (id: string) => void;
 }
 
-//TODO: рефакторинг
 const BaseEditorContent = ({
   eventId,
   onBlockCreate,
@@ -60,18 +59,6 @@ const BaseEditorContent = ({
     handleFailedBlocksOrderUpdating,
   );
 
-  const onBeforeCapture = useCallback(() => {
-    /*...*/
-  }, []);
-  const onBeforeDragStart = useCallback(() => {
-    /*...*/
-  }, []);
-  const onDragStart = useCallback(() => {
-    /*...*/
-  }, []);
-  const onDragUpdate = useCallback(() => {
-    /*...*/
-  }, []);
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { destination, source, draggableId } = result;
@@ -145,13 +132,7 @@ const BaseEditorContent = ({
           {name}
         </Typography.Text>
       </div>
-      <DragDropContext
-        onBeforeCapture={onBeforeCapture}
-        onBeforeDragStart={onBeforeDragStart}
-        onDragStart={onDragStart}
-        onDragUpdate={onDragUpdate}
-        onDragEnd={onDragEnd}
-      >
+      <DragDropContext onDragEnd={onDragEnd}>
         <BlockList
           blocks={data.blocks}
           BlockComponent={BlockItem}

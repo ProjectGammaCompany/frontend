@@ -6,8 +6,8 @@ import {
   EventForm,
 } from "@/entities/Event";
 import { useTags } from "@/entities/Tag";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow } from "@/shared/ui";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import type { AxiosResponse } from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -20,7 +20,6 @@ interface CreateEventWindowProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RequestResponse = AxiosResponse<CreateEventResponse, any, object>;
 
-//todo fix path
 const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
   const navigate = useNavigate();
   const notify = useNotify();

@@ -3,7 +3,7 @@ import {
   useDeleteNotification,
   useNotifications,
 } from "@/entities/Notification";
-import { useNotify } from "@/shared/lib";
+import { useNotify } from "@/shared/lib/notifications";
 import { Button, Empty, Flex, Spin, Typography } from "antd";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";

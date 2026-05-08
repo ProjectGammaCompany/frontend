@@ -10,9 +10,9 @@ import {
   useEditorTaskData,
 } from "@/entities/Task";
 import { DeleteTaskButton } from "@/features/deleteTask";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow } from "@/shared/ui";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import type { AxiosResponse } from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { addTaskToList } from "../../model/addTaskToList";

@@ -1,5 +1,5 @@
-import { axiosInstance } from "@/shared/api";
-import type { TokensResponse } from "@/shared/model";
+import { axiosInstance } from "@/shared/api/axios";
+import type { TokensResponse } from "@/shared/model/types";
 
 export const changePassword = (
   code: string,

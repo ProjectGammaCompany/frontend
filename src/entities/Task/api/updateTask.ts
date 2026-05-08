@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
 
 import type { TaskFormData } from "./createTask";
 import { type ServerOption } from "./getEditorTaskData";

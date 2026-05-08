@@ -1,4 +1,5 @@
-import { Seo, type ChangeTypeOfKeys } from "@/shared/lib";
+import { Seo } from "@/shared/lib/seo";
+import { type ChangeTypeOfKeys } from "@/shared/lib/tsTypes";
 import {
   selectFiltersWindowState,
   setIsFiltersWindowOpen,

@@ -1,5 +1,7 @@
 import { useTags } from "@/entities/Tag";
-import { CustomModalWindow, CustomSwitch } from "@/shared/ui";
+
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
 import { Button, Form, Select, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";

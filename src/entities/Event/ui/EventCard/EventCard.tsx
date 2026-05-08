@@ -1,4 +1,4 @@
-import { DefaultEventCoverSvg } from "@/shared/ui";
+import { DefaultEventCoverSvg } from "@/shared/ui/svg";
 import { Typography } from "antd";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";

@@ -1,4 +1,4 @@
-import { CustomSwitch } from "@/shared/ui";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
 import { Button, Form, InputNumber, Select, Typography } from "antd";
 import { useForm, useWatch } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";

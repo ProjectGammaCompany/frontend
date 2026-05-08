@@ -1,4 +1,4 @@
-import { basicRender } from "@/shared/lib/testFunctions/basicRender";
+import { basicRender } from "@/shared/lib/testFunctions";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";

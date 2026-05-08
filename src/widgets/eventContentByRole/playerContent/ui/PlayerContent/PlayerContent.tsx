@@ -1,8 +1,10 @@
 import { usePlayerInfo, useRateEvent } from "@/entities/Event";
 import { JoinGroupWindow } from "@/features/joinGroup";
 import { ToggleFavoriteEventButton } from "@/features/toggleFavoriteEvent";
-import { getFullFileUrl, Seo, useNotify } from "@/shared/lib";
-import { DefaultEventCoverSvg } from "@/shared/ui";
+import { useNotify } from "@/shared/lib/notifications";
+import { Seo } from "@/shared/lib/seo";
+import { getFullFileUrl } from "@/shared/lib/workWithFiles";
+import { DefaultEventCoverSvg } from "@/shared/ui/svg";
 import { Button, Flex, Rate, Spin, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";

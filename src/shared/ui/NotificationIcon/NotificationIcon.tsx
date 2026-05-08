@@ -5,10 +5,7 @@ interface NotificationIconProps {
   className?: string;
 }
 
-export const NotificationIcon = ({
-  type,
-  className,
-}: NotificationIconProps) => {
+const NotificationIcon = ({ type, className }: NotificationIconProps) => {
   return (
     <img
       className={"notification__icon " + (className ?? "")}
@@ -16,3 +13,5 @@ export const NotificationIcon = ({
     />
   );
 };
+
+export default NotificationIcon;

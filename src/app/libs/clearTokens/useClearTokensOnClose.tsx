@@ -1,8 +1,9 @@
-import { queryClient } from "@/shared/api";
-import { settingsStorage, tokenStorage } from "@/shared/lib";
+import { queryClient } from "@/shared/api/reactQuery";
+import { settingsStorage } from "@/shared/lib/settingsStorage";
+import { tokenStorage } from "@/shared/lib/tokenStorage";
+
 import { useEffect } from "react";
 
-//todo: переместить в отдельную директорию
 export const useClearTokens = () => {
   useEffect(() => {
     const handleBeforeUnload = () => {

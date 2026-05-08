@@ -12,9 +12,11 @@ import {
   useJoinCodeData,
 } from "@/entities/Event";
 import { useTags } from "@/entities/Tag";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/shared/ui";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { TrashSvg } from "@/shared/ui/svg";
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import type { AxiosResponse } from "axios";

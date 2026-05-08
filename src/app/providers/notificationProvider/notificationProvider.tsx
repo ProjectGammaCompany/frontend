@@ -1,4 +1,4 @@
-import { NotificationContext } from "@/shared/lib";
+import { NotificationContext } from "@/shared/lib/notifications";
 import { notification } from "antd";
 import type { ReactNode } from "react";
 

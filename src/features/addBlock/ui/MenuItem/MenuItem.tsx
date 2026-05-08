@@ -1,5 +1,5 @@
 import { BlockCard } from "@/entities/Block";
-import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui";
+import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui/svg";
 
 interface MenuItemProps {
   type: "parallel" | "consistent";

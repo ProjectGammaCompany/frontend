@@ -1,6 +1,6 @@
-import { Seo } from "@/shared/lib"
-import NotificationsList from "../NotificationsList/NotificationsList"
-import "./NotificationsPage.scss"
+import { Seo } from "@/shared/lib/seo";
+import NotificationsList from "../NotificationsList/NotificationsList";
+import "./NotificationsPage.scss";
 
 const NotificationsPage = () => {
   return (

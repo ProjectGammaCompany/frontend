@@ -1,4 +1,4 @@
-import { Seo } from "@/shared/lib";
+import { Seo } from "@/shared/lib/seo";
 import { Segmented, Typography } from "antd";
 import classnames from "classnames";
 import {

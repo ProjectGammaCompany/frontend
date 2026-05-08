@@ -1,5 +1,5 @@
 import { deleteCondition } from "@/entities/Condition";
-import { TrashSvg } from "@/shared/ui";
+import { TrashSvg } from "@/shared/ui/svg";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
 import "./DeleteConditionButton.scss";
@@ -11,7 +11,6 @@ interface DeleteConditionButtonProps {
   onError?: () => void;
 }
 
-//todo: перенести в ui кнопку удаления
 const DeleteConditionButton = ({
   eventId,
   blockId,

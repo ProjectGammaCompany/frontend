@@ -1,9 +1,12 @@
 import { eventQueries } from "@/entities/Event";
 import { EditEventSettingsWindow } from "@/features/editEventSettings";
-import { queryClient } from "@/shared/api";
-import { Seo } from "@/shared/lib";
-import { BackSvg, Header, IconButton, Logo, SettingsSvg } from "@/shared/ui";
+import { queryClient } from "@/shared/api/reactQuery";
+import { Seo } from "@/shared/lib/seo";
+import IconButton from "@/shared/ui/IconButton/IconButton";
+import Logo from "@/shared/ui/Logo/Logo";
+import { BackSvg, SettingsSvg } from "@/shared/ui/svg";
 import { Typography } from "antd";
+import { Header } from "antd/es/layout/layout";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./EventHeader.scss";
@@ -13,7 +16,6 @@ interface EventHeaderProps {
   eventId: string;
 }
 
-//todo: подумать, нужен ли перенос окна в mainContent
 const EventHeader = ({ role, eventId }: EventHeaderProps) => {
   const navigate = useNavigate();
 

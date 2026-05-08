@@ -1,3 +1,4 @@
+import { CrossSvg } from "@/shared/ui/svg";
 import { Button, Spin } from "antd";
 import classnames from "classnames";
 import {
@@ -9,7 +10,6 @@ import {
 import type { Html5QrcodeError } from "html5-qrcode/esm/core";
 import type { Html5QrcodeScannerConfig } from "html5-qrcode/esm/html5-qrcode-scanner";
 import { useCallback, useEffect, useState } from "react";
-import { CrossSvg } from "../../ui";
 import "./QrCodeScanner.scss";
 interface QrCodeScannerProps {
   elementId: string;

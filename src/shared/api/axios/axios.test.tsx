@@ -1,8 +1,8 @@
-import { http, HttpResponse } from "msw";
+import { mockTokenStorage } from "@/shared/lib/tokenStorage";
+import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
-import { baseApiUrl, createAxiosInstance } from "..";
-import { mockTokenStorage } from "../../lib";
+import { baseApiUrl, createAxiosInstance } from "./createAxiosInstance";
 
 const validAccessToken = "testAccess";
 const validRefreshToken = "testRefresh";

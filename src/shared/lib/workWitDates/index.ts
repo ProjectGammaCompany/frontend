@@ -1,0 +1,1 @@
+export { getCurrentStringData } from "./getCurrentStringData";

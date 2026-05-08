@@ -5,9 +5,11 @@ import {
   type SendAnswerResponse,
   useSendAnswer,
 } from "@/features/sendTaskAnswer";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { getTaskNotificationStyle } from "@/shared/lib/notifications";
+import { queryClient } from "@/shared/api/reactQuery";
+import {
+  getTaskNotificationStyle,
+  useNotify,
+} from "@/shared/lib/notifications";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -18,8 +20,6 @@ interface TextEntryTaskProps {
   data: TextEntryTaskData;
 }
 
-//todo: change for final version
-//todo: не забыть приведение в lowercase перед отправкой ответа
 interface TextEntryTaskData {
   taskId: string;
   name: string;

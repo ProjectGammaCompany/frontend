@@ -1,6 +1,6 @@
 import { BlockCard } from "@/entities/Block";
 import type { BlockItemData } from "@/entities/Event";
-import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui";
+import { CoherentBlockSvg, ParallelBlockSvg } from "@/shared/ui/svg";
 import { Typography } from "antd";
 import "./BlockItem.scss";
 interface BlockItemProps {

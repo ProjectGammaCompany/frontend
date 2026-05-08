@@ -1,6 +1,6 @@
 import type { EditorUserStats } from "@/entities/Event";
-import { getFullFileUrl } from "@/shared/lib";
-import { ProfileSvg } from "@/shared/ui";
+import { getFullFileUrl } from "@/shared/lib/workWithFiles";
+import { ProfileSvg } from "@/shared/ui/svg";
 import { Progress, Table, Typography } from "antd";
 import Column from "antd/es/table/Column";
 import "./UsersStatsTable.scss";

@@ -1,4 +1,4 @@
-import { axiosInstance } from "../axios/axios";
+import { axiosInstance } from "../axios";
 
 export type UploadFileResponse = string;
 export const uploadFile = (file: File) => {

@@ -1,6 +1,6 @@
 import type { TaskStageData } from "@/entities/Event";
 import { useSendAnswer } from "@/features/sendTaskAnswer";
-import { getShuffledArray } from "@/shared/lib";
+import { getShuffledArray } from "@/shared/lib/workWithArrays";
 
 // eslint-disable-next-line boundaries/dependencies
 import { ChoiceTask } from "@/widgets/taskViews/choiceTask";
@@ -19,7 +19,6 @@ interface TaskStageProps {
   eventId: string;
 }
 
-//todo: выделить типизацию таски куда-то для переиспользования
 const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   const [task, setTask] = useState(defaultTask);
 

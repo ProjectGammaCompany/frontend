@@ -1,5 +1,6 @@
 import type { BlockStage } from "@/entities/Event";
-import { getShuffledArray, useNotify } from "@/shared/lib";
+import { useNotify } from "@/shared/lib/notifications";
+import { getShuffledArray } from "@/shared/lib/workWithArrays";
 import { TaskSlider } from "@/widgets/taskSlider";
 import { Button, Typography } from "antd";
 import { useState } from "react";

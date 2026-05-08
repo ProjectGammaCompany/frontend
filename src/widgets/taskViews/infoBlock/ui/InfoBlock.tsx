@@ -1,8 +1,8 @@
 import { type TaskStageFile, eventQueries } from "@/entities/Event";
 import { TaskView } from "@/entities/Task";
 import { useSendAnswer } from "@/features/sendTaskAnswer";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
 import { Button } from "antd";
 import "./InfoBlock.scss";
 interface InfoBlockProps {

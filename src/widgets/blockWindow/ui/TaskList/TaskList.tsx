@@ -4,7 +4,7 @@ import {
   useTasks,
   useUpdateTasksOrder,
 } from "@/entities/Block";
-import { useNotify } from "@/shared/lib";
+import { useNotify } from "@/shared/lib/notifications";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useCallback } from "react";

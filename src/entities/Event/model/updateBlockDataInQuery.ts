@@ -2,7 +2,7 @@ import {
   eventQueries,
   type getEditingEventDataResponse,
 } from "@/entities/Event";
-import { queryClient } from "@/shared/api";
+import { queryClient } from "@/shared/api/reactQuery";
 import type { AxiosResponse } from "axios";
 
 type DataType =

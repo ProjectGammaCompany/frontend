@@ -1,4 +1,5 @@
-import { downloadApk, Seo } from "@/shared/lib";
+import { Seo } from "@/shared/lib/seo";
+import { downloadApk } from "@/shared/lib/workWithFiles";
 import { Button, Typography } from "antd";
 import { motion } from "motion/react";
 import { useEffect } from "react";

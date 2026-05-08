@@ -1,4 +1,4 @@
-import { type TokensResponse } from "@/shared/model";
+import { type TokensResponse } from "@/shared/model/types";
 import { useMutation } from "@tanstack/react-query";
 import { type AxiosResponse } from "axios";
 import { changePassword } from "../api/changePassword";

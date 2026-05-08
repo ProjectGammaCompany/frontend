@@ -4,8 +4,8 @@ import {
   type ServerGroup,
   eventQueries,
 } from "@/entities/Event";
-import { queryClient } from "@/shared/api";
-import type { ChangeTypeOfKeys } from "@/shared/lib";
+import { queryClient } from "@/shared/api/reactQuery";
+import type { ChangeTypeOfKeys } from "@/shared/lib/tsTypes";
 import type { AxiosResponse } from "axios";
 
 type FormData = BaseEventFormData & {

@@ -1,4 +1,4 @@
-import { CrossSvg } from "@/shared/ui/index.ts";
+import { CrossSvg } from "@/shared/ui/svg/index.ts";
 import { Button, Typography } from "antd";
 import { useNavigate } from "react-router";
 import type { CustomNotification } from "../../api/getNotifications.ts";
