@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export const updateTasksOrder = (
   eventId: string,
@@ -7,5 +8,6 @@ export const updateTasksOrder = (
 ) => {
   return axiosInstance.put(`event/${eventId}/blocks/${blockId}/tasks`, {
     tasks,
+    lastEditionDate: getCurrentStringDate(),
   });
 };

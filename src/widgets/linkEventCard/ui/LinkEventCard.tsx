@@ -1,5 +1,5 @@
-import { EventCard } from "@/entities";
-import { ToggleFavoriteEventButton } from "@/features";
+import { EventCard } from "@/entities/Event";
+import { ToggleFavoriteEventButton } from "@/features/toggleFavoriteEvent";
 import { Typography } from "antd";
 import { Link } from "react-router";
 import "./LinkEventCard.scss";

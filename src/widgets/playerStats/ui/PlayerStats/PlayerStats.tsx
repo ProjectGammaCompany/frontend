@@ -1,4 +1,4 @@
-import { usePlayerStats } from "@/entities";
+import { usePlayerStats } from "@/entities/Event";
 import { Button, Flex, Spin, Typography } from "antd";
 import GroupsStatsTable from "../GroupStatsTable/GroupsStatsTable";
 import UserStatsTable from "../UserStatsTable/UserStatsTable";

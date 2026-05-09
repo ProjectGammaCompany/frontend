@@ -1,4 +1,4 @@
-import { TrashSvg } from "@/shared/ui";
+import { TrashSvg } from "@/shared/ui/svg";
 import { Button } from "antd";
 import { useDeleteBlock } from "../model/useDeleteBlock";
 import "./DeleteBlockButton.scss";
@@ -22,7 +22,7 @@ const DeleteBlockButton = ({
       loading={deleteMutation.isPending}
       className="delete-block-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };

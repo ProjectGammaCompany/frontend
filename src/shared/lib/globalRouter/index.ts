@@ -1,0 +1,1 @@
+export { globalRouter } from "./globalRouter";

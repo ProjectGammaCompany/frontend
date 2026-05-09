@@ -8,5 +8,8 @@ export const eventQueries = {
   getJoinCodeData: (eventId: string) => [eventId, "joinCodeData"] as const,
   getUserRole: (eventId: string) => [eventId, "userRole"] as const,
   getPlayerStats: (eventId: string) => [eventId, "playerStats"] as const,
+  getPlayerInfo: (eventId: string) => [eventId, "playerInfo"] as const,
   getEditorStats: (eventId: string) => [eventId, "editorStats"] as const,
+  getBlockOptions: (eventId: string) => [eventId, "blockOptions"] as const,
+  getGameData: (eventId: string) => [eventId, "game"] as const,
 };

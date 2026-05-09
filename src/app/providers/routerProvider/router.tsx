@@ -11,8 +11,8 @@ import { PolicyPage } from "@/pages/policy";
 import { ProfilePage } from "@/pages/profile";
 import { StatsPage } from "@/pages/stats";
 import { TermsPage } from "@/pages/terms";
-import { tokenStorage } from "@/shared/lib";
-import { BaseLayout } from "@/widgets";
+import { tokenStorage } from "@/shared/lib/tokenStorage";
+import { BaseLayout } from "@/widgets/baseLayout";
 import { createBrowserRouter, redirect } from "react-router";
 import { RootLayout } from "./RootLayout";
 
@@ -98,7 +98,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-//TODO: добавить тест
 function privateRoutesMiddleware() {
   if (!tokenStorage.getAccessToken()) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -106,7 +105,6 @@ function privateRoutesMiddleware() {
   }
 }
 
-//TODO: добавить тест
 function authMiddleware() {
   if (tokenStorage.getAccessToken()) {
     // eslint-disable-next-line @typescript-eslint/only-throw-error

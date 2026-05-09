@@ -1,4 +1,4 @@
-import type { Condition } from "@/entities";
+import type { Condition } from "@/entities/Block";
 import { Typography } from "antd";
 import "./ConditionItem.scss";
 interface ConditionItemProps {

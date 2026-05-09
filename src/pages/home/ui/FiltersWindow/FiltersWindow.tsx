@@ -1,6 +1,7 @@
-import { getTags } from "@/entities";
-import { CustomModalWindow, CustomSwitch } from "@/shared/ui";
-import { useQuery } from "@tanstack/react-query";
+import { useTags } from "@/entities/Tag";
+
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
 import { Button, Form, Select, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
@@ -19,17 +20,7 @@ const FiltersWindow = ({
   filters,
   onFiltersChange,
 }: FiltersWindowProps) => {
-  const { data: tags } = useQuery({
-    queryKey: ["eventTags"],
-    queryFn: getTags,
-    select: (data) =>
-      data.data.tags.map((tag) => {
-        return {
-          label: tag.name,
-          value: tag.id,
-        };
-      }),
-  });
+  const { data: tags } = useTags();
 
   const [initialValues, setInitialValues] = useState(filters);
 

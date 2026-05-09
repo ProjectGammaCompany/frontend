@@ -1,5 +1,7 @@
-import { Seo } from "@/shared/lib";
-import { BackSvg, Header, Logo } from "@/shared/ui";
+import { Seo } from "@/shared/lib/seo";
+import { Header } from "@/shared/ui/Header";
+import { Logo } from "@/shared/ui/Logo";
+import { BackSvg } from "@/shared/ui/svg";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useNavigate, useParams } from "react-router";
 import { useGameData } from "../../model/useGameData";

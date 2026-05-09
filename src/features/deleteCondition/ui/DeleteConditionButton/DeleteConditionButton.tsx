@@ -1,5 +1,5 @@
-import { deleteCondition } from "@/entities";
-import { TrashSvg } from "@/shared/ui";
+import { deleteCondition } from "@/entities/Condition";
+import { TrashSvg } from "@/shared/ui/svg";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "antd";
 import "./DeleteConditionButton.scss";
@@ -11,7 +11,6 @@ interface DeleteConditionButtonProps {
   onError?: () => void;
 }
 
-//todo: перенести в ui кнопку удаления
 const DeleteConditionButton = ({
   eventId,
   blockId,
@@ -30,7 +29,7 @@ const DeleteConditionButton = ({
       onClick={() => deleteMutation.mutate()}
       className="delete-condition-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };

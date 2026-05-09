@@ -1,4 +1,4 @@
-import { TrashSvg } from "@/shared/ui";
+import { TrashSvg } from "@/shared/ui/svg";
 import { Button } from "antd";
 import { useDeleteTask } from "../../model/useDeleteTask";
 import "./DeleteTaskButton.scss";
@@ -30,7 +30,7 @@ const DeleteTaskButton = ({
       onClick={() => deleteMutation.mutate()}
       className="delete-task-btn"
     >
-      <TrashSvg />
+      {!deleteMutation.isPending && <TrashSvg />}
     </Button>
   );
 };

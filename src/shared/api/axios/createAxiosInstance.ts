@@ -1,7 +1,9 @@
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
-import { globalRouter, type TokenStorage } from "../../lib";
-import type { TokensResponse } from "../../model";
-import { refreshTokens } from "../endpoints/refreshTokens";
+
+import { globalRouter } from "@/shared/lib/globalRouter";
+import type { TokenStorage } from "@/shared/lib/tokenStorage";
+import type { TokensResponse } from "@/shared/model/types";
+import { refreshTokens } from "./refreshTokens";
 
 export const baseApiUrl = import.meta.env.VITE_APP_BASE_API_URL as string;
 

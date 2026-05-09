@@ -1,7 +1,8 @@
-import { TaskView, type TaskStageFile } from "@/entities";
-import { useSendAnswer } from "@/features";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
+import { type TaskStageFile, eventQueries } from "@/entities/Event";
+import { TaskView } from "@/entities/Task";
+import { useSendAnswer } from "@/features/sendTaskAnswer";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
 import { Button } from "antd";
 import "./InfoBlock.scss";
 interface InfoBlockProps {
@@ -26,7 +27,7 @@ const InfoBlock = ({ data }: InfoBlockProps) => {
     const el = document.getElementById("root");
     el?.scrollTo({ top: 0, behavior: "smooth" });
     void queryClient.invalidateQueries({
-      queryKey: [eventId, "game"],
+      queryKey: eventQueries.getGameData(eventId),
     });
   };
 

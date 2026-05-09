@@ -1,5 +1,5 @@
-import { handleError } from "@/shared/api";
-import { CustomModalWindow } from "@/shared/ui";
+import { handleError } from "@/shared/api/axios";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import { Button, Form, Input, Typography } from "antd";
 import Password from "antd/es/input/Password";
 import { useState } from "react";

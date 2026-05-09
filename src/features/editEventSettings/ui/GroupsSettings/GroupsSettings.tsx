@@ -1,4 +1,4 @@
-import type { ClientGroup } from "@/entities";
+import type { ClientGroup } from "@/entities/Event";
 import { Button, Form } from "antd";
 import { useWatch } from "antd/es/form/Form";
 import { v4 as uuidv4 } from "uuid";
@@ -16,7 +16,6 @@ export const GroupsSettings = () => {
     login: string,
     password: string,
   ) => {
-    console.log("меняю");
     const newArray = groups.map((group, i) => {
       if (i === index) {
         return {

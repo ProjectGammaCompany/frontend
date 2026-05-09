@@ -1,6 +1,6 @@
-import type { BlockItemData } from "@/entities";
-import { useNotify } from "@/shared/lib";
-import { BackSvg } from "@/shared/ui";
+import type { BlockItemData } from "@/entities/Event";
+import { useNotify } from "@/shared/lib/notifications";
+import { BackSvg } from "@/shared/ui/svg";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import classnames from "classnames";
 import { useCallback, useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { DraggableCard } from "@/shared/lib";
+import { DraggableCard } from "@/shared/lib/dnd";
 import { Typography } from "antd";
 import type { ReactNode } from "react";
 import "./BlockCard.scss";

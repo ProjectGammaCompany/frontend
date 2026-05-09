@@ -1,9 +1,6 @@
-import {
-  updateBlockValueInQuery,
-  type BlockSettings,
-  type UpdateBlockData,
-} from "@/entities";
-import type { ChangeTypeOfKeys } from "@/shared/lib";
+import type { BlockSettings, UpdateBlockData } from "@/entities/Block";
+import { updateBlockValueInQuery } from "@/entities/Event";
+import type { ChangeTypeOfKeys } from "@/shared/lib/tsTypes";
 import { Button, Form, Switch, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { AnimatePresence, motion } from "motion/react";

@@ -11,7 +11,6 @@ interface CustomModalWindowProps {
   zIndex?: number;
 }
 
-//TODO: отредактировать кнопку сворачивания
 const CustomModalWindow = ({
   open,
   setIsOpen,

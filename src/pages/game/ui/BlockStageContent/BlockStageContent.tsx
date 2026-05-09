@@ -1,6 +1,7 @@
-import { type BlockStage } from "@/entities";
-import { getShuffledArray, useNotify } from "@/shared/lib";
-import { TaskSlider } from "@/widgets";
+import type { BlockStage } from "@/entities/Event";
+import { useNotify } from "@/shared/lib/notifications";
+import { getShuffledArray } from "@/shared/lib/workWithArrays";
+import { TaskSlider } from "@/widgets/taskSlider";
 import { Button, Typography } from "antd";
 import { useState } from "react";
 import { invalidateGameData } from "../../model/invalidateGameData";

@@ -1,27 +1,29 @@
 import {
-  deleteEvent,
-  editEventSettings,
-  EventForm,
-  getEditingEventSettings,
-  selectEventName,
-  setName,
-  useJoinCodeData,
   type BaseEventFormData,
   type ClientGroup,
   type EditEventSettingsResponse,
   type EditingEventSettings,
-} from "@/entities";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow, CustomSwitch, TrashSvg } from "@/shared/ui";
-import { useMutation, useQuery } from "@tanstack/react-query";
+  EventForm,
+  deleteEvent,
+  editEventSettings,
+  selectEventName,
+  setName,
+  useEditingEventSettings,
+  useJoinCodeData,
+} from "@/entities/Event";
+import { useTags } from "@/entities/Tag";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { TrashSvg } from "@/shared/ui/svg";
+import { useMutation } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import type { AxiosResponse } from "axios";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { mapServerGroupToClientGroup } from "../../model/mapServerGroupToClientGroup";
+import { mapServerDataToFormData } from "../../model/mapServerDataToFormData";
 import { updateSettingsInQuery } from "../../model/updateSettingsInQuery";
 import { GroupsSettings } from "../GroupsSettings/GroupsSettings";
 import "./EditEventSettingsWindow.scss";
@@ -38,9 +40,6 @@ export type FullFormData = BaseEventFormData & {
   collaborators: string[];
 };
 
-type FullSettingsData = EditingEventSettings & {
-  name: string;
-};
 const EditEventSettingsWindow = ({
   eventId,
   open,
@@ -50,13 +49,8 @@ const EditEventSettingsWindow = ({
   const title = useSelector(selectEventName);
   const navigate = useNavigate();
 
-  const { data: formData } = useQuery({
-    queryKey: [eventId, "settings"],
-    queryFn: () => getEditingEventSettings(eventId),
-    select: (data) => {
-      return mapServerDataToFormData({ ...data.data, name: title });
-    },
-    enabled: open,
+  const { data: formData } = useEditingEventSettings(eventId, open, (data) => {
+    return mapServerDataToFormData({ ...data, name: title });
   });
 
   const {
@@ -66,30 +60,13 @@ const EditEventSettingsWindow = ({
     refetch,
   } = useJoinCodeData(eventId, false);
 
+  const { data: tagOptions, refetch: refetchTags } = useTags();
+
   const [showSuccessText, setShowSuccessText] = useState(false);
 
   const [groupEvent, setGroupEvent] = useState(false);
 
   const dispatch = useDispatch();
-
-  const mapServerDataToFormData = (data?: FullSettingsData) => {
-    if (!data) {
-      return undefined;
-    }
-
-    const transformedData: FullFormData & { joinCode?: string } = {
-      ...data,
-      startDate: data.startDate
-        ? dayjs(data.startDate, "DD.MM.YYYY HH:mm")
-        : undefined,
-      endDate: data.endDate
-        ? dayjs(data.endDate, "DD.MM.YYYY HH:mm")
-        : undefined,
-      groups: mapServerGroupToClientGroup(data.groups),
-    };
-    return transformedData;
-  };
-
   const deleteEventMutation = useMutation({
     mutationFn: () => deleteEvent(eventId),
     onSuccess: () => {
@@ -126,6 +103,12 @@ const EditEventSettingsWindow = ({
     }
   }, [formData?.private, open, refetch]);
 
+  useEffect(() => {
+    if (open) {
+      void refetchTags();
+    }
+  }, [open, refetchTags]);
+
   return (
     <>
       <CustomModalWindow open={open} setIsOpen={setIsOpen}>
@@ -139,6 +122,7 @@ const EditEventSettingsWindow = ({
           <EventForm<FullFormData, AxiosResponse<EditEventSettingsResponse>>
             submitBtnText="Применить"
             onSuccessText="Настройки обновлены"
+            tagOptions={tagOptions}
             showSuccessText={showSuccessText}
             isJoinCodePending={isJoinCodeDataPending}
             isJoinCodeError={isJoinCodeDataError}

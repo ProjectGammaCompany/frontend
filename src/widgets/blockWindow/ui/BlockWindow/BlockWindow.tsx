@@ -1,16 +1,19 @@
 import {
-  selectTasksReorderingState,
-  setTasksReorderingState,
-  updateBlockValueInQuery,
-  useBlockSettings,
-  useUpdateBlockName,
   type Condition,
   type UpdateBlockData,
-} from "@/entities";
-import { DeleteBlockButton } from "@/features";
-import { queryClient } from "@/shared/api";
-import { useDebounce, useNotify } from "@/shared/lib";
-import { CustomModalWindow, CustomSwitch, SettingsSvg } from "@/shared/ui";
+  selectTasksReorderingState,
+  setTasksReorderingState,
+  useBlockSettings,
+  useUpdateBlockName,
+} from "@/entities/Block";
+import { eventQueries, updateBlockValueInQuery } from "@/entities/Event";
+import { DeleteBlockButton } from "@/features/deleteBlock";
+import { queryClient } from "@/shared/api/reactQuery";
+import { useDebounce } from "@/shared/lib/customHooks";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { SettingsSvg } from "@/shared/ui/svg";
 import { Button, Input, Typography } from "antd";
 import { useEffect, useEffectEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,7 +96,7 @@ const BlockWindow = ({
 
   const handleSuccessBlockDeleting = async () => {
     await queryClient.invalidateQueries({
-      queryKey: [eventId, "data"],
+      queryKey: eventQueries.getEditingEventData(eventId),
     });
     notify.success({
       title: "Блок успешно удалён",
@@ -130,6 +133,12 @@ const BlockWindow = ({
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    if (open) {
+      setWindowState("tasks");
+    }
+  }, [open]);
 
   useEffect(() => {
     onChangedName(debounceName);

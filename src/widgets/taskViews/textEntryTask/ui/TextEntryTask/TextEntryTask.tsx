@@ -1,12 +1,15 @@
-import { TaskView, type TaskStageFile } from "@/entities";
+import { type TaskStageFile, eventQueries } from "@/entities/Event";
+import { TaskView } from "@/entities/Task";
 import {
   SendAnswerButton,
-  useSendAnswer,
   type SendAnswerResponse,
-} from "@/features";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { getTaskNotificationStyle } from "@/shared/lib/notifications";
+  useSendAnswer,
+} from "@/features/sendTaskAnswer";
+import { queryClient } from "@/shared/api/reactQuery";
+import {
+  getTaskNotificationStyle,
+  useNotify,
+} from "@/shared/lib/notifications";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -17,8 +20,6 @@ interface TextEntryTaskProps {
   data: TextEntryTaskData;
 }
 
-//todo: change for final version
-//todo: не забыть приведение в lowercase перед отправкой ответа
 interface TextEntryTaskData {
   taskId: string;
   name: string;
@@ -95,7 +96,7 @@ const TextEntryTask = ({ data }: TextEntryTaskProps) => {
       const el = document.getElementById("root");
       el?.scrollTo({ top: 0, behavior: "smooth" });
       void queryClient.invalidateQueries({
-        queryKey: [eventId, "game"],
+        queryKey: eventQueries.getGameData(eventId),
       });
     }, 5000);
   };

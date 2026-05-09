@@ -1,13 +1,15 @@
 import {
-  createEvent,
-  EventForm,
   type BaseEventFormData,
+  createEvent,
   type CreateEventData,
   type CreateEventResponse,
-} from "@/entities";
-import { useNotify } from "@/shared/lib";
-import { CustomModalWindow } from "@/shared/ui";
+  EventForm,
+} from "@/entities/Event";
+import { useTags } from "@/entities/Tag";
+import { useNotify } from "@/shared/lib/notifications";
+import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import type { AxiosResponse } from "axios";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 interface CreateEventWindowProps {
@@ -18,10 +20,11 @@ interface CreateEventWindowProps {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RequestResponse = AxiosResponse<CreateEventResponse, any, object>;
 
-//todo fix path
 const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
   const navigate = useNavigate();
   const notify = useNotify();
+
+  const { data: tagOptions, refetch: refetchTags } = useTags();
 
   const handleFailedCreating = () => {
     notify.error({
@@ -30,6 +33,12 @@ const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
       placement: "top",
     });
   };
+
+  useEffect(() => {
+    if (open) {
+      void refetchTags();
+    }
+  }, [open, refetchTags]);
   return (
     <CustomModalWindow open={open} setIsOpen={setIsOpen}>
       <EventForm<BaseEventFormData, RequestResponse>
@@ -47,6 +56,7 @@ const CreateEventWindow = ({ open, setIsOpen }: CreateEventWindowProps) => {
           };
           return createEvent(preparedData);
         }}
+        tagOptions={tagOptions}
         onCoverLoadError={() => {
           notify.error({
             title: "Не удалось загрузить файл",

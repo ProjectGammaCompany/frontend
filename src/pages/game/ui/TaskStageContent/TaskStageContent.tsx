@@ -1,7 +1,13 @@
-import type { TaskStageData } from "@/entities";
-import { useSendAnswer } from "@/features";
-import { getShuffledArray } from "@/shared/lib";
-import { ChoiceTask, InfoBlock, TextEntryTask } from "@/widgets";
+import type { TaskStageData } from "@/entities/Event";
+import { useSendAnswer } from "@/features/sendTaskAnswer";
+import { getShuffledArray } from "@/shared/lib/workWithArrays";
+
+// eslint-disable-next-line boundaries/dependencies
+import { ChoiceTask } from "@/widgets/taskViews/choiceTask";
+// eslint-disable-next-line boundaries/dependencies
+import { InfoBlock } from "@/widgets/taskViews/infoBlock";
+// eslint-disable-next-line boundaries/dependencies
+import { TextEntryTask } from "@/widgets/taskViews/textEntryTask";
 import { Button, Flex, Spin, Typography } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
@@ -13,7 +19,6 @@ interface TaskStageProps {
   eventId: string;
 }
 
-//todo: выделить типизацию таски куда-то для переиспользования
 const TaskStageContent = ({ eventId, defaultTask }: TaskStageProps) => {
   const [task, setTask] = useState(defaultTask);
 

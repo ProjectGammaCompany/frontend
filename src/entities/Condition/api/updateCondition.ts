@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 import type { ConditionData } from "./createCondition";
 
 export interface UpdateConditionResponse {
@@ -12,6 +13,6 @@ export const updateCondition = (
 ) => {
   return axiosInstance.put<UpdateConditionResponse>(
     `event/${eventId}/blocks/${blockId}/conditions/${id}`,
-    data,
+    { ...data, lastEditionDate: getCurrentStringDate() },
   );
 };

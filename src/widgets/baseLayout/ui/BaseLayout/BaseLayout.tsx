@@ -1,4 +1,4 @@
-import { Header } from "@/shared/ui";
+import { Header } from "@/shared/ui/Header";
 import type { ReactNode } from "react";
 import { Outlet, useLocation } from "react-router";
 

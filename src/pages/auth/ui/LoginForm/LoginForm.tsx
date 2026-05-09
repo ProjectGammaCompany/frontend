@@ -1,5 +1,5 @@
-import { handleError } from "@/shared/api";
-import { CustomSwitch } from "@/shared/ui";
+import { handleError } from "@/shared/api/axios";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
 import { Flex, Typography } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";

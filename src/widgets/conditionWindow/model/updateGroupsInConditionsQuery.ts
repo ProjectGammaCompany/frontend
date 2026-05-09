@@ -1,5 +1,5 @@
-import { blockQueries, type UseConditionsData } from "@/entities";
-import { queryClient } from "@/shared/api";
+import { type UseConditionsData, blockQueries } from "@/entities/Block";
+import { queryClient } from "@/shared/api/reactQuery";
 
 export const updateGroupsInConditionsQuery = (
   eventId: string,

@@ -1,4 +1,4 @@
-import { QrCodeScanner } from "@/shared/lib";
+import { QrCodeScanner } from "@/shared/lib/qrCodeScanner";
 import { Button, Flex, Input, Typography } from "antd";
 import type { Html5QrcodeScannerConfig } from "html5-qrcode/esm/html5-qrcode-scanner";
 import { useState } from "react";

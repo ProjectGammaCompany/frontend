@@ -3,8 +3,8 @@ import {
   setTasksReorderingState,
   useTasks,
   useUpdateTasksOrder,
-} from "@/entities";
-import { useNotify } from "@/shared/lib";
+} from "@/entities/Block";
+import { useNotify } from "@/shared/lib/notifications";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useCallback } from "react";
@@ -63,7 +63,7 @@ const TaskList = ({
         return;
       }
       if (
-        draggableId === destination.droppableId &&
+        source.droppableId === destination.droppableId &&
         destination.index === source.index
       ) {
         return;

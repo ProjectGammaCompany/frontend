@@ -1,9 +1,15 @@
-import { TaskView, type TaskStageFile } from "@/entities";
-import type { SendAnswerResponse } from "@/features";
-import { SendAnswerButton, useSendAnswer } from "@/features";
-import { queryClient } from "@/shared/api";
-import { useNotify } from "@/shared/lib";
-import { getTaskNotificationStyle } from "@/shared/lib/notifications";
+import { type TaskStageFile, eventQueries } from "@/entities/Event";
+import { TaskView } from "@/entities/Task";
+import {
+  SendAnswerButton,
+  type SendAnswerResponse,
+  useSendAnswer,
+} from "@/features/sendTaskAnswer";
+import { queryClient } from "@/shared/api/reactQuery";
+import {
+  getTaskNotificationStyle,
+  useNotify,
+} from "@/shared/lib/notifications";
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -13,7 +19,6 @@ interface ChoiceTaskProps {
   data: ChoiceTaskData;
 }
 
-//todo: change
 interface ChoiceTaskData {
   taskId: string;
   eventId: string;
@@ -32,7 +37,6 @@ interface TaskOption {
   value: string;
 }
 
-//todo: Просмотреть ещё раз логику реагирования на истечение времени, рефакторинг переменных, проверка useEffect
 const ChoiceTask = ({ data }: ChoiceTaskProps) => {
   const notify = useNotify();
 
@@ -103,7 +107,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       const el = document.getElementById("root");
       el?.scrollTo({ top: 0, behavior: "smooth" });
       void queryClient.invalidateQueries({
-        queryKey: [eventId, "game"],
+        queryKey: eventQueries.getGameData(eventId),
       });
     }, 3000);
   };

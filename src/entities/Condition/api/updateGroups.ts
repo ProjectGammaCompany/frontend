@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export const updateGroups = (
   eventId: string,
@@ -10,6 +11,7 @@ export const updateGroups = (
     `event/${eventId}/blocks/${blockId}/conditions/${conditionId}/groups`,
     {
       groups,
+      lastEditionDate: getCurrentStringDate(),
     },
   );
 };

@@ -2,17 +2,14 @@ import "@ant-design/v5-patch-for-react-19";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router";
-import { queryClient } from "../shared/api";
+import { queryClient } from "../shared/api/reactQuery";
+import { useClearTokens } from "./libs/clearTokens/useClearTokensOnClose";
 import AntConfigProvider from "./providers/antConfigProvider/AntConfigProvider";
 import { MessageProvider } from "./providers/messageProvider/messageProvider";
 import { NotificationProvider } from "./providers/notificationProvider/notificationProvider";
 import router from "./providers/routerProvider/router";
-import { useClearTokens } from "./providers/useClearTokensOnClose";
 import "./styles/App.scss";
 
-//todo: добавить отправку lastEditionDate в каждый put/post/delete запрос в editor'е
-//todo: перенести useQuery и useMutation в model по соседству с используемым api
-//todo: поправить index.ts в entities (у event)
 function App() {
   useClearTokens();
 

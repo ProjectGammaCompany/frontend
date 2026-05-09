@@ -1,5 +1,5 @@
-import { useNotify } from "@/shared/lib";
-import { StarSvg } from "@/shared/ui";
+import { useNotify } from "@/shared/lib/notifications";
+import { StarSvg } from "@/shared/ui/svg";
 import { Button } from "antd";
 import classnames from "classnames";
 import { useState } from "react";

@@ -1,6 +1,6 @@
-import type { UserStats } from "@/entities";
-import { getFullFileUrl, getImgUrl } from "@/shared/lib";
-import { ProfileSvg } from "@/shared/ui";
+import type { UserStats } from "@/entities/Event";
+import { getFullFileUrl, getImgUrl } from "@/shared/lib/workWithFiles";
+import { ProfileSvg } from "@/shared/ui/svg";
 import { Table, Typography } from "antd";
 import Column from "antd/es/table/Column";
 import "./UserStatsTable.scss";

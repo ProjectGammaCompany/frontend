@@ -1,5 +1,5 @@
-import { CustomIcon, HomeSvg, NotificationSvg, ProfileSvg } from "@/shared/ui";
-
+import { CustomIcon } from "@/shared/ui/CustomIcon";
+import { HomeSvg, NotificationSvg, ProfileSvg } from "@/shared/ui/svg";
 import type { ReactNode } from "react";
 
 export interface NavigationButtonsInfo {

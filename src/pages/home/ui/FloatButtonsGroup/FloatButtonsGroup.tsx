@@ -1,5 +1,5 @@
-import { useWindowWidth } from "@/shared/lib";
-import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/shared/ui";
+import { useWindowWidth } from "@/shared/lib/customHooks";
+import { CreateEventSvg, MoreSvg, MyEventsSvg } from "@/shared/ui/svg";
 import { Button } from "antd";
 import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router";

@@ -1,4 +1,4 @@
-import { useUpdateBlockSettings, type UpdateBlockData } from "@/entities";
+import { useUpdateBlockSettings, type UpdateBlockData } from "@/entities/Block";
 
 export const useFormSubmit = (
   eventId: string,

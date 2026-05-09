@@ -1,10 +1,12 @@
-import { useUpdateUsername } from "@/entities";
-import { handleError } from "@/shared/api";
-import { downloadApk, Seo, useNotify } from "@/shared/lib";
+import { useProfileData, useUpdateUsername } from "@/entities/User";
+
+import { handleError } from "@/shared/api/axios";
+import { useNotify } from "@/shared/lib/notifications";
+import { Seo } from "@/shared/lib/seo";
+import { downloadApk } from "@/shared/lib/workWithFiles";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useEffectEvent } from "react";
-import { useProfileData } from "../../model/useProfileData";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
 import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";

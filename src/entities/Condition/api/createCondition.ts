@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 
 export interface ConditionData {
   group?: string[];
@@ -18,6 +19,6 @@ export const createCondition = (
 ) => {
   return axiosInstance.post<CreateConditionResponse>(
     `event/${eventId}/blocks/${blockId}/conditions`,
-    conditionData,
+    { ...conditionData, lastEditionDate: getCurrentStringDate() },
   );
 };

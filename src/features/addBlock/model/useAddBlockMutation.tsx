@@ -1,5 +1,8 @@
-import type { BlockItemData, getEditingEventDataResponse } from "@/entities";
-import { queryClient } from "@/shared/api";
+import type {
+  BlockItemData,
+  getEditingEventDataResponse,
+} from "@/entities/Event";
+import { queryClient } from "@/shared/api/reactQuery";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { addBlock, type AddBlockResponse } from "../api/addBlock";

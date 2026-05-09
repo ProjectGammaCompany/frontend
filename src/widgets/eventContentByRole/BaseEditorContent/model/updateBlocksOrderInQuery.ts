@@ -1,9 +1,9 @@
 import {
-  eventQueries,
   type BlockItemData,
+  eventQueries,
   type getEditingEventDataResponse,
-} from "@/entities";
-import { queryClient } from "@/shared/api";
+} from "@/entities/Event";
+import { queryClient } from "@/shared/api/reactQuery";
 import type { AxiosResponse } from "axios";
 
 export const updateBlocksOrderInQuery = (

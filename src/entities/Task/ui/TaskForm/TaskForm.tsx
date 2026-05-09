@@ -1,10 +1,12 @@
 import {
   getNormalizedFileList,
-  getRandomString,
   handleDownload,
   useFileUpload,
-} from "@/shared/lib";
-import { CustomSwitch, IconButton, QRCodeSvg } from "@/shared/ui";
+} from "@/shared/lib/workWithFiles";
+import { getRandomString } from "@/shared/lib/workWithStrokes";
+import { CustomSwitch } from "@/shared/ui/CustomSwitch";
+import { IconButton } from "@/shared/ui/IconButton";
+import { QRCodeSvg } from "@/shared/ui/svg";
 import {
   Button,
   Form,
@@ -261,7 +263,6 @@ const TaskForm = <TResponse,>({
     }
   }, [initialData?.files]);
 
-  //todo: посмотреть правильный вариант
   useEffect(() => {
     const files = fileList
       .filter((f) => f.status === "done" && f.url)
@@ -282,7 +283,6 @@ const TaskForm = <TResponse,>({
     }
   }, [form, initialData]);
 
-  //todo: check block error
   return (
     <Form
       initialValues={initialData}

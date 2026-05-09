@@ -1,4 +1,4 @@
-import type { EditorGroupStats } from "@/entities";
+import type { EditorGroupStats } from "@/entities/Event";
 import { Select, Typography } from "antd";
 import { useEffect, useState } from "react";
 import UsersStatsTable from "../UsersStatsTable/UsersStatsTable";

@@ -1,4 +1,4 @@
-import { useEditorStats } from "@/entities";
+import { useEditorStats } from "@/entities/Event";
 import { Button, Flex, Spin, Typography } from "antd";
 import GroupContent from "../GroupContent/GroupContent";
 import UsersStatsTable from "../UsersStatsTable/UsersStatsTable";

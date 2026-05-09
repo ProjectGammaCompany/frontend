@@ -1,7 +1,8 @@
-import { queryClient } from "@/shared/api";
+import { eventQueries } from "@/entities/Event";
+import { queryClient } from "@/shared/api/reactQuery";
 
 export const invalidateGameData = (eventId: string) => {
   void queryClient.invalidateQueries({
-    queryKey: [eventId, "game"],
+    queryKey: eventQueries.getGameData(eventId),
   });
 };

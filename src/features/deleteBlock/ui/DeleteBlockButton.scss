@@ -1,7 +1,7 @@
 .delete-block-btn {
   flex-shrink: 0;
   height: 45px;
-  width: 45px;
+  width: 45px !important;
   padding: 5px;
   background-color: var(--red-color);
   color: white;

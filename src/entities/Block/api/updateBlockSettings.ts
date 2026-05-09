@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 import type { BlockSettings } from "./getBlockSettings";
 
 export type UpdateBlockData = Omit<BlockSettings, "name" | "order">;
@@ -8,5 +9,8 @@ export const updateBlockSettings = (
   blockId: string,
   data: UpdateBlockData,
 ) => {
-  return axiosInstance.put(`event/${eventId}/blocks/${blockId}`, data);
+  return axiosInstance.put(`event/${eventId}/blocks/${blockId}`, {
+    ...data,
+    lastEditionDate: getCurrentStringDate(),
+  });
 };

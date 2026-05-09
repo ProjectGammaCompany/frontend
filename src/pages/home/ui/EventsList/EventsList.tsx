@@ -1,7 +1,8 @@
-import { eventQueries } from "@/entities";
-import { queryClient } from "@/shared/api";
-import { getFullFileUrl, getImgUrl } from "@/shared/lib";
-import { LinkEventCard } from "@/widgets";
+import { queryClient } from "@/shared/api/reactQuery";
+import { getFullFileUrl, getImgUrl } from "@/shared/lib/workWithFiles";
+
+import { eventQueries } from "@/entities/Event";
+import { LinkEventCard } from "@/widgets/linkEventCard";
 import { Button, Flex, Spin, Typography } from "antd";
 import { useEffect } from "react";
 import { useOnInView } from "react-intersection-observer";

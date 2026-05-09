@@ -1,7 +1,7 @@
-import { queryClient } from "@/shared/api";
+import type { GetProfileResponse } from "@/entities/User";
+import { queryClient } from "@/shared/api/reactQuery";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
-import type { GetProfileResponse } from "../api/getProfile";
 import { setAvatar } from "../api/setAvatar";
 
 export const useSetAvatar = () => {
@@ -11,8 +11,7 @@ export const useSetAvatar = () => {
     onSuccess: (_, variables) => {
       queryClient.setQueryData(
         ["profile"],
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (oldData: AxiosResponse<GetProfileResponse, any, object>) => {
+        (oldData: AxiosResponse<GetProfileResponse>) => {
           return oldData
             ? {
                 ...oldData,

@@ -1,5 +1,6 @@
-import { axiosInstance } from "@/shared/api";
-import type { PickPartial } from "@/shared/lib";
+import { axiosInstance } from "@/shared/api/axios";
+import type { PickPartial } from "@/shared/lib/tsTypes";
+import { getCurrentStringDate } from "@/shared/lib/workWitDates";
 import type { ServerGroup } from "./getEditingEventSettings";
 
 interface EditingEventSettings {
@@ -25,8 +26,8 @@ export const editEventSettings = (
   eventId: string,
   settings: EditingEventSettings,
 ) => {
-  return axiosInstance.put<EditEventSettingsResponse>(
-    `event/${eventId}`,
-    settings,
-  );
+  return axiosInstance.put<EditEventSettingsResponse>(`event/${eventId}`, {
+    ...settings,
+    lastEditionDate: getCurrentStringDate(),
+  });
 };

@@ -1,5 +1,5 @@
-import type { TaskItem } from "@/entities";
-import { useWindowWidth } from "@/shared/lib";
+import type { TaskItem } from "@/entities/Event";
+import { useWindowWidth } from "@/shared/lib/customHooks";
 import { Checkbox, ConfigProvider, Typography } from "antd";
 import { motion } from "motion/react";
 import "./TaskSliderItem.scss";

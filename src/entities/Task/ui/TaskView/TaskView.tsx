@@ -1,5 +1,6 @@
-import type { TaskStageFile } from "@/entities";
-import { useMessage } from "@/shared/lib";
+import { useMessage } from "@/shared/lib/messages";
+import { handleDownload } from "@/shared/lib/workWithFiles";
+import { FileItem } from "@/shared/ui/FileItem";
 import { Typography } from "antd";
 import dayjs from "dayjs";
 import {
@@ -9,8 +10,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import FileItem from "../FileItem/FileItem";
 import "./TaskView.scss";
+
+export interface TaskStageFile {
+  url: string;
+  name: string;
+}
 interface TaskViewProps {
   taskData: {
     title: string;
@@ -20,7 +25,6 @@ interface TaskViewProps {
     timestamp?: string;
   };
   isExpirationFnCanceled?: boolean;
-  //todo узнать, какой лучше тип использовать
   onExpirationTimeFn?: () => void;
   children?: ReactNode;
 }
@@ -104,6 +108,10 @@ const TaskView = ({
     }
   });
 
+  const handleFileClick = (path: string, name: string) => {
+    void handleDownload(path, name);
+  };
+
   useEffect(() => {
     if (
       !isExpirationFnCanceled &&
@@ -165,8 +173,8 @@ const TaskView = ({
               const iconType = getFileType(fileExst);
               return (
                 <FileItem
+                  onClick={() => handleFileClick(file.url, file.name)}
                   key={file.url}
-                  path={file.url}
                   name={file.name}
                   iconType={iconType}
                 />

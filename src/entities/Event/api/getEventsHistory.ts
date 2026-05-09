@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api";
+import { axiosInstance } from "@/shared/api/axios";
 import { type Event } from "./getEvents";
 
 type ServerEvent = Omit<Event, "rating"> & {

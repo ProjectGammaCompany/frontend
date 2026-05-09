@@ -1,9 +1,5 @@
-import {
-  useConditions,
-  useGroups,
-  type Condition,
-  type Group,
-} from "@/entities";
+import { type Condition, useConditions } from "@/entities/Block";
+import { type Group, useGroups } from "@/entities/Event";
 import { Button, Flex, Spin, Typography } from "antd";
 import ConditionItem from "../ConditionItem/ConditionItem";
 import "./ConditionsList.scss";

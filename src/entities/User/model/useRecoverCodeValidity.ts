@@ -7,7 +7,7 @@ export const useRecoverCodeValidity = (
   enabled: boolean,
 ) => {
   return useQuery({
-    queryKey: userQueries.recoverCodeValidity(code!),
+    queryKey: userQueries.getRecoverCodeValidity(code!),
     queryFn: () => getRecoverPasswordCodeValidity(code!),
     enabled: enabled,
     select: (data) => data.data,

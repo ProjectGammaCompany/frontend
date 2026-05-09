@@ -1,9 +1,8 @@
-import type { TaskStageFile } from "@/entities";
-import { basicRender } from "@/shared/lib";
+import { basicRender } from "@/shared/lib/testFunctions";
 import { act, screen } from "@testing-library/react";
 import dayjs from "dayjs";
 import { describe, expect, it, vi } from "vitest";
-import TaskView from "./TaskView";
+import TaskView, { type TaskStageFile } from "./TaskView";
 
 describe("TaskView", () => {
   it("calls once onExpirationTimeFn after time has elapsed", () => {

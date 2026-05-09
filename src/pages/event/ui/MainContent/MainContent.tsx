@@ -1,4 +1,5 @@
-import { PlayerContent } from "@/widgets";
+// eslint-disable-next-line boundaries/dependencies
+import { PlayerContent } from "@/widgets/eventContentByRole/playerContent";
 import { Fragment } from "react/jsx-runtime";
 import EditorContent from "../EditorContent/EditorContent";
 import "./MainContent.scss";
