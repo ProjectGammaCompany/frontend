@@ -1,8 +1,9 @@
 .auth-page {
-  height: calc(100dvh - 15px);
+  height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-top: 3dvh;
+  padding-top: calc(3dvh + 15px);
+  padding-inline: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,13 +34,9 @@
     width: 100%;
     max-width: 500px;
     min-width: 300px;
-    height: 430px;
-    transition: height ease-in-out 0.5s;
+    min-height: 400px;
+    transition: height ease-in-out 0.1s;
     margin-bottom: 100px;
-
-    &_register {
-      height: 500px;
-    }
   }
 
   &__form-wrapper {
@@ -50,7 +47,6 @@
     & > div {
       position: absolute;
       width: calc(100% - 30px);
-      flex-shrink: 0;
     }
   }
 

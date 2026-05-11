@@ -117,3 +117,7 @@ export { useBlockOptions } from "./model/useBlockOptions.ts";
 export { usePlayerInfo } from "./model/usePlayerInfo.ts";
 
 export { updateBlockValueInQuery } from "./model/updateBlockDataInQuery.ts";
+
+export { useEditorUserStats } from "./model/useEditorUserStats.ts";
+
+export { type PassedTask } from "./api/getEditorUserStats.ts";

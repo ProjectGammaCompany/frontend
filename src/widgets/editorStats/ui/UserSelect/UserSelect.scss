@@ -1,0 +1,17 @@
+.user-select {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  &__select {
+    min-width: 200px;
+    &-content {
+      font-family: "Inter";
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .user-select {
+    flex-direction: row;
+  }
+}

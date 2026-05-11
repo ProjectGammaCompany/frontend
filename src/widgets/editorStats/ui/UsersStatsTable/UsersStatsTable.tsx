@@ -54,6 +54,7 @@ const UsersStatsTable = ({ users }: UsersStatsTableProps) => {
         dataSource={mappedData}
         pagination={false}
         bordered
+        scroll={{ x: "max-content" }}
         classNames={{
           header: {
             cell: "users-stats-table__header",
@@ -74,6 +75,7 @@ const UsersStatsTable = ({ users }: UsersStatsTableProps) => {
           align="center"
           dataIndex="userPreview"
           key="userPreview"
+          fixed
           render={(userPreview: UserPreview) => (
             <div className="users-stats-table__user-preview">
               {userPreview.avatar ? (

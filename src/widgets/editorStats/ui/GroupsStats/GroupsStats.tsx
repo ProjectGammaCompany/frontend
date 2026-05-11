@@ -2,12 +2,12 @@ import type { EditorGroupStats } from "@/entities/Event";
 import { Select, Typography } from "antd";
 import { useEffect, useState } from "react";
 import UsersStatsTable from "../UsersStatsTable/UsersStatsTable";
-import "./GroupContent.scss";
+import "./GroupsStats.scss";
 interface GroupContentProps {
   groups: EditorGroupStats[];
 }
 
-const GroupContent = ({ groups }: GroupContentProps) => {
+const GroupsStats = ({ groups }: GroupContentProps) => {
   const [index, setIndex] = useState(groups.length > 0 ? 0 : undefined);
 
   const [group, setGroup] = useState(groups.length > 0 ? groups[0] : undefined);
@@ -27,7 +27,7 @@ const GroupContent = ({ groups }: GroupContentProps) => {
     }
   }, [groups, index]);
   return (
-    <div className="group-content">
+    <div className="groups-stats">
       <div>
         <Typography.Text strong>Группа: </Typography.Text>
         <Select
@@ -37,7 +37,7 @@ const GroupContent = ({ groups }: GroupContentProps) => {
             setIndex(value);
           }}
           classNames={{
-            root: "group-content__select-group",
+            root: "groups-stats__select-group",
           }}
         />
       </div>
@@ -46,4 +46,4 @@ const GroupContent = ({ groups }: GroupContentProps) => {
   );
 };
 
-export default GroupContent;
+export default GroupsStats;

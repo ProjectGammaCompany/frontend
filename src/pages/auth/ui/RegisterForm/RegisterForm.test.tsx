@@ -24,13 +24,25 @@ describe("RegisterForm", () => {
   afterAll(() => server.close());
 
   it("requires email, password,repeat password and agreement fields", async () => {
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.click(screen.getByText("Зарегистрироваться"));
     expect((await screen.findAllByText("Поле обязательно")).length).toBe(4);
   });
 
   it("requires email regex in the email field", async () => {
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Почта"), "1232");
 
     expect(
@@ -39,7 +51,13 @@ describe("RegisterForm", () => {
   });
 
   it("requires password length equals 5 in the email field", async () => {
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Пароль"), "123");
 
     expect(
@@ -48,7 +66,13 @@ describe("RegisterForm", () => {
   });
 
   it("requires password repeat length equals 5 in the email field", async () => {
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Повторный ввод пароля"), "123");
 
     expect(
@@ -57,7 +81,13 @@ describe("RegisterForm", () => {
   });
 
   it("requires similar values in password and password repeat fields", async () => {
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Пароль"), "12345");
 
     await userEvent.type(
@@ -76,7 +106,13 @@ describe("RegisterForm", () => {
         });
       }),
     );
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Почта"), "user@email.com");
     await userEvent.type(screen.getByLabelText("Пароль"), "12345");
     await userEvent.type(
@@ -99,7 +135,13 @@ describe("RegisterForm", () => {
         });
       }),
     );
-    basicRender(<RegisterForm />);
+    basicRender(
+      <RegisterForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Почта"), "user@email.com");
     await userEvent.type(screen.getByLabelText("Пароль"), "12345");
     await userEvent.type(

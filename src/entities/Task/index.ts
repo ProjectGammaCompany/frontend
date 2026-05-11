@@ -19,3 +19,5 @@ export { type ClientOption } from "./api/createTask.ts";
 export { useEditorTaskData } from "./model/useEditorTaskData.ts";
 
 export { taskQueries } from "./api/queries.ts";
+
+export { default as GameOption } from "./ui/GameOption/GameOption.tsx";

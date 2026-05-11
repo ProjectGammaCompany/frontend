@@ -1,6 +1,5 @@
 import { Seo } from "@/shared/lib/seo";
 import { Segmented, Typography } from "antd";
-import classnames from "classnames";
 import {
   AnimatePresence,
   motion,
@@ -27,26 +26,27 @@ export const AuthPage = () => {
     },
   };
 
+  const [registerFormHeight, setRegisterFormHeight] = useState(0);
+
+  const [loginFormHeight, setLoginFormHeight] = useState(0);
+
   const [pageState, setPageState] =
     useState<(typeof PAGE_STATES_VALUES)[number]>("login");
 
   useEffect(() => {
-    const el = document.getElementById("root-layout");
+    const el = document.getElementById("root");
 
     if (el) {
-      el.classList.toggle("root-layout_on-auth-page");
+      el.classList.toggle("root-layout_primary-background");
     }
 
     return () => {
       if (el) {
-        el.classList.toggle("root-layout_on-auth-page");
+        el.classList.toggle("root-layout_primary-background");
       }
     };
   }, []);
 
-  const contentWrapperClassNames = classnames("auth-page__content-wrapper", {
-    "auth-page__content-wrapper_register": pageState === "register",
-  });
   return (
     <main className="auth-page">
       <div className="auth-page__content">
@@ -63,7 +63,14 @@ export const AuthPage = () => {
             Платформа квестов и интерактивных событий
           </Typography.Paragraph>
         </div>
-        <div className={contentWrapperClassNames}>
+        <div
+          className="auth-page__content-wrapper"
+          style={{
+            height:
+              (pageState === "login" ? loginFormHeight : registerFormHeight) +
+              75,
+          }}
+        >
           <Segmented
             data-testid="switch form"
             options={PAGE_STATES.map((state) => {
@@ -94,7 +101,7 @@ export const AuthPage = () => {
                   }}
                   exit={INITIAL_LOGIN_FORM_STYLES}
                 >
-                  <LoginForm />
+                  <LoginForm setHeightForm={setLoginFormHeight} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -108,7 +115,7 @@ export const AuthPage = () => {
                   }}
                   exit={INITIAL_REGISTER_FORM_STYLES}
                 >
-                  <RegisterForm />
+                  <RegisterForm setHeightForm={setRegisterFormHeight} />
                 </motion.div>
               )}
             </AnimatePresence>

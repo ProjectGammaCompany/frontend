@@ -25,13 +25,25 @@ describe("LoginForm", () => {
   afterAll(() => server.close());
 
   it("requires email and password fields", async () => {
-    basicRender(<LoginForm />);
+    basicRender(
+      <LoginForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.click(screen.getByText("Войти"));
     expect((await screen.findAllByText("Поле обязательно")).length).toBe(2);
   });
 
   it("requires email regex in the email field", async () => {
-    basicRender(<LoginForm />);
+    basicRender(
+      <LoginForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Почта"), "1232");
 
     expect(
@@ -40,7 +52,13 @@ describe("LoginForm", () => {
   });
 
   it("requires password length equals 5 in the email field", async () => {
-    basicRender(<LoginForm />);
+    basicRender(
+      <LoginForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Пароль"), "123");
 
     expect(
@@ -56,7 +74,13 @@ describe("LoginForm", () => {
         });
       }),
     );
-    basicRender(<LoginForm />);
+    basicRender(
+      <LoginForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
     await userEvent.type(screen.getByLabelText("Почта"), "user@email.com");
     await userEvent.type(screen.getByLabelText("Пароль"), "12345");
     await userEvent.click(screen.getByText("Войти"));
@@ -77,7 +101,13 @@ describe("LoginForm", () => {
       }),
     );
 
-    basicRender(<LoginForm />);
+    basicRender(
+      <LoginForm
+        setHeightForm={() => {
+          /* empty */
+        }}
+      />,
+    );
 
     await userEvent.type(screen.getByLabelText("Почта"), "user@email.com");
     await userEvent.type(screen.getByLabelText("Пароль"), "12345");

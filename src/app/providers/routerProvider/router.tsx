@@ -20,8 +20,63 @@ const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <ErrorPage />,
-    Component: RootLayout,
     children: [
+      {
+        path: "/",
+        Component: RootLayout,
+        children: [
+          {
+            path: "/",
+            middleware: [privateRoutesMiddleware],
+            children: [
+              {
+                path: "event/:eventId",
+                children: [
+                  {
+                    path: "game",
+                    Component: GamePage,
+                  },
+                  {
+                    path: "stats",
+                    Component: StatsPage,
+                  },
+                  {
+                    index: true,
+                    Component: EventPage,
+                  },
+                ],
+              },
+              {
+                path: "/",
+                children: [
+                  {
+                    path: "/",
+                    Component: BaseLayout,
+                    children: [
+                      {
+                        path: "home",
+                        Component: HomePage,
+                      },
+                      {
+                        path: "profile",
+                        Component: ProfilePage,
+                      },
+                      {
+                        path: "notifications",
+                        Component: NotificationPage,
+                      },
+                      {
+                        path: "my-events",
+                        Component: MyEventsPage,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
       {
         index: true,
         Component: LandingPage,
@@ -43,56 +98,6 @@ const router = createBrowserRouter([
         path: "/forgot-password",
         middleware: [authMiddleware],
         Component: ForgotPasswordPage,
-      },
-      {
-        path: "/",
-        middleware: [privateRoutesMiddleware],
-        children: [
-          {
-            path: "event/:eventId",
-            children: [
-              {
-                path: "game",
-                Component: GamePage,
-              },
-              {
-                path: "stats",
-                Component: StatsPage,
-              },
-              {
-                index: true,
-                Component: EventPage,
-              },
-            ],
-          },
-          {
-            path: "/",
-            children: [
-              {
-                path: "/",
-                Component: BaseLayout,
-                children: [
-                  {
-                    path: "home",
-                    Component: HomePage,
-                  },
-                  {
-                    path: "profile",
-                    Component: ProfilePage,
-                  },
-                  {
-                    path: "notifications",
-                    Component: NotificationPage,
-                  },
-                  {
-                    path: "my-events",
-                    Component: MyEventsPage,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
       },
     ],
   },

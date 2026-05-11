@@ -1,8 +1,10 @@
 .terms-page {
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - 15px);
+  height: 100dvh;
   overflow-y: auto;
   gap: 10px;
+  padding-inline: 10px;
+  padding-top: 15px;
   padding-bottom: 10px;
 }
