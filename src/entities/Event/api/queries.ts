@@ -12,4 +12,6 @@ export const eventQueries = {
   getEditorStats: (eventId: string) => [eventId, "editorStats"] as const,
   getBlockOptions: (eventId: string) => [eventId, "blockOptions"] as const,
   getGameData: (eventId: string) => [eventId, "game"] as const,
+  getEditorUserStats: (eventId: string, userId: string) =>
+    [eventId, userId, "editorUserStats"] as const,
 };

@@ -1,5 +1,5 @@
 import { type TaskStageFile, eventQueries } from "@/entities/Event";
-import { TaskView } from "@/entities/Task";
+import { GameOption, TaskView } from "@/entities/Task";
 import {
   SendAnswerButton,
   type SendAnswerResponse,
@@ -13,7 +13,6 @@ import {
 import { Typography } from "antd";
 import type { AxiosResponse } from "axios";
 import { useState } from "react";
-import Option from "../Option/Option";
 import "./ChoiceTask.scss";
 interface ChoiceTaskProps {
   data: ChoiceTaskData;
@@ -150,7 +149,7 @@ const ChoiceTask = ({ data }: ChoiceTaskProps) => {
       <Typography.Title level={2}>{hintTextMap[data.type]}</Typography.Title>
       <ul className="choice-task__option-list">
         {options?.map((option) => (
-          <Option
+          <GameOption
             key={option.id}
             id={option.id}
             value={option.value}

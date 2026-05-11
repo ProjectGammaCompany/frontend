@@ -1,0 +1,60 @@
+.passed-task {
+  &__option {
+    &_incorrect {
+      border: 4px solid rgba(255, 0, 0, 0.5);
+    }
+
+    &_correct {
+      border: 4px solid rgba(0, 163, 0, 0.5);
+    }
+    &-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      gap: 15px;
+    }
+  }
+
+  &__status-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+
+  &__status-text {
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 15px;
+    &_correct {
+      background-color: green;
+    }
+    &_incorrect {
+      background-color: var(--error-color);
+    }
+    &_partial {
+      background-color: var(--warning-color_dark);
+    }
+  }
+
+  &__input-task-value {
+    display: inline-block;
+    border: 1px solid var(--input-border-color);
+    min-width: 100px;
+    padding: 3px 10px;
+    border-radius: 5px;
+  }
+  &__empty-answer {
+    color: var(--error-color) !important;
+  }
+}
+
+@media (min-width: 450px) {
+  .passed-task {
+    &__status-wrapper {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}

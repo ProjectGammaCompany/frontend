@@ -8,6 +8,7 @@ export type EditorUserStats = EditorUserDTO;
 
 const sortByPoints = (a: EditorUserStats, b: EditorUserStats) =>
   b.points - a.points;
+
 export const useEditorStats = (eventId: string) => {
   return useQuery({
     queryKey: eventQueries.getEditorStats(eventId),

@@ -1,0 +1,10 @@
+.editor-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 10px;
+
+  &__segmented {
+    width: fit-content;
+  }
+}

@@ -73,10 +73,11 @@ describe("StatsPageContent", () => {
       }),
     );
 
-    basicRender(<StatsPageContent eventId="23" />);
+    const a = basicRender(<StatsPageContent eventId="23" />);
 
+    a.debug(undefined, Number.MAX_VALUE);
     expect(
-      await screen.findByText(/Правильных ответов на вопросы/),
-    ).toBeInTheDocument();
+      (await screen.findAllByText(/Правильных ответов на вопросы/)).length,
+    ).greaterThan(0);
   });
 });

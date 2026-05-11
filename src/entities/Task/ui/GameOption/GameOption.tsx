@@ -1,24 +1,24 @@
 import { Checkbox, ConfigProvider, Typography } from "antd";
 import classnames from "classnames";
-import "./Option.scss";
-interface OptionProps {
+import "./GameOption.scss";
+interface GameOptionProps {
   id: string;
   value: string;
-  clickFn: (id: string, value: boolean) => void;
+  clickFn?: (id: string, value: boolean) => void;
   selected: boolean;
   className?: string;
   disabled: boolean;
 }
 
-const Option = ({
+const GameOption = ({
   id,
   value,
   clickFn,
   selected,
   className,
   disabled,
-}: OptionProps) => {
-  const classNames = classnames("option__wrapper", className);
+}: GameOptionProps) => {
+  const classNames = classnames("game-option__wrapper", className);
 
   return (
     <li className={classNames}>
@@ -32,10 +32,10 @@ const Option = ({
         <Checkbox
           disabled={disabled}
           checked={selected}
-          onChange={({ target }) => clickFn(id, target.checked)}
+          onChange={({ target }) => clickFn?.(id, target.checked)}
           classNames={{
-            root: "option",
-            icon: "option__icon",
+            root: "game-option",
+            icon: "game-option__icon",
           }}
         />
       </ConfigProvider>
@@ -44,4 +44,4 @@ const Option = ({
   );
 };
 
-export default Option;
+export default GameOption;
