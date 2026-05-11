@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input, Typography } from "antd";
 import type { Rule } from "antd/es/form";
 import Password from "antd/es/input/Password";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import "./AuthForm.scss";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface AuthFormProps<T extends Record<string, any>> {
@@ -21,6 +21,7 @@ interface AuthFormProps<T extends Record<string, any>> {
   loading: boolean;
   error?: string;
   extra?: ReactNode;
+  setHeightForm: (height: number) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,50 +33,70 @@ const AuthForm = <T extends Record<string, any>>({
   loading,
   error,
   extra,
+  setHeightForm,
 }: AuthFormProps<T>) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+
+      setHeightForm(entry.contentRect.height);
+    });
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [setHeightForm]);
   return (
-    <Form
-      name={name}
-      onFinish={onFinish}
-      className="auth-form"
-      requiredMark={false}
-    >
-      {fields.map((field) => (
-        <Form.Item
-          layout="vertical"
-          key={field.name}
-          label={field.label}
-          name={field.name}
-          rules={field.rules}
-          dependencies={field.dependencies}
-          className="auth-form__form-item"
-        >
-          {field?.boolean ? (
-            <Checkbox />
-          ) : field.name?.toLocaleLowerCase().includes("password") ? (
-            <Password />
-          ) : (
-            <Input type={field.type} inputMode={field.inputMode} />
-          )}
+    <Form name={name} onFinish={onFinish} requiredMark={false}>
+      <div ref={ref} className="auth-form__wrapper">
+        {fields.map((field) => (
+          <Form.Item
+            layout="vertical"
+            key={field.name}
+            label={field.label}
+            name={field.name}
+            rules={field.rules}
+            dependencies={field.dependencies}
+            className="auth-form__form-item"
+          >
+            {field?.boolean ? (
+              <Checkbox />
+            ) : field.name?.toLocaleLowerCase().includes("password") ? (
+              <Password />
+            ) : (
+              <Input type={field.type} inputMode={field.inputMode} />
+            )}
+          </Form.Item>
+        ))}
+        {extra}
+        {error && (
+          <Typography.Paragraph
+            type="danger"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </Typography.Paragraph>
+        )}
+        <Form.Item label={null}>
+          <Button
+            classNames={{
+              icon: "auth-form__submit-btn-icon",
+            }}
+            type="primary"
+            htmlType="submit"
+            loading={loading}
+            className="auth-form__submit-btn"
+          >
+            {submitButtonText}
+          </Button>
         </Form.Item>
-      ))}
-      {extra}
-      {error && (
-        <Typography.Paragraph type="danger">{error}</Typography.Paragraph>
-      )}
-      <Form.Item label={null}>
-        <Button
-          classNames={{
-            icon: "auth-form__submit-btn-icon",
-          }}
-          type="primary"
-          htmlType="submit"
-          loading={loading}
-          className="auth-form__submit-btn"
-        >
-          {submitButtonText}
-        </Button>
-      </Form.Item>
+      </div>
     </Form>
   );
 };

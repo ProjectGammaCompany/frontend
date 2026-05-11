@@ -8,7 +8,10 @@ import { EMAIL_RULES, PASSWORD_RULES } from "../../const/rules";
 import { useLogin } from "../../model/useLogin";
 import AuthForm from "../AuthForm/AuthForm";
 import "./LoginForm.scss";
-const LoginForm = () => {
+interface LoginFormProps {
+  setHeightForm: (height: number) => void;
+}
+const LoginForm = ({ setHeightForm }: LoginFormProps) => {
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState<boolean>(true);
 
@@ -38,6 +41,7 @@ const LoginForm = () => {
   return (
     <AuthForm<loginProps>
       name="login"
+      setHeightForm={setHeightForm}
       test-id="login-form"
       fields={[
         {

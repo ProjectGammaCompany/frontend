@@ -12,7 +12,11 @@ import "./RegisterForm.scss";
 type RegisterFormValues = RegisterProps & {
   agreement: boolean;
 };
-const RegisterForm = () => {
+
+interface RegisterFormProps {
+  setHeightForm: (height: number) => void;
+}
+const RegisterForm = ({ setHeightForm }: RegisterFormProps) => {
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,6 +43,7 @@ const RegisterForm = () => {
   return (
     <AuthForm<RegisterFormValues>
       name="register"
+      setHeightForm={setHeightForm}
       fields={[
         {
           name: "email",
@@ -92,7 +97,7 @@ const RegisterForm = () => {
               <Typography.Text className="register-form__agreement-text">
                 Я принимаю условия{" "}
                 <Link to="/terms">Пользовательского соглашения</Link> и даю
-                согласие на обработку персональных данных в соответствии с
+                согласие на обработку персональных данных в соответствии с{" "}
                 <Link to="/policy">Политикой конфиденциальности</Link>
               </Typography.Text>
             }

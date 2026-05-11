@@ -38,15 +38,15 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    const el = document.getElementById("root-layout");
+    const el = document.getElementById("root");
 
     if (el) {
-      el.classList.toggle("root-layout_on-landing-page");
+      el.classList.toggle("root-layout_primary-background");
     }
 
     return () => {
       if (el) {
-        el.classList.toggle("root-layout_on-landing-page");
+        el.classList.toggle("root-layout_primary-background");
       }
     };
   }, []);

@@ -3,3 +3,8 @@
     width: 1rem !important;
   }
 }
+
+.root-layout_primary-background {
+  background-color: var(--primary-color);
+  transition: background-color 1s ease-in-out;
+}

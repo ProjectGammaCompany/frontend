@@ -140,15 +140,15 @@ const ForgotPasswordPage = () => {
   }, [data, isRefetching]);
 
   useEffect(() => {
-    const el = document.getElementById("root-layout");
+    const el = document.getElementById("root");
 
     if (el) {
-      el.classList.toggle("root-layout_on-forgot-password-page");
+      el.classList.toggle("root-layout_primary-background");
     }
 
     return () => {
       if (el) {
-        el.classList.toggle("root-layout_on-forgot-password-page");
+        el.classList.toggle("root-layout_primary-background");
       }
     };
   }, []);

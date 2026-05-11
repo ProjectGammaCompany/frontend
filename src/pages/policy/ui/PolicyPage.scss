@@ -1,7 +1,9 @@
 .policy-page {
-  height: calc(100dvh - 15px);
+  height: 100dvh;
   overflow-y: auto;
   display: flex;
+  padding-inline: 10px;
+  padding-top: 15px;
   flex-direction: column;
   gap: 10px;
   padding-bottom: 10px;
