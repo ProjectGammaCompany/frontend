@@ -51,13 +51,14 @@ export default defineConfig({
           {
             src: "/img/screenshots/desktop.png",
             type: "image/png",
-            sizes: "2880x1564",
+            sizes: "2034x1186",
             form_factor: "wide",
           },
           {
             src: "/img/screenshots/mobile.png",
             type: "image/png",
-            sizes: "narrow",
+            sizes: "636x1194",
+            form_factor: "narrow",
           },
         ],
         display: "standalone",
