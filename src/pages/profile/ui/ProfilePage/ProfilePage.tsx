@@ -1,12 +1,12 @@
 import { useProfileData, useUpdateUsername } from "@/entities/User";
-
 import { handleError } from "@/shared/api/axios";
 import { useNotify } from "@/shared/lib/notifications";
 import { Seo } from "@/shared/lib/seo";
 import { downloadApk } from "@/shared/lib/workWithFiles";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useEffect, useEffectEvent } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import AvatarBlock from "../AvatarBlock/AvatarBlock";
 import LogoutBtn from "../LogoutBtn/LogoutBtn";
 import "./ProfilePage.scss";
@@ -16,6 +16,7 @@ interface ProfileFormData {
 }
 const ProfilePage = () => {
   const notify = useNotify();
+  const [downloadApkLoading, setDownloadApkLoading] = useState(false);
 
   const ProfilePageSeo = (
     <Seo
@@ -124,8 +125,16 @@ const ProfilePage = () => {
             <Input />
           </Form.Item>
           <div className="profile-page__interact-block">
-            <Button className="profile-page__android-btn" onClick={downloadApk}>
-              Перейти на Android
+            <Button
+              className="profile-page__android-btn"
+              disabled={downloadApkLoading}
+              onClick={() => downloadApk(setDownloadApkLoading)}
+            >
+              {downloadApkLoading ? (
+                <Spin indicator={<LoadingOutlined spin />} />
+              ) : (
+                "Перейти на Android"
+              )}
             </Button>
             <Button
               htmlType="submit"

@@ -1,6 +1,11 @@
 import { getFullFileUrl } from "./getFullFileUrl";
 
-export const handleDownload = async (path: string, name: string) => {
+export const handleDownload = async (
+  path: string,
+  name: string,
+  setLoading?: (value: boolean) => void,
+) => {
+  setLoading?.(true);
   const response = await fetch(getFullFileUrl(path));
   const blob = await response.blob();
 
@@ -10,6 +15,6 @@ export const handleDownload = async (path: string, name: string) => {
   link.href = url;
   link.download = name;
   link.click();
-
+  setLoading?.(false);
   window.URL.revokeObjectURL(url);
 };

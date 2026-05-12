@@ -1,12 +1,15 @@
 import { Seo } from "@/shared/lib/seo";
 import { downloadApk } from "@/shared/lib/workWithFiles";
-import { Button, Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Button, Spin, Typography } from "antd";
 import { motion } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "./LandingPage.scss";
 const LandingPage = () => {
   const navigate = useNavigate();
+
+  const [downloadApkLoading, setDownloadApkLoading] = useState(false);
   const EVENTS = [
     "Квесты",
     "Тесты",
@@ -131,9 +134,17 @@ const LandingPage = () => {
           type="primary"
           size="large"
           className="landing-page__cta-btn"
-          onClick={downloadApk}
+          onClick={() => downloadApk(setDownloadApkLoading)}
+          disabled={downloadApkLoading}
         >
-          Получить Android-приложение
+          {downloadApkLoading ? (
+            <Spin
+              indicator={<LoadingOutlined spin />}
+              style={{ color: "white" }}
+            />
+          ) : (
+            "Получить Android-приложение"
+          )}
         </Button>
       </motion.section>
     </main>
