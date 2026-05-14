@@ -16,10 +16,12 @@ interface EditorUserInfoProps {
   eventId: string;
 }
 const UserInfo = ({ userId, eventId }: EditorUserInfoProps) => {
-  const { data, isPending, isError, refetch } = useEditorUserStats(
-    eventId,
-    userId,
-  );
+  const {
+    data: blocks,
+    isPending,
+    isError,
+    refetch,
+  } = useEditorUserStats(eventId, userId);
 
   if (isPending) {
     return (
@@ -29,7 +31,6 @@ const UserInfo = ({ userId, eventId }: EditorUserInfoProps) => {
     );
   }
 
-  //todo: пофиксить стили
   if (isError) {
     return (
       <Flex justify="center" align="center" vertical gap={10}>
@@ -70,7 +71,7 @@ const UserInfo = ({ userId, eventId }: EditorUserInfoProps) => {
     });
   };
 
-  const items: CollapseProps["items"] = data.blocks.map((block) => {
+  const items: CollapseProps["items"] = blocks.map((block) => {
     return {
       key: block.id,
       label: block.name,
