@@ -8,6 +8,7 @@ interface CustomDatePickerProps {
     | ((date: Dayjs | null, dateString: string | null) => void)
     | undefined;
   showTime?: boolean;
+  minDate?: undefined | Dayjs;
 }
 
 const DATE_FORMAT = "DD.MM.YYYY";
@@ -17,10 +18,11 @@ const CustomDatePicker = ({
   ref,
   value,
   onChange,
+  minDate,
   showTime,
   ...rest
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-redundant-type-constituents
-}: CustomDatePickerProps & { ref?: React.RefObject<any | null> }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: CustomDatePickerProps & { ref?: React.RefObject<any> }) => {
   return (
     <DatePicker
       ref={ref}
@@ -28,6 +30,7 @@ const CustomDatePicker = ({
       onChange={onChange}
       showTime={showTime}
       format={showTime ? DATE_TIME_FORMAT : DATE_FORMAT}
+      minDate={minDate}
       classNames={{
         popup: {
           root: "custom-date-picker__popup-root",

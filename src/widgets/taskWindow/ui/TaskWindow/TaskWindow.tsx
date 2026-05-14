@@ -10,7 +10,6 @@ import {
   useEditorTaskData,
 } from "@/entities/Task";
 import { DeleteTaskButton } from "@/features/deleteTask";
-import { queryClient } from "@/shared/api/reactQuery";
 import { useNotify } from "@/shared/lib/notifications";
 import { CustomModalWindow } from "@/shared/ui/CustomModalWindow";
 import type { AxiosResponse } from "axios";
@@ -66,9 +65,6 @@ const TaskWindow = (props: CreateTaskProps | EditTaskProps) => {
   const handleSuccessDelete = () => {
     if (id) {
       removeTaskFromList(eventId, blockId, id);
-      queryClient.removeQueries({
-        queryKey: [eventId, blockId, id],
-      });
       setIsOpen(false);
     }
   };
