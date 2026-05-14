@@ -73,9 +73,8 @@ describe("StatsPageContent", () => {
       }),
     );
 
-    const a = basicRender(<StatsPageContent eventId="23" />);
+    basicRender(<StatsPageContent eventId="23" />);
 
-    a.debug(undefined, Number.MAX_VALUE);
     expect(
       (await screen.findAllByText(/Правильных ответов на вопросы/)).length,
     ).greaterThan(0);

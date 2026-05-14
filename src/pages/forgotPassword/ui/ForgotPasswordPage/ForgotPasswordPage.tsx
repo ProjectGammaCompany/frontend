@@ -1,18 +1,18 @@
 import {
-  useChangePassword,
-  useRecoverCodeValidity,
-  useSendCodeByEmail,
-} from "@/entities/User";
-import { handleError } from "@/shared/api/axios";
-import { useNotify } from "@/shared/lib/notifications";
-import { Seo } from "@/shared/lib/seo";
-import { settingsStorage } from "@/shared/lib/settingsStorage";
-import { tokenStorage } from "@/shared/lib/tokenStorage";
-import { Button, Flex, Form, Input, Typography } from "antd";
-import Password from "antd/es/input/Password";
-import { useEffect, useEffectEvent, useState } from "react";
-import { useNavigate } from "react-router";
-import "./ForgotPasswordPage.scss";
+    useChangePassword,
+    useRecoverCodeValidity,
+    useSendCodeByEmail,
+} from "@/entities/User"
+import { handleError } from "@/shared/api/axios"
+import { useNotify } from "@/shared/lib/notifications"
+import { Seo } from "@/shared/lib/seo"
+import { settingsStorage } from "@/shared/lib/settingsStorage"
+import { tokenStorage } from "@/shared/lib/tokenStorage"
+import { Button, Flex, Form, Input, Typography } from "antd"
+import Password from "antd/es/input/Password"
+import { useEffect, useEffectEvent, useState } from "react"
+import { useNavigate } from "react-router"
+import "./ForgotPasswordPage.scss"
 interface EmailFormData {
   email: string;
 }
@@ -152,10 +152,6 @@ const ForgotPasswordPage = () => {
       }
     };
   }, []);
-
-  useEffect(() => {
-    console.log(isRefetching, isPending, code);
-  }, [code, isPending, isRefetching]);
 
   useEffect(() => {
     if (code) {
