@@ -29,7 +29,7 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
   const {
     data: requiredFields,
     error: requiredFieldsError,
-    isPending,
+    isFetching,
     refetch,
   } = useJoinRequiredFields(joinCode, false);
 
@@ -162,7 +162,7 @@ const JoinWithCodeWindow = ({ open, setIsOpen }: JoinWithCodeWindowProps) => {
             <Button
               className="join-with-code-window__submit-btn"
               disabled={!joinCode}
-              loading={isPending && !joinCode}
+              loading={isFetching}
               onClick={() => {
                 void refetch();
               }}

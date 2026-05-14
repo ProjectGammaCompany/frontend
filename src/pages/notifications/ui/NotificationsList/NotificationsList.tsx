@@ -18,7 +18,6 @@ const NotificationsList = () => {
   const [deletingNotificationPage, setDeletingNotificationPage] = useState(0);
 
   const inViewRef = useOnInView((inView) => {
-    console.log(inView, !isFetching, hasNextPage);
     if (inView && !isFetching && hasNextPage) {
       void fetchNextPage();
     }
