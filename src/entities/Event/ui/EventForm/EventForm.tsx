@@ -103,6 +103,8 @@ export const EventForm = <TData extends EventFormData, TResponse>({
 
   const privateValue = Form.useWatch("private", form);
 
+  const startDateValue = Form.useWatch("startDate", form);
+
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const fileUploadMutation = useFileUpload();
@@ -246,8 +248,28 @@ export const EventForm = <TData extends EventFormData, TResponse>({
         <Form.Item<EventFormData> name="startDate" label="Время начала">
           <CustomDatePicker showTime />
         </Form.Item>
-        <Form.Item<EventFormData> name="endDate" label="Время завершения">
-          <CustomDatePicker showTime />
+        <Form.Item<EventFormData>
+          name="endDate"
+          label="Время завершения"
+          rules={[
+            {
+              validator(_, value) {
+                const startDate = form.getFieldValue("startDate" as never) as
+                  | Dayjs
+                  | undefined;
+                if (value && startDate && value < startDate) {
+                  return Promise.reject(
+                    new Error(
+                      "Время завершения события должно быть больше времени начала",
+                    ),
+                  );
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
+        >
+          <CustomDatePicker showTime minDate={startDateValue} />
         </Form.Item>
         <Form.Item<EventFormData>
           name="tags"
